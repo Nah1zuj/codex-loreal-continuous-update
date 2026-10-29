@@ -1,0 +1,8 @@
+{
+  "live_demo_port": 5180,
+  "capture_button_protocol": "passed",
+  "offline_asr": "passed with synthetic fixture",
+  "ordinary_asr_calls": 1,
+  "audio_saved": false,
+  "remote_asr_requests": 0
+}

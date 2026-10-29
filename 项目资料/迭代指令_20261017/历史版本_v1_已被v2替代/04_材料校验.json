@@ -1,0 +1,35 @@
+{
+  "created_on": "2026-10-17",
+  "scope": "prompt_and_research_only",
+  "application_implementation": "NOT_STARTED",
+  "application_source_files_checked": 190,
+  "changed_application_source_files": [],
+  "reference_copies_identical": true,
+  "files": [
+    {
+      "file": "00_阅读与素材说明.txt",
+      "bytes": 2241,
+      "sha256": "6966f21c9232824feab3020dccd64914c0f4382e06445962564979c3c9ee1e36"
+    },
+    {
+      "file": "01_TRACE迭代_Harness_Prompt_20261017.txt",
+      "bytes": 23215,
+      "sha256": "c8d6906d86c993424981e977b8849c8fb6954e8916ba104ef32452fb5f8c9849"
+    },
+    {
+      "file": "02_Apple与开源语音方案_20261017.txt",
+      "bytes": 4393,
+      "sha256": "cad15eaa6c8393824f63b7891333a1f9010372574c614602447549a0ba52a860"
+    },
+    {
+      "file": "参考素材/图1_苹果与网格人物_原始参考.png",
+      "bytes": 107872,
+      "sha256": "6aef9acea6958407b72055af116410c99d716f453ce7eed0653a814d7b7cc78a"
+    },
+    {
+      "file": "参考素材/图像替换提示_用户原文.md",
+      "bytes": 9836,
+      "sha256": "68044d203ce16f5f538b3d1f2adebfa70ce76b8c15e8a58640dc31eea78c4b71"
+    }
+  ]
+}

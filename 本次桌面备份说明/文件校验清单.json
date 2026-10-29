@@ -1,0 +1,5308 @@
+{
+  "backed_up_at": "2026-10-20T18:23:01+08:00",
+  "source": "/Users/xiaogui/ai项目/欧莱雅项目/交付备份/欧莱雅Demo_最新版_20261020",
+  "destination": "/Users/xiaogui/Desktop/codex欧莱雅持续更新版",
+  "version": "TRACE-20261020-portable",
+  "version_evidence": "2026-10-20 12:25交付文件、最新聊天完成记录及工作目录源码对比",
+  "files_copied": 809,
+  "directories_copied": 110,
+  "symlinks_copied": 0,
+  "source_bytes": 444163615,
+  "verification": "All file SHA-256 hashes, paths, file types and permission modes match; source unchanged during copy.",
+  "files": {
+    "AccessibleBeautyAgent": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "验证与历史说明": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "首次安装_Mac.command": {
+      "mode": 493,
+      "type": "file",
+      "bytes": 242,
+      "sha256": "fb2f20cd1016c8982d5ef06dd3d1a72ceea58331102719dfbeb4d7c19720d901"
+    },
+    "首次安装_Windows.bat": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 125,
+      "sha256": "86f5e7aa07a8a7c0b6ff52f8fc040be7628d5275f4d129d1a0b11968b28d1ae6"
+    },
+    "启动Demo_Windows.bat": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 139,
+      "sha256": "6d52941eaf5f11f0f08468d0be40da6b30a83fad40b8757d960f02b20dae1538"
+    },
+    "启动Demo_Mac.command": {
+      "mode": 493,
+      "type": "file",
+      "bytes": 512,
+      "sha256": "bfe0940aab2da250e66bdaf616bc50344e2400ce37953417a8af0f6b5f816b6d"
+    },
+    "复制文件夹到桌面.command": {
+      "mode": 493,
+      "type": "file",
+      "bytes": 525,
+      "sha256": "6946e7465a63708e3b19bd079785862ef511ae3b0a2ac5b7e6a3b17911ab5d66"
+    },
+    "00_先读我_运行说明.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4677,
+      "sha256": "27c9fb410cb25aa70d47c280e240f180cd66d85cd9a17561255ed1f38403dbca"
+    },
+    "AccessibleBeautyAgent/hardware": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/tests": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/docs": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/voice": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/work": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/scripts": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/prompts": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/templates": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/pytest.ini": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 88,
+      "sha256": "e23769d0746fe9822c594b53b0182074fd337e1d74fa6fd3fae188e1a4f367bd"
+    },
+    "AccessibleBeautyAgent/start-portable.ps1": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 422,
+      "sha256": "a5efe0ed20ccccddf5939af5ceba553acff32f886e4378b66e75e5b8e0be4091"
+    },
+    "AccessibleBeautyAgent/launch-portable.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3424,
+      "sha256": "bdd74cc13ff3d24f039956abd29287583cc1e8b3db11e0059bc242523ec76607"
+    },
+    "AccessibleBeautyAgent/README.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 16699,
+      "sha256": "c9ad2408ab5c53b3724d3327ecd50066f1e8acc86ac29576601a557a3de78376"
+    },
+    "AccessibleBeautyAgent/install-portable.ps1": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1665,
+      "sha256": "469dfd4b439d1e2b9df6a249c8a35cf2ce0f24f05499ddd6a4145b82cd8740d9"
+    },
+    "AccessibleBeautyAgent/.gitignore": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 467,
+      "sha256": "660be401540206b65010de915744c82829956e64aec1d0af408316254b1d8aec"
+    },
+    "AccessibleBeautyAgent/.env": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1051,
+      "sha256": "f92137c96d831b9c21cc70b9c7292a9e0a71e7d8876e4793f0359833b18be987"
+    },
+    "AccessibleBeautyAgent/install-portable.sh": {
+      "mode": 493,
+      "type": "file",
+      "bytes": 1435,
+      "sha256": "8602d5a170e2b055a48e7f3db317841c5907bac57dc99e04db3bf3310b794b76"
+    },
+    "AccessibleBeautyAgent/.env.example": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 991,
+      "sha256": "a03f806b67f1469a1965664f7948a9362ab570bf6a0cacad3570adf431eb05aa"
+    },
+    "AccessibleBeautyAgent/PHASE2_SPECIFICATION.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 26095,
+      "sha256": "944c786111a73c02c7d6809079fadb6588ede9fe314c86c5db09a0c30b19efde"
+    },
+    "AccessibleBeautyAgent/SPECIFICATION.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 26092,
+      "sha256": "8e0b457b1f022fada6bb9edd455dd0666616690c4a2ab3edc6eb292c73fe4dbe"
+    },
+    "AccessibleBeautyAgent/PHASE3_SPECIFICATION.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 32616,
+      "sha256": "ad689d2820987fb87d381d4c6e21b83f998e1368ea4dd63bec108bb3989c93fe"
+    },
+    "AccessibleBeautyAgent/hardware/examples": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/hardware/src": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/hardware/pyproject.toml": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 302,
+      "sha256": "24e992841462b3759784509baa4df9b0f7e06486e937a01ce8f34839e89edf48"
+    },
+    "AccessibleBeautyAgent/hardware/README.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4911,
+      "sha256": "4528b675c2233696347527890e0e7f1c324d7c9f6da2ee811140254661111c5f"
+    },
+    "AccessibleBeautyAgent/hardware/.gitignore": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 38,
+      "sha256": "58562d64be91c10079f459b975d5f53e8bcf1a5629e6d5731e8ba6fff719275f"
+    },
+    "AccessibleBeautyAgent/hardware/examples/simulator.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 412,
+      "sha256": "f43c82b393396080554b59cfd97a2243c9b4e8498a2e89b9f149319a754fac25"
+    },
+    "AccessibleBeautyAgent/hardware/src/trace_hardware": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/hardware/src/trace_hardware/__init__.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 64,
+      "sha256": "39da957d4d32cbe92a01c4084ff10716df3efba33947d671a2af974f188b454d"
+    },
+    "AccessibleBeautyAgent/hardware/src/trace_hardware/core.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9263,
+      "sha256": "c90ffc3ecfc480ee0907555afec1c899a4fb118540d2f69b511d7c597cdaeea9"
+    },
+    "AccessibleBeautyAgent/frontend/dist": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/public": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/index.html": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 470,
+      "sha256": "04cd5c04ba31aaa0d65fe69d25ea118187448bd9219940e09e4a491b7533e60a"
+    },
+    "AccessibleBeautyAgent/frontend/package-lock.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 95532,
+      "sha256": "4fcca93baccb7f72aacd9f309444410a19bf546041c8dec33f64cb1be085f2e4"
+    },
+    "AccessibleBeautyAgent/frontend/package.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 780,
+      "sha256": "9de1ea6df3461248a28aa2295642e9da8ebdcbcd8ed6c71da90eb1672fae64c5"
+    },
+    "AccessibleBeautyAgent/frontend/tsconfig.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 310,
+      "sha256": "3fdc176619f7940cc5705f593084bc3bb4be2ea7d473dc84053fe0a3bbeaa2d0"
+    },
+    "AccessibleBeautyAgent/frontend/vite.config.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 206,
+      "sha256": "6c858d43c1185ecb7b1930cd4489698fceaffa1694f34d20dadd2609f882d45c"
+    },
+    "AccessibleBeautyAgent/frontend/vite.package.config.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 340,
+      "sha256": "f1219038a44e6dc7c0e5e419de6b3717c869c529bb6e7199b598bae93207e00f"
+    },
+    "AccessibleBeautyAgent/frontend/dist/art": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/dist/models": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/dist/visuals": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/dist/fonts": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/dist/index.html": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 569,
+      "sha256": "8eb5d22b529670801c29311937cb22574728c91c7bd74f02d00b50e2c64d38c6"
+    },
+    "AccessibleBeautyAgent/frontend/dist/demo-release.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 78,
+      "sha256": "9dc123bafd606ade27dc5bb03cb181d1d3abbb5e314f83e4d4546d2fa4a5f1d8"
+    },
+    "AccessibleBeautyAgent/frontend/dist/voice-pcm-worklet.js": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 814,
+      "sha256": "53fb8449d2afd838425a5c8ef7d6869a2292ce4af632b4039b4295300464f884"
+    },
+    "AccessibleBeautyAgent/frontend/dist/art/apple-study.jpg": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 67669,
+      "sha256": "b142072953d10910f1d1f722a31994dcae6d8940f0c257a9686771ceb79012e7"
+    },
+    "AccessibleBeautyAgent/frontend/dist/art/README.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 518,
+      "sha256": "e9aa73d32464782e9fdca66bd109433ab6ea66791d7b5848d90c8775ad293aef"
+    },
+    "AccessibleBeautyAgent/frontend/dist/models/human.glb": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 404976,
+      "sha256": "402b8a8ac9f03232e6d64b5962929703a069daf99d3c49ac8eb0e48bedc9c576"
+    },
+    "AccessibleBeautyAgent/frontend/dist/models/LeePerrySmith_License.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 364,
+      "sha256": "7cf4da43a6ae6d32f7f7d063fe129a19468af6f4fe7c53b937f83959709fcb50"
+    },
+    "AccessibleBeautyAgent/frontend/dist/models/README.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 432,
+      "sha256": "bbcb662afd14459cdf656950ed3540e424122b8f785df29a70275bb780533c5b"
+    },
+    "AccessibleBeautyAgent/frontend/dist/visuals/porcelain-brown-shirt.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1538966,
+      "sha256": "752ca33e0e56a0a7302d1815e7eb4502fb91bfcfadd5955682ddaa23aad013e2"
+    },
+    "AccessibleBeautyAgent/frontend/dist/visuals/CHARACTER-SOURCE.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 386,
+      "sha256": "10d06116cad49a2cd3b24b81ca244393b0f3c2f721670cf79051cb52ce1fa54b"
+    },
+    "AccessibleBeautyAgent/frontend/dist/visuals/mesh-portrait-preview.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 65576,
+      "sha256": "9d0050d3fd15f8ba764bf3d8b275ab2612b9ba5d016b294cebb041e78c882104"
+    },
+    "AccessibleBeautyAgent/frontend/dist/visuals/porcelain-character.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1479178,
+      "sha256": "2223951d8b44845deda2d530aad50cf5dfc0d659db4433bfd8d2adde742fe00b"
+    },
+    "AccessibleBeautyAgent/frontend/dist/visuals/APPLE-SOURCE.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 293,
+      "sha256": "3df9631020de0ce1343a00b8284584a60f6407dc345ff7b9bb0392b033703e42"
+    },
+    "AccessibleBeautyAgent/frontend/dist/visuals/apple-reference.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1706573,
+      "sha256": "c7b2239ee310b067bd45b794bc44c29c0f842f7505ca19efe97b671994bb6f87"
+    },
+    "AccessibleBeautyAgent/frontend/dist/fonts/NotoSerifSC-Story-1.ttf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 50924,
+      "sha256": "7d2dc2d5a47e48f43aaf4c4ac67f94c2ef4d2e35963b3263d19590b3ad0ea7d1"
+    },
+    "AccessibleBeautyAgent/frontend/dist/fonts/NotoSerifSC-OFL.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4314,
+      "sha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3"
+    },
+    "AccessibleBeautyAgent/frontend/dist/fonts/NotoSerifSC-Story-0.ttf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 50940,
+      "sha256": "b42c68e9a7b7e3ad8152afedca61215a735bef9a4da34642429d05dd1836dd05"
+    },
+    "AccessibleBeautyAgent/frontend/dist/fonts/Prata-OFL.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4475,
+      "sha256": "26b0aca81c38c07e0bfeb45638a48ff0498f7f83ce252ebaa885137831679a46"
+    },
+    "AccessibleBeautyAgent/frontend/dist/fonts/README.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 752,
+      "sha256": "4247d8749847cd2329f9486f33dbf64241a50c6cf5727cc4197ea26c5aed5bbe"
+    },
+    "AccessibleBeautyAgent/frontend/dist/fonts/Prata-Regular.ttf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 101284,
+      "sha256": "3b2b880737be3bda5f03554297b758516876157c88f9e3b3bae8fa1fc96a2c2c"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-53-400-normal-CUr7o7PI.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 36420,
+      "sha256": "3045444bc19250ca6fb27ca9a4acfeeba41fc57fbdadf57db16b9839220b85ed"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-57-400-normal-X9crklJp.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 49144,
+      "sha256": "cf39095f45ad18b27794922308abf0aae9866f6130800b35442bce4f0822d329"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-52-400-normal-wKOWPyMs.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 35772,
+      "sha256": "8fbd3b1114a2d94c6166d85dc093f43487def661be2fdc369c4207d1ad681344"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-41-400-normal-2yGRlUJ3.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 26576,
+      "sha256": "f97119290ab53f15ddcf931c20f89ac822787b59fcbde8439bca09ff9ba77405"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-112-400-normal-Bjzy25E6.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39948,
+      "sha256": "8b2392a29608a069b9636467ec19a0aed362671d8a4f3dd403b5dd13926cbc2a"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-34-400-normal-D4pub3cv.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42712,
+      "sha256": "f99c03565925ae557cadff9889eb4e6e14d92e520b060dd6380ab789652ae5ad"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-64-400-normal-CD7LrdzK.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 27052,
+      "sha256": "1bd4082ecf77eca7a90b0d8f2bed3757ea13268fb0fc693d6b46653aec202e72"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-51-400-normal-CpN_EEt1.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 37164,
+      "sha256": "0b2049dfd1f18e8a181c20b7bea01b8224acb84ae210d1f8a707e55b8d089780"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/SculptureScene-Cu3XzIh6.js": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 661782,
+      "sha256": "05e894f2c689ca692a7dfc27ee84bd6f543b8a5969e2fffc633dc4a3e5017e19"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-latin-400-normal-Dbyzi_OP.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 18616,
+      "sha256": "bdcea43c45c24598e317c0ee5b003c95ab9047b0541efb5b803e3da7c27877a9"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-113-400-normal-BqfX6qRL.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 50132,
+      "sha256": "f865fc576865102ef40b893857c4a23521b4d7e609b3d359c74728f6e39ecbd9"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-58-400-normal-CCDg5UE-.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 54168,
+      "sha256": "100f1b080aa6a16944952192821c6426d72725fb8e7441fd4e402d071d3ee57c"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-114-400-normal-BVQ-X6tH.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 49272,
+      "sha256": "1c15f87cce5bb89fb5cae5d14d4e0869f80f4a73973cb205fcf717d261b745b5"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-cyrillic-400-normal-E6O3Ay2Z.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8040,
+      "sha256": "22c78938835f757b4b1d2a99cde0fc731c206d5681eb98dd5199bfd600cd9fff"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-110-400-normal-DYDJXw43.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 41908,
+      "sha256": "5f828453da22a27898473a8a844d1d7d1a56cadaf76471a9c676ac9ff131e291"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-25-400-normal-aJ-D48u6.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 41088,
+      "sha256": "20b2e93a5303c61e6b0e44dfa042f994d82c3ad07f516cf597ed9dcd7beec66e"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-118-400-normal-CHsjkmbl.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39252,
+      "sha256": "bc801af22b035a282d54295f7252fa8750e5d22ddb340981aacfb85c3752ad0d"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-50-400-normal-CL92OsA_.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 33908,
+      "sha256": "a914664a32e633cb38770d83feb472e90e4ace016ccafb0634f3e4f9ded0d6ec"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-vietnamese-400-normal-Bv_ce-n0.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7640,
+      "sha256": "cc4a47b8ac5fb9910edd40ced7ab011f3295a1900a563e42cd43e6e17e9e8b75"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-vietnamese-400-normal-BDvw8C8Z.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5956,
+      "sha256": "992ce1137e064f4ba4384533d84f0a07af2b7ed72e447f632be14cea07c63436"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-84-400-normal-Cm-NqSUF.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 22548,
+      "sha256": "1402df11d4b72efc3d38950afb081a291f789972c6b50a61ac5e58f880b71a44"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-109-400-normal-Cb2jf7XO.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 52272,
+      "sha256": "293ef960ce32119df3a434008dac3c6b890d4ab54087a331091e337948f137f0"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-113-400-normal-mBNpFg1t.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39828,
+      "sha256": "a39469f99e4d3b6e269ff700d8b2edc0bea839d0c46cf43d0c1a1c8a71ad8dc7"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-103-400-normal-D8vZovO8.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 44476,
+      "sha256": "45fb7120ec9d94c70bd107bffadfc17176c0e81cc531b115324fc872a6948aba"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-88-400-normal-CMbkAMHR.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7560,
+      "sha256": "a58259d49afd339662aa70d5ca0523a064f8fd9ae732ad680963d36ccd803953"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-54-400-normal-_890vp0f.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 45536,
+      "sha256": "72336a7f001f8ebe6667176c55dfa1d460c31eeb99c9845c6be10b01c8544eb8"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-45-400-normal-D3U2i4Fh.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 60144,
+      "sha256": "6b39d3b2976003f5022e6af69abb46dd8b0f0a4ebfb7485ecd3f7a66b3a4bd7b"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-73-400-normal-CzLG5u1x.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 29204,
+      "sha256": "4f7bc6b6b51b96c5d7107a4b1476e4d6136ff0b019a0adf5c028eec37d3175b7"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-91-400-normal-DoGQ3RJz.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7484,
+      "sha256": "215a59517eb74cef7e034a62f4101018625629153b2a71c18e5aadd28fbef206"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-104-400-normal-C7Um0QjD.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42612,
+      "sha256": "02acf1996e65a18f1740e9d6bc22ab75b0095aeedb014d43fc8653154af09f17"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-118-400-normal-ChWZxDuM.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 30804,
+      "sha256": "2d8ada37568200a83ad829b355c863a705e875cde00571c89a8f903b138b3907"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-88-400-normal-w_viLXV3.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6152,
+      "sha256": "2b9a72a0157f70b1e4b257d0aa13d701597c6ea375063fd3d07f24e4c37673b8"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-86-400-normal-DpKNfY0x.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 31436,
+      "sha256": "2b3379be80a276ef33f35c54a01f825a8e9877c208cd34943b1aaf4cf368d421"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-80-400-normal-CipLvdtL.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 29120,
+      "sha256": "97913a9ec55a52c2226d03b88ac4bfe2e72861a00d32c5ff279e900c319a699d"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-70-400-normal-BIUSA_ZY.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 35404,
+      "sha256": "af4b9ed9489518e4ce291c6ec39e1719e9aa1d0ba0643fd768d568112f4daeed"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-79-400-normal-CAkm9YG8.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 30736,
+      "sha256": "f08743b215770a2dc231e056d0128b8a5b607985e2aabbeb76a19a8d0df455ad"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-85-400-normal-D6KUxyVS.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 21816,
+      "sha256": "5f82871e558477f3b479dad534993f2bc5b41aa99cf8bb867a2bbe7ccc3b5569"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-6-400-normal-DeDrdmIV.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8900,
+      "sha256": "7fab1516bb96d2bfd65f2d67eadb3ba14fe745232f613ea7e7afe7d713556dbf"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-37-400-normal-4EafqbAq.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 35708,
+      "sha256": "53b49f61dc76d9ec3e302fc4d2e64f1cdf81ec61902f7216e58d68f348972973"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-56-400-normal-VKrJZN4n.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 37056,
+      "sha256": "32064b13723da0ce323148eabc3aead3cd3123d41cb6f020f08c0d818a0d6a5c"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/index-B8R9Bi-B.js": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 504502,
+      "sha256": "204e9c9e8a3061db33e02621a6aa7f03ccd8d727bff144f60ab8a0dd62099195"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-82-400-normal-BYIYywsb.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 32600,
+      "sha256": "f2fd134835797badf5edb26ff2513507cf67827b0503b53493c4a07a3543acb1"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-50-400-normal-BOcV9pBm.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42668,
+      "sha256": "239ebe5a8ff91d036261e7b26594cb9cebcc8b0ac9b630f3bcde1200412524d8"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-59-400-normal--c1WTjBh.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 45552,
+      "sha256": "9420b5fec136ff85e830db279637b01cbf65f8b9e0e01c5fa62d8e9bc75a551b"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-76-400-normal-Bohz5vWe.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 43852,
+      "sha256": "0113a81c4b1d35b1d17a44c3184bf7b69e8699807085ee1a98cd36c092e6b532"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-33-400-normal-DgFRWyb3.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 43600,
+      "sha256": "3d5587477f47521eb84d63b55008e1b52ff6813fb8ddb54f2bf4dd998c0056d8"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-72-400-normal-DI-xiaI8.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42328,
+      "sha256": "d6ec4603ca8b73458ee16c9a255c09c3716fb5641ac2083d028a0c0a61633bbb"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-116-400-normal-DANlmn-z.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 44564,
+      "sha256": "63c6894b5e74b35fcbe1c2a95678a3a40b42d685667bbdd79f32d29bb958806c"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-43-400-normal-Dz2xm4_C.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 30832,
+      "sha256": "b5b61d6a1157229150ff66d1d2997ff72d0e6722e92e05ba7b3ebe716b36a2da"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-41-400-normal-DNbv1lfl.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 33396,
+      "sha256": "62ec123838f7fa75fa11e704a91b3c98ef70ff9ae66611bb1cd09a0de6e28645"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-42-400-normal-BWxcIMdh.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 40772,
+      "sha256": "23107be8d9842cd568543ba40fe00cccf3bbde06a220b83fa280a4619b13c91c"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-39-400-normal-CmWHGiVB.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 46676,
+      "sha256": "e88dd338d5d3c7caaddb9d73fa0cde238e676c3a51a1e8a2d8a8dc7076347177"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-114-400-normal-BByM65_k.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39360,
+      "sha256": "70c38bdf292733a2167b8091110fc650442b9888cece984552ec6c90775b0e22"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-90-400-normal-B4B7KpSz.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5952,
+      "sha256": "092b908aedd7b6519bde9089c1ac420741875099f8289c0f82d546f8324592e9"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-26-400-normal-BmHpHid6.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 46320,
+      "sha256": "6bca21109055699d29440406f17e540fc0942aa2d95538cd47984bd6b1af3269"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-38-400-normal-LeDesBQa.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39684,
+      "sha256": "0ed19348b9acc0d78251a9358dfcd406f1e68d86ed3d3080dcf2352042e37131"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-63-400-normal-Cwyt48md.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 33804,
+      "sha256": "7dbf09a682a4e05cc0de4c5fe93a79d3bdc6053147f29a21f295da532e5e26e5"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-66-400-normal-ZUojjDZW.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 36504,
+      "sha256": "c4afcce8095fbb98cdfee097ffaeacd4f5bf6692d4b655ff3fc82651a8199937"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-68-400-normal-S26xQ_RE.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 28556,
+      "sha256": "28302b1b4d060e430cf017b32df943740cdfb5a9bc34e4e7f9998db0f5aeb051"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-110-400-normal-CoCVPqeb.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 52244,
+      "sha256": "14872da24586396d1b101d395b4993fc5e18fb3b7bc9cec17d90638c6ee45f3e"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-66-400-normal-DTx716Vm.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 46168,
+      "sha256": "ce386e5f8f0b29abf978d1f6883951203b7a93e86dcc29d65465a9639edc3c12"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-111-400-normal-B4UjboLF.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42724,
+      "sha256": "781006ca8d5463354fb6fde2b118875a6da699b1796ce22be3abc003777b6b71"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-74-400-normal-Br35r17P.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 51568,
+      "sha256": "d20cd8b419fc9f722d76aac16c41c84fd736c8c9ec517031eded78a6c926b9b4"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-48-400-normal-BL8ILOHO.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 33700,
+      "sha256": "087d91daec02168b3fbfc2d4cbd9dcf9e7b6edf262c2e58abc12ceee4da9253a"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-46-400-normal-Cbp-mPea.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 40772,
+      "sha256": "0931bf8ea722d78f80595729507547f67e4b45344ef8b21381c20cdcd32be2bf"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-100-400-normal-ReL1GkIj.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 44800,
+      "sha256": "d3c38854e9bbe14c9e9e7007d47fbecf9bd51e7a67585c96538f1e40a1f8def2"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-38-400-normal-D5KrRhdB.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 49060,
+      "sha256": "4cdbca713ffc9a19e93db71de31237f9b95b47a057ace3c90035790642a4d057"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-21-400-normal-C7mGDn1x.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 16704,
+      "sha256": "6e14315e54ca3d8f928241730473899e6528b09bff9bd22266de3a29795896af"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-71-400-normal-D3dkJTAV.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 41524,
+      "sha256": "2c044fe7e1cf1cc6a8976b1ffb7912b0f5ea07a9b867327b41fc2ae2fb413cd0"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-71-400-normal-D7w4Y-ST.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 33128,
+      "sha256": "99b09b56badaabbd842d58a0b48905b2b62eb8dc91514081264247c1eebaf102"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-82-400-normal-CFz5wBm3.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 40276,
+      "sha256": "ed83d678c85a514bfda6baaec78a8447ab1f5480233d3682482556ec03afedbd"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-117-400-normal-DOZHOKDT.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 35120,
+      "sha256": "85a1ff3520d799b288f00df8ba06a99e9bbd3565897ad72c5e6733ccd3926a0c"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-45-400-normal-BBf5fyo-.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 47976,
+      "sha256": "674be02327f6b5489cbe5d5cc9c8fddba0604b359523d25d3cc6c98d11742a28"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-117-400-normal-Cg-LkokN.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 44372,
+      "sha256": "1ed8d6c6d8498d0c48d800737d2f1c0cb951d6a4e46d810d3055c8973e1684a2"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-32-400-normal-CO8YV2jx.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 35632,
+      "sha256": "286168fa3f8c3ff0393f7be781beedb78d319703458e84233d490b91427cb064"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-6-400-normal-CISTeE1_.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 11252,
+      "sha256": "2fd7a8e9b5a7f5978795082ba866dbd2fbf8c709959426e3fee3f1b9a6553b1d"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-63-400-normal-BGjjA31f.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42852,
+      "sha256": "fd305f3f7ed123ca317319de95c9a56ab1e97852f3c0bccfad4c1f63b7bc2c55"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-69-400-normal-BrosfOW1.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 49728,
+      "sha256": "ef1ac8ab13fe524cb4980483a4afdba2234ec52c39abbe65540d22ba57b355cc"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-37-400-normal-CNlOiofx.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 45172,
+      "sha256": "239e33b50e2ce033871dcfe7d4bf876d41c55d72bb524520fd1e3af169253503"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-47-400-normal-BImRhQuH.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 38900,
+      "sha256": "32e1b98d5994e97170930a6f8b833715ea3965dd2a1415fcd6046e96c7055433"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-28-400-normal-CKZqodJm.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 35520,
+      "sha256": "6d6246c6fd7a03e5eee9ccbbae5a0bf67ff9624535575e2a34a7bb1d10b3d862"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-101-400-normal-BDfk0zJO.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 41212,
+      "sha256": "424c0e24e4d5ff3c27bc40b55a7826693259012525d82673eaae00e2def71aea"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-48-400-normal-DkKcK2Tm.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 43488,
+      "sha256": "80b37e0d216da7942b97765caa63e149de9726d215bae25eb8ea5b7c93298a52"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-112-400-normal-9sI071hl.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 50164,
+      "sha256": "271112875182e6ff58fc0fe8acb4e073112624d8d1e9dfc26f0a2b0c1fc84d5e"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-87-400-normal-BGjr9P9B.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6816,
+      "sha256": "c02b788873db1b88684800e484cd640def94a886c42001e20bef1a1e4649a96d"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-69-400-normal-DrCsa2Sr.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 38460,
+      "sha256": "d4be17011f92b819855d0fc092230c0eb13baad1be4bd17d9b6bd9b0ee8ebd6b"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-101-400-normal-xYvoHK9m.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 51760,
+      "sha256": "bd2f98711322cb4caf693fa8db40594087870f63c21ae0cd41f50b4c0f7b38ef"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-105-400-normal-C9hFvF4k.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 53680,
+      "sha256": "22d1cf5f1543d153f24c18782ccf6cc44580c565b91a4d7b6e73818b879cf329"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-62-400-normal-gHAN3JT1.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 41948,
+      "sha256": "1d36caa852ee220398f9a65ad101a67b24fcc7a113146a0d1db6aa0b1d5d7313"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-46-400-normal-DzGlH9qb.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 51712,
+      "sha256": "da5baca8349a6915cc4ddef3e582061084f6221fb0319a8f94bf39e2ce65aa60"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-67-400-normal-DTZkQT91.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 48648,
+      "sha256": "2ab27787a29a04a067b2579cc52eb553917d6bda4d6969000a5b878eef4bd36d"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-44-400-normal-KrwQkVb4.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 37972,
+      "sha256": "c79ebadffcbc63731481f32fb59c3690e776cd0dea07bc3bc920c9f58573f6ea"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-23-400-normal-CAhTnGkw.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39092,
+      "sha256": "31deec0c69ec5cb783a3a7746bc03e4cb9fec134303cb5a02170ad1eb65cbd4c"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-89-400-normal-lCxVBzmS.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6992,
+      "sha256": "5bd78eaa1e1a17f42075daf692695bb13f9f246b56283ac1933d79d1f4a5b80f"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-65-400-normal-C8Sx_a9W.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 38156,
+      "sha256": "0efc6921cb22b2869ad4dfebdece27ad455fb8e6e0ace41cbf3e9383150514ef"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-91-400-normal-qXnKBASq.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5900,
+      "sha256": "dce4d29c20d5c9c4c4ad04045deac4eeea687eb12712bccc752793afe4b65c18"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-116-400-normal-4K5BIzu1.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 35464,
+      "sha256": "0e385bef95ce8fdfac8b3e1776f042b59e02c4d3160a967809fb6a8a22b0990e"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-84-400-normal-DStkEFfC.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 28528,
+      "sha256": "9efc0527e0e50fc1713a46459af8d1551be281fdea503c9416eb98fec29bfd0f"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-104-400-normal-CD8YcV0B.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 53092,
+      "sha256": "1d62d709a30ae046888b226665e84b056d6e0ee1947da424b2aec423d907c9d7"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-22-400-normal-BA2TjkoN.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 44632,
+      "sha256": "68cf19eb70c5a1cad04ba1eb7b89231843e12aab918963c898b7e744e87e726f"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-latin-ext-400-normal-Iv_J2YnH.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7248,
+      "sha256": "8f58767409309088d84f4bae4eabc5b5b6b714ce1a94f050847289aaaf235431"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-5-400-normal-B0zLr2XL.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 15264,
+      "sha256": "f78717bd58e04beb1a467cb2457ea8da14912e75608559e0f106f02db965ffcd"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-25-400-normal-BqETRGLD.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 51760,
+      "sha256": "a0799b5460f5a31eea98ec8371752b8308f6ba8da93b36dd91ead8492583b0b9"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-107-400-normal-C8C13wwv.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 52488,
+      "sha256": "3a62924b2596ab3d51f3ade3eca697f0794cfb2354df9b1919edb43d7aa7eafb"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-40-400-normal-BNaG2NzN.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 43388,
+      "sha256": "39a2feb52b0bfc3138f23151f09cc4faa86d3aab890ea4408ec14a939a422f4b"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-102-400-normal-CSgCCFa9.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 52516,
+      "sha256": "d7c46277fac6c53e2541454ab4aa1d460f74f96e5db403381a9ccaa5af02d749"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/AdminApp-Ck8UKi4Q.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5140,
+      "sha256": "4f7fb45ae024b069283619e66e949938db4d3de2e3e7d3a788cfe45b405cfe9f"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-119-400-normal--Fele97i.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 70032,
+      "sha256": "52301c76f72d4ba11a7059a5e0292639a35ca61176082ed87fa628c6e1db2492"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-76-400-normal-DcB08CFh.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 34612,
+      "sha256": "9513ffe226cad7bee226ef503eeb32733443530882cd9dbd628fcc54ab066533"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-119-400-normal-BrIWc_nj.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 54348,
+      "sha256": "6ac1bd4876fb82d1c4c97536319937f610648b79cd852c941f89cbfe00c8bdb8"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-35-400-normal-CzfTX1U2.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 33388,
+      "sha256": "550c508b2da2f686ad407094fc61abb8ca4955579a2a651296e4687df991eebd"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-64-400-normal-CvBGfQsI.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 34524,
+      "sha256": "ba07cf4b4c1952c87bdc4883ce6314d075fb09973c76d30864b6a04573d71632"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-78-400-normal-BV2anfcn.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 45892,
+      "sha256": "74a003ecd94f92a5c35901d893f6264f143085097e7f3fcd6c163d1f659bbc94"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-61-400-normal-DEdGYtwD.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 40248,
+      "sha256": "5acf29b7c4b4999f769f08f229832bf49d6fc9b667e4d23b8a631e69de3defbf"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-72-400-normal-B61Z4Jd8.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 34460,
+      "sha256": "ce64b49d6f171ff84ab32e47a8846dd08c2492fd51ee1f4a010f86e5cd07ef2e"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-89-400-normal-BunMnOrT.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8976,
+      "sha256": "27d5bc2e3fd94a8c063c88ead288508a53159286251c194633a8f612ba1ccbc0"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-36-400-normal-DEHcJKlW.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 30716,
+      "sha256": "e3e327821de43568afbf311b9a52234c28e34a5eac2969d7bde522704dd11ce7"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-24-400-normal-DWWywIBv.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 43748,
+      "sha256": "74edac9ceae09ba64ec6c5029a45a768dcfa40a4b6cce51c8b0418150b18c384"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-47-400-normal-CA_5s-Dr.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 49928,
+      "sha256": "8e0971e569aa2cbb305159b0c9a316915f6ce74185f2636d6f18cc974666b436"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-latin-ext-400-normal-gIH_qXVp.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5724,
+      "sha256": "ff6d9a53e368c9cb7ef501c7c71bcbc00349c7eb0d7fad0d1ca806f8faa26c7e"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-111-400-normal-D0YWUhMA.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 53696,
+      "sha256": "2b0a0cf8c33a64e8025046154a6a7418a4cf27ca157331c53b5ff016fb7e0b52"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-60-400-normal-B-su3nCf.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39712,
+      "sha256": "0518cc46556d808bbf2adc97d964787d0181fee0fd042ab08178adcbc0073fd8"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-57-400-normal-C6PkFoaO.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39076,
+      "sha256": "c719a170320a936006435ef3b866396ccb3240f095e6192cd1a9676a45364913"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-40-400-normal-BILW2C8W.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 34364,
+      "sha256": "1b5b7e6eba0a7a95f142349a9a214f55c30b025183a5ddc64e364ac6e5472b1e"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-83-400-normal-B4MQ4cnu.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 30896,
+      "sha256": "4e65935907a097807dcbc71ab80d0ac87ece0c60e09437c85e79546cc0e3c966"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-35-400-normal-9OurGiuq.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 41752,
+      "sha256": "59ba86ac4182266502ce99e6cc05423e22dae77c1d7412377ad528c3d339a320"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-29-400-normal-y9MQBnJu.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 48272,
+      "sha256": "7c3aa5e0640134db5a52b16f42d95d4db7964ac03274bfd92c5eac95f7505e7a"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-68-400-normal-DqkwUB1L.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 37744,
+      "sha256": "30e59a58a1b70a2fb079b964ea87d20fe606d6d111eadf72a06250bdbd8da5e0"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-latin-400-normal-CIgGI3sg.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 22664,
+      "sha256": "ea440a490caefaeec53f78adf9ea4ec0bd222ba24af962fbc7b4b7d47850e7ba"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-102-400-normal-BbQbiaew.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42172,
+      "sha256": "fbb76004518f2c84e088db7f422bbbb6b322fef39f636f89aa0463a114de5373"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/index-BmBh_oVA.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 245984,
+      "sha256": "715680eb70578cb026f1e93349fcfa9567695899d9a85b603057c9c6d04741cf"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-62-400-normal-C68ACm04.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 52444,
+      "sha256": "22bcf85cacc79e9fbed8c22613a983b90a47ad588c5e5b7b0e4bbb35a43b6ef7"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-31-400-normal-Dgp7wka8.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 43588,
+      "sha256": "be928606e947810fa1def68ff046643ed468d02d76520535c6e5a4f896236566"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-115-400-normal-B-Rty9ST.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 47488,
+      "sha256": "5e9d93144a187155222d8b898f216f6d8c0dc824c8e3e542915920930e9b08b2"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-65-400-normal-Bk8SN5Oo.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 30352,
+      "sha256": "8c63cc77c1d220108f47708b6806eddb56da5fddc877d2e8f8bed9f592e82719"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-30-400-normal-D18vuEb9.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 52720,
+      "sha256": "d730aedea97fa7cabc56af83f7d14fbdea81142236e786931e5d1ef9930940b6"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-43-400-normal-DN9kCyno.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39156,
+      "sha256": "2aa63456db26fa110ed6af47bb17fd2097f56143d409add44d04ce0dc0d3777a"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-59-400-normal-CeSjNpXe.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 36416,
+      "sha256": "0a274c73d62090bcd19ce602b70333b65a2949ffff0fb58a9c0764c28b14eea6"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-56-400-normal-BiGVW4p9.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 47468,
+      "sha256": "9034c28d252addcde91314d3e66063e73ef914fc25774fe49e543850dfe5bf11"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-73-400-normal-CjFHe9hh.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 35624,
+      "sha256": "614979a5fca5dceede7b40bdb6024c8fc5fcca80ee3e44f976e2e8f22de7f97e"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-105-400-normal-BHHNimkF.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42780,
+      "sha256": "b05da70aec9bf352fb77b3a07e5477c95587eb836a720943460a49d8fffc84d2"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-24-400-normal-5FVPkn6z.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 55240,
+      "sha256": "748eb9b7c1f687bfaf255d4212c3b60a9cc53d04473f7353a4bcf568983c4bb4"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-81-400-normal-DwVKpWL7.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39324,
+      "sha256": "553115166876825f6cf596e61f419304e9ee49380a182f3f58def85cc19aaed8"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-75-400-normal-C3rovZtN.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 30712,
+      "sha256": "cd9fa7f2609359dd37475cf265ea8d0e2faa146aff777d0068290e9747ef3017"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-27-400-normal-6ChHYUYB.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42280,
+      "sha256": "0007315badaff955ae176831bb4b5a92db0a6cb0165aa529439e34503d03c23c"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-99-400-normal-Bd6NEUiQ.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8584,
+      "sha256": "b81b678a90277d65257325b1cc698295a8b57b205eabf3a132ee634fef979dea"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-42-400-normal-CB0Lgo3r.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 33116,
+      "sha256": "cb42250607c16ac6644ad2bfcb783c3355ede2fd3834cc2d5cd9c2e343d2ce6d"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-54-400-normal-fnBxYYH4.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 36656,
+      "sha256": "60e16a0fc5c4b5b056334b1217802a9e06d2a56cd37a1b75ac9ed72c63246e8f"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-55-400-normal-OR21fGsv.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 32452,
+      "sha256": "9335e5aa92ad3ef8b200e7816cc4a09848be9ead6178319db16c22cd3d63da02"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-55-400-normal-Ce9hQ0YZ.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 41716,
+      "sha256": "046ce44c0d5a94879a64b9f14455a1e80c46b17bf8c98b827eefa96eacfefda4"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-67-400-normal-C1Oz0pFt.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 37656,
+      "sha256": "4984939cfbdf151cde1a5108c294d310e749def5d91af0f3b1b3495eb963a5fa"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/AdminApp-DHTV-Ql5.js": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 25050,
+      "sha256": "7db25dbc2dc61de20c5090e2eaa311a6a781dd7a9a9d24235e8da5d1fbf52baa"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-61-400-normal-LGTmzE8I.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 32148,
+      "sha256": "bc969adb767ff5c0da99b82efc653ea11200cfec96a7acd21202ad780c24ffdb"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-109-400-normal-DdTeJTKp.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 41812,
+      "sha256": "f07bcd4a75335ccd17deaf012e51b732658b69d340363aec9ad8392b4ad1d7b8"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-108-400-normal-DCLtaPv5.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 43852,
+      "sha256": "a9d450627989c9e65347e9ea95146034f15d168b74285e84e8a23d256c3ef28c"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-30-400-normal-O7SnWSLf.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 40412,
+      "sha256": "d64a121cdd32be0a6e82bec5a9c918893ea9537f07a8bb2f10e6a6654bb2f598"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/cormorant-garamond-latin-400-normal-B7YtguxJ.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 30980,
+      "sha256": "b926f33f9d3d5cb64e639b8fe9ad5380560a63f3e7a29d212f2b80a2d22ec051"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-27-400-normal-Y6AvStvM.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 34048,
+      "sha256": "04a269894c40bda831579d523c916d592937a71c81be01cc5334368c7b5d5bca"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-70-400-normal-DGgPTQo8.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 27820,
+      "sha256": "c257f9abfc8b90cae12396c85fdb0bd69f3feb09ab1935faab7bbc67e4b89512"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-29-400-normal-lQml1r-l.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 38108,
+      "sha256": "2b99bfe3ebbbee489e29e6e7261bd43911b4fef73f567c40fb046726d6e1fba5"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-115-400-normal-Bah1xX7z.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 38216,
+      "sha256": "e613ce4ca826a1e6a94565095e32385ae30644870f0e6e11465f1570a308fe9a"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-107-400-normal-ygG4MA5M.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 41844,
+      "sha256": "3c9fded1c99c9b9ff49a2946e3f9d1fdfffe7d99f5afb83ed36bcdfa4cb863db"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/cormorant-garamond-latin-400-normal-B-1hWBU7.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 22876,
+      "sha256": "8048ac209bec741e1c29cd0cfac5aac1c0c2ba8c3ddbd4a58fa9bd92ef5c63c2"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-58-400-normal-DVaM_vK5.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 43316,
+      "sha256": "7db027f41d886ba883186df4149118bf2bd67d209fa20e6b35cead28ec00b2ef"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-22-400-normal-CmEjSfFB.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 55116,
+      "sha256": "0c7978263e4d6a3172e9a243e7626879c450e7a461649098ddeea94effae7151"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-108-400-normal-CnSV0C_u.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 54660,
+      "sha256": "70388b41dbc9e70cf0e14036b29600b04f553668e97c065db0fcb9e2f5839654"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-53-400-normal-DdrtXsQA.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 28512,
+      "sha256": "d02835c0c38db449e5bdc5d02e3cdee9a98c5a83668db45ea4c3ceedeb26ad98"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-106-400-normal-0U-wz-KB.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 54168,
+      "sha256": "160d61a8fc7457b49945bf4a753bdcee2a327ddc5c7a41c3b240ade7a073ca61"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-90-400-normal-BgpljIOb.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7660,
+      "sha256": "c9cd1825baff41d677b838322400a143f465a5e5e5c73acd0289d1e8a8506ac2"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-103-400-normal-CUHTi12k.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 55472,
+      "sha256": "ff017a0ec7e92350e68b7d5d6019cf1e9c77928000f313576dba68951f88689c"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-28-400-normal-CMYAtxzL.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 44616,
+      "sha256": "53963a40f4ed08547b574b799911fe8d0556492af43123b70d7f10809846d564"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-26-400-normal-BSzuGlng.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 37516,
+      "sha256": "ee1c7471882eaf5709ad479d849bcc70eef214803732bdfb8dd56fd502e132dd"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-79-400-normal-DdbG_TsO.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 38232,
+      "sha256": "10461f714117f4ce03c24412c8001b6796f744f0f2d64aaf63e9de69b42068f3"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-86-400-normal-Bz2KOH-v.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 25288,
+      "sha256": "6db58b686996d0b7294fdb6c0de070a5655e3c1a7ed95f58931e9a365092fa92"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-80-400-normal-2KipuDMA.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 23408,
+      "sha256": "032133d339d581d98340adf3ee80873501ce838abfc0ad9b8d2e87d90cf2f273"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-78-400-normal-Ciy80LJH.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 37096,
+      "sha256": "f1b0994f0406bf6f01cd31ea312cbf2f7e114e224053f6040a57a3720066bbce"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-51-400-normal-K2vB_amj.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 30040,
+      "sha256": "dadb6d424a9bd9264082a0fcb522cd1b92b74126f6508d125a549c6a52a2f306"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-85-400-normal-Bktfnpot.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 26844,
+      "sha256": "e1042d05a73a5b1c590f833271338e83cfd044d2afa8803b571c49fb77079ecc"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-60-400-normal-DR2IcHGH.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 31860,
+      "sha256": "c4d16a9a50ff199e3fb1f724e4de1554d988125d5b9f82e2141cd96d8a099009"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-44-400-normal-7RpHTAzV.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 47648,
+      "sha256": "bf8b0eb5a4912c263f7e3bd4fe9eb2673f1ca4d7b748fd914aefa8b58f354bfd"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-75-400-normal-GyGkoHle.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42584,
+      "sha256": "ca2b0733f4bd6f02d2102ce61f074661d55a5709dcc4c8741e82b66248b59e6e"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-74-400-normal-BwgdtHTO.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39460,
+      "sha256": "7b8dd20a7927cc71bee8cfea0555909a93172423e62b18c84b3dcf9dd173d34b"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-52-400-normal-CcNwQIpz.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 45152,
+      "sha256": "6efd8f86a9ae1c4e611b76844997f3a567365dbf71b6e3b16c21bbcff6e54485"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-77-400-normal-DXmeg5Qd.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 27224,
+      "sha256": "9d298d19de6fa484d53e9fc566a784320d3a34b9dac7f96e60a8e7afd97f28dc"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-99-400-normal-CcCfmhcb.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6920,
+      "sha256": "648e7d3f5a03ba9f9b49804e474220dd155d31e1b2b5b3ee7bd4772717cf3bcf"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-100-400-normal-C4-86xa_.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 56184,
+      "sha256": "373938a90a6343a1e0109b806ebc7c4d36e9f9654eda0417054ed211e17a0bbd"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-49-400-normal-DzLACwr8.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 37080,
+      "sha256": "85ac5231f9a586452eeb6b5b23198e547dcc18fc6903755d7ff87a2af5bdc7ef"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-87-400-normal-Bvr1WGbA.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5460,
+      "sha256": "038988b9ce055fe20e1fb309fa28e21dd1667460940f492349f3aa3ff4ae37a0"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-77-400-normal-Bmgf8Ouu.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 34288,
+      "sha256": "defe03aaf4e5b0b059ccfb8ca9c7876506667b62f0ca4e399f51f2fb5b9bd6d2"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-49-400-normal-DjfBJfAV.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 47356,
+      "sha256": "b9fc48f1389aa72e7dbde06e2ab9fae0f47aef5d84b6fd8148b70d4795d71a38"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-23-400-normal-Dp0nGeFG.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 49176,
+      "sha256": "16d14d6ed2e0341b6cd756838ea0b00f8fc03c3e8eb337f19d83bb990184246b"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-36-400-normal-hS-x6gUQ.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39628,
+      "sha256": "fc822465cd26339ef0ec1d32fd98258548d033827df2c90603d79d50c7be0cba"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-33-400-normal-D957xGZn.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 34764,
+      "sha256": "668cb1a991576f49da8bb311efb227e888752b05d4a5983d39fab70b5e056d6f"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-39-400-normal-DBlVs41-.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 37824,
+      "sha256": "27e6d1a3e8135ddcd1bcac7dd2de96fb40a43efc38d84e414b802e2bafcb66a2"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-106-400-normal-By0PBMMN.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 43148,
+      "sha256": "a69e4919aaf46031a1bfa206280a497669b2af64f0de0a973cfdb0601406a1cf"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-31-400-normal-BnWU33m3.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 33856,
+      "sha256": "a888b15fb48d49247cfbaee526993f75b6c118573b4a1664560f34998940274c"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-32-400-normal-DJHDmhYT.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42976,
+      "sha256": "bb2b026adad2be815429d085e31316156c8c66cd8d47b2e11ebcf38ce7892910"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-81-400-normal-CtmR2MQs.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 31920,
+      "sha256": "72b8d3706a36345da7281d52b8e1402646541a2a873059443a825e6ac21fe0c9"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-cyrillic-400-normal-C8SYfPzS.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8948,
+      "sha256": "985622c1d50913777898185f07fa769424a93250d782d5105782c58fa75cb3cb"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-21-400-normal-JNqf8ldM.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 13968,
+      "sha256": "198318a26fef917346dd6ed4c78da03f1c5760a04ca865b70f414183890ebba0"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-5-400-normal-DsAhfvEY.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 17892,
+      "sha256": "c6d60fc398a82e8055423b568e9d3ab15d2bddd4517e826674369de8061abe38"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-83-400-normal-Cr0AUYZ5.woff": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 39188,
+      "sha256": "eeaf7295c18cda6256273b23fe2d46356d79d6ee8f23311684c935acad03afd6"
+    },
+    "AccessibleBeautyAgent/frontend/dist/assets/noto-serif-sc-34-400-normal-D9Gw4Yxs.woff2": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 33960,
+      "sha256": "66c35dc76153487b017608264634ea093981271548c59aaa394772ed08c81e73"
+    },
+    "AccessibleBeautyAgent/frontend/public/art": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/public/models": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/public/visuals": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/public/fonts": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/public/release.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 160,
+      "sha256": "12277afc595136dbb75ef6bf8eddc6e5bd8c23e65b51ef85dc785d66f520440a"
+    },
+    "AccessibleBeautyAgent/frontend/public/voice-pcm-worklet.js": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 814,
+      "sha256": "53fb8449d2afd838425a5c8ef7d6869a2292ce4af632b4039b4295300464f884"
+    },
+    "AccessibleBeautyAgent/frontend/public/art/apple-study.jpg": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 67669,
+      "sha256": "b142072953d10910f1d1f722a31994dcae6d8940f0c257a9686771ceb79012e7"
+    },
+    "AccessibleBeautyAgent/frontend/public/art/README.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 518,
+      "sha256": "e9aa73d32464782e9fdca66bd109433ab6ea66791d7b5848d90c8775ad293aef"
+    },
+    "AccessibleBeautyAgent/frontend/public/models/human.glb": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 404976,
+      "sha256": "402b8a8ac9f03232e6d64b5962929703a069daf99d3c49ac8eb0e48bedc9c576"
+    },
+    "AccessibleBeautyAgent/frontend/public/models/LeePerrySmith_License.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 364,
+      "sha256": "7cf4da43a6ae6d32f7f7d063fe129a19468af6f4fe7c53b937f83959709fcb50"
+    },
+    "AccessibleBeautyAgent/frontend/public/models/README.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 432,
+      "sha256": "bbcb662afd14459cdf656950ed3540e424122b8f785df29a70275bb780533c5b"
+    },
+    "AccessibleBeautyAgent/frontend/public/visuals/porcelain-brown-shirt.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1538966,
+      "sha256": "752ca33e0e56a0a7302d1815e7eb4502fb91bfcfadd5955682ddaa23aad013e2"
+    },
+    "AccessibleBeautyAgent/frontend/public/visuals/CHARACTER-SOURCE.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 386,
+      "sha256": "10d06116cad49a2cd3b24b81ca244393b0f3c2f721670cf79051cb52ce1fa54b"
+    },
+    "AccessibleBeautyAgent/frontend/public/visuals/mesh-portrait-preview.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 65576,
+      "sha256": "9d0050d3fd15f8ba764bf3d8b275ab2612b9ba5d016b294cebb041e78c882104"
+    },
+    "AccessibleBeautyAgent/frontend/public/visuals/porcelain-character.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1479178,
+      "sha256": "2223951d8b44845deda2d530aad50cf5dfc0d659db4433bfd8d2adde742fe00b"
+    },
+    "AccessibleBeautyAgent/frontend/public/visuals/APPLE-SOURCE.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 293,
+      "sha256": "3df9631020de0ce1343a00b8284584a60f6407dc345ff7b9bb0392b033703e42"
+    },
+    "AccessibleBeautyAgent/frontend/public/visuals/apple-reference.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1706573,
+      "sha256": "c7b2239ee310b067bd45b794bc44c29c0f842f7505ca19efe97b671994bb6f87"
+    },
+    "AccessibleBeautyAgent/frontend/public/fonts/NotoSerifSC-Story-1.ttf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 50924,
+      "sha256": "7d2dc2d5a47e48f43aaf4c4ac67f94c2ef4d2e35963b3263d19590b3ad0ea7d1"
+    },
+    "AccessibleBeautyAgent/frontend/public/fonts/NotoSerifSC-OFL.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4314,
+      "sha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3"
+    },
+    "AccessibleBeautyAgent/frontend/public/fonts/NotoSerifSC-Story-0.ttf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 50940,
+      "sha256": "b42c68e9a7b7e3ad8152afedca61215a735bef9a4da34642429d05dd1836dd05"
+    },
+    "AccessibleBeautyAgent/frontend/public/fonts/Prata-OFL.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4475,
+      "sha256": "26b0aca81c38c07e0bfeb45638a48ff0498f7f83ce252ebaa885137831679a46"
+    },
+    "AccessibleBeautyAgent/frontend/public/fonts/README.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 752,
+      "sha256": "4247d8749847cd2329f9486f33dbf64241a50c6cf5727cc4197ea26c5aed5bbe"
+    },
+    "AccessibleBeautyAgent/frontend/public/fonts/Prata-Regular.ttf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 101284,
+      "sha256": "3b2b880737be3bda5f03554297b758516876157c88f9e3b3bae8fa1fc96a2c2c"
+    },
+    "AccessibleBeautyAgent/frontend/src/hardware": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/types": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/admin": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/content": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/vision": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/state": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/components": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/api": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/accessibility": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/frontend/src/App.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 47021,
+      "sha256": "b00b5a12d3af3030dd81e67513c0a7f567de025a750062762c3ee884d417d8d2"
+    },
+    "AccessibleBeautyAgent/frontend/src/main.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1342,
+      "sha256": "b5959e35c28a51d9939b36a24973722f53b2fc7600cb10d9e20d0d7350f6a141"
+    },
+    "AccessibleBeautyAgent/frontend/src/style.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8327,
+      "sha256": "fc1475e9506ff8298169867eacb70d4fa2bcd6b8b95892f36a19f57aceb8612c"
+    },
+    "AccessibleBeautyAgent/frontend/src/hardware/Mirror.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1634,
+      "sha256": "8fa904da6e31a4a0391cd66fa632aca12c3337cc6b2100ca8444f00c271298e1"
+    },
+    "AccessibleBeautyAgent/frontend/src/hardware/gateway.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 850,
+      "sha256": "874fe7db6d0dc7f79ec69589257d08a49ae785462bba9ade17729f5c94e27180"
+    },
+    "AccessibleBeautyAgent/frontend/src/hardware/gateway.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 976,
+      "sha256": "fff7328a0a31f0067979b82a8e7080244b60d8d90abf82746e0b885ef464a681"
+    },
+    "AccessibleBeautyAgent/frontend/src/types/index.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3236,
+      "sha256": "aecc914ec3c11ba68af831ed390673be928bb9a5e97f82d54b0924b8d6c643e0"
+    },
+    "AccessibleBeautyAgent/frontend/src/admin/ReferencePage.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6046,
+      "sha256": "077ff899413d8382b6074c043ddc748a53d02f439a2bd4ade202b4c47d10b841"
+    },
+    "AccessibleBeautyAgent/frontend/src/admin/AdminApp.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1995,
+      "sha256": "57f08472ceaf89597f7313aed2d709542e51266fd183fd95d78467ad918affdc"
+    },
+    "AccessibleBeautyAgent/frontend/src/admin/RecordEditor.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6004,
+      "sha256": "1994b169d43a206e9e3d7c3546ea9c9ddb7a0eb99975726840862efed96adcfd"
+    },
+    "AccessibleBeautyAgent/frontend/src/admin/file.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 364,
+      "sha256": "45c711eb3e1d9d0fb4e3a9b6a51fbe175d00b0a4055372ebe36b0610544e0d30"
+    },
+    "AccessibleBeautyAgent/frontend/src/admin/fields.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 859,
+      "sha256": "da34d8ab2318059165c860a0f2df7b4cc4de94e6eb1def79d9089bf507a57271"
+    },
+    "AccessibleBeautyAgent/frontend/src/admin/types.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1456,
+      "sha256": "7176248dab2eca5fa21272c14590808a8a56d6ab787b977384178ae12a2547b2"
+    },
+    "AccessibleBeautyAgent/frontend/src/admin/admin.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5147,
+      "sha256": "25149219cae8b016ffd9dec9a5dedd1f1266adbbf35546f74bfa3d1795e693ff"
+    },
+    "AccessibleBeautyAgent/frontend/src/admin/KnowledgePage.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5597,
+      "sha256": "acf4b3fef2d0463eed1b16989af89dcf6a07dba2de99e0403801fe2c09a6ae07"
+    },
+    "AccessibleBeautyAgent/frontend/src/admin/fields.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5617,
+      "sha256": "4d8a7284d9cc8be15274b1fff1a6714e23ce6c9d9ec616d9499ae802b1ce9780"
+    },
+    "AccessibleBeautyAgent/frontend/src/admin/RagPage.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3668,
+      "sha256": "46841f9fb6faa816339ce492a74ad6f6116c344b1a35bbdc823b688ef7143d85"
+    },
+    "AccessibleBeautyAgent/frontend/src/content/guidance.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 861,
+      "sha256": "790072a5bb5201a4f98db7b838af383d86fcfb92d66908a0d4244a6006d3b5b7"
+    },
+    "AccessibleBeautyAgent/frontend/src/content/locale.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4100,
+      "sha256": "101e66cbcf1e1700f2223945ca62fcd79da52b2978c231cdbd9ffd5879d70f8f"
+    },
+    "AccessibleBeautyAgent/frontend/src/content/errors.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4327,
+      "sha256": "362fe7328b72bb61097f9b8014a6e955948e35a0f0c4ad11b72428408a0ff546"
+    },
+    "AccessibleBeautyAgent/frontend/src/content/traceBrand.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 17672,
+      "sha256": "0c0ee0ef6b319d44b9eacf239bb5823fc98770b7b4917058a1a06238373034d5"
+    },
+    "AccessibleBeautyAgent/frontend/src/content/Locale.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1332,
+      "sha256": "ee094070f7913e80ba80e7b0df1151054cc2bc0d5e4b0514b53e6b2d3cf42d8c"
+    },
+    "AccessibleBeautyAgent/frontend/src/vision/camera.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 566,
+      "sha256": "5f40cbb29bfcb850c132b50cf2e95fa5ac7d88630bf6564b8e31efd59a7784e7"
+    },
+    "AccessibleBeautyAgent/frontend/src/vision/camera.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1943,
+      "sha256": "106e4fa65ea9f2e309940a917b63798336c9e1a2f17910687e85b79fccd9c55d"
+    },
+    "AccessibleBeautyAgent/frontend/src/state/routes.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 973,
+      "sha256": "bc42f8bd378ca9321d46eddbcd6319f1da017740a96675f0923a0b7c846d4c49"
+    },
+    "AccessibleBeautyAgent/frontend/src/state/session.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 610,
+      "sha256": "24dc505e0f0119241a8fd16973c977f7800f7d4e74a734d56a9492562801ddc6"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/cameraStream.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3299,
+      "sha256": "a0a954b209f5afeae623aa3d258c8afbb69a4d2164714146a0c01c2050fe3159"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/appleField.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3272,
+      "sha256": "619a27997a9e5068cd530098b599f16c66f6d67897aa2da3c80a6919fb2d873f"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/photo.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 501,
+      "sha256": "b5b47992215b7ad9359d5ba30a113815c9b5738a89c67182e48617a9563d2290"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/appleField.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 588,
+      "sha256": "c6c11ad328219898062b89d9aaf87274f759644956319cb59cc8bd92335cd737"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/frameAnalysis.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6291,
+      "sha256": "7d360e39dc881760d62428e0f3c942bd7b6800803dfeaace3c6a1b15de5f1ef4"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/visualCommand.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 393,
+      "sha256": "dece75144ef209fa862df3c607d2b92b7404e7f2f64388b1d80eacb945836d19"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/photo.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1023,
+      "sha256": "7b76b7efbc0a75a2c10dd204f205020009ce7894f1bab02f3ba62774f58983b7"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/callController.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7274,
+      "sha256": "2023e5947efbf7c8b0268730c573771e2bb27b66f1836bf7e47e0fc703bfaa36"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/localVoice.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5093,
+      "sha256": "28d5f98bd88d113ab595970e14eb11aa48dcbb3d1a26ed576c58402f37e6c8ab"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/storyField.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5082,
+      "sha256": "4a2e4348cb290db6d8f3c92667eb4fb6648da3e82f7abd4ed425d8cf6a7da17b"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/localAudioEnergy.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1464,
+      "sha256": "77ccdf75eaf19e45399af109434a899363dd26c55d64eab0f108c754975ed349"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/frameAnalysis.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4476,
+      "sha256": "8b258570078b2f68fdcae2447ea3f10d0b4600bf382432dc4e7f907473afcaed"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/voice.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5119,
+      "sha256": "7c49d54152e15fe6952ba67ea5a908595912390d441ef9e299d01d6347004f90"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/voiceV2.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7306,
+      "sha256": "21aaa34581bd7be816d212c13680ba4242f80861cc861495ae9483312d59b9d3"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/cameraStream.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5193,
+      "sha256": "05b0ecf5af22b74b69e4e77474d3d5211c12926bf3597b908cf1b552a88d5ca7"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/voiceCommands.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3330,
+      "sha256": "5858a360e2de49b359a9a2a090bd80abe573476e8735ef85a522e59a03f15e22"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/voice.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7330,
+      "sha256": "47ccb6a11abf212a884f3535e4c650483967be1ae8dd5e40d08057be76bc23c0"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/recollection.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1106,
+      "sha256": "7e4149359991eae9e171de9fbe1c5e50a0875852f26deeaebcffe6172a608c3b"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/callController.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 11671,
+      "sha256": "059956c5bd4ede22e3dcf76eded2178c7ea21a7860ac5eef7b0442938d18d3b0"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/localAudioEnergy.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1691,
+      "sha256": "767574bce0fbb5a60179b58dd2274533ba568554798c725078501dd37a8a7769"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/storyField.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1309,
+      "sha256": "bc4695b3728849a6a7841afdea40f05ffac7d7ad74c3a1d6ec8f5acdeaa01daf"
+    },
+    "AccessibleBeautyAgent/frontend/src/realtime/localVoice.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7612,
+      "sha256": "2d521c245903fee4dd7ebd456dd42448db8c1ed2d8c688ed9647e9256fa891b0"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/iterationV2.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2780,
+      "sha256": "b13829585ab7a695ee207405c53eeb1bd97ecfa7c0bd39d321ae220330fba77e"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/storyLayout.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3155,
+      "sha256": "44d0758299a46007161beaa4eaa5f83e4b16ad3d346d9329677ab5a2eb2d892b"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/reference.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 23513,
+      "sha256": "5eb80f5be43d1ba3e4ac1f892b71b0a41da473bdedfce285baa31d906f8e2599"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/companion.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 26138,
+      "sha256": "9c69bd17e5eecedbca31c84b10e552a506be3bfce38a55686abd31dd463968bc"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/traceTokens.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 464,
+      "sha256": "a03bc3fedda8d324aee4b948dcafd1042b23a148d9530937d4f9ec558a25115b"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/homeComposition.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 800,
+      "sha256": "c2733345fce7dc1b16996f093c4d2ef2259ecd5751a9d26b08e22c04c126a494"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/story.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 10943,
+      "sha256": "b1d652087092230a4892902e5a5a943b68d12f02205ee70549a32474af592748"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/appleAtmosphere.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 343,
+      "sha256": "a836041796a49c83d0686164f21e15a5802b9cd7e10794a10e5487947708a8e7"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/referenceCharacter.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2519,
+      "sha256": "320e9799898f4d66fb31268dd838e22f513965309806f009407dc9775fc36180"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/trace.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 15307,
+      "sha256": "a56275611815771f109fc4583ed31633267d2f45528b1f3232a53e40eee441aa"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/fidelity.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 14608,
+      "sha256": "045edb4c99c14d1155453a370e98ceb1303b1413775c96b915ee6a1d3ca95007"
+    },
+    "AccessibleBeautyAgent/frontend/src/styles/sculpture.css": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 18072,
+      "sha256": "8f0cf91c47e7967590606639279422de9ccd1472174913b660969dc196b5ca3d"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/AppleMark.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 668,
+      "sha256": "553e694998222ade4afce173805a20a2ee61c8fc4f55099ff1d30faffa516d6c"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/AmbientParticles.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1137,
+      "sha256": "6ba4800b87059bdeba6f348ae89071484012f0da9e4f9fe4946a401eeb754566"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/LocalFrameOverlay.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 973,
+      "sha256": "4574f71de5743b21761c28fd5659b1b79230b491e787cb27d6089baa7fd6ca0f"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/ParticleApple.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7436,
+      "sha256": "a3fd5ace2f0d406b2156390a98480b52c447788b333844beeb61750263c692ea"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/LocalCameraCheck.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5856,
+      "sha256": "fe8d6ffe60faf72868d5e8a255250714bded54846c29296041992296a726a0ee"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/MemoryFacts.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1313,
+      "sha256": "e27c171241694099e640a2b506bb89e00e0b1df1d60049e3b83e27ba53c944ed"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/StoryParticles.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9733,
+      "sha256": "0b04813a799d7063cdc1fa69c78bcdca22ab1a04ad533be2338ca5c69c0658bb"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/ModuleHeader.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 752,
+      "sha256": "b9cffaef4b162e4811fbf8ebf1f7798cf3728947dd4883b5948884a5d6b6b7dd"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/TraceMark.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 205,
+      "sha256": "4cd4e527bb1b1bacd1cd947e6d596e599eb475e3c46123a5b1149d590a00e9d8"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/CallExperience.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 30781,
+      "sha256": "2cd4c62ac6625f835f40edff6b2ef3df86998db907cc9b0197de7af20aaa39bc"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/LocalFrameOverlay.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1682,
+      "sha256": "bbcc7f3dc25839751056445ccc9143290daca840a86adab2adbc43b4c065d567"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/AmbientParticles.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 694,
+      "sha256": "57e4bfb26566bb8ac14639deecdb2d0396b245334e038c3e9a180d2225fbc744"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/ParticleApple.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2973,
+      "sha256": "badad673206638fa38dda048c63d3013c9eb27520ca01ee7f163f373dcbccc26"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/CalendarApple.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 754,
+      "sha256": "7e875e2c008223c798a4a701091869752145ac040c7ef8d6591a8a24c169d8a3"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/TraceDotGrid.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1071,
+      "sha256": "1b2fdd68ea086f5ca533637a3125c1080844116590a44d7b82269803dec1e615"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/LocalPhotoCheck.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5250,
+      "sha256": "a0f5e1fa5c9aff6298370f50d2ff2b8727da7eee7b248e9ac23e948c29a28f29"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/CallStatus.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1202,
+      "sha256": "28abd6c565718b2fbd075d46c803bea84326f69493d101bcdebe7c4d815df601"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/DebugPanel.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1084,
+      "sha256": "7743a44462eb1d2b4d405d6c07fc02ff3b49480f5308b071eea65dc8cf4c3fe4"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/LocalPhotoCheck.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3596,
+      "sha256": "b5a8c5ef88c9f5bf4e50ca70b6c4363c90769f75921630160bd285546467c427"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/VoiceAccessBar.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2815,
+      "sha256": "34eb8a51bf6155596dc956f1823d3c3558eb3f1dfe2d3aff76742c952e86964d"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/SaveLookRecord.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2962,
+      "sha256": "48c82b8f8e49fe2efbfaa564d96130895e25329738f97fefe8600fdba3fc1720"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/trace.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4759,
+      "sha256": "b0dbaf2f7a8e38b5b8bd4b961af61ee1b54950d32daa9300ffae5a242559ea44"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/LocalCameraCheck.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 10358,
+      "sha256": "3eefb489592fb9ee156857647a8bc5bad1fa3f5817f30674bcdfafa2cc8ede14"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/CallControls.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1121,
+      "sha256": "973dbd8b6d856f411afcf6c62bae12e29e33f4e5d1fd6c00a4b52254ab3a9c6a"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/SaveLookRecord.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1667,
+      "sha256": "5969d61a0d60d317041dfd0cd7019aaad838debe3cdf09460c09256c0cca9394"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/v4.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2159,
+      "sha256": "228b2a371ef0d7062f11c78dc37f82c49276a5b4050d004ef52745e6908c6a90"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/BilingualText.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 335,
+      "sha256": "ae58b7a5232514a157bf6181711b855ecd8e86446d0b3306d734e00992a6f3b1"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/ReadingControls.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 981,
+      "sha256": "262ab4ee4a55a8d28dfc97a14d05cc2644a3aa6df5ed4108962034fc0aec00d4"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/ThreadProgress.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 509,
+      "sha256": "b24723be67eefa5f27d3482feeab3f9c90d4d31a77cf63183a2566472133c99f"
+    },
+    "AccessibleBeautyAgent/frontend/src/components/BeautyPalette.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1609,
+      "sha256": "b7abbfc8977e69aaa80408e73774ceb7a0b2d98c398ff748a31e7e4fb616fd0a"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/refinePortrait.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 945,
+      "sha256": "847652bf5c9b62f93113760709df74a76837007ff165a859bc75f2a5d51d483f"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/sculptureField.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 717,
+      "sha256": "f54d4f28aa98812e47d69727605cafcd408b599be3d1ed865c26bccb2e26eed9"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/geometry.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2552,
+      "sha256": "1bd4fb100ce9394aeba2e2a9bbf3c103ffe7bf7098d3f148e0f53f0ed48ea972"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/SculptureScene.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 24621,
+      "sha256": "56198a9efef99d4c93df32c3c90e7c197ce3b8d2925a78a58bf9fb6a4ff9670c"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/appleBites.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1006,
+      "sha256": "48455c11299713edd125bd4308b9d6ae5712382d7e33970184ef7215e7115ab0"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/BilingualHeading.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 709,
+      "sha256": "7b1402b8e64f95bd7f9abbddcabab94194bfbb732d69f714b7998bfe373e8a12"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/MagneticCTA.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1279,
+      "sha256": "e8efb216d41d7a56409eb6b3be8219c72aef4507caac9c8ba13cf1f989aa59ba"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/BeautyIllustration.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2131,
+      "sha256": "bf618686735bbdf5c638b08210bd3051653e0148e5ecf47d7f673ade47c24280"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/refinePortrait.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1392,
+      "sha256": "7adc207ddf4ecf6d9adbd69d52db9df783c7a9d518f87f8d17d9eac2510f4a64"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/fineTopology.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1285,
+      "sha256": "f9a061ba9edd3000a2d557c1a89b907b36b942b2efdd4713a9bccc432aad36b4"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/surfaceBudget.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 477,
+      "sha256": "76d47e2402f11247b38478c8f75798b46fb48eecd0ca9180752be36f13d68b13"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/sculptureField.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4429,
+      "sha256": "e36a45b2f60aaaa2046af171ad78d2ea0741e351273074b70be69aefc274bf2c"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/BeautyVisuals.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4283,
+      "sha256": "9f4cad3d7a0590d95b7e97c045d2d20a961e530b0a4a251a13dd566622f61e7f"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/SectionBackground.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2434,
+      "sha256": "dac925ecfe1d7957bfa6cac68dcf6c5b4578a386f01b1354a72296161628e6a7"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/geometry.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1908,
+      "sha256": "fd23dca9ebfaccc9237890ee0064bed9b062fbc5b973ca4741cfd76b02a59e97"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/surfaceBudget.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 550,
+      "sha256": "a7b21ea51e0935bba6d092b2472f04ad0748c3fa25b1556f4b6117b6304e5d90"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/appleBites.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 828,
+      "sha256": "9a41037ffcaea0effeb2215c3afd27a91d86ba974eb29936f7b81e41b7dc9145"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/GlassAppleMaterial.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1996,
+      "sha256": "874fb39d913faf9e172d81710bc3d87e579b376b4ea1faaec0a7aaf482da6d7d"
+    },
+    "AccessibleBeautyAgent/frontend/src/visual/appleLayers.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1035,
+      "sha256": "76eb6ec7988ca8d6df565e4e3b35fa85d9d13b7b1b87a7f663129fa4c294ae02"
+    },
+    "AccessibleBeautyAgent/frontend/src/api/stream.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1690,
+      "sha256": "9121101c5004b4393b73a353c08fd08c9efaed90a0f263cc1f9628ede251550e"
+    },
+    "AccessibleBeautyAgent/frontend/src/api/client.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1454,
+      "sha256": "9610bc2d1c75b7543921f4f6c8488f8a6a04a4f7a6d0e93e6a8a3b35994eee53"
+    },
+    "AccessibleBeautyAgent/frontend/src/api/stream.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1385,
+      "sha256": "08f9e4071a82fe7753d2e0baa549c0b4b349582ac84a585e2d8608899262f684"
+    },
+    "AccessibleBeautyAgent/frontend/src/api/client.test.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 695,
+      "sha256": "df2aaae1aa848efe162bd0b2727fb3600087c138ecbbba3231a1830616dd8583"
+    },
+    "AccessibleBeautyAgent/frontend/src/accessibility/useArtMotion.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 799,
+      "sha256": "bbe3c6a0cd42d48081eb81c06a910ecbe22308220d9fa8749425a6667a09d0a3"
+    },
+    "AccessibleBeautyAgent/frontend/src/accessibility/useSpeech.ts": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 591,
+      "sha256": "41ada8a4577828bab9053c29783d2a07e77fd4c62681de8238eee35a4fead8ae"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/LookRecollection.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2814,
+      "sha256": "b79e435f61152292245519ca3e6d0c399015f843790faf5578f9225303e540d0"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/VideoCall.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9576,
+      "sha256": "5e9206d0b33a03bbbdbb007dc16682a2c98b91faf700c653114d2782f6d1b81a"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/VoiceCall.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 944,
+      "sha256": "016cb1573f34575b81d0a9db5c21c6ab1fb7462990ff36a78e632137c51e1db2"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/editorial.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1754,
+      "sha256": "273fa8d55dfc4dcac33f91ad4118141d035293b13d63a0a8bf7265f8d003c4a0"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/Pair.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2144,
+      "sha256": "0916bb2d35b36e73e1e63463a9befba396606bd1dc1c610ccc8b6925f0b3bf0c"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/Demo.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 676,
+      "sha256": "612f7ecec3074702cc7caba91d1aa60b5c5734374d6621124139cfb920d02294"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/Home.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1913,
+      "sha256": "fda96c8ff6b1b4de8bd6b9f01e371d8b2538d07e5c7f874ea67ef2ab8097bfc7"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/Session.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2657,
+      "sha256": "fe61104a920a1da2a00b21b14fdf0a885e21eb1df9f807f952eb576b3e63ec32"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/FullLook.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 10148,
+      "sha256": "1d7f2a891c63430857d720150ce7b3c7daea205d45991f375f12b3764e76f36d"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/BeautyMemory.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5039,
+      "sha256": "0596f4a2a7e53aa08990b2008b9de1b12ce7759d3d63f5d49d598bb0dc1942f1"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/Entry.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3475,
+      "sha256": "c9098553e16cd6f01153ade2a319fc151e7db8a1523725249b03458b63875d16"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/CameraCheck.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5352,
+      "sha256": "fc495973924da06c8c685b7ff7af672506b82576150bdfa196b70a26fa1b424f"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/Journal.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 10466,
+      "sha256": "b6940ff4bf2a659d395b53a15d0588e7c7f7774d92b565efb161684a7d54dcd2"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/Story.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6965,
+      "sha256": "95f94a190ee4ee10d16f27122117abd55fce08cb721d4e47b310bfd30a82ce46"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/Journal.test.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1788,
+      "sha256": "989aa8d45c03ece0e8cf56f7bbab9e2cc232f8629532f4680c575c425f0a172e"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/Reading.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5899,
+      "sha256": "44b7456d03e1a0599d09fb8d1b0d2f374a37e3f8a7b0a2a742beae1e5763be63"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/Hardware.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9564,
+      "sha256": "ebc3f3eefc38107dac6536019480469d96e8320c41277166d53d0550943dd315"
+    },
+    "AccessibleBeautyAgent/frontend/src/pages/VoiceCall.tsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9670,
+      "sha256": "c40f3cbe34c72b8b76049beb738618814fa69a32ed233cb556c0e0d633401ad4"
+    },
+    "AccessibleBeautyAgent/tests/vision": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/tests/rag": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/tests/regression": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/tests/test_visual_entry.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3037,
+      "sha256": "933401b91203be895e92175189a9ad1d537277e04812d6c25e792b065074b098"
+    },
+    "AccessibleBeautyAgent/tests/test_voice_first_guidance.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4172,
+      "sha256": "5ad36ebc88e21a0848d2c139ffa8bb18ad8b86a72290381ba28ff4ffecd49215"
+    },
+    "AccessibleBeautyAgent/tests/test_v4_policies.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1891,
+      "sha256": "fd83bdb3cd2b7fbe0645c74c00974dd18acd8ff994724d137924e0445ff92160"
+    },
+    "AccessibleBeautyAgent/tests/test_phase4_landmarks.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 995,
+      "sha256": "9ee0af98aa0505b6a2f7b0bf284d149daf911bcf7af903a3e5a7bc9feb5fcf90"
+    },
+    "AccessibleBeautyAgent/tests/test_trace_phase3.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3326,
+      "sha256": "af379ee7bc1bc79e6c7c18a2bb72eea305a106573792a368bba99bdd6016465c"
+    },
+    "AccessibleBeautyAgent/tests/test_v2_conversation.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7721,
+      "sha256": "53e3ea781241a73c3e44b1760826bfb5eb49e2f587dec0f31fa456f75128d2a0"
+    },
+    "AccessibleBeautyAgent/tests/test_v4_video_analysis.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3434,
+      "sha256": "4851fa4d9f03dc54a3dd2343da32b4f5562fe9c874b55057945fbe1680b14258"
+    },
+    "AccessibleBeautyAgent/tests/test_phase4_controller.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2626,
+      "sha256": "c1c85b32099bf52dba6fc43170ecc95c8784321a4caea30f5e24544e43f6fdb6"
+    },
+    "AccessibleBeautyAgent/tests/test_vision_evaluation.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1597,
+      "sha256": "3ab27953c2915c53c0657d0fb67a6589b902cf8855c8492ce9fc9c3c7aa8fd13"
+    },
+    "AccessibleBeautyAgent/tests/test_v2_ingestion.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1456,
+      "sha256": "dce5912d8a37601b34beb73c8d96d822721a6a77e997e4cc780e4ee1d080e443"
+    },
+    "AccessibleBeautyAgent/tests/test_phase4_flow.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7028,
+      "sha256": "5a891589934fe1e36aa3e2695864ea1d30f98c8bd4722b561578b91da63ae903"
+    },
+    "AccessibleBeautyAgent/tests/test_vision_mvp.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3665,
+      "sha256": "15d6666e321bd8aad42d52b5eaa6bdb6b181e0642ae6f9054e431b4a08e8646c"
+    },
+    "AccessibleBeautyAgent/tests/test_recollection_v2.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2787,
+      "sha256": "405872d1e4378494b5dc601d58a70cf70ef0843450d331a266e604d2814ac805"
+    },
+    "AccessibleBeautyAgent/tests/test_v4_full_look.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6862,
+      "sha256": "cb3358a30fc768c3ec5229ac8053323dfe636ea248e228c1405c7db4a945749d"
+    },
+    "AccessibleBeautyAgent/tests/test_v2_local_vision.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1777,
+      "sha256": "39bc6127a38e55e99ed33bb315ef34346fcd44b06913352a9f45f4f2fa3e245b"
+    },
+    "AccessibleBeautyAgent/tests/test_v2_privacy.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4152,
+      "sha256": "6dc6997c26310b42ab3d4946fa558ce1490c3324c7f95983bdbf73d8fccf9900"
+    },
+    "AccessibleBeautyAgent/tests/test_reference_full_look.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1053,
+      "sha256": "e01ad93668e3b0905d604f3445f218a2df508764e4d74cb36c9c50d58b6391ae"
+    },
+    "AccessibleBeautyAgent/tests/test_phase4_intents.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 991,
+      "sha256": "2c5deab4425ab7b607ef34539c09f9d9355b56f8efc1fb12b8ee4ad947bf6d6d"
+    },
+    "AccessibleBeautyAgent/tests/test_vision_session.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5819,
+      "sha256": "27ae81415a920bafdb46e67292c771ad0196f41db10eba871b68d67e2264e612"
+    },
+    "AccessibleBeautyAgent/tests/test_story_companion.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3412,
+      "sha256": "2c1d39bc7d83b3486e40d7cc86f2c0d5ff4617b40e560e1dda2c77fec6cf1fa5"
+    },
+    "AccessibleBeautyAgent/tests/test_realtime_companion_language.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3845,
+      "sha256": "3c2dfc3ef38541fb758bc90e69f5d7933d98616ec4f8d4cc5b9a9e4f300b14eb"
+    },
+    "AccessibleBeautyAgent/tests/test_private_journal.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1496,
+      "sha256": "a539e20424dec68fce33a80a012b7259682386c9e075eb6b09084a4ea50f5e25"
+    },
+    "AccessibleBeautyAgent/tests/test_hardware.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6697,
+      "sha256": "1fa6264fdc619e0d405e467324d0db6f2f45c7348d1127eb2949002105d27302"
+    },
+    "AccessibleBeautyAgent/tests/vision/test_consensus.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1526,
+      "sha256": "9d53273a51d8b6d86079a1fb3ad99c86f46298825321e42d689b589f4c7f0d4e"
+    },
+    "AccessibleBeautyAgent/tests/rag/test_phase2.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6880,
+      "sha256": "b04002bd96c609432d3f4f167bafb8556463b7b0e524c7d1840fbbae66a8af10"
+    },
+    "AccessibleBeautyAgent/tests/rag/test_phase2_edges.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6532,
+      "sha256": "18bc4a63f2b117db7064a40d327cf94d346125a8b80490e6883f6813c9faa7a5"
+    },
+    "AccessibleBeautyAgent/tests/regression/test_acceptance.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6012,
+      "sha256": "6fa0997fe1d174ee759756770e97583b617005abee8954280e24f763e590048b"
+    },
+    "AccessibleBeautyAgent/tests/regression/test_windows_setup.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 701,
+      "sha256": "3051afd4824c574e4971df3180df062f2ba49d4a6044c29e97aaed0f41dde28a"
+    },
+    "AccessibleBeautyAgent/tests/regression/test_edge_cases.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4788,
+      "sha256": "cd6287c86094001307cf678416b1b5ce92924d22326fddd1885de5d10c49814b"
+    },
+    "AccessibleBeautyAgent/tests/regression/test_review.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 696,
+      "sha256": "5ba3a4b5f2d7dad26fe1a140eb98fc2c8ccb2650c725cd3ce47d9f1125c7c916"
+    },
+    "AccessibleBeautyAgent/backend/app": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/requirements-evaluation.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 97,
+      "sha256": "75232ddc5f7e4f28ca3c5dc7ce2459eed8dd6cda705f8d7e1267790f2ed9948c"
+    },
+    "AccessibleBeautyAgent/backend/requirements.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 216,
+      "sha256": "aad5b05b9749b00fcec7897a69c05e624b6f1bdf42df127056c5e9f31a4eb46b"
+    },
+    "AccessibleBeautyAgent/backend/requirements-mac-20261017.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 733,
+      "sha256": "1ac09a2dee464bc2546949094c4ad0c06e6e601ba6d73359a039c6c3cd7f4427"
+    },
+    "AccessibleBeautyAgent/backend/requirements-landmarks.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 193,
+      "sha256": "75aa4a116ffa385110bce77485f1e8023630f7b26bd01b20cb8dfe8ec26ee41e"
+    },
+    "AccessibleBeautyAgent/backend/requirements-windows.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 310,
+      "sha256": "505e461b591b12c85d0ea80b4af039fd0b64ffc9e04fed3fb6d367191b9c3c1e"
+    },
+    "AccessibleBeautyAgent/backend/requirements-lock.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 551,
+      "sha256": "82972c8194e4743351a9c5747e17e1e61326b224e27a2ebd80104e1086de3072"
+    },
+    "AccessibleBeautyAgent/backend/app/reading": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/products": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/memory": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/content": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/agent": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/vision": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/rag": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/policies": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/schemas": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/full_look": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/looks": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/knowledge": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/routes": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/services": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/backend/app/config.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4712,
+      "sha256": "a80677292b47360bde6af28f385d48413720a0cc9ab46c25dd49718657ccc2bc"
+    },
+    "AccessibleBeautyAgent/backend/app/__init__.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42,
+      "sha256": "52b7dfe93c2e75c0e32b7306381dea59753d5c21a76a24600af99289e916294f"
+    },
+    "AccessibleBeautyAgent/backend/app/main.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4355,
+      "sha256": "907691d13f469a0401091915cd1978a2017070936e5fd91530b97c4d4bf60c14"
+    },
+    "AccessibleBeautyAgent/backend/app/privacy.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6177,
+      "sha256": "375c69c5958d81b2d375b3b942127de863d4004325de1fbb3a909d077277ffe1"
+    },
+    "AccessibleBeautyAgent/backend/app/reading/service.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3897,
+      "sha256": "979d2092cf182054931cfb04cd45f249896405f350a9bc531e7a857966c6b383"
+    },
+    "AccessibleBeautyAgent/backend/app/products/service.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1883,
+      "sha256": "ad89da1a2e4da4df6daeefcee50ce9a0d8fdb3c1bfb955915d4830ddc0fece77"
+    },
+    "AccessibleBeautyAgent/backend/app/memory/store.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3401,
+      "sha256": "8a2fa034aafe91a0397d603a6fe8995f972becd317c17c6822d2cff34a9e2c80"
+    },
+    "AccessibleBeautyAgent/backend/app/memory/recollection.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2716,
+      "sha256": "2ea5d63a2df71213f1c017208aa7df56617c43746a46c2b36ab56ece74bd5ffb"
+    },
+    "AccessibleBeautyAgent/backend/app/memory/migrations.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1189,
+      "sha256": "6cf880ef3a0140ca74e7e101b3693235ef030a69385f0ca9069c863a6c4e9ab9"
+    },
+    "AccessibleBeautyAgent/backend/app/content/__init__.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "AccessibleBeautyAgent/backend/app/content/beauty_companion.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2221,
+      "sha256": "5f251602e97014bf799d521838fea7525cd0222f4b213f433c31ab2695d7334c"
+    },
+    "AccessibleBeautyAgent/backend/app/content/locale.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1290,
+      "sha256": "bc3b3b9891d955603007f0dc78d610a961fd82b7f4d2d0ce23bbe98985f3bb1a"
+    },
+    "AccessibleBeautyAgent/backend/app/agent/harness.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 23305,
+      "sha256": "e0337533c6f2d44e1726df5aaae3f6821642d7d6107921cee94cecf16ba8deaa"
+    },
+    "AccessibleBeautyAgent/backend/app/agent/conversation.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 13352,
+      "sha256": "23b315bec1e01fb78c49f0c99e737a9dc32f74d4b7ca2b9e5658d0b3bbb790ad"
+    },
+    "AccessibleBeautyAgent/backend/app/agent/tools.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8387,
+      "sha256": "1f03ab7ac4a00d8a9c307bd8f0188045461b03d09d9ba2c424ccae46df7302db"
+    },
+    "AccessibleBeautyAgent/backend/app/agent/providers.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7691,
+      "sha256": "37829c985a289d1e4558a3d54784d83a14f2a94aaf88c17486135733ff005aa5"
+    },
+    "AccessibleBeautyAgent/backend/app/agent/coaching.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 13865,
+      "sha256": "15e8d80f8288e7a1f959c77d7be95974c723c0beed2e7fa45781e495976d7755"
+    },
+    "AccessibleBeautyAgent/backend/app/agent/coaching_intents.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2078,
+      "sha256": "62ae3e84f923f4c01ff91b61f2d814c8dee83ff1b68efaef17e177660051cc78"
+    },
+    "AccessibleBeautyAgent/backend/app/agent/state.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3878,
+      "sha256": "dc71ea5b6b737aa7ef6c88ca1b59ae5a7629812e0c3c04c96f6ff35cf24da888"
+    },
+    "AccessibleBeautyAgent/backend/app/vision/service.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2236,
+      "sha256": "e909b2bdd849e0e4cc8d393bb256f493fe6350f565a5047074e5acde32037f5a"
+    },
+    "AccessibleBeautyAgent/backend/app/vision/local_regions.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3675,
+      "sha256": "77be8f0fe8a4990367002ef58ce617c90598a336c0207fb04ee8b218b9af97e3"
+    },
+    "AccessibleBeautyAgent/backend/app/vision/providers.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1743,
+      "sha256": "1be142079415419ca082f8e2c220c393fcb09edc1cfa85c7d56f759606ef9df4"
+    },
+    "AccessibleBeautyAgent/backend/app/vision/local_landmarks.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3657,
+      "sha256": "b0203dd7948fd00d1ffc90d84a6aa0dc87db5abf5a4d770f99da0b96f82de304"
+    },
+    "AccessibleBeautyAgent/backend/app/vision/makeup_observation.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9965,
+      "sha256": "147f9662fc2f0ac67f3a1abb124f118d9f4ad615fe60e42fd1a0acab36df8072"
+    },
+    "AccessibleBeautyAgent/backend/app/vision/consensus.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1267,
+      "sha256": "40805f3c1d082298cf702e7501508f1244866078f2d7365121f695d4a8ba44c7"
+    },
+    "AccessibleBeautyAgent/backend/app/vision/gate.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4801,
+      "sha256": "94b0aec35ca438d1047bba3dd7571c06db2b53d36c08d142611123729508dab4"
+    },
+    "AccessibleBeautyAgent/backend/app/vision/language.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 982,
+      "sha256": "dfb5859e981fe8c035fc1f6a9e69d5cec5545501068c436917c99a847fd49d91"
+    },
+    "AccessibleBeautyAgent/backend/app/vision/reference.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2207,
+      "sha256": "59275ab2c600e442b43e9c92803ddf22f3a9c29d159de28c51ee09971bb21148"
+    },
+    "AccessibleBeautyAgent/backend/app/vision/evidence.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 568,
+      "sha256": "8bb7451375772f0cc63d4f0fda227fa05f8d2870214cacf44e1b32ddfc5287f7"
+    },
+    "AccessibleBeautyAgent/backend/app/rag/reranker.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 690,
+      "sha256": "21da5448e7590869463c4718405ccd0b28eeaeaa024d8671c91fa9f177f819a8"
+    },
+    "AccessibleBeautyAgent/backend/app/rag/retriever.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4199,
+      "sha256": "55f5197535d8f2371fc0f51114718d98a112ec3e49a6d8be974d6ba3b74e38a2"
+    },
+    "AccessibleBeautyAgent/backend/app/rag/embeddings.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1605,
+      "sha256": "ccf094102f979cd857ea4275faf4fee77f0f8269de771f1ffb8f654cdd8046ba"
+    },
+    "AccessibleBeautyAgent/backend/app/rag/document_builder.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4163,
+      "sha256": "70eea1e403532ca8175adeaf09087c8855a834b7e0cc9bc4e8ad53462e6806db"
+    },
+    "AccessibleBeautyAgent/backend/app/rag/knowledge.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 949,
+      "sha256": "4f5f67ca2a2e81ed72573438ca386e337757ed12d58bf96db245d7a1c304c62b"
+    },
+    "AccessibleBeautyAgent/backend/app/policies/registry.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1605,
+      "sha256": "944f73fb852b7c5d5041a5a0f79b0ddcb0b1d7a8208159ef6d3a7cd7d2509adc"
+    },
+    "AccessibleBeautyAgent/backend/app/schemas/models.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6245,
+      "sha256": "3b1b0d6297192f95b8b9c1d9cac4b8f90317c5a0d61a2a11be2f0da66969babb"
+    },
+    "AccessibleBeautyAgent/backend/app/schemas/makeup.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2920,
+      "sha256": "b1ece7300d43e44d659f87b7fc8f6dad66068ffe4f3f1d7c43033ee74839c279"
+    },
+    "AccessibleBeautyAgent/backend/app/schemas/full_look.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2423,
+      "sha256": "085bb4a1d4fc3aa0c234337b545105843d6def35adefcb0569e9d2a632969eaa"
+    },
+    "AccessibleBeautyAgent/backend/app/schemas/knowledge.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9890,
+      "sha256": "6b2c6c7a115ea7e1d2a4f4f1cef4db4ddcbf9dea6696e3a9a46a73555336c83d"
+    },
+    "AccessibleBeautyAgent/backend/app/full_look/service.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 10262,
+      "sha256": "fc7f268084d41defa2795e67316fb07e881a271fedfd15f13fd393e871a16eff"
+    },
+    "AccessibleBeautyAgent/backend/app/full_look/materials.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1722,
+      "sha256": "6aa65525fa43903fd4b4009084ae5b03d9533a3cf3a24e6d7592a04217c9c705"
+    },
+    "AccessibleBeautyAgent/backend/app/looks/service.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 846,
+      "sha256": "84aaaebb99c2f988580fa03801661fa52dc325d62294b0dfb53319e121926aaa"
+    },
+    "AccessibleBeautyAgent/backend/app/knowledge/importer.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8699,
+      "sha256": "5f595c04ad0b99d70b76f45278a204ae8053aa9f8bd462476cfcda99109faf21"
+    },
+    "AccessibleBeautyAgent/backend/app/knowledge/policy.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 247,
+      "sha256": "3dc13eadf0e16b9d2cad4bc04da235b752ca9a281a40d1fa5b1cc7fb7da0f603"
+    },
+    "AccessibleBeautyAgent/backend/app/knowledge/tutorial_ingestion.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3598,
+      "sha256": "7413df64273af056bf2da1aa2683d2a3730d09368458764ddb742aa07f86f540"
+    },
+    "AccessibleBeautyAgent/backend/app/knowledge/admin_service.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6511,
+      "sha256": "db380bf8f2075e8711b3b95cdb313280996c7b93a810636c5a1e9c1909259664"
+    },
+    "AccessibleBeautyAgent/backend/app/knowledge/repository.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5892,
+      "sha256": "3a6bb402a403d87e86a2f0a44d1d1faf83a8a85aa57b15b4e3b634bc842ea75c"
+    },
+    "AccessibleBeautyAgent/backend/app/knowledge/vocabulary.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1965,
+      "sha256": "d10daf91a9472683e201f0f9052ad95b7e64e71be02581d638bd7cbd41ae6bf3"
+    },
+    "AccessibleBeautyAgent/backend/app/knowledge/validation.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4047,
+      "sha256": "fef4ede764c498e1f77d61523fcbac2fafaa283c2e2cba98dbc2af421d058c52"
+    },
+    "AccessibleBeautyAgent/backend/app/routes/journal.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5472,
+      "sha256": "02c168853d7021015723673c6a81f7e60d6638e0f55ab02647f835f24de6a65e"
+    },
+    "AccessibleBeautyAgent/backend/app/routes/recollection.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3684,
+      "sha256": "ba0f9ea7853dbffb0b6ee5f228312c01e7a7b597644f96a8108ebe43d3f9753f"
+    },
+    "AccessibleBeautyAgent/backend/app/routes/conversation.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1448,
+      "sha256": "d8c5afae1b0d147e15b14df56e35d17b013d4daa8787f1267cbc17227aa6a2c5"
+    },
+    "AccessibleBeautyAgent/backend/app/routes/reading.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1409,
+      "sha256": "d4caca95e1c6c73dfcaaa982b390c0b3cbff4eabf5de83c6128375d8c40b49c8"
+    },
+    "AccessibleBeautyAgent/backend/app/routes/api.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6647,
+      "sha256": "a0aac4b34fd62f0fe9f5b2221aba7bd79021f07aa334196947dcbee23f6bc7fd"
+    },
+    "AccessibleBeautyAgent/backend/app/routes/admin.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4789,
+      "sha256": "267aaa1c3eafd889f147f19114a004b78fad8228328b13896f8e6a0ef25fb166"
+    },
+    "AccessibleBeautyAgent/backend/app/routes/local_vision.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9417,
+      "sha256": "168eff9bbaa81f2b2eef3aa7f8d9ceaa3de550446031e54672650799650cefa9"
+    },
+    "AccessibleBeautyAgent/backend/app/routes/hardware.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6074,
+      "sha256": "587e25812bb8bad32ed58e6dc31e561191ee22a29145827bd1c34481409a2193"
+    },
+    "AccessibleBeautyAgent/backend/app/routes/makeup.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1202,
+      "sha256": "4965c5f04a2e01fadb2dbbaa5b5caca5c15b32fb4197b031b60a6a0136f96190"
+    },
+    "AccessibleBeautyAgent/backend/app/routes/full_look.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2014,
+      "sha256": "f850d1eccae9fadcd3bbce146927498c986b8257ccdd252ec52e17bbd0bea400"
+    },
+    "AccessibleBeautyAgent/backend/app/services/model_client.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4622,
+      "sha256": "0ef421cd00b95f853f5547d5292f9e88a9e41872380a98c0a702961a71c459ab"
+    },
+    "AccessibleBeautyAgent/backend/app/services/voice.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 759,
+      "sha256": "d6a329a58c9840cc56d9520856c0a1aebb40fb7247a513464dc08484226d23fe"
+    },
+    "AccessibleBeautyAgent/backend/app/services/qwen.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 242,
+      "sha256": "d6591db1c3c91d829b72fc900e678bb36523986b928a538f8f1d7350a8c3a29a"
+    },
+    "AccessibleBeautyAgent/docs/design": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/docs/旧入口归档": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/docs/superpowers": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/docs/implementation_report.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1213,
+      "sha256": "ac237021c9d7e9b68bb8679e9db451e87aca00f643c9833524bc935a7992d886"
+    },
+    "AccessibleBeautyAgent/docs/architecture_audit.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4687,
+      "sha256": "30482b98502eb1342e1465fa9027f7b14028cac944cbc759a84384d82d2811a9"
+    },
+    "AccessibleBeautyAgent/docs/PHASE4_PROGRESS.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3838,
+      "sha256": "0480b213721ccf3636dda1b282e09d20e8d2321bcc540cc2086eebbe6b10846f"
+    },
+    "AccessibleBeautyAgent/docs/CONCEPT_REFERENCES.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1899,
+      "sha256": "0908da972f7caec6d546bf9b5cfa242f1c2b1e2e350ae4656fab1f698eb9aa53"
+    },
+    "AccessibleBeautyAgent/docs/config.example.toml": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 710,
+      "sha256": "1fb0a23d63cdf768852111a80038214330576555ec331516259164b84f52abeb"
+    },
+    "AccessibleBeautyAgent/docs/accessibility_checklist.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1053,
+      "sha256": "78a67a8eff33d0dcde7a70b10cde36405f12e9b0f70d44df00f15618299d3291"
+    },
+    "AccessibleBeautyAgent/docs/ARCHITECTURE.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6330,
+      "sha256": "0ae246dc54f4b216d03e6d0975463c7c101ef0b986966b0e69cd079670ef9c34"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_V4_ASSET_AND_PRODUCT_REVIEW.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5131,
+      "sha256": "38b1ff4d3f3d0d635fe2fabdcea88cba019d6d4ab255f7cfe65e9e0faa74d96e"
+    },
+    "AccessibleBeautyAgent/docs/API.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6135,
+      "sha256": "c1d2e5196fd9095a14c162135837bf40b75617199c920488d863852356faec6b"
+    },
+    "AccessibleBeautyAgent/docs/UI_REPOSITORIES.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 954,
+      "sha256": "69096ab0477c32454c38002f2c23823a2339e8330a7c74c85a25d02be9d373c3"
+    },
+    "AccessibleBeautyAgent/docs/KNOWLEDGE_BASE_WORKFLOW.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6431,
+      "sha256": "af9fcf9d2859fab0263ab77e82e5cf46f94e69a8ffb786f3ce94e5221fe13da8"
+    },
+    "AccessibleBeautyAgent/docs/api_reference.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1794,
+      "sha256": "33eec4b357b1b6007b979f5d9bfca37af0c256f895361beae5765862c68939ad"
+    },
+    "AccessibleBeautyAgent/docs/vision_mvp_audit.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2599,
+      "sha256": "d061f58cef09a4a42ab9d2a33616b39cd0cbe502b98f4777a2b951a744a2c2a8"
+    },
+    "AccessibleBeautyAgent/docs/PHASE3_ACCEPTANCE.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8372,
+      "sha256": "b4cec91b0d2ecc4e13b93bf553b5c20580dda70dbe94f1da46212c9ecc18f461"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_V4_RUNBOOK.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3479,
+      "sha256": "727d55dcb8e3d92be88021aa4a1ca7c652021a10b0567a4f1472a94a5783d995"
+    },
+    "AccessibleBeautyAgent/docs/reference_ui_integration.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3143,
+      "sha256": "15ef2f16b0776958c39232d86e5e87c70ea6b2473262a1b09e02f329fd21ff4a"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_V4_TEST_REPORT.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5177,
+      "sha256": "7170d85f3043faf63e3bb13449cfd8bcf087fd10c8ba693d8afbd6164974f486"
+    },
+    "AccessibleBeautyAgent/docs/KB_RESEARCH_CHECKLIST.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1487,
+      "sha256": "c9bfad07c66b4965c1e562f68743a7044c4e0686d3ba13ebd152f04f046921ed"
+    },
+    "AccessibleBeautyAgent/docs/PHASE2_PLAN.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2491,
+      "sha256": "1aabf103d7964de92afce6756a8cb1ca897d3f7dabcc6eb4f2737fc033a78982"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_V4_ACCESSIBILITY_AUDIT.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6290,
+      "sha256": "b72affdeb83c7f683bedea84822714d6eff601415539d1c44d23abbfe715b5ff"
+    },
+    "AccessibleBeautyAgent/docs/ACCOUNT_SWITCH_HANDOFF.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 12993,
+      "sha256": "29209e2965b32a0ff3148844a52f945bdd2e1b36fed60d5d7d357fde65b0038a"
+    },
+    "AccessibleBeautyAgent/docs/testing_report.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2063,
+      "sha256": "50fb39bcb10fa3ce0493610e2614f486ced384ce95592d13276d6ff933b8081e"
+    },
+    "AccessibleBeautyAgent/docs/MAKEUP_EVALUATION_SCHEMA.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1721,
+      "sha256": "622e1cfc1a3dec83d91fb2c45f9a2d746246cd78e8edb4460e7a15da65cc68d3"
+    },
+    "AccessibleBeautyAgent/docs/knowledge_sources.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1514,
+      "sha256": "ec6f8677c8a37083f40ee12d1f5110583f603a6b9dc510af5bf9e799d8d76446"
+    },
+    "AccessibleBeautyAgent/docs/filming_guide.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4844,
+      "sha256": "16e2cde95df72dbdd5af10f8684631097a31c173ad676d6a536937ec2409c65d"
+    },
+    "AccessibleBeautyAgent/docs/vision_evaluation_protocol.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3451,
+      "sha256": "2e2f433ffa36007266d82d52c0f57ea66b57b465472a9f7fa8e94c4df1a9f74d"
+    },
+    "AccessibleBeautyAgent/docs/RUNBOOK.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3475,
+      "sha256": "38b955ea90b22a78c44ee399d0ef6b893c6aa7255155cd04ebeee22edb74828c"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_REALTIME_CALL_HANDOFF.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5684,
+      "sha256": "6f6d3bf5e48311304df7783a646277e44b9e738047c05ccccd27df4faef18a67"
+    },
+    "AccessibleBeautyAgent/docs/MAKEUP_KNOWLEDGE_CURATION.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1490,
+      "sha256": "2aeb53e350dc1a0316d53ae519590c0046e421967f95703108188a87281c27a0"
+    },
+    "AccessibleBeautyAgent/docs/PHASE3_PLAN.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2368,
+      "sha256": "070d6322294433d08f2375da0e2487a6fa4bbaf8d64c7df4e22ce5aad9b363e7"
+    },
+    "AccessibleBeautyAgent/docs/DEVELOPMENT_STATUS.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8018,
+      "sha256": "3d4e343de17005a0a6dc6f356af0f1b242ff27ac70341f3d1419e9b372f2e059"
+    },
+    "AccessibleBeautyAgent/docs/STORY_GENERATIVE_REPORT.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7996,
+      "sha256": "d38b154bff3174b95a2763c7e7eaa604d7b18a2828e38ed0a729df9e8e46302c"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_SENSORY_UI_REPORT.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6471,
+      "sha256": "933da647f8833ec123e61056092ac6e78e87d6c5bbb249a4fe6231f29c12dc62"
+    },
+    "AccessibleBeautyAgent/docs/PHASE4_ENGINEERING_REPORT.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 11412,
+      "sha256": "81ffc8e8d5c9edd783ccfe0a7c094e288d57b220b712c4b0efc2de0a5dad298c"
+    },
+    "AccessibleBeautyAgent/docs/KNOWLEDGE_BASE_GUIDE.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2517,
+      "sha256": "188de811bb86186c74d7b699dd1da7e1288feba1ccc669944fd85559cf334ee2"
+    },
+    "AccessibleBeautyAgent/docs/deployment_guide.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1622,
+      "sha256": "33d54a95e336f31f94c5bb9f4d14eb812faae3c697350b7d215b9b974faa70e9"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_SENSORY_UI.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8691,
+      "sha256": "ecccb5b724d83ee9b90c988392757bbb5ab2a340db0f5763b9b992afed01f69f"
+    },
+    "AccessibleBeautyAgent/docs/UI_CUSTOMIZATION.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3280,
+      "sha256": "695bb6355bb2e91c7a737bb494f02e435fb0cade914b0c1418d640b10f5b814c"
+    },
+    "AccessibleBeautyAgent/docs/privacy_and_permissions.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1937,
+      "sha256": "5dc3228e4c286ae9c78940d59301865a2afabf75a0a9936444627825d4da8b16"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_DEMO_GUIDE.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1780,
+      "sha256": "e6f85dc5bb9018f091eeaddb6217065be82852b2416fb1ce5ea86ef8804c77ad"
+    },
+    "AccessibleBeautyAgent/docs/remaining_limitations.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1369,
+      "sha256": "164b1cd44e5ad62a5f2643683c3c45814f7d01f2111ab9cf50d10842f05972ba"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_V4_BASELINE_AUDIT.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2743,
+      "sha256": "3cd77b07417e32347b2ea430f49a7dc2a9958853176cc078d244939e20cbb7ed"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_FLUID_APPLE_REPORT.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7802,
+      "sha256": "e3e14079bb4c0e58af533e2dd2f01277903858d4f45c185d1c49d12bffab8181"
+    },
+    "AccessibleBeautyAgent/docs/v2_progress.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5052,
+      "sha256": "e936f9af22bc1112ef55eae4a5ebfb8344eea3d9734df453f8cdaee1d2cc1010"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_V4_API_CONTRACT.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1925,
+      "sha256": "58fbecb0e38791a87ac333649e9529c2cc8c06d22868f6b38a6a450eed309d45"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_V4_HANDOFF.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1127,
+      "sha256": "7428199328ca37cc844a8f6f4ac9e57451e5ac668c5dbb4a3deea51d7d792da8"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_V4_IMPLEMENTATION_LOG.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2710,
+      "sha256": "e48676bbb8ebb8e4dec1edaed4773999ef893ade2f05fcbc2f2b7234575aef7f"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_V4_TODAYS_LOOK_SCHEMA.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1559,
+      "sha256": "3e47d734035e7e951176618da8bdec56e597873a1ab4ebda7204ea24134d90cc"
+    },
+    "AccessibleBeautyAgent/docs/portrait-refinement-2026-10-13.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6475,
+      "sha256": "26bafeabe8ff7c538537c0afbf49d34bde5f587a4ce4eefb57f79fe935db4a6a"
+    },
+    "AccessibleBeautyAgent/docs/vision_mvp_report.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7177,
+      "sha256": "f460937c2f5fb67b7be15dd0222613fdd687c88a5c1a8e7e939e711fe0298593"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_V4_PLAN.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2281,
+      "sha256": "812a4a8392589d80f6ace6289e68c1af3347cfba68970936b200cfedd463da97"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_VOICE_FIRST_JOURNAL_REPORT.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5324,
+      "sha256": "e673b3293e95db1cbec763098b73ba52049060822dc60ad0359a8ca07d140b3e"
+    },
+    "AccessibleBeautyAgent/docs/reference-fidelity-audit.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6238,
+      "sha256": "41794d648b63d4902a787b842b6cd53f4643e84a98732825e830f4257cf4c2a3"
+    },
+    "AccessibleBeautyAgent/docs/PHASE2_ACCEPTANCE.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4467,
+      "sha256": "93e284bdfe13780f89213f78f7d35eb4aed455eb8564f74a571c16b01f265718"
+    },
+    "AccessibleBeautyAgent/docs/BRAILLE_USAGE_GUIDE.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1244,
+      "sha256": "f77428ef0b8f9e5bfcbaece4489cdb3ef7f197d1c2363eb85b05538b72e05d11"
+    },
+    "AccessibleBeautyAgent/docs/architecture_v2.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1934,
+      "sha256": "6a6d83a2082a4ff5f1c8b1e062211d5faba89ecd8c8c14da371017f039fc820c"
+    },
+    "AccessibleBeautyAgent/docs/IMPLEMENTATION_PLAN.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3383,
+      "sha256": "e721a169b45c5254b25580ebb1c07f7410f473e7d8e20d5514a64a3e5350c955"
+    },
+    "AccessibleBeautyAgent/docs/real_device_validation.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3018,
+      "sha256": "df552df8bfbf4252588410084de23ac2282ed6fcf0aefba6d58ab1da44d53f87"
+    },
+    "AccessibleBeautyAgent/docs/TRACE_V4_EVIDENCE_TO_PROMPT.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4255,
+      "sha256": "4cba034458679ad082648b8523ec3b49e24f35801bb0c61f557194fdf43d9934"
+    },
+    "AccessibleBeautyAgent/docs/design/trace-home-concept.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1366104,
+      "sha256": "373b302e93d10ebda83fabdadf3640546570817372b55ea3e5e125319b4554cd"
+    },
+    "AccessibleBeautyAgent/docs/design/trace-home-render.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 120653,
+      "sha256": "a85e06b69fce016482e0147544d3a248d56b277d894c6d18c72f1502981dd22e"
+    },
+    "AccessibleBeautyAgent/docs/design/trace-bilingual-warm.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 120128,
+      "sha256": "f5f8af5916c1b8e370c8c5657599942837309bc3f33cad09d51cdf7881efd100"
+    },
+    "AccessibleBeautyAgent/docs/旧入口归档/setup.ps1": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1422,
+      "sha256": "33d35dccdd4c46942466eb9a3b23a62f3534257cf73938e23d40e618c82285a9"
+    },
+    "AccessibleBeautyAgent/docs/旧入口归档/start-mac.sh": {
+      "mode": 493,
+      "type": "file",
+      "bytes": 2737,
+      "sha256": "71787bbd6ac0fd0eb4bc2ae38ea3f9d6f194876258c7dc557bdf69b71dd66e6b"
+    },
+    "AccessibleBeautyAgent/docs/旧入口归档/setup-voice-mac.sh": {
+      "mode": 493,
+      "type": "file",
+      "bytes": 1001,
+      "sha256": "8b9367b72ce346c2df1e39c7cd72b2b41406b62de7debf9e5df3028804b43bd7"
+    },
+    "AccessibleBeautyAgent/docs/旧入口归档/start-windows.ps1": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8997,
+      "sha256": "50fae05ad254c3f066e1915a6793211dc7b932855a8a609db89e3d7d6e42864f"
+    },
+    "AccessibleBeautyAgent/docs/旧入口归档/start-dev.ps1": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2773,
+      "sha256": "77a70a9180adf952e6020a01f0d3899a5841c38687ab28e6ed736b083c987bf9"
+    },
+    "AccessibleBeautyAgent/docs/superpowers/plans": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/docs/superpowers/specs": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/docs/superpowers/plans/2026-10-11-realtime-beauty-companion.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 13677,
+      "sha256": "42155f2979b39f6bc4fff5eec6e1983af9ebafc32c07c843fdbe0483adc0b4ec"
+    },
+    "AccessibleBeautyAgent/docs/superpowers/specs/2026-10-11-realtime-beauty-companion-design.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9157,
+      "sha256": "7378f88fd947165d8f4ea2d66f0ee2f1ade90a29dc7f121173d79c2e5ebfe78d"
+    },
+    "AccessibleBeautyAgent/voice/models": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/voice/fixtures": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/voice/server.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2656,
+      "sha256": "bc70d88e7c4c82f0e9e762ecb6bf6b3bd80fa294b5dcc2f60399855244d7f04f"
+    },
+    "AccessibleBeautyAgent/voice/requirements.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 140,
+      "sha256": "ab9f8a01338be691723cad4abb7c90cbc9004c3571c1df6f1a0181d7633d42d9"
+    },
+    "AccessibleBeautyAgent/voice/test_bounded.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3705,
+      "sha256": "efc65230724db6cfc2cf1b4a9163d8c24ccf67eb08410d86560c69b43e7f7d9a"
+    },
+    "AccessibleBeautyAgent/voice/MODEL-SOURCES.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2946,
+      "sha256": "093127e680a29bcd7521c56b6d7883c9f747afd39ad215b4f118dd97732984fd"
+    },
+    "AccessibleBeautyAgent/voice/setup_local_voice_models.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2380,
+      "sha256": "71ec1e38db0104b04091be30cf5d3eb62034b2ba2f52c11c86489aca8eadc489"
+    },
+    "AccessibleBeautyAgent/voice/engine.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8010,
+      "sha256": "ebd55fdf6520a368ff1c090b1692df4b9bb5b9a3903e10f489b7a881f6d09c56"
+    },
+    "AccessibleBeautyAgent/voice/verify_stream.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2268,
+      "sha256": "6da5e7c781d824f313d04f581a866cd471c65546ceea4363ce57e69b89a9dfb9"
+    },
+    "AccessibleBeautyAgent/voice/THIRD_PARTY_NOTICES.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1063,
+      "sha256": "c7e98e3e77ef37057fedd426f61d1b6347a9bcc15d2baaea7c226b74a56a62a6"
+    },
+    "AccessibleBeautyAgent/voice/quiet-keywords.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 241,
+      "sha256": "2624aa01b4a22989415a02edcd3a227c959fa2a91c63564537a8ba41c969cd8d"
+    },
+    "AccessibleBeautyAgent/voice/requirements-tested-mac.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 394,
+      "sha256": "a357887bea4d2de0f848e93f07bd53aa8a9652223ce3bf690dce654477ac0365"
+    },
+    "AccessibleBeautyAgent/voice/active-keywords.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1257,
+      "sha256": "324bd4f27aa589263669345fbb96fa303789768c1cb427d392737c2ac5a82c98"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/voice/models/asr": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/voice/models/kws": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/decoder-epoch-13-avg-2-chunk-8-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 759829,
+      "sha256": "63a22dd60f40fff082ac3e09afa507f6787da36df76ded2fbe145fa233e22c21"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/joiner-epoch-13-avg-2-chunk-16-left-64.int8.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 86629,
+      "sha256": "190d4067b4cc20b72a42a1916e69d92052000fb7051a427ebb1bc72a69207dc1"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/encoder-epoch-13-avg-2-chunk-8-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 11976951,
+      "sha256": "307e2f5e87e9d6df4fd058239f4437b6236db7699b9c61decb490f89fb4226d0"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/tokens.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1928,
+      "sha256": "2d3f32311f9b692b964da3c90e830258d3e78e013cb0c992dbfb15cd5a1a71b0"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/joiner-epoch-13-avg-2-chunk-8-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 338154,
+      "sha256": "76f7a24ed0c08633af14b2ee377f747af880d3b65eeba2cd3f31f3380fb73e8d"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/joiner-epoch-13-avg-2-chunk-16-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 338154,
+      "sha256": "76f7a24ed0c08633af14b2ee377f747af880d3b65eeba2cd3f31f3380fb73e8d"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/encoder-epoch-13-avg-2-chunk-16-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 11976272,
+      "sha256": "540ff509ed89bd22afe04bf7049a54bb1c95c6d8a18742ea9691910cdb5f859e"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/encoder-epoch-13-avg-2-chunk-8-left-64.int8.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4600657,
+      "sha256": "2ca84d6bfe73e1ea3c9c49f600f7cad1c9ddd423c53c906b8bfe802444dd78d5"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/decoder-epoch-13-avg-2-chunk-16-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 759829,
+      "sha256": "63a22dd60f40fff082ac3e09afa507f6787da36df76ded2fbe145fa233e22c21"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/en.phone": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3330061,
+      "sha256": "f7000ec3a90544c0c7c16090d8951779c2b322e14dad5006290f498567d439ea"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/encoder-epoch-13-avg-2-chunk-16-left-64.int8.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4599656,
+      "sha256": "408bbd740838c42d5bf6d1c5b80b3c88b616c7860b92d980328b5b068c76ae48"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/joiner-epoch-13-avg-2-chunk-8-left-64.int8.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 86629,
+      "sha256": "190d4067b4cc20b72a42a1916e69d92052000fb7051a427ebb1bc72a69207dc1"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/keywords.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 284,
+      "sha256": "4878b5c2cddd6605d228877a196137e2412f0fcda1af44a524d7265a1547835c"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/keywords_raw.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 208,
+      "sha256": "5b1ade36d81417b3479410134a0fb1f3b099b7cac4dea42f6939421902b59d19"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/en_1.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 534924,
+      "sha256": "5143a6ba93c4b274e2c4ac22deb75c2c48936c853f0519add1de828b6c79cc5a"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/en_0.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 212044,
+      "sha256": "6bc58a4efdf20daac252b6b1502632601a71efe0308f6757dc1eda34891a7e4f"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/zh_0.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 179646,
+      "sha256": "668bf8df51a10027b84d5d8816a1ce11ae93545538dc05cfe2aa6811d399c250"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/en_trans.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 367,
+      "sha256": "55ca91f3ee53c324b2f802f63c50cacc8931da846c4aaa35f115680201ff904b"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/zh_1.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 164976,
+      "sha256": "30edbabea84ca4c076f5b43bb44495f436f6711319c32a200d3fc5c67c1fee1d"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/zh_3.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 257006,
+      "sha256": "710e79fb3450042be50bb2f6432a2a549b53577aea041a577e53a926fcabb614"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/zh_2.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 144856,
+      "sha256": "04a579c23bdd6de049814f1cbfb470d735d7747ba37eb0a92d813c89da942706"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/zh_6.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 113518,
+      "sha256": "f5da5689f1960431a53855d7fbe78c9ab0b73e5495ffba631cd43458225d9039"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/zh_5.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 132938,
+      "sha256": "55321b6d1ab4bd9a16928957a52cf943b2ae864543cca7f39e9844b4889e9bb8"
+    },
+    "AccessibleBeautyAgent/voice/models/kws-bilingual/test_wavs/zh_4.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 147216,
+      "sha256": "d46ca3a2ce52b5059f3d84e2cfdc62907e8579faa7078b1becaea614dd41b35d"
+    },
+    "AccessibleBeautyAgent/voice/models/asr/test_wavs": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/voice/models/asr/model.int8.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 239233841,
+      "sha256": "c71f0ce00bec95b07744e116345e33d8cbbe08cef896382cf907bf4b51a2cd51"
+    },
+    "AccessibleBeautyAgent/voice/models/asr/LICENSE": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 71,
+      "sha256": "221c6df10b0931a5629adad671ea48fb7747e034c414b6d2bfa275bc3dd4ea17"
+    },
+    "AccessibleBeautyAgent/voice/models/asr/tokens.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 315894,
+      "sha256": "f449eb28dc567533d7fa59be34e2abca8784f771850c78a47fb731a31429a1dc"
+    },
+    "AccessibleBeautyAgent/voice/models/asr/README.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 104,
+      "sha256": "763991a00edaea534ab36bf1b7cf89e61e911666dcfabbba71f91f9f7c593a63"
+    },
+    "AccessibleBeautyAgent/voice/models/asr/test_wavs/ja.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 230444,
+      "sha256": "460bd8dccb0d2a5f4e29c628f837be4082d13defc64c3fc21dd1b6bb0e119095"
+    },
+    "AccessibleBeautyAgent/voice/models/asr/test_wavs/en.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 228908,
+      "sha256": "eb1eb008904465b74c304aad8342e8c7d3c6e61ffe9f66adcaca9cf0f76a93f4"
+    },
+    "AccessibleBeautyAgent/voice/models/asr/test_wavs/zh.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 178988,
+      "sha256": "b77f1794fe374a0ba1ee1dc458bfaf9349496cbbfc32780c50ba3c5a7ad8e373"
+    },
+    "AccessibleBeautyAgent/voice/models/asr/test_wavs/yue.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 164780,
+      "sha256": "0960b2db54ae202071d250e6462fbf74a3c863f0e3e7f01273e4939c996875a0"
+    },
+    "AccessibleBeautyAgent/voice/models/asr/test_wavs/ko.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 147500,
+      "sha256": "0dc797a5c81ed30fc339d91f3da718ab02854e17ffa37cb93c4c039ac5c6bb9c"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/test_wavs": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/encoder-epoch-99-avg-1-chunk-16-left-64.int8.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4777666,
+      "sha256": "dd784973fc9d2fabb3b800d6dcd20fc3b0ca84f8e2415afe54b032878e447f4d"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/joiner-epoch-12-avg-2-chunk-16-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 253410,
+      "sha256": "fcf43a2edf687e2e1bc8a2b2cf53129d3b0d693d90dcc4202e2d53b43db6c43c"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/encoder-epoch-12-avg-2-chunk-16-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 12152560,
+      "sha256": "859cd6decc23f35e6ddb3a6ddb7172a57f6de7b54288728c2433ab94b7635c59"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/decoder-epoch-99-avg-1-chunk-16-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 675349,
+      "sha256": "fb581d6734511676e246e0dff2fea01b31b0913176cb3ca64576dbab0a177774"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/keywords.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 286,
+      "sha256": "46de8c6834da501b0a2e39a2691b17fd74ea707930dd30fbc7cc69b3d396b93f"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/keywords_raw.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 101,
+      "sha256": "75b5846317e6c90d37da2c8ba5d05e6f5688eca20c7bca1ad4d0372795339ace"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/encoder-epoch-12-avg-2-chunk-16-left-64.int8.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4777666,
+      "sha256": "dd784973fc9d2fabb3b800d6dcd20fc3b0ca84f8e2415afe54b032878e447f4d"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/tokens.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1627,
+      "sha256": "72316508d9119696145abc6f1f8cdc46287535c34e5ce7e595f845cb1499cf2e"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/decoder-epoch-99-avg-1-chunk-16-left-64.int8.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 181069,
+      "sha256": "ed83454004d5bd16d831eaf00adcd181ed7734886aab6ef440f3ffa5aa3cfe3b"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/README.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 767,
+      "sha256": "dd0ec68b5d9ee736f016fc982078bd3cdbccc69057e9910bdd45580992d13367"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/encoder-epoch-99-avg-1-chunk-16-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 12152560,
+      "sha256": "859cd6decc23f35e6ddb3a6ddb7172a57f6de7b54288728c2433ab94b7635c59"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/joiner-epoch-99-avg-1-chunk-16-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 253410,
+      "sha256": "fcf43a2edf687e2e1bc8a2b2cf53129d3b0d693d90dcc4202e2d53b43db6c43c"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/decoder-epoch-12-avg-2-chunk-16-left-64.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 675349,
+      "sha256": "fb581d6734511676e246e0dff2fea01b31b0913176cb3ca64576dbab0a177774"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/joiner-epoch-99-avg-1-chunk-16-left-64.int8.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 65242,
+      "sha256": "f79760052b87239e325f0567c752ad3130b30d92effb847d4307743c20c59a24"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/configuration.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 48,
+      "sha256": "63cd5920dc448cf6416aa533e4de43f3066f646ddfca8ed19e05b1b265f37cb6"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/decoder-epoch-12-avg-2-chunk-16-left-64.int8.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 181069,
+      "sha256": "ed83454004d5bd16d831eaf00adcd181ed7734886aab6ef440f3ffa5aa3cfe3b"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/joiner-epoch-12-avg-2-chunk-16-left-64.int8.onnx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 65242,
+      "sha256": "f79760052b87239e325f0567c752ad3130b30d92effb847d4307743c20c59a24"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/test_wavs/6.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 113518,
+      "sha256": "f5da5689f1960431a53855d7fbe78c9ab0b73e5495ffba631cd43458225d9039"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/test_wavs/5.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 132938,
+      "sha256": "55321b6d1ab4bd9a16928957a52cf943b2ae864543cca7f39e9844b4889e9bb8"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/test_wavs/4.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 147216,
+      "sha256": "d46ca3a2ce52b5059f3d84e2cfdc62907e8579faa7078b1becaea614dd41b35d"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/test_wavs/0.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 179646,
+      "sha256": "668bf8df51a10027b84d5d8816a1ce11ae93545538dc05cfe2aa6811d399c250"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/test_wavs/1.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 164976,
+      "sha256": "30edbabea84ca4c076f5b43bb44495f436f6711319c32a200d3fc5c67c1fee1d"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/test_wavs/3.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 257006,
+      "sha256": "710e79fb3450042be50bb2f6432a2a549b53577aea041a577e53a926fcabb614"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/test_wavs/2.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 144856,
+      "sha256": "04a579c23bdd6de049814f1cbfb470d735d7747ba37eb0a92d813c89da942706"
+    },
+    "AccessibleBeautyAgent/voice/models/kws/test_wavs/test_keywords.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 222,
+      "sha256": "6af1addaeb80ddb6dc8576e11dcb5a4d17bc02629e6561ca6b2aadb5ec05e27d"
+    },
+    "AccessibleBeautyAgent/voice/fixtures/wake.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 119154,
+      "sha256": "55d0bd9c78cc7fb729a80e6552956ceb2ae62a68fd7889c7fe488e4d9a5e4caf"
+    },
+    "AccessibleBeautyAgent/voice/fixtures/english.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 64888,
+      "sha256": "a5105a8b887c01c39924afc500ae72a1bdd0123b39ff6a9986d068a8765b1336"
+    },
+    "AccessibleBeautyAgent/voice/fixtures/chat.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 135036,
+      "sha256": "ec91576ddf8bca77eba9108163dcf2d4ecb276e63cf2f36a4da29e944216e716"
+    },
+    "AccessibleBeautyAgent/voice/fixtures/pause.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 42900,
+      "sha256": "032214cecdc732001ac50eb228d94f1d6be52c140e9ce9c9af5f9de225474df5"
+    },
+    "AccessibleBeautyAgent/voice/fixtures/wake2.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 105036,
+      "sha256": "175e0045144f5fc4c7189a9a4deb78b1d1f9bd48dbe6c5e7b37b88e330a2e9b8"
+    },
+    "AccessibleBeautyAgent/voice/fixtures/negative.wav": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 134498,
+      "sha256": "c0fc950743ef86a963a363d0b3d3de1bcfb41d1291ea7d80b2df2b82ba032180"
+    },
+    "AccessibleBeautyAgent/voice/fixtures/00_合成音频说明.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 733,
+      "sha256": "ebd52f01573c29f7d0a7b2f9bcb63b5bfb1176c20908e11d76d4969c2c5769bb"
+    },
+    "AccessibleBeautyAgent/work/models": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/work/models/face_landmarker.manifest.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 313,
+      "sha256": "bf9b9d4f78c24e68b64fa27558628b94cd2f25136904e95df985113c0f8f04a7"
+    },
+    "AccessibleBeautyAgent/work/models/face_landmarker.task": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3758596,
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+    },
+    "AccessibleBeautyAgent/scripts/run_realtime_text.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1393,
+      "sha256": "3b63d4e41ac893b066d8042fc80c7b7a0bd5c4a63ccc133f453eb2c8ebc1647e"
+    },
+    "AccessibleBeautyAgent/scripts/live_smoke.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2398,
+      "sha256": "58372fcbf7609fd75a52c23032a6643823dd15b5110919ddaedc1c7cf9482df9"
+    },
+    "AccessibleBeautyAgent/scripts/import_kb.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1399,
+      "sha256": "8421e7a79dd8f5c20724abaf728b3a35aec302a266ca4e10ac5577b6398b1d1f"
+    },
+    "AccessibleBeautyAgent/scripts/extract_video_frames.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3052,
+      "sha256": "bdab5bf3729bb5a8b343120083bc8b002a525295aea69f7bcf49c39b5ee55c67"
+    },
+    "AccessibleBeautyAgent/scripts/evaluate_makeup_vision.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4004,
+      "sha256": "e337951d7eca95f76728ce072b9991ee63fc3505d19d8035118532da05dfc9fc"
+    },
+    "AccessibleBeautyAgent/scripts/analyze_reference_media.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2677,
+      "sha256": "c68d2006dfbf9bdbf9a91174771f6a22bff27ba2e905e68a248cd4d7149f76ab"
+    },
+    "AccessibleBeautyAgent/scripts/create_kb_templates.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4361,
+      "sha256": "a5c92e5324cc3acf39d3a72b2caf028905ca51ddca9108dcbb965b90e7ea255b"
+    },
+    "AccessibleBeautyAgent/scripts/create_demo_data.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5618,
+      "sha256": "09e2ae3140194b5dfcc1cbd1048d572fa99707bb53c818a53838d81837115e25"
+    },
+    "AccessibleBeautyAgent/scripts/validate_kb.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 750,
+      "sha256": "cb3687fcf88d71998b07d79be0a642e250473ea7ce53cee7bee3b579268872ae"
+    },
+    "AccessibleBeautyAgent/scripts/setup_local_landmarks.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1014,
+      "sha256": "7d6cee28427e84aaca0984e4b3b84c8aea3aa51446126554c7787b4b3b958458"
+    },
+    "AccessibleBeautyAgent/scripts/ingest_kb.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 716,
+      "sha256": "4777ae19d38dccbddf65acf0ec5cca1a9d48483c91e3fecb85bb16b6bb1348ae"
+    },
+    "AccessibleBeautyAgent/scripts/calibrate_makeup_thresholds.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2282,
+      "sha256": "2d1da8644751184576d69ff46455ca5a3be7ca935a33a559b8d58630c84a1127"
+    },
+    "AccessibleBeautyAgent/scripts/rebuild_index.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1008,
+      "sha256": "854d8b69a63a09dbaf8f441af07dbb85115bf7e2bd2540bd81c25563c1f84a47"
+    },
+    "AccessibleBeautyAgent/scripts/import_tutorials.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1160,
+      "sha256": "50a1736922602c7ffb37218db914526066dc9c26e6ad787556ca2a76c047ea35"
+    },
+    "AccessibleBeautyAgent/prompts/policies": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/prompts/vision_lip.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 404,
+      "sha256": "83b4815a4779e45c57a1d6a86179bd4bc5eb932d78c1b49a3e713b13dee54eef"
+    },
+    "AccessibleBeautyAgent/prompts/vision_blush.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 642,
+      "sha256": "50bdc46b44b1b6b5e0eeb43c65db3fe7b50f6b49ac94166e2d88442acdc1ebc0"
+    },
+    "AccessibleBeautyAgent/prompts/accessibility_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 621,
+      "sha256": "df4e934945719de971d04a0e929e2dbaaafe8e7347f18e5e2a938309097e250d"
+    },
+    "AccessibleBeautyAgent/prompts/agent_system.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 952,
+      "sha256": "ac24510ffd66770c9e01f907f35fdab996b59357ec8aae5eec0fac147cdeec1f"
+    },
+    "AccessibleBeautyAgent/prompts/reference_analysis.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 680,
+      "sha256": "8917fd28ca24f15c26c8ecde40a3b45c2196e9415978f4f9f5cac6f405bd88fb"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v5": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v4": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v5/material_description_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 599,
+      "sha256": "92776b4f3172c7450ff985f8e3bc3536cb5e0b6f825c56b73c67747ea70c9fc5"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v5/guidance_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 486,
+      "sha256": "22d7ae0b6fbc8c499a860ee5ba9b55f07317b1d8b046b11e314a14e3e15779d9"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v5/visual_feedback_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 555,
+      "sha256": "f0d50b07cdd36d6acef1634368f62bd8dcc469e70cf6945a20f65910c33926b6"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v5/full_look_planner_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 530,
+      "sha256": "13f57b69546ec99b3da755351e7829d1e04652a17d4921a64ef6a0406d5e842f"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v5/brand_copy_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1283,
+      "sha256": "1617c18b6eb9c3c27cd2901ba5a2aab1aed21d1c9ddce4a770b0d5b8f37932b1"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v5/accessibility_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1652,
+      "sha256": "c46f00eaba5423f686161eef6dad4b0836e3b63000349eb83767c229e1a5f02c"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v4/material_description_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 599,
+      "sha256": "92776b4f3172c7450ff985f8e3bc3536cb5e0b6f825c56b73c67747ea70c9fc5"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v4/guidance_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 486,
+      "sha256": "22d7ae0b6fbc8c499a860ee5ba9b55f07317b1d8b046b11e314a14e3e15779d9"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v4/visual_feedback_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 555,
+      "sha256": "f0d50b07cdd36d6acef1634368f62bd8dcc469e70cf6945a20f65910c33926b6"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v4/full_look_planner_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 530,
+      "sha256": "13f57b69546ec99b3da755351e7829d1e04652a17d4921a64ef6a0406d5e842f"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v4/brand_copy_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 422,
+      "sha256": "a633e9b106b9accf5f6f7c4a4a10454d552367de57c5b50879327b7c68d45a8a"
+    },
+    "AccessibleBeautyAgent/prompts/policies/v4/accessibility_policy.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 591,
+      "sha256": "04b8f827d6f4e11afa40fac2ef6bae05b05f3c78947b11a7fa32dfa7500d7c90"
+    },
+    "AccessibleBeautyAgent/templates/sources_template.csv": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 218,
+      "sha256": "e8e2cb000902f4c0c21b9001119bdae4123b0481f8fe42fc76cc021ab0770faa"
+    },
+    "AccessibleBeautyAgent/templates/reference_cases_template.csv": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 495,
+      "sha256": "9f0d04a6fbd64088cea83e5de9e5bcc3f2540ee47afbbaa1884e88637a02d554"
+    },
+    "AccessibleBeautyAgent/templates/routine_steps_template.csv": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 380,
+      "sha256": "0a809bbfaafa2bb621993a82f5fec6132ded2456fe4f5b79c31b120e302b4e81"
+    },
+    "AccessibleBeautyAgent/templates/products_template.csv": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 284,
+      "sha256": "5dfb294be50ffc1426011841379076bdc909315a2d83957f30b206e1de19b64e"
+    },
+    "AccessibleBeautyAgent/templates/beauty_kb_template.xlsx": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 30376,
+      "sha256": "ccede24789204cbeca0c968e7132e9963f0f5e45d8fdfb264fc93925d85745a3"
+    },
+    "AccessibleBeautyAgent/templates/beauty_looks_template.csv": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 497,
+      "sha256": "197c97a19e43e5e346f21fef3faa9dc8f5ac3c3b6de98fc1fcc3f8cbe32c09a8"
+    },
+    "AccessibleBeautyAgent/templates/accessibility_guidance_template.csv": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 359,
+      "sha256": "df72a7430c58967d1e9a50bfb4dfe841b63078e2b86804919e8300d3d722544f"
+    },
+    "AccessibleBeautyAgent/templates/routines_template.csv": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 135,
+      "sha256": "af4f69ef2fa0b4b5ff1092bb7201497fcd3647fc1d56e2662be3cdd907b8698c"
+    },
+    "AccessibleBeautyAgent/data/research": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/demo": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/materials": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/locales": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/config": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/references": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/knowledge": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/users": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/import": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/research/v4": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/research/v4/excel_inventory.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 973,
+      "sha256": "cbdcc520c48f7eaf623ba2454fbb7e6c6c76a861abe30e5ba3fff3c74b9fd6dc"
+    },
+    "AccessibleBeautyAgent/data/research/v4/sources.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6314,
+      "sha256": "935d9d30421bb0ac3848984740a34861307c675beb8ec5f9f2826068518b91ef"
+    },
+    "AccessibleBeautyAgent/data/research/v4/evidence_rules.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 10616,
+      "sha256": "5daab7e6c8ed9900bff4aee2e82b0ad0d6f0e63b53a76097a946385066ddd6a7"
+    },
+    "AccessibleBeautyAgent/data/research/v4/hash_duplicates.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 157,
+      "sha256": "74cb0a421b741f1570d9da20861197e2af154a49189939561b7742e702fcaae5"
+    },
+    "AccessibleBeautyAgent/data/research/v4/assets_hash_review.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 15794,
+      "sha256": "4eada78826595ab0f764cfbfea3b5cac6d07821893b9f96e47b86e35335d748f"
+    },
+    "AccessibleBeautyAgent/data/research/v4/products_candidates.csv": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1493,
+      "sha256": "b9aee12963366f1c2eba1552f8eff096c66f00f9d9efbc5cef7107277e81216a"
+    },
+    "AccessibleBeautyAgent/data/research/v4/products_candidates.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2694,
+      "sha256": "42bca22a194db4ccc4792b01c87d07a1857629e1921b38d62dfe87bc5c8b7217"
+    },
+    "AccessibleBeautyAgent/data/research/v4/build_review.py": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9537,
+      "sha256": "17d4b1b4d5da9fd8a341810980b1d7b41ff79341262f523ea5bd46244c3f054a"
+    },
+    "AccessibleBeautyAgent/data/research/v4/material_candidates.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5845,
+      "sha256": "59bcd9727d49c933cf187a6ed02e993696fe1eb33e5f1ef195bdb2813773991f"
+    },
+    "AccessibleBeautyAgent/data/demo/knowledge": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/demo/scenarios.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 442,
+      "sha256": "f8e1d6c9705bf7b5945386742ea3a66faf144a3ddf0c7c3124f9a3f2dbfa3dce"
+    },
+    "AccessibleBeautyAgent/data/demo/knowledge/looks.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2126,
+      "sha256": "cbe937f1e7ecfca0707eadbfdb3d885e0c1fb8012b5fc949f6a494292cc54cff"
+    },
+    "AccessibleBeautyAgent/data/demo/knowledge/accessibility_guidance.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 589,
+      "sha256": "f67dcd73954324432ea4a9c2c1252ab79b9686d7e577883c02345dd46d50e5e5"
+    },
+    "AccessibleBeautyAgent/data/demo/knowledge/reference_cases.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1030,
+      "sha256": "1a223021cbeb2ac3d4d8c2cc7d9f58013e6c46a08ca1061fd759540c7f29df90"
+    },
+    "AccessibleBeautyAgent/data/demo/knowledge/routines.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7393,
+      "sha256": "a2b06acfc59ece81a25bf1e636b0024146e060f07dc7aeabd74cd4381fe45ae2"
+    },
+    "AccessibleBeautyAgent/data/demo/knowledge/products.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5438,
+      "sha256": "fe7f60e094164b2bfb8a5d4a7bb4d16631fce214f212ab3696682e083117f90c"
+    },
+    "AccessibleBeautyAgent/data/materials/materials.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 5856,
+      "sha256": "a279489d1ef5593aedc8d86b11129090989eba2b3416e1d19906594f4f092522"
+    },
+    "AccessibleBeautyAgent/data/locales/guidance.en.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 19339,
+      "sha256": "eab8c00bb019e0c88c136ee607d9df3eea3ea72037cfe33450f6e3d83d714749"
+    },
+    "AccessibleBeautyAgent/data/config/scenes.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 487,
+      "sha256": "75cb6bd374c7ba9939905476cdf0f994ec129af17dccf6fe138514e114a64ff3"
+    },
+    "AccessibleBeautyAgent/data/config/finishes.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 203,
+      "sha256": "6605b96c5b94b3ad588315832cc70896149c1ff4958194e0ec01d9b875659d4f"
+    },
+    "AccessibleBeautyAgent/data/config/accessibility_categories.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 219,
+      "sha256": "899efa765dbc3612fd4b8d443230b779e56c2ca54ea4d6bf6c7093cbdfbef06a"
+    },
+    "AccessibleBeautyAgent/data/config/intensity_levels.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 170,
+      "sha256": "818375844c15a1bc05af52533f79f366bf498d9ffccb13c0b69297117fe1ba0e"
+    },
+    "AccessibleBeautyAgent/data/config/placements.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 57,
+      "sha256": "89d75a1936ca24ddaa6664429d7cc164e55c4d18f898b070eb5ca178ff4f65f4"
+    },
+    "AccessibleBeautyAgent/data/config/impressions.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 148,
+      "sha256": "d60c3eb24e7c3edec5fdd287aac266dfca15fd414d0d1aa0602faac77b8fee4e"
+    },
+    "AccessibleBeautyAgent/data/config/saturation_levels.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 119,
+      "sha256": "7e33e126b4b212be575f0e1664a6cd2b3dc26a9dddd4e7dc0f0ddf280ec036de"
+    },
+    "AccessibleBeautyAgent/data/config/knowledge_sources.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1025,
+      "sha256": "6cb13f8e66c159d894849d40a7793e906385387edd1972b6a281a7d41fa68f22"
+    },
+    "AccessibleBeautyAgent/data/config/reference_status.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 129,
+      "sha256": "42c73f9f8a5b2e75a87e067f93fdbc9fdb238fd43c57c5417a9fd538db568f22"
+    },
+    "AccessibleBeautyAgent/data/config/makeup_areas.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 102,
+      "sha256": "8ad9a6c10166f44da152ed4e06c5073da7ff08f7141f7f446465c8c6ab7f6e94"
+    },
+    "AccessibleBeautyAgent/data/references/raw": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "AccessibleBeautyAgent/data/references/raw/1a57b2a9613645449b437869d6e331bc.jpg": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7545,
+      "sha256": "37c47c882e52fc78607922e2fd4a84ba7278d05d4d08dc5621745b5102c0b410"
+    },
+    "AccessibleBeautyAgent/data/knowledge/sources.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2059,
+      "sha256": "896284c52cfe2b87e12e62e9fd63212167ee5727104cddbc61e53a21590f717e"
+    },
+    "AccessibleBeautyAgent/data/knowledge/looks.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3979,
+      "sha256": "c4ecc7087a57a91b8e1a6ed03db9967a23ccebf321f1cfffed538a9a175b0730"
+    },
+    "AccessibleBeautyAgent/data/knowledge/accessibility_guidance.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 98800,
+      "sha256": "8665900f28981affafcdc2d863603728fed2defe6159affce010be46910ad416"
+    },
+    "AccessibleBeautyAgent/data/knowledge/reference_cases.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3357,
+      "sha256": "f09f268e5e1f24a5a500898ed54d31cc4eda376ab8916e52033251f749773a1b"
+    },
+    "AccessibleBeautyAgent/data/knowledge/routines.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9612,
+      "sha256": "5acf94f891ff9709ee539a27ee54c818a3a38a1202852a8f6b9412a388d161ed"
+    },
+    "AccessibleBeautyAgent/data/knowledge/products.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 8311,
+      "sha256": "925de333407b57279911ab8d312962848a28ff0e31669a9258fd8c531ee337c0"
+    },
+    "AccessibleBeautyAgent/data/import/trace-original-tutorials.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 14706,
+      "sha256": "3fd143934d5e0c6af6a09b1929566a1761fd6831b84b55344dfb3c01bb26ba29"
+    },
+    "项目资料/迭代指令_20261017": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/04_会议与决策": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/output": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/03_设计与汇报": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/实施成果_20261017": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/01_方案策划": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/项目迁移交接_20261008_历史说明.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 14667,
+      "sha256": "d0b7b406244ec864962ac51fe7e31d1547d22efb23e05f8245e4e774fbafd2c6"
+    },
+    "项目资料/迭代指令_20261017/参考素材": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/迭代指令_20261017/历史版本_v1_已被v2替代": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/迭代指令_20261017/04_材料校验.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1400,
+      "sha256": "ca6ac99375be937e6a61984c2c7fc4cf3ca4d42bea7fec5e201b7e19731f6368"
+    },
+    "项目资料/迭代指令_20261017/01_TRACE迭代_Harness_Prompt_20261017.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 31135,
+      "sha256": "d4637461864c6c686a1a013a0552d620e4315f744f457301ce73f466d3950d23"
+    },
+    "项目资料/迭代指令_20261017/02_Apple与开源语音方案_20261017.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 6806,
+      "sha256": "09f870ecc1dab1e5df70c9adedb5ce43daecfdc2cf1d026ffe94f02fe95cf848"
+    },
+    "项目资料/迭代指令_20261017/00_阅读与素材说明.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3199,
+      "sha256": "a697ee3419af75ec6afdd26cc6a32f9445711da97b1a4820fe3a846281f5378c"
+    },
+    "项目资料/迭代指令_20261017/参考素材/图1_苹果与网格人物_原始参考.png": {
+      "mode": 384,
+      "type": "file",
+      "bytes": 107872,
+      "sha256": "6aef9acea6958407b72055af116410c99d716f453ce7eed0653a814d7b7cc78a"
+    },
+    "项目资料/迭代指令_20261017/参考素材/图像替换提示_用户原文.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 9836,
+      "sha256": "68044d203ce16f5f538b3d1f2adebfa70ce76b8c15e8a58640dc31eea78c4b71"
+    },
+    "项目资料/迭代指令_20261017/历史版本_v1_已被v2替代/04_材料校验.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1152,
+      "sha256": "2dca75dd48648739d01acdf73a082e3b9dc513660c598c6fc8187d5344514777"
+    },
+    "项目资料/迭代指令_20261017/历史版本_v1_已被v2替代/01_TRACE迭代_Harness_Prompt_20261017.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 23215,
+      "sha256": "c8d6906d86c993424981e977b8849c8fb6954e8916ba104ef32452fb5f8c9849"
+    },
+    "项目资料/迭代指令_20261017/历史版本_v1_已被v2替代/02_Apple与开源语音方案_20261017.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4393,
+      "sha256": "cad15eaa6c8393824f63b7891333a1f9010372574c614602447549a0ba52a860"
+    },
+    "项目资料/迭代指令_20261017/历史版本_v1_已被v2替代/00_阅读与素材说明.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2241,
+      "sha256": "6966f21c9232824feab3020dccd64914c0f4382e06445962564979c3c9ee1e36"
+    },
+    "项目资料/04_会议与决策/第二次例会_图片生成说明_v2.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2001,
+      "sha256": "1a890389c232a0ef202801c302f051b909edd72a647b7266307c9096b4f4bc28"
+    },
+    "项目资料/04_会议与决策/第二次例会_讨论与行动简图_v2.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1596855,
+      "sha256": "31501216a9aa27c31df4098d4c203d28344f0cf12d757f7ffdebf4b5aa34240a"
+    },
+    "项目资料/04_会议与决策/第二次例会_图片生成说明.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2361,
+      "sha256": "30da0158388d6e2eb17cdb09c341d5c68b093d89a879d7b070ae45da12c53529"
+    },
+    "项目资料/04_会议与决策/第二次例会_讨论与行动简图.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1680635,
+      "sha256": "d7b3eb2b7a88e07c9081decd5c4a884bb8cbf6a6ca53d4d0a4e3e6434cfb241a"
+    },
+    "项目资料/output/pdf": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/output/pdf/雅诗兰黛VMA视障美妆项目研究报告_20260928.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 13578,
+      "sha256": "fb41a2416f93cbaf2e3cb9820451a43351674b2ec8e12041e4b8e61214a676e8"
+    },
+    "项目资料/output/pdf/雅诗兰黛VMA视障美妆项目研究报告_20260928.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 409266,
+      "sha256": "a6d76146207965c2a2f352c22a0ee0c9864524ce5de455d0032f84b51b59e06b"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE双模式UI": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包.zip": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 31134,
+      "sha256": "5a7aa81168b5041cc6887bbc579abade6af70cf3a18b4cde9059eff0da342e68"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE双模式UI/00_使用说明.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1237,
+      "sha256": "608b8947656efb6fcdae9ad3c5a06fecb783168bda470a650f060a168bbc5b6a"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE双模式UI/TRACE_双模式UI设计与演示流程_v1.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 25358,
+      "sha256": "7ea8f7b64cf230de385300a33122059b33829f7ac78abc74a631187ad78faade"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/03_验收与视频走查": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/02_UI结构JSON": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/01_产品与交互规范": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/00_先读我_前端交接说明.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3330,
+      "sha256": "dd6049648b707c5d9270e12ad8fafd455a8bec440c7c9a4e65fde050669427bf"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/00_发给前端同学的话.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 600,
+      "sha256": "495de2a39d3670a0a3e37d438b3768c14f63947e027cddadd70d7a2755c34aba"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/文件清单与校验.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1609,
+      "sha256": "026871f5b307f4202cc2a31c7cb285f6e438d66c6c278cc8b50ad21102d0a4c5"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/03_验收与视频走查/02_视频演示顺序.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 938,
+      "sha256": "72c4c54dd19d38e86e7f5922aa702254ebe3bb3ee227b03c3d726f77a93732e5"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/03_验收与视频走查/01_开发顺序与验收清单.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2438,
+      "sha256": "f303ae6aab756f8e3f43c89bd2f5dde59f41e46cf15a4a70e65842c3a71d6f0c"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/02_UI结构JSON/00_使用说明.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1237,
+      "sha256": "608b8947656efb6fcdae9ad3c5a06fecb783168bda470a650f060a168bbc5b6a"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/02_UI结构JSON/TRACE_双模式UI设计与演示流程_v1.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 25358,
+      "sha256": "7ea8f7b64cf230de385300a33122059b33829f7ac78abc74a631187ad78faade"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/01_产品与交互规范/TRACE_双模式入口与无障碍体验规范_v2.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 17486,
+      "sha256": "316d0e1011340c95906bb21d6fda82958def31437f3d7bec2bf033bb7cb02667"
+    },
+    "项目资料/03_设计与汇报/20261011_TRACE前端开发交接包/01_产品与交互规范/TRACE_双模式重构_Codex执行Prompt_v2.md": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 13262,
+      "sha256": "0a2183a7db4924d3fd5503de149d0d5138f1e1dee807848f4d0b7e1230b5a082"
+    },
+    "项目资料/实施成果_20261017/文案更新_美没有统一定义.jpg": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 34253,
+      "sha256": "67f208cad636de39568177815fc020f1d0a288b3ed7757737c43dbe74be8d43a"
+    },
+    "项目资料/实施成果_20261017/TRACE_Harness_v2_首页运行预览.jpg": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 196930,
+      "sha256": "1c50e26c83fcff7fe2b720de352c403e28849c99d702eeff79ad44c9942622b9"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包.zip": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 40950625,
+      "sha256": "600bf710a950b61ca72017e3e597d7f9fe455ecf04fc7898165a2d2629f95ef7"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/04_人机协作与不确定性": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/02_美妆无障碍": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/01_视障与语言交互": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/03_视觉算法": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/00_论文总索引.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 23537,
+      "sha256": "58b19cff4c87651ecfe2f2fbd2ed7d3d436a2ed0344003b8e9d83246bccebda3"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/论文来源与关键词.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 45967,
+      "sha256": "6eb860b14447760f7b0b775cc95abe7ddd511fbd11ea8196088e58f6b7883a42"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/00_先读我_使用说明.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 3319,
+      "sha256": "956bea72e3783b2759cce1785b8f61d75a028205b6e7b5e31f158a7c62a5cf4d"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/00_论文总索引.html": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 52907,
+      "sha256": "6a34a3a11444584d46ebb98ed005fb71cb8d4009fab1a1be21da3fea59175ed9"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/04_人机协作与不确定性/2023_非专家Prompt设计困难_Why Johnny Cant Prompt_A15.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2343439,
+      "sha256": "52b0e4055a65df985c552cb39a3abc8312c64c4e47ca284192425bf8da082352"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/04_人机协作与不确定性/2019_人机交互设计准则_Guidelines for Human-AI Interaction_A16.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1405242,
+      "sha256": "82fff584c6b986f573608361478e93447538c6ce707e4b9b04d45d584272ea03"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/04_人机协作与不确定性/2020_按需解释与用户提问_Questioning the AI_A25.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 355085,
+      "sha256": "6d308a1fef6c67685b3ecc971fda1fccb3e3d6ac75c7b171b5e345fb4d0291fa"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/04_人机协作与不确定性/2021_减少AI过度依赖_To Trust or to Think_A20.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1910784,
+      "sha256": "c0c6983901488b46ea3951fb29f96a9420f87952a46816824826d0320d175989"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/04_人机协作与不确定性/2024_适度信任系统综述_Appropriate Trust Review_A19.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1722692,
+      "sha256": "3eff67de51fb6734f9922bfa62936fcb7f2742088961a77c163037eae41b7eed"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/04_人机协作与不确定性/2024_不确定性表达与用户信任_Im Not Sure But_A17.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1467056,
+      "sha256": "8e99a6ea10942b7b5d386e4c45e4fc39eb34bacabdfe9c73fb3b180eda6c4737"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/02_美妆无障碍/2024_盲人与低视力女性化妆实践_Blind Womens Makeup_SRC-PAPER-123.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 302961,
+      "sha256": "8be5a96f627ee92b83c1e47f7bf5bce9cb4481d3b59dbe34e5f186021157033f"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/02_美妆无障碍/2021_化妆品购买与使用无障碍_Inclusive Beauty_SRC-PAPER-122.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 334593,
+      "sha256": "c60e6744b2b59a15580e366d8d3cc9159a56ff85057410a7f5abe45319ad9682"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/02_美妆无障碍/2022_视障化妆的实践与困难_It Feels Like Taking a Gamble_SRC-PAPER-121.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 15288553,
+      "sha256": "a20a1bbe8d45c0aef18a53471a9bcad64f0ebbc891c8ba34b74fcf3e983855c7"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/02_美妆无障碍/2025_非视觉化妆的步骤反馈_Non-visual Makeup Routines_D01.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 4087196,
+      "sha256": "bc8ba54f938ef55cae5d77bf13307e867fd4c75f1a6590ea2b728a8891288138"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/01_视障与语言交互/2016_避免消费残障励志叙事_Inspiration Porn Critique_C13_待获取全文.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 462,
+      "sha256": "b3c1320a3cc06e0dfd839c7fbd18a23c79948df1f0393a1af85ec949c610622a"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/01_视障与语言交互/2020_语音助手无障碍与交互失败_Voice Assistant Accessibility_D27.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 178287,
+      "sha256": "1b186042a59766171f57d332bd1fbf1173fe266f3908a87b1e78f382a81a21f9"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/01_视障与语言交互/2020_语言模型中的残障偏见_Social Biases in NLP_C17.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1004220,
+      "sha256": "3647419f178c5f00e0c6906f7972d9ae82fa2076c7b3383688541620c7dab14c"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/01_视障与语言交互/2024_残障偏见与情境差异_Ableism Vignette Experiments_C15.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 679129,
+      "sha256": "3c0d81edd78c9a1294e88e20b1a4383819a96f53b622ac00c16efe73ac70e60d"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/01_视障与语言交互/2019_盲人触觉与听觉引导_Tactile vs Auditory Guidance_D05.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1698109,
+      "sha256": "5c82f33c61a611e4e9b69dbbdb7cf4a396b7c7dfc19f3cd4a982146428ae265e"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/01_视障与语言交互/2019_残障身份与语言表达_SaytheWord_C04.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 208505,
+      "sha256": "ad1193251850c41484ceb44d166c12c21a0ef5134206c96c56ea606226708f9b"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/01_视障与语言交互/2019_视障情绪识别的机会与局限_Emotion Recognition_D13.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 572554,
+      "sha256": "313b847617b853fa867e34c3d8c022507548fbe627d69b546a9829491e8e8f9f"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/01_视障与语言交互/2023_情感与毒性模型的残障偏见_Automated Ableism_C18.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 360796,
+      "sha256": "3c929647b6cb8ac8b5377a3be73a6551fb144b60b84d5dbc814ead32bb1020b1"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/01_视障与语言交互/2022_残障身份称呼偏好_Identity-First vs Person-First_C01.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2790884,
+      "sha256": "a7b4c326ec6487b51d4733cfd22ca8334838ead0138522368785c24471577943"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/03_视觉算法/2019_移动端实时人脸几何_Mobile Facial Surface Geometry_B30.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1092031,
+      "sha256": "6c46bec41cdaa2a0f145f5aa179d9cacbca9544209afe11172e1bacfc9736fe1"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/03_视觉算法/2007_光照与颜色恒常性_Edge-Based Color Constancy_B21.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 721736,
+      "sha256": "b433b7f39128325b3981f210d4568c35000f4f9b33b243b553000263e173a25a"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/03_视觉算法/2020_姿态表情鲁棒的妆容迁移_PSGAN_B03.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1774035,
+      "sha256": "11cd3857782ef83b3f5b3dd2fdc50afce2f253dff6285e67f15da896d56e64f0"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/03_视觉算法/2017_带置信度的颜色恒常性_FC4_B22.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1245292,
+      "sha256": "d61d05b95028e9c0b55493c2e07be050d2d01d1561e91723733f5ab9f8470c51"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/03_视觉算法/2019_盲人照片隐私识别_VizWiz-Priv_D24.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1022934,
+      "sha256": "473579708f70512122f26a7c5bc3ca6a54cb0966803d57286abc2a6874a13597"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/03_视觉算法/2018_盲人拍照问答与不可回答情况_VizWiz Grand Challenge_D23.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1236554,
+      "sha256": "c0fa9159aaa9b593c15015b8be91e4da3daa6291ae8e0df3a2f6c3332c4005ba"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/03_视觉算法/2018_人脸边界与对齐_Look at Boundary_B27.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 7008163,
+      "sha256": "ba992849513442f50f702fa26ce04e1971ec17b0e2b2c344966cce886f72be44"
+    },
+    "项目资料/01_方案策划/20261009_视障美妆Demo论文资料包/03_视觉算法/2013_遮挡下人脸关键点_Robust Face Landmark Estimation_B25.pdf": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1267342,
+      "sha256": "258d83f8934d8209c274bc797dc9948d005dba209f1a7e6f59fdfbd6ba3d8038"
+    },
+    "验证与历史说明/验收截图": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "验证与历史说明/验证证据": {
+      "mode": 493,
+      "type": "directory"
+    },
+    "验证与历史说明/后端测试.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1805,
+      "sha256": "37b2810c2d72e37a9dd7922b3f4155c49cd125601a6de70e52a20d1b17f7cba4"
+    },
+    "验证与历史说明/前端测试.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 21062,
+      "sha256": "28af28ec6e59913a83e001c13241b9cc2a7524a4739b8585a425e180764b6fe7"
+    },
+    "验证与历史说明/倾听映照流程验证_本地模型.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 215,
+      "sha256": "2ff166758fa1368417fa8ae615bc84eb0beb4369731e0691f0e6a180a9c8d7d6"
+    },
+    "验证与历史说明/5180本地地址回归.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 686,
+      "sha256": "825c3c84015fabc0683eacacb9e7d04672fa41b21ff9037b8d010cb1af69592d"
+    },
+    "验证与历史说明/代理依赖回归测试.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 691,
+      "sha256": "dbca68d563531db800df135162c3748ed18214c287bc48fabf159a7f45b0629c"
+    },
+    "验证与历史说明/本地语音模型验证.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 219,
+      "sha256": "c83695d423ffb61d656c849bf0fdaa91bb57be7159b8562f514f36dc98d656ca"
+    },
+    "验证与历史说明/182项前端回归.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 20821,
+      "sha256": "60ce76323a14e2a5ec59d1d56df129f51a9428f58312c83d17245ea40310e665"
+    },
+    "验证与历史说明/交付说明.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2157,
+      "sha256": "9c7ad2c39234081864239fd8bf82a7668fde6608aa09fcaf655f678051d42226"
+    },
+    "验证与历史说明/DeepSeek思考模式回归测试.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 691,
+      "sha256": "2b05d2e90196218ab344a994af89bfd5842de1590924463b16ccdebc14e291ce"
+    },
+    "验证与历史说明/浏览器已进入映照第一步.png": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 84780,
+      "sha256": "cfbfd2745898bfe5f2c316edd0b64e7fa83852807c1e0f00d817e9a6e1250af0"
+    },
+    "验证与历史说明/语音按钮实机协议验证.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 197,
+      "sha256": "bf016f8f80181b56c87be5f1ad3e85a1e9885055f752cb34b4071e2203bcfbd2"
+    },
+    "验证与历史说明/前端构建.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 15932,
+      "sha256": "3b4264f10169a80da611bb63adca516373f4fe00299c556ae5b67e118cae8f95"
+    },
+    "验证与历史说明/模型错误提示回归测试.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 691,
+      "sha256": "e31c3e3103d37d79a208ab1464ec7742e63eab0e3f88137bb192ea7c60175ea3"
+    },
+    "验证与历史说明/后端全部回归.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1745,
+      "sha256": "e235eb9de70f10b84bdfaa7ae3e40f65fcdd600486c0732de4c9eb3e04ab126e"
+    },
+    "验证与历史说明/文件校验清单.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 164369,
+      "sha256": "71e350008d09e2f724b666d3f1df6bf6a7edeebc81514da7c9296ec106c89fec"
+    },
+    "验证与历史说明/验收截图/页面检查.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 1685,
+      "sha256": "26a2dee150e178da08b4d04d678a208890f8ac60b3b433ddaf05d4ee39845143"
+    },
+    "验证与历史说明/验收截图/01_桌面首页_1280x900.jpg": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 175813,
+      "sha256": "b8a20f9dd8db188939adce030fd08e26061fbac3e56184d2f05e01995284494e"
+    },
+    "验证与历史说明/验收截图/03_窄视口重排_640x450.jpg": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 119648,
+      "sha256": "773b58308c94fce86c735580e8bc122da2a2f96ba725ea6aa559450a6f0ecf64"
+    },
+    "验证与历史说明/验收截图/02_手机首页_390x844.jpg": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 110255,
+      "sha256": "001d0c581ba19c70d465fbe56bd4eae5191ad7b9fab25094e8f62954719fbe20"
+    },
+    "验证与历史说明/验证证据/本地语音连接_合成音频结果.json": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 2783,
+      "sha256": "6e12802976ff8b5ca5bad8e577245eb8305f6622300e0d62e42186589e7e5734"
+    },
+    "验证与历史说明/验证证据/代码验证结果.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 468,
+      "sha256": "6174b7da4aef08ebef0687283d2b2872ed5801273e56f2dd262d08f7d1db9ebe"
+    },
+    "验证与历史说明/验证证据/文案调整验证结果.txt": {
+      "mode": 420,
+      "type": "file",
+      "bytes": 406,
+      "sha256": "21845229b418c4d05d0c31e1fd389e292d1b89ffd743857d207607efe167614e"
+    }
+  }
+}

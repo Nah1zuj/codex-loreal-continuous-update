@@ -1,0 +1,30 @@
+.....................................................s.................. [ 37%]
+....................s................................................... [ 75%]
+..............................................                           [100%]
+=============================== warnings summary ===============================
+../../../10月17日版正确安装包/AccessibleBeautyAgent/.venv/lib/python3.15/site-packages/fastapi/routing.py:233: 135 warnings
+tests/rag/test_phase2.py: 135 warnings
+tests/rag/test_phase2_edges.py: 135 warnings
+tests/regression/test_acceptance.py: 1755 warnings
+tests/regression/test_edge_cases.py: 1350 warnings
+tests/regression/test_review.py: 135 warnings
+tests/test_hardware.py: 525 warnings
+tests/test_phase4_controller.py: 675 warnings
+tests/test_phase4_flow.py: 1080 warnings
+tests/test_private_journal.py: 135 warnings
+tests/test_realtime_companion_language.py: 540 warnings
+tests/test_recollection_v2.py: 540 warnings
+tests/test_reference_full_look.py: 135 warnings
+tests/test_story_companion.py: 675 warnings
+tests/test_trace_phase3.py: 405 warnings
+tests/test_v2_conversation.py: 540 warnings
+tests/test_v2_privacy.py: 675 warnings
+tests/test_v4_full_look.py: 1755 warnings
+tests/test_v4_video_analysis.py: 1755 warnings
+tests/test_vision_session.py: 540 warnings
+tests/test_visual_entry.py: 405 warnings
+tests/test_voice_first_guidance.py: 945 warnings
+  [本机项目路径]/10月17日版正确安装包/AccessibleBeautyAgent/.venv/lib/python3.15/site-packages/fastapi/routing.py:233: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    is_coroutine = asyncio.iscoroutinefunction(dependant.call)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html

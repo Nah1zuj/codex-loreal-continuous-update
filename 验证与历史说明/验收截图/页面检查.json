@@ -1,0 +1,81 @@
+[
+  {
+    "current": "4 拾光 · 美的记忆",
+    "oldDecorativeImages": 0,
+    "portraits": [
+      {
+        "loaded": true,
+        "src": "/visuals/mesh-portrait-preview.png"
+      }
+    ],
+    "scrollWidth": 1280,
+    "title": "TRACE · 拾光 · 我的选择",
+    "voice": "ended",
+    "width": 1280
+  },
+  {
+    "current": "2 倾听 · 美学对话",
+    "oldDecorativeImages": 0,
+    "portraits": [
+      {
+        "loaded": true,
+        "src": "/visuals/mesh-portrait-preview.png"
+      }
+    ],
+    "scrollWidth": 1280,
+    "title": "TRACE · 语音陪伴",
+    "voice": "ended",
+    "width": 1280
+  },
+  {
+    "current": "3 映照 · 实时妆教",
+    "oldDecorativeImages": 0,
+    "portraits": [
+      {
+        "loaded": true,
+        "src": "/visuals/mesh-portrait-preview.png"
+      }
+    ],
+    "scrollWidth": 1280,
+    "title": "TRACE · 视觉探索",
+    "voice": "ended",
+    "width": 1280
+  },
+  {
+    "current": "5 今天的你",
+    "oldDecorativeImages": 0,
+    "portraits": [
+      {
+        "loaded": true,
+        "src": "/visuals/mesh-portrait-preview.png"
+      }
+    ],
+    "scrollWidth": 1280,
+    "title": "TRACE · 今日造型",
+    "voice": "ended",
+    "width": 1280
+  },
+  {
+    "current": "6 故事",
+    "oldDecorativeImages": 0,
+    "portraits": [],
+    "scrollWidth": 1280,
+    "title": "TRACE · 关于 TRACE",
+    "voice": "ended",
+    "width": 1280
+  },
+  {
+    "current": "1 首页",
+    "oldDecorativeImages": 0,
+    "portraits": [
+      {
+        "loaded": true,
+        "src": "/visuals/mesh-portrait-preview.png"
+      }
+    ],
+    "scrollWidth": 1280,
+    "title": "TRACE · 首页",
+    "voice": "ended",
+    "width": 1280
+  }
+]

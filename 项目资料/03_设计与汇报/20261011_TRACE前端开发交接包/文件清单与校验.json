@@ -1,0 +1,46 @@
+{
+  "created_on": "2026-10-11",
+  "status": "DEVELOPMENT_HANDOFF_NOT_IMPLEMENTED_FRONTEND",
+  "files": [
+    {
+      "file": "00_先读我_前端交接说明.txt",
+      "bytes": 3330,
+      "sha256": "dd6049648b707c5d9270e12ad8fafd455a8bec440c7c9a4e65fde050669427bf"
+    },
+    {
+      "file": "00_发给前端同学的话.txt",
+      "bytes": 600,
+      "sha256": "495de2a39d3670a0a3e37d438b3768c14f63947e027cddadd70d7a2755c34aba"
+    },
+    {
+      "file": "01_产品与交互规范/TRACE_双模式入口与无障碍体验规范_v2.md",
+      "bytes": 17486,
+      "sha256": "316d0e1011340c95906bb21d6fda82958def31437f3d7bec2bf033bb7cb02667"
+    },
+    {
+      "file": "01_产品与交互规范/TRACE_双模式重构_Codex执行Prompt_v2.md",
+      "bytes": 13262,
+      "sha256": "0a2183a7db4924d3fd5503de149d0d5138f1e1dee807848f4d0b7e1230b5a082"
+    },
+    {
+      "file": "02_UI结构JSON/00_使用说明.txt",
+      "bytes": 1237,
+      "sha256": "608b8947656efb6fcdae9ad3c5a06fecb783168bda470a650f060a168bbc5b6a"
+    },
+    {
+      "file": "02_UI结构JSON/TRACE_双模式UI设计与演示流程_v1.json",
+      "bytes": 25358,
+      "sha256": "7ea8f7b64cf230de385300a33122059b33829f7ac78abc74a631187ad78faade"
+    },
+    {
+      "file": "03_验收与视频走查/01_开发顺序与验收清单.txt",
+      "bytes": 2438,
+      "sha256": "f303ae6aab756f8e3f43c89bd2f5dde59f41e46cf15a4a70e65842c3a71d6f0c"
+    },
+    {
+      "file": "03_验收与视频走查/02_视频演示顺序.txt",
+      "bytes": 938,
+      "sha256": "72c4c54dd19d38e86e7f5922aa702254ebe3bb3ee227b03c3d726f77a93732e5"
+    }
+  ]
+}

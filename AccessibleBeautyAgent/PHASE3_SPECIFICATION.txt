@@ -1,0 +1,2077 @@
+You are continuing development of the existing project:
+
+Accessible Beauty Agent
+L'Oréal Hackathon Track 3
+
+This is PHASE 3:
+
+TRACE BRAND LANGUAGE
++
+BRAILLE-DERIVED DESIGN SYSTEM
++
+ACCESSIBILITY UI
++
+CAMPAIGN / DEMO EXPERIENCE
+
+IMPORTANT:
+
+DO NOT rebuild the project from scratch.
+
+DO NOT unnecessarily rewrite:
+
+- Agent
+- RAG
+- Vision Provider
+- Reading Provider
+- Camera
+- Memory
+- Knowledge Base
+- FastAPI
+- existing API contracts
+- existing state machine
+
+This phase mainly changes:
+
+1. product identity
+2. user-facing naming
+3. UI copy
+4. visual language
+5. accessibility presentation
+6. Braille-inspired design logic
+7. storytelling / campaign pages
+8. demo narrative
+
+The technical core should remain intact.
+
+==================================================
+0. FIRST: INSPECT THE EXISTING PROJECT
+==================================================
+
+Before modifying anything:
+
+1. Inspect the current repository.
+2. Read:
+   - README.md
+   - DEVELOPMENT_STATUS.md
+   - frontend routes
+   - current user-facing copy
+   - current Home page
+   - Guide page
+   - Read page
+   - Camera page
+   - Memory page
+   - Product / recommendation page
+   - Admin pages
+3. Identify the existing design system.
+4. Identify existing accessibility implementation.
+5. Preserve working logic.
+
+Do not duplicate existing components unnecessarily.
+
+==================================================
+1. NEW WORKING PRODUCT IDENTITY
+==================================================
+
+Use the following as the current working product identity:
+
+TRACE
+
+Chinese conceptual name:
+
+迹
+
+Do NOT force “迹” to appear everywhere.
+
+TRACE should remain the primary visual brand name.
+
+Core campaign line:
+
+Beauty, translated across senses.
+
+Chinese supporting line:
+
+让美的信息，在感官之间流动。
+
+Alternative closing line:
+
+Beauty should not begin with sight.
+It should begin with you.
+
+Do not scatter these strings throughout components.
+
+Centralize all brand copy.
+
+For example:
+
+frontend/src/content/brand.ts
+
+or:
+
+frontend/src/content/productCopy.ts
+
+==================================================
+2. CORE BRAND PHILOSOPHY
+==================================================
+
+The product philosophy is NOT:
+
+“AI becomes the eyes of blind people.”
+
+Avoid this framing.
+
+The product philosophy is:
+
+Beauty information is commonly designed
+to be accessed visually.
+
+When sight is not the most reliable information channel,
+beauty information does not disappear.
+
+It can be translated into:
+
+voice
+language
+touch
+rhythm
+structured guidance
+memory
+
+Core idea:
+
+Information does not disappear when sight does.
+It changes form.
+
+Use this idea as conceptual inspiration,
+but DO NOT present it as a direct quotation
+from any literary work unless exact citation rights
+and wording are verified.
+
+==================================================
+3. CULTURAL / RESEARCH INSPIRATION
+==================================================
+
+The design system is conceptually inspired by:
+
+A.
+
+Blind and low-vision descriptions of space
+being reconstructed through:
+
+sound
+touch
+rain
+echo
+rhythm
+memory
+
+B.
+
+The idea that visual impairment is not simply
+a binary state of:
+
+seeing
+versus
+not seeing
+
+but includes many different relationships with:
+
+light
+contrast
+distance
+colour
+partial vision
+memory
+sound
+touch
+
+C.
+
+Research-informed principles of non-visual makeup:
+
+procedural guidance
+tactile-first interaction
+real-time feedback
+hands-free interaction
+practice
+routine
+agency
+
+D.
+
+Braille as a structured tactile writing system.
+
+IMPORTANT:
+
+Braille is NOT a language.
+
+Do not describe:
+
+“Braille grammar”
+
+in user-facing or project language.
+
+Prefer:
+
+Braille-inspired coding system
+
+Braille-derived visual syntax
+
+Braille cell geometry
+
+tactile writing logic
+
+==================================================
+4. DO NOT ROMANTICIZE DISABILITY
+==================================================
+
+Avoid language such as:
+
+darkness becomes light
+
+AI gives sight back
+
+seeing the world again
+
+complete the missing sense
+
+overcome disability
+
+fix blindness
+
+Avoid charity language.
+
+Avoid pity-oriented storytelling.
+
+The user is not being repaired.
+
+The product is improving access to information.
+
+Prefer concepts such as:
+
+access
+translation
+choice
+agency
+interpretation
+navigation
+confirmation
+expression
+
+==================================================
+5. BRAND SYSTEM STRUCTURE
+==================================================
+
+Create a structured brand system with:
+
+MASTER BRAND
+
+TRACE
+
+FUNCTIONAL SUB-SYSTEMS
+
+DOT
+ECHO
+THREAD
+PAIR
+IMPRINT
+
+Each concept must have:
+
+1. poetic concept name
+2. clear Chinese action name
+3. clear English functional explanation
+4. Chinese functional explanation
+
+Never rely only on the poetic name.
+
+Accessibility requires clarity.
+
+==================================================
+6. MODULE 01 — DOT
+==================================================
+
+Name:
+
+DOT
+
+Chinese functional title:
+
+读给我听
+
+English descriptor:
+
+Read the Surface
+
+Function:
+
+Visual information reading.
+
+Used for:
+
+product packaging
+shade labels
+printed instructions
+beauty counter cards
+physical screens
+product labels
+flat printed material
+
+Core concept:
+
+A dot can become information.
+
+Small units of visual information
+are translated into something the user can hear.
+
+Suggested page hierarchy:
+
+DOT
+
+读给我听
+
+Read the Surface
+
+Supporting copy:
+
+“把包装、色号、标签或屏幕放在镜头前。
+我会先告诉你最重要的信息。”
+
+English:
+
+“Place the package, label or screen in front of the camera.
+I’ll start with what matters most.”
+
+==================================================
+7. MODULE 02 — ECHO
+==================================================
+
+Name:
+
+ECHO
+
+Chinese:
+
+帮我看看
+
+English descriptor:
+
+Hear What Changed
+
+Function:
+
+Makeup visual confirmation.
+
+This is the existing:
+
+makeup visual check
+
+but should be reframed.
+
+Concept:
+
+The user makes an action.
+
+The visual world changes.
+
+TRACE returns that change
+through another information channel.
+
+Do NOT call this:
+
+AI Beauty Evaluation
+Beauty Score
+Perfect Makeup Check
+
+Suggested supporting copy:
+
+“当你需要确认时，
+我把眼前发生的变化说给你听。”
+
+English:
+
+“When you need confirmation,
+I’ll describe what has changed.”
+
+==================================================
+8. MODULE 03 — THREAD
+==================================================
+
+Name:
+
+THREAD
+
+Chinese:
+
+陪我完成
+
+English descriptor:
+
+Follow Your Way
+
+Function:
+
+Step-by-step makeup routine.
+
+Concept:
+
+One instruction connects to the next.
+
+The user does not receive a long tutorial at once.
+
+Interaction principles:
+
+one action
+one confirmation
+then the next
+
+Support:
+
+重复
+慢一点
+为什么
+下一步
+跳过
+帮我看看
+
+Suggested copy:
+
+“One action.
+One confirmation.
+Then the next.”
+
+Chinese:
+
+“一步一步来。
+你完成这一小步以后，我们再继续。”
+
+==================================================
+9. MODULE 04 — PAIR
+==================================================
+
+Name:
+
+PAIR
+
+Chinese:
+
+陪我选
+
+English descriptor:
+
+Compare What Matters
+
+Function:
+
+Product / option comparison.
+
+The system should usually compare:
+
+2 options
+
+or a very small number.
+
+Do not present a shopping catalogue.
+
+Do not make one recommendation appear
+objectively superior.
+
+Compare based on:
+
+finish
+saturation
+scene
+user preference
+known product attributes
+
+Suggested copy:
+
+“我不替你决定。
+我把真正有区别的地方说清楚。”
+
+English:
+
+“I won’t choose for you.
+I’ll make the differences clear.”
+
+==================================================
+10. MODULE 05 — IMPRINT
+==================================================
+
+Name:
+
+IMPRINT
+
+Chinese:
+
+记住我的习惯
+
+English descriptor:
+
+Remember What You Choose
+
+Function:
+
+Beauty Memory.
+
+Concept:
+
+A preference can leave a trace,
+but only when the user decides to keep it.
+
+Suggested copy:
+
+“只有你确认过的内容，
+才会留下来。”
+
+English:
+
+“Only what you choose to keep
+becomes part of your memory.”
+
+Memory page must allow:
+
+view
+edit
+remove
+
+Do not frame Memory as hidden tracking.
+
+==================================================
+11. VOICE / INTENT ENTRY
+==================================================
+
+The voice entry does not need another complex brand name.
+
+Use:
+
+说出你想要的
+
+English:
+
+Start With You
+
+or:
+
+Tell Me What You Want
+
+Suggested copy:
+
+“从场景、感觉或者一个模糊的想法开始就可以。”
+
+Example:
+
+“今晚有一个 dinner，
+我想正式一点，
+但不想显得太成熟。”
+
+The system should feel comfortable
+with incomplete natural-language intention.
+
+==================================================
+12. MASTER EXPERIENCE
+==================================================
+
+The full product journey should now conceptually become:
+
+SPEAK
+↓
+DOT
+↓
+PAIR
+↓
+THREAD
+↓
+ECHO
+↓
+IMPRINT
+
+But do NOT force the user
+to use every module in this exact order.
+
+This is a conceptual loop,
+not a rigid navigation flow.
+
+A more campaign-oriented expression:
+
+READ
+
+UNDERSTAND
+
+CHOOSE
+
+ACT
+
+HEAR IT BACK
+
+REMEMBER
+
+==================================================
+13. BRAILLE DESIGN PRINCIPLE
+==================================================
+
+The visual system may be inspired by
+the geometry of a standard six-dot Braille cell.
+
+Use the geometry:
+
+2 columns
+×
+3 rows
+
+as a design grid.
+
+However:
+
+DO NOT randomly generate dot patterns
+and claim they are Braille.
+
+There must be a strict distinction between:
+
+A.
+REAL BRAILLE
+
+and
+
+B.
+BRAILLE-INSPIRED DOT GRAPHICS
+
+==================================================
+14. REAL BRAILLE RULE
+==================================================
+
+If the UI displays actual Braille text:
+
+it must represent a real intended word.
+
+Examples may include:
+
+TRACE
+READ
+VOICE
+
+But only include these if the translation
+can be reliably verified.
+
+Create a clear code structure for:
+
+verifiedBrailleStrings
+
+Example:
+
+{
+  "trace": {
+     "latin": "TRACE",
+     "braille": "...",
+     "verified": false
+  }
+}
+
+Until verified=true:
+
+DO NOT display the Braille string
+as authoritative text in the final Demo.
+
+Instead use the visual dot system.
+
+==================================================
+15. BRAILLE VALIDATION
+==================================================
+
+Do NOT implement an improvised
+English-to-Braille converter.
+
+If a trusted Braille translation library
+or validated translation source is integrated later,
+design an adapter for it.
+
+For now:
+
+keep actual Braille strings
+in a controlled content file.
+
+Add documentation:
+
+docs/BRAILLE_USAGE_GUIDE.md
+
+Explain:
+
+- what is real Braille
+- what is decorative dot geometry
+- which strings need human verification
+- never claim decorative patterns are readable Braille
+
+==================================================
+16. DOT GRID BRAND SYSTEM
+==================================================
+
+Create a six-position dot grid:
+
+1 4
+2 5
+3 6
+
+or whichever internal coordinate representation
+matches standard Braille cell ordering.
+
+Use this as a visual composition system.
+
+Possible use:
+
+navigation markers
+
+loading states
+
+section indicators
+
+cards
+
+motion patterns
+
+page transitions
+
+progress states
+
+But do not imply that arbitrary patterns
+are Braille characters.
+
+Call this internally:
+
+Dot Rhythm
+
+or:
+
+TRACE Dot Grid
+
+==================================================
+17. SIX CAPABILITY DOT SYSTEM
+==================================================
+
+Create an optional six-dot
+brand navigation interpretation.
+
+Example conceptual mapping:
+
+1 = SPEAK
+
+2 = READ
+
+3 = CHOOSE
+
+4 = GUIDE
+
+5 = CHECK
+
+6 = REMEMBER
+
+IMPORTANT:
+
+This is a brand navigation map
+inspired by Braille-cell geometry.
+
+It is NOT a Braille character.
+
+Make that distinction clear
+in documentation and pitch materials.
+
+==================================================
+18. DOT RHYTHM MOTION
+==================================================
+
+Use restrained motion.
+
+Example:
+
+when listening:
+
+one dot
+→ two dots
+→ three dots
+
+when processing:
+
+dots travel through the 2×3 grid
+
+when a step completes:
+
+one dot changes from outline to filled
+
+Avoid:
+
+fast flashing
+high-frequency blinking
+excessive decorative animation
+
+Respect accessibility
+and prefers-reduced-motion.
+
+Implement:
+
+@media (prefers-reduced-motion: reduce)
+
+with a static fallback.
+
+==================================================
+19. DESIGN LANGUAGE
+==================================================
+
+The UI should feel:
+
+editorial
+quiet
+tactile
+warm
+premium
+human
+structured
+
+Avoid:
+
+generic AI gradients
+
+neon blue/purple
+
+glassmorphism overload
+
+cyberpunk
+
+SaaS dashboards
+
+clinical medical UI
+
+charity campaign aesthetics
+
+cartoon accessibility symbols
+
+Use:
+
+warm off-white
+
+charcoal / deep neutral text
+
+soft stone / beige / muted warm accent
+
+subtle line work
+
+dot systems
+
+large typography
+
+generous but controlled spacing
+
+high contrast
+
+Do not set specific inaccessible low-contrast colours.
+
+==================================================
+20. TYPOGRAPHIC SYSTEM
+==================================================
+
+Typography should have strong hierarchy.
+
+Suggested visual feeling:
+
+editorial beauty publication
++
+functional accessibility interface
+
+Create clear levels:
+
+DISPLAY
+TITLE
+SECTION
+BODY
+FUNCTION LABEL
+STATUS
+
+Avoid tiny uppercase text
+for important information.
+
+Normal user body copy
+must remain easy to read.
+
+==================================================
+21. TACTILE VISUAL METAPHOR
+==================================================
+
+Use subtle design references to:
+
+embossing
+
+impression
+
+pressure
+
+surface
+
+trace
+
+rhythm
+
+Do NOT imitate physical Braille badly.
+
+Examples:
+
+slightly raised-looking dot surfaces
+
+embossed card edges
+
+paper-like texture
+
+pressed label appearance
+
+But keep rendering lightweight.
+
+==================================================
+22. HOMEPAGE REBUILD
+==================================================
+
+Redesign the normal Home page.
+
+Suggested structure:
+
+--------------------------------
+
+TRACE
+
+Beauty, translated across senses.
+
+让美的信息，在感官之间流动。
+
+--------------------------------
+
+Large primary voice action:
+
+“从你今天想要什么开始”
+
+or
+
+“告诉我今天想要什么”
+
+--------------------------------
+
+Capability system:
+
+DOT
+读给我听
+
+ECHO
+帮我看看
+
+THREAD
+陪我完成
+
+PAIR
+陪我选
+
+IMPRINT
+记住我的习惯
+
+Each card must include:
+
+concept name
+Chinese function name
+short description
+
+Do not make poetic names
+the only accessible label.
+
+--------------------------------
+
+Optional small closing text:
+
+Beauty should not begin with sight.
+It should begin with you.
+
+==================================================
+23. HOME CAPABILITY COPY
+==================================================
+
+Use initial copy approximately:
+
+DOT
+读给我听
+
+“包装、色号、说明和屏幕上的信息，
+可以换一种方式被读到。”
+
+ECHO
+帮我看看
+
+“当你需要确认，
+我把眼前的变化说给你听。”
+
+THREAD
+陪我完成
+
+“一次只走一步。
+你随时可以重复、停下或者让我解释。”
+
+PAIR
+陪我选
+
+“比较真正与你有关的差异，
+决定仍然由你来做。”
+
+IMPRINT
+记住我的习惯
+
+“只有你确认过的偏好，
+才会被留下。”
+
+Keep all text centralized and editable.
+
+==================================================
+24. MODULE PAGE HEADER SYSTEM
+==================================================
+
+Every module page should use:
+
+concept name
+
++
+
+clear functional name
+
++
+
+one short explanation
+
+Example:
+
+ECHO
+
+帮我看看
+
+Hear What Changed
+
+“只有在你需要确认时，
+我才会使用摄像头。”
+
+==================================================
+25. CAMERA CONSENT LANGUAGE
+==================================================
+
+Replace purely technical consent wording.
+
+Do NOT say only:
+
+Camera Permission Required
+
+Use:
+
+“需要我看一下现在的状态吗？”
+
+Then:
+
+“只有这次检查会使用摄像头。
+准备好后我会拍几张画面进行判断。”
+
+Buttons:
+
+允许这次查看
+
+暂时不用
+
+Do not use manipulative consent design.
+
+==================================================
+26. READING MODULE EXPERIENCE
+==================================================
+
+DOT page should feel like reading a surface.
+
+Camera framing may use a subtle:
+
+2 × 3 dot grid
+
+as an alignment hint.
+
+Do NOT make the overlay look
+like medical face detection.
+
+Suggested state sequence:
+
+准备
+
+↓
+
+把内容放到镜头前
+
+↓
+
+正在读取
+
+↓
+
+先告诉你最重要的
+
+↓
+
+详细阅读
+
+User options:
+
+“只读色号”
+
+“读使用方法”
+
+“全部读出来”
+
+“再读一次”
+
+==================================================
+27. ECHO EXPERIENCE
+==================================================
+
+The makeup checking experience
+should visually suggest:
+
+action
+↓
+response
+↓
+confirmation
+
+Not:
+
+scan
+↓
+AI score
+
+After a visual check,
+present:
+
+OBSERVATION
+
+then:
+
+OPTIONAL NEXT ACTION
+
+Example:
+
+“我现在能看到两侧都有腮红。”
+
+Then:
+
+“如果你希望两边更接近，
+可以在右侧再补一点点。”
+
+Only when confidence is sufficient.
+
+==================================================
+28. THREAD EXPERIENCE
+==================================================
+
+Use a tactile / thread-like progress system.
+
+Not a conventional:
+
+Step 2 / 5 progress bar only.
+
+Possible visual:
+
+dot
+│
+dot
+│
+dot
+
+or:
+
+connected tactile markers.
+
+Still expose semantic progress:
+
+Step 2 of 4
+
+to screen readers.
+
+==================================================
+29. IMPRINT EXPERIENCE
+==================================================
+
+Preferences should visually resemble:
+
+small remembered traces
+
+not database rows.
+
+Example card:
+
+Dinner
+
+“唇色希望比上次更浅一点”
+
+Saved by you
+
+Actions:
+
+修改
+删除
+
+Add copy:
+
+“TRACE 只记住你确认过的内容。”
+
+==================================================
+30. DEVELOPER MODE SEPARATION
+==================================================
+
+Developer terminology must remain available,
+but visually separated from the main product.
+
+Developer mode may show:
+
+RAG
+
+vector score
+
+visual confidence
+
+raw JSON
+
+tool call
+
+session state
+
+retrieved chunks
+
+Do NOT expose these labels
+inside normal TRACE pages.
+
+==================================================
+31. SCREEN READER SEMANTICS
+==================================================
+
+The poetic layer must NEVER damage accessibility.
+
+Every concept must have
+an explicit accessible name.
+
+For example:
+
+Visible:
+
+ECHO
+帮我看看
+
+Accessible label:
+
+“帮我看看，使用摄像头确认当前妆容状态”
+
+Do not make a screen reader
+read decorative dot patterns.
+
+Decorative dot grids should use:
+
+aria-hidden="true"
+
+Actual important status text
+must have semantic equivalents.
+
+==================================================
+32. BRAILLE AND SCREEN READER RELATIONSHIP
+==================================================
+
+Do NOT assume a blind user
+will use the visual Braille design.
+
+The Braille-derived visuals primarily form:
+
+brand structure
+
+design logic
+
+cultural reference
+
+while actual accessibility remains based on:
+
+screen reader compatibility
+
+voice
+
+clear semantics
+
+keyboard focus
+
+audio interaction
+
+human-readable labels
+
+==================================================
+33. CREATE BRAND CONTENT FILE
+==================================================
+
+Create something like:
+
+frontend/src/content/traceBrand.ts
+
+Include:
+
+brand name
+
+taglines
+
+module names
+
+Chinese labels
+
+English labels
+
+module descriptions
+
+campaign copy
+
+consent copy
+
+memory copy
+
+fallback copy
+
+No major product copy
+should be scattered randomly across components.
+
+==================================================
+34. CREATE DESIGN TOKENS
+==================================================
+
+Create:
+
+frontend/src/styles/traceTokens.css
+
+or equivalent.
+
+Include variables for:
+
+background
+
+surface
+
+text
+
+muted text
+
+border
+
+accent
+
+focus
+
+spacing
+
+radius
+
+dot size
+
+dot gap
+
+motion duration
+
+Do not make accessibility-dependent states
+rely on colour alone.
+
+==================================================
+35. CREATE REUSABLE DOT COMPONENT
+==================================================
+
+Create:
+
+TraceDotGrid
+
+Props may include:
+
+activeDots
+
+size
+
+interactive
+
+ariaLabel
+
+decorative
+
+animationMode
+
+If decorative:
+
+aria-hidden=true
+
+If interactive:
+
+must expose semantic labels.
+
+==================================================
+36. CREATE TRACE MARK
+==================================================
+
+Create a simple
+brand mark component.
+
+Do NOT design a fake Braille word
+unless validated.
+
+The first version may be:
+
+TRACE
++
+a six-dot abstract mark
+derived from the 2×3 geometry.
+
+Mark it clearly in documentation:
+
+“Braille-cell-inspired geometry,
+not a Braille character.”
+
+==================================================
+37. CAMPAIGN / STORY PAGE
+==================================================
+
+Create a separate page:
+
+/story
+
+or:
+
+/about-trace
+
+This is useful for Hackathon judges.
+
+It should not be the primary user interaction page.
+
+Suggested narrative:
+
+SECTION 01
+
+Beauty is visual by default.
+
+Colour cards.
+Mirrors.
+Labels.
+Tutorials.
+Before-and-after images.
+
+SECTION 02
+
+But information can change form.
+
+Sound.
+
+Language.
+
+Touch.
+
+Rhythm.
+
+Memory.
+
+SECTION 03
+
+TRACE
+
+Beauty, translated across senses.
+
+SECTION 04
+
+DOT
+THREAD
+ECHO
+PAIR
+IMPRINT
+
+Show what each does.
+
+SECTION 05
+
+The user remains in control.
+
+Camera with consent.
+
+Memory with consent.
+
+Recommendation with choice.
+
+SECTION 06
+
+Closing:
+
+Beauty should not begin with sight.
+It should begin with you.
+
+==================================================
+38. CAMPAIGN COPY STYLE
+==================================================
+
+The campaign must NOT sound like:
+
+“Here are five reasons our product helps blind people.”
+
+Avoid generic marketing listicle language.
+
+Use restrained editorial writing.
+
+Short passages.
+
+Strong spatial rhythm.
+
+Examples:
+
+“Beauty is written everywhere.
+
+On a label.
+In a colour.
+Across a cheek.
+At the edge of a lip.
+In something remembered from last time.”
+
+Then:
+
+“TRACE changes the channel,
+not the person.”
+
+This sentence may be used
+as campaign copy.
+
+==================================================
+39. LITERARY INSPIRATION POLICY
+==================================================
+
+Do NOT directly copy passages
+from novels, memoirs or academic works.
+
+Use conceptual inspiration only.
+
+If references appear in pitch documentation,
+place them in:
+
+docs/CONCEPT_REFERENCES.md
+
+Record:
+
+author
+
+work
+
+conceptual relevance
+
+source
+
+Do not present paraphrased literary ideas
+as direct quotations.
+
+==================================================
+40. RESEARCH / CONCEPT REFERENCES DOCUMENT
+==================================================
+
+Create:
+
+docs/CONCEPT_REFERENCES.md
+
+Sections:
+
+Blindness and spatial perception
+
+Non-visual beauty routines
+
+Accessible cosmetic packaging
+
+Braille and tactile writing systems
+
+Inclusive interface design
+
+For each:
+
+title
+author
+year
+source/link placeholder
+what concept it informed
+
+Do not fabricate sources.
+
+If exact bibliographic information
+is not already available in the repository,
+mark:
+
+NEEDS SOURCE VERIFICATION
+
+instead of inventing a citation.
+
+==================================================
+41. PROMOTIONAL DEMO MODE
+==================================================
+
+Create optional:
+
+?demo=true
+
+or:
+
+/demo
+
+This mode is designed for judges.
+
+It may:
+
+hide developer controls
+
+show brand intro
+
+start with the Dinner scenario
+
+provide clean module transitions
+
+highlight:
+
+voice
+DOT
+THREAD
+ECHO
+IMPRINT
+
+but must still use the actual system,
+not a fake video prototype.
+
+==================================================
+42. DEMO INTRO
+==================================================
+
+Suggested opening:
+
+TRACE
+
+Beauty, translated across senses.
+
+Then:
+
+“今晚有一个 dinner，
+我想正式一点，
+但不要显得太成熟。”
+
+Then the actual Agent begins.
+
+Do not make the intro longer than necessary.
+
+==================================================
+43. STORYTELLING THROUGH PRODUCT STATE
+==================================================
+
+Use subtle language changes
+through the journey.
+
+Before interaction:
+
+“What do you want today?”
+
+During routine:
+
+“We’ll do one thing at a time.”
+
+Before camera:
+
+“Need me to check?”
+
+After visual result:
+
+“Here is what I can tell.”
+
+Before memory:
+
+“Do you want me to keep this for next time?”
+
+This supports agency.
+
+==================================================
+44. COPY TO AVOID
+==================================================
+
+Remove or reduce user-facing phrases such as:
+
+AI detects
+
+AI understands everything
+
+smart beauty analysis
+
+perfect makeup
+
+beauty correction
+
+beauty defect
+
+normal face
+
+abnormal makeup
+
+beauty score
+
+vision replacement
+
+blind-friendly AI
+
+Instead use:
+
+describe
+
+read
+
+compare
+
+check
+
+guide
+
+translate
+
+remember
+
+confirm
+
+==================================================
+45. ERROR COPY
+==================================================
+
+Errors should stay human.
+
+Instead of:
+
+LOW_CONFIDENCE_ERROR
+
+use:
+
+“现在的信息还不够清楚，
+我不想随便猜。”
+
+Then:
+
+“可以把脸稍微转正一点，
+或者移到亮一点的位置再试一次。”
+
+For DOT:
+
+“这个色号我现在读不清楚。
+可以把包装靠近一点吗？”
+
+==================================================
+46. RESPONSIVE MINI-APP PRESENTATION
+==================================================
+
+The project remains:
+
+React / Vite PWA / H5
+
+unless already migrated.
+
+Design primarily for:
+
+mobile
+
+Android tablet
+
+portrait demo
+
+mobile browser
+
+full-screen PWA
+
+It should visually feel like
+a polished mini-program / mobile application.
+
+Do NOT migrate to native WeChat Mini Program
+during this phase unless strictly necessary.
+
+==================================================
+47. INTERNATIONALIZATION
+==================================================
+
+Prepare:
+
+zh-CN
+
+en
+
+The Chinese experience is currently primary.
+
+Do not create awkward literal translations.
+
+Module brand names remain:
+
+DOT
+ECHO
+THREAD
+PAIR
+IMPRINT
+
+Chinese functional names remain visible.
+
+==================================================
+48. ACCESSIBILITY TESTS
+==================================================
+
+Add or improve tests for:
+
+1.
+All major buttons have accessible names.
+
+2.
+Decorative dot grids are aria-hidden.
+
+3.
+Important dot-state information
+has a textual equivalent.
+
+4.
+Normal UI never depends only on colour.
+
+5.
+prefers-reduced-motion works.
+
+6.
+Keyboard navigation works.
+
+7.
+aria-live announces important Agent responses.
+
+8.
+Camera consent can be declined.
+
+9.
+Memory consent can be declined.
+
+10.
+Poetic names are always accompanied
+by a clear functional explanation.
+
+==================================================
+49. VISUAL ACCEPTANCE TEST
+==================================================
+
+The final normal user experience
+should no longer look like:
+
+AI Dashboard
+
+RAG App
+
+Computer Vision Demo
+
+Developer Tool
+
+It should look like:
+
+a premium
+accessible
+beauty companion
+
+with a coherent editorial identity.
+
+==================================================
+50. PRODUCT ACCEPTANCE TEST
+==================================================
+
+A new user should be able to infer:
+
+DOT
+= read visual information
+
+ECHO
+= check what changed
+
+THREAD
+= step-by-step guidance
+
+PAIR
+= compare options
+
+IMPRINT
+= saved preferences
+
+without needing technical explanation.
+
+==================================================
+51. BRAILLE ACCEPTANCE TEST
+==================================================
+
+Review every use of dots.
+
+For each occurrence ask:
+
+Is this:
+
+REAL BRAILLE?
+
+or
+
+BRAILLE-INSPIRED VISUAL GEOMETRY?
+
+If REAL BRAILLE:
+
+it needs verified content.
+
+If decorative:
+
+do not call it a Braille word.
+
+Document this distinction.
+
+==================================================
+52. FINAL DELIVERABLES
+==================================================
+
+At the end,
+the project should include:
+
+Updated TRACE Home
+
+DOT page
+
+ECHO page
+
+THREAD page
+
+PAIR page
+
+IMPRINT page
+
+TRACE Dot Grid component
+
+TRACE brand mark
+
+updated consent language
+
+updated error language
+
+Story / Campaign page
+
+Demo mode
+
+Braille Usage Guide
+
+Concept References document
+
+centralized bilingual copy
+
+design tokens
+
+accessibility updates
+
+tests
+
+==================================================
+53. DO NOT OVERDO THE AESTHETIC
+==================================================
+
+The interface must still be fast and usable.
+
+Do NOT create:
+
+complex WebGL
+
+3D effects
+
+heavy particle systems
+
+large video backgrounds
+
+excessive page transitions
+
+unnecessary animation libraries
+
+The aesthetic should come from:
+
+language
+spacing
+typography
+rhythm
+dot geometry
+surface
+information hierarchy
+
+not technical decoration.
+
+==================================================
+54. EXECUTION ORDER
+==================================================
+
+Execute approximately:
+
+1. inspect existing project
+2. audit current user-facing names
+3. centralize copy
+4. implement TRACE naming
+5. build Dot Grid component
+6. create design tokens
+7. update Home
+8. update DOT
+9. update ECHO
+10. update THREAD
+11. update PAIR
+12. update IMPRINT
+13. update consent/error copy
+14. update screen-reader semantics
+15. implement reduced-motion support
+16. create Story page
+17. create Demo mode
+18. create Braille Usage Guide
+19. create Concept References doc
+20. run accessibility tests
+21. run frontend build
+22. run existing regression tests
+23. fix errors
+24. update DEVELOPMENT_STATUS.md
+
+==================================================
+55. FINAL REPORT
+==================================================
+
+When finished, report:
+
+A.
+Existing product name before revision
+
+B.
+New TRACE naming system
+
+C.
+Pages modified
+
+D.
+Components created
+
+E.
+User-facing terms replaced
+
+F.
+Braille-inspired elements added
+
+G.
+Which elements are REAL Braille
+and whether they are verified
+
+H.
+Accessibility changes
+
+I.
+Story / campaign implementation
+
+J.
+Demo mode implementation
+
+K.
+Any mock content
+
+L.
+Remaining research / source-verification tasks
+
+M.
+Any remaining errors
+
+N.
+How to launch the redesigned Demo
+
+Do not claim that a decorative dot pattern
+is valid Braille.
+
+Do not claim literary or research references
+have been verified unless they actually have been.
+
+Do not damage the existing functional Agent workflow.

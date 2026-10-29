@@ -1,0 +1,43 @@
+{
+  "path": "C:\\Users\\HUAWEI\\Downloads\\accessibility_evidence.xlsx",
+  "mode": "READ_ONLY_DATA_ONLY",
+  "sheets": [
+    {
+      "name": "00_Dashboard",
+      "nonempty_rows": 17
+    },
+    {
+      "name": "01_DOI_Master",
+      "nonempty_rows": 121
+    },
+    {
+      "name": "02_Prompt_Agent",
+      "nonempty_rows": 33
+    },
+    {
+      "name": "03_Vision_Motion_Color",
+      "nonempty_rows": 33
+    },
+    {
+      "name": "04_Disability_Language",
+      "nonempty_rows": 33
+    },
+    {
+      "name": "05_Command_UX_Accept",
+      "nonempty_rows": 33
+    },
+    {
+      "name": "06_Accessibility_Evidence",
+      "nonempty_rows": 51
+    },
+    {
+      "name": "07_Policy_Summary",
+      "nonempty_rows": 23
+    },
+    {
+      "name": "08_Priority_Reading",
+      "nonempty_rows": 27
+    }
+  ],
+  "note": "Workbook is a curated screening corpus, not proof of fulltext review; source labels not promoted to HUMAN_VERIFIED"
+}

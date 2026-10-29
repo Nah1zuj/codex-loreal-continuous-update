@@ -1,0 +1,17 @@
+# Non-secret reference only; Settings currently reads application environment,
+# not TOML. This is documentation, not an alternate credential loader.
+MODEL_PROVIDER = "mock"
+ALLOW_REMOTE_AI = false
+VISION_PROVIDER = "mock"
+READING_PROVIDER = "mock"
+REFERENCE_PROVIDER = "mock"
+EMBEDDING_PROVIDER = "mock"
+RERANKER_PROVIDER = "mock"
+DEVELOPER_MODE = false
+ADMIN_ENABLED = false
+REMOTE_TIMEOUT = 30
+# For an authorized compatible text endpoint, set provider and model in the
+# application's environment. Supply credentials via an owner-managed secret
+# store. No actual credential is included or read by this example.
+COMPATIBLE_BASE_URL = "https://provider.example/v1"
+COMPATIBLE_MODEL = "owner-selected-model"

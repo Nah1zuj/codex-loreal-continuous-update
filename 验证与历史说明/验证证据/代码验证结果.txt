@@ -1,0 +1,6 @@
+2026-10-17 · 本轮最新代码
+前端：35个测试文件，173项通过；npm run build成功。
+后端：189项通过，1项跳过；测试使用mock模型，与本机实际.env配置分离。
+原始日志在本机AccessibleBeautyAgent/work/v2-frontend-tests.log、v2-build.log、v2-backend-tests.log。
+构建仍有原有大资源块提示；Python3.15测试有依赖弃用警告，没有测试失败。
+Mac三服务启动已实测；Windows尚未实机运行。

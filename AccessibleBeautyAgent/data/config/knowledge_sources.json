@@ -1,0 +1,24 @@
+{
+  "trace_original_v2": {
+    "title": "TRACE original accessibility conversation drafts",
+    "publisher": "TRACE development team",
+    "permission": "original",
+    "evidence": "New project-authored text; not copied from external tutorials. Expert accessibility and makeup review required.",
+    "attribution": "TRACE V2 original draft",
+    "local_file": "data/import/trace-original-tutorials.json"
+  },
+  "loreal_portfolio": {
+    "title": "Our Global Brands Portfolio",
+    "publisher": "L’Oréal",
+    "url": "https://www.loreal.com/en/our-global-brands-portfolio/",
+    "permission": "citation_only",
+    "evidence": "No reusable full-text license established; citation metadata only."
+  },
+  "rnib_makeup": {
+    "title": "Applying make-up",
+    "publisher": "RNIB",
+    "url": "https://www.rnib.org.uk/living-with-sight-loss/independent-living/applying-make-up/",
+    "permission": "citation_only",
+    "evidence": "No reusable full-text license established; citation metadata only."
+  }
+}

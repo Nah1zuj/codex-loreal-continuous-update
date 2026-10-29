@@ -1,0 +1,118 @@
+{
+  "label": "CANONICAL KNOWLEDGE — demo_data flags preserve sample provenance",
+  "records": [
+    {
+      "source": "demo_team",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "reference_id": "soft_formal_ref_001",
+      "look_id": "soft_formal",
+      "media_type": "image",
+      "source_file": "data/references/replace-with-reviewed-image.jpg",
+      "source_id": null,
+      "frame_timestamp": null,
+      "scene": [
+        "dinner"
+      ],
+      "overall": {
+        "intensity": "medium_low",
+        "contrast": "medium_low"
+      },
+      "base": {
+        "finish": "natural_polished",
+        "coverage": null
+      },
+      "blush": {
+        "visible": true,
+        "intensity": "light_medium",
+        "placement": "upper_cheek",
+        "finish": "soft"
+      },
+      "lip": {
+        "visible": true,
+        "saturation": "medium_low",
+        "finish": "soft_satin"
+      },
+      "eye": {
+        "definition": "minimal"
+      },
+      "quality": {
+        "face_visible": null,
+        "lighting": null,
+        "pose": null
+      },
+      "confidence": null,
+      "uncertainty_notes": "",
+      "notes": "SAMPLE DATA; no real media was analyzed. Replace after human review.",
+      "ai_generated_draft": false,
+      "human_verified": false
+    },
+    {
+      "source": "unknown",
+      "source_type": "team_reference",
+      "source_ids": [
+        "source_1a57b2a9613645449b437869d6e331bc"
+      ],
+      "verified": true,
+      "demo_data": true,
+      "status": "HUMAN_VERIFIED",
+      "version": 3,
+      "updated_at": "2026-10-06T18:52:13.130132+00:00",
+      "review_notes": "合成图验收：light_medium 是流程测试值，不是对图像的观察。",
+      "verified_by": "自动化验收（模拟人工审核）",
+      "verified_at": "2026-10-06T18:52:13.130030Z",
+      "tags": [],
+      "reference_id": "ref_1a57b2a9613645449b437869d6e331bc",
+      "look_id": "soft_formal",
+      "media_type": "image",
+      "source_file": "data/references/raw/1a57b2a9613645449b437869d6e331bc.jpg",
+      "source_id": "source_1a57b2a9613645449b437869d6e331bc",
+      "frame_timestamp": null,
+      "scene": [
+        "dinner",
+        "presentation"
+      ],
+      "overall": {
+        "intensity": null,
+        "contrast": null
+      },
+      "base": {
+        "finish": null,
+        "coverage": null
+      },
+      "blush": {
+        "visible": null,
+        "intensity": "light_medium",
+        "placement": null,
+        "finish": null
+      },
+      "lip": {
+        "visible": null,
+        "saturation": null,
+        "finish": null
+      },
+      "eye": {
+        "definition": null
+      },
+      "quality": {
+        "face_visible": null,
+        "lighting": null,
+        "pose": null
+      },
+      "confidence": null,
+      "uncertainty_notes": "所有属性未知，待人工填写；未调用外部 AI。",
+      "notes": "MOCK DRAFT — no actual visual interpretation performed.",
+      "ai_generated_draft": true,
+      "human_verified": true
+    }
+  ]
+}

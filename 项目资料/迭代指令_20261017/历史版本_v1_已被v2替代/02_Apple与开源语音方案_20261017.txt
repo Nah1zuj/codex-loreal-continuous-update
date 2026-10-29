@@ -1,0 +1,41 @@
+Apple 与开源语音方案核查
+核查日期：2026-10-17
+范围：读取官方资料和当前源码；没有安装、集成或实机测试这些新增方案。
+
+1. Apple 哪项功能接近本次需求
+
+对应的是“语音控制”（Voice Control），可用名称/编号操作界面，并暂停、恢复接收命令。当前Mac手册中文示例为“停止听取/开始听取”。“旁白”（VoiceOver）主要提供读屏，可配合语音控制。iPhone资料使用“进入睡眠状态/唤醒”表述。
+这些系统能力可以辅助首次操作，但不会自动把TRACE变成具备本轮全部动线的语音产品。具体系统、语言和浏览器权限弹窗的操作需要实测。
+来源：[Apple Mac语音控制](https://support.apple.com/zh-cn/guide/mac-help/mh40719/27/mac/27)，[Apple iPhone语音控制](https://support.apple.com/zh-cn/111778)。
+
+2. “说同意就自动授权”的边界
+
+getUserMedia访问麦克风需用户许可，浏览器有使用提示。未获许可的网页不能先采集声音来识别“同意”；应用内同意不能代替系统许可。
+实现方向：初次依靠可访问的启动入口与系统辅助操作；已授权后才接收网站内的语音选择。能否自动播报欢迎语取决于实际浏览器策略，保留首次激活入口。
+来源：[MDN麦克风许可说明](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)，[MDN自动播放策略](https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay)。
+
+3. “不回复但等待唤醒词”可以如何做
+
+设计推论：将静默唤醒与正常对话分成两条状态路径，静默时只在本机检测控制词，唤醒后才接普通指令和现有对话接口。
+当前TRACE的pause()会中止浏览器识别，不能直接靠它实现继续等待唤醒。浏览器SpeechRecognition默认可能采用服务器识别，持续识别但不显示结果并不等于本地处理。
+特别要解决：唤醒词刚识别出来时，用户已经继续说的后半句不能丢失。需要有界临时音频与可处理该片段的识别路径，不能仅重新start()。
+网页切后台/锁屏/电脑休眠是另一个运行环境问题，不能与应用内“静默待命”混为一谈。
+来源：[MDN Web Speech识别机制与设备端识别](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API)。架构建议不是已通过的集成结果。
+
+4. GitHub候选方案
+
+A. 优先验证：sherpa-onnx
+官方提供自定义关键词检测、中文模型和麦克风Python示例。关键词列表可调整，无须每改一个词就重新训练；官方预训练说明提供中文及中英模型、检测时间信息。
+适合验证本机中文唤醒。代码许可证为Apache-2.0；所选模型许可证需另外核对。它不是直接粘贴即可完成的React功能，仍需音频、状态、同句识别及双端安装接入。当前项目Python环境是否兼容尚未验证。
+来源：[官方仓库](https://github.com/k2-fsa/sherpa-onnx)，[自定义关键词说明](https://k2-fsa.github.io/sherpa/onnx/kws/index.html)，[官方预训练模型](https://k2-fsa.github.io/sherpa/onnx/kws/pretrained_models/index.html)，[麦克风示例](https://github.com/k2-fsa/sherpa-onnx/blob/master/python-api-examples/keyword-spotter-from-microphone.py)。
+
+B. 结构参考：openWakeWord
+官方README当前声明英语支持；提供浏览器音频经WebSocket接Python的例子。代码为Apache-2.0，内置预训练模型为CC BY-NC-SA 4.0。中文长唤醒句不适合直接套用现成英语模型，故本轮不作为首选。
+来源：[openWakeWord官方README](https://github.com/dscripka/openWakeWord)。
+
+选择结论是本轮方案建议：先验证中文、本地处理及同句续接，再确认接入，不根据GitHub星数或库名声称已可用。若只改界面状态而没有真实唤醒能力，不能验收R3。
+
+5. Harness规范依据
+
+本文将上下文、工作边界、阶段、可观察验收和证据要求分开；不建立不必要的流程文件，也不把“规范稿”写成“已实施”。这些是针对本项目裁剪的工作约束。
+来源：[OpenAI Codex开发工作流说明](https://developers.openai.com/cookbook/examples/codex/iterating-development-workflows-with-codex)。用户本轮“先不要动代码”是暂停实施的直接依据。

@@ -1,0 +1,23 @@
+/* Numbered navigation and shared voice controls, including the home page. */
+.trace-app.trace-sculpture .trace-header{flex-wrap:wrap;gap:14px 20px;padding:12px 24px}
+.trace-app.trace-sculpture .trace-header nav{flex:1 1 780px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;min-width:0}
+.step-nav-item{display:flex;align-items:center;gap:6px;min-width:0}
+.trace-app.trace-sculpture .trace-header nav button{display:flex;align-items:center;gap:9px;min-height:54px;padding:8px 10px;white-space:normal;max-width:none}
+.trace-app.trace-sculpture .trace-header nav .visual-label{min-width:0}
+.trace-app.trace-sculpture .trace-header nav .visual-label>span{font-size:20px;line-height:1.4}
+.trace-app.trace-sculpture .trace-header nav .visual-label small{display:block;font-size:14px;line-height:1.4;max-width:150px}
+.nav-number{display:grid;place-items:center;flex:none;width:26px;height:26px;border:1px solid #9d6255;border-radius:50%;font:16px Georgia,serif;color:#825245}
+.nav-arrow{font-size:20px;color:#a57563}
+.voice-access-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 20px;padding:12px 28px;background:#fff8f0;border-bottom:1px solid #dfcabb;color:#563e33}
+.voice-access-heading,.voice-access-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px}
+.voice-access-heading{font-size:16px}.voice-access-heading [data-call-state]{font-size:14px}
+.voice-access-actions button,.voice-access-actions summary{font-size:15px;min-height:44px;padding:8px 14px}
+.voice-access-actions details{margin:0;position:relative}.voice-access-actions summary{cursor:pointer}
+.voice-setup-copy{position:absolute;right:0;z-index:30;width:min(440px,calc(100vw - 32px));padding:20px;background:#fffaf5;border:1px solid #b99b89;box-shadow:0 10px 30px #50312520;border-radius:12px}
+.voice-indicator{width:10px;height:10px;flex:none;border-radius:50%;background:#a46751}
+.trace-app.trace-sculpture .reference-hero .hero-actions{flex-wrap:wrap;gap:15px}
+.home-voice-invitation{font-size:18px;line-height:1.8;max-width:460px;margin:0}
+.home-voice-invitation small{font-size:14px}
+.look-recollection{padding:24px;border:1px solid #c8aa99;border-radius:16px;background:#fff7ec;margin:24px 0}
+.look-recollection h2{font-size:24px}.look-recollection ol{padding-left:24px}
+@media(max-width:767px){.trace-app.trace-sculpture .trace-header{padding:12px 16px}.trace-app.trace-sculpture .trace-header nav{justify-content:flex-start;gap:6px;width:100%}.step-nav-item{flex:1 1 150px}.step-nav-item button{flex:1}.nav-arrow{display:none}.voice-access-bar{padding:12px 16px}.voice-access-actions{width:100%}.voice-access-actions button{flex:1 1 140px}.voice-setup-copy{position:static;width:100%;box-shadow:none}.home-voice-invitation{font-size:18px}}

@@ -1,0 +1,3 @@
+/** Original TRACE engraved orchard seal: symmetric fruit, open central seam,
+ * narrow stem and offset leaf. Decorative, with the wordmark naming the link. */
+export function AppleMark(){return <svg className="apple-mark" viewBox="0 0 64 72" aria-hidden="true" focusable="false"><path d="M30 21C17 12 6 23 9 40c2 14 8 25 17 25 5 0 5-3 10-2 11 5 22-9 21-23M55 28c-3-10-13-13-23-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><circle cx="57" cy="33" r="1.25" fill="currentColor"/><path d="M32 18l-4-11M34 15c2-7 9-9 14-7-4 6-8 8-14 7M31 29c-4 11-3 23 1 29" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>}

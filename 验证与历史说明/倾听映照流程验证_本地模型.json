@@ -1,0 +1,9 @@
+{
+  "origin": "http://127.0.0.1:5180",
+  "conversation_final_received": true,
+  "reflect_initialized": true,
+  "same_session": true,
+  "first_step": "准备与补水",
+  "model_mode": "mock",
+  "network_calls": 0
+}

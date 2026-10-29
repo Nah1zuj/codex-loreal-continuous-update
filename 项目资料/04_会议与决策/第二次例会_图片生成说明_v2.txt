@@ -1,0 +1,26 @@
+生成方式：内置 image_gen 编辑工具。
+修改：删除会前准备栏，重新编号及排版；会后任务仍为暂定。
+最终提示词：
+Edit the referenced Chinese meeting infographic. Remove the ENTIRE card headed “01 会前准备｜带着材料来”, including all its text and document icon. Do not move its contents elsewhere. Renumber “会上讨论” to 01 and “会后探索” to 02. Reflow the whole composition beautifully into a more compact portrait approximately 3:4 image with no blank gap. Keep the same refined warm-white, lavender, teal, and amber design, strong readable simplified Chinese type and clear spacing. Enlarge the two remaining cards to use the available space. Preserve all other text and meanings, including the introductory flow “妆前选择与准备 → 妆中操作 ⇄ 检查与修正” (this is the makeup process, not meeting preparation). Keep the amber notice “暂定，按讨论结果调整” very prominent. No extra content. Exact final content:
+第二次例会｜视障美妆项目
+从想法出发，把下一步讨论清楚
+本次目标：明确待验证的问题，商定探索任务
+妆前选择与准备 → 妆中操作 ⇄ 检查与修正
+
+01 会上讨论｜围绕一个真实任务
+以“涂口红”为例，暂不限定最终产品
+• 用户缺的是操作教学、位置提示，还是结果确认？
+• 用户自己做什么？系统帮什么？是否需要硬件？
+• 相比现有办法，我们可能改善哪一步？
+• 最大未知是什么？用什么小实验查清？
+
+02 会后探索
+暂定，按讨论结果调整
+• 用户研究：寻找访谈渠道，了解真实化妆经历
+• 体验验证：用人工模拟，测试提示是否有用
+• 技术验证：测试一个关键能力，记录失败案例
+• 文档整理：记录决定、待验证假设与任务分工
+
+会议结束要留下
+待验证问题 ＋ 负责人 ＋ 下次带回的证据
+先验证需要与能力，再决定首版做什么

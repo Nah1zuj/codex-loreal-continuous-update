@@ -1,0 +1,49 @@
+{
+  "release": "TRACE-20261020-portable",
+  "created_at": "2026-10-20T11:46:11.253381+08:00",
+  "source": "10月17日版正确安装包/AccessibleBeautyAgent",
+  "changes_preserved": [
+    "语音开始/结束边界收集",
+    "本地语音错误提示区分",
+    "倾听进入映照按钮",
+    "映照切换指令谐音容错",
+    "点击录音与点击提交，可替代语音起止词",
+    "5180浏览器本地来源校验修复",
+    "一键进入倾听与保持会话进入映照"
+  ],
+  "deployment_changes": [
+    "统一入口，独立端口5180/8012/8013",
+    "运行环境首次自动重建",
+    "页面版本标识",
+    "默认本地mock；不携带个人密钥和数据库"
+  ],
+  "limitations": [
+    "全新电脑在线依赖安装未实机验证",
+    "Windows启动未实机验证",
+    "真人发声准确率、相机效果需目标机器验证"
+  ],
+  "verification": {
+    "frontend_tests": "182 passed",
+    "backend_tests": "full regression completed without failures",
+    "frontend_build": "passed using current Mac dependencies",
+    "voice_model_files_sha256_checked": 58,
+    "critical_latest_source_files_checked": 6,
+    "symlinks": 0,
+    "private_credentials_included": false,
+    "fresh_dependency_install_tested": false,
+    "windows_tested": false,
+    "local_face_landmark_model": "included and SHA-256 verified",
+    "socks_proxy_dependency": "httpx[socks] added; network-disabled missing-dependency error regression passed",
+    "model_errors": "Network-disabled proxy failure, HTTP auth, quota, timeout and sanitized messages regression checks passed",
+    "deepseek_non_thinking": "Explicitly disabled; authorized minimal real model request returned OK in the browser.",
+    "voice_boundary_tests": "9 passed",
+    "live_browser_flow": {
+      "url": "http://127.0.0.1:5180/",
+      "home_to_listen": "passed in browser",
+      "real_minimal_model_reply": "OK received in browser",
+      "listen_to_reflect": "passed in browser; first step visible",
+      "voice_button_protocol": "passed against the running service using synthetic fixture",
+      "human_spoken_recognition_accuracy": "not tested"
+    }
+  }
+}

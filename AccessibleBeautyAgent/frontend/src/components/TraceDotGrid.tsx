@@ -1,0 +1,5 @@
+export function TraceDotGrid({activeDots=[],size='small',decorative=true,ariaLabel,interactive=false,onDot,animationMode='none',labels}:{activeDots?:number[];size?:'small'|'large';decorative?:boolean;ariaLabel?:string;interactive?:boolean;onDot?:(dot:number)=>void;animationMode?:'none'|'listening'|'processing';labels?:string[]}){
+ if(interactive&&(!ariaLabel||!labels||labels.length!==6))throw new Error('Interactive dot navigation requires six explicit labels and a group name')
+ const hidden=decorative&&!interactive
+ return <div className={`trace-dots ${size} ${animationMode}`} aria-hidden={hidden?true:undefined} role={hidden?undefined:interactive?'group':'img'} aria-label={hidden?undefined:ariaLabel??'Six-position dot geometry'}>{[1,4,2,5,3,6].map(dot=>interactive?<button key={dot} type="button" className={'trace-dot '+(activeDots.includes(dot)?'filled':'')} aria-label={labels![dot-1]} onClick={()=>onDot?.(dot)}><span aria-hidden="true">{dot}</span></button>:<span key={dot} className={'trace-dot '+(activeDots.includes(dot)?'filled':'')} />)}</div>
+}

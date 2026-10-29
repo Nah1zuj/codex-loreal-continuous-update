@@ -1,0 +1,138 @@
+[
+  {
+    "material_id": "cotton",
+    "name_zh": "棉",
+    "name_en": "cotton",
+    "kind": "fiber",
+    "texture_description": "棉是纤维；可制成挺括梭织或柔软针织，触感不能只由成分确定。",
+    "weight_drape": "以具体织物重量、织造和后整理为准",
+    "breathability_notes": "透气性受结构密度、厚度、混纺和后整理影响；不作无条件排名",
+    "care_notes": "以具体衣物洗护标签为准",
+    "visual_style_tags": [],
+    "source_refs": [
+      "https://cottonworks.com/product-innovation/nonwovens/technical-and-performance-guide/"
+    ],
+    "verification_status": "DRAFT",
+    "human_verified": false,
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "material_id": "linen",
+    "name_zh": "亚麻",
+    "name_en": "linen",
+    "kind": "fiber",
+    "texture_description": "亚麻来自亚麻植物；可有明显纹理和褶皱，但重量、混纺与整理决定具体触感。",
+    "weight_drape": "以具体织物重量、织造和后整理为准",
+    "breathability_notes": "透气性受结构密度、厚度、混纺和后整理影响；不作无条件排名",
+    "care_notes": "以具体衣物洗护标签为准",
+    "visual_style_tags": [],
+    "source_refs": [
+      "https://allianceflaxlinenhemp.eu/en/flax-performance-and-properties"
+    ],
+    "verification_status": "DRAFT",
+    "human_verified": false,
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "material_id": "wool",
+    "name_zh": "羊毛",
+    "name_en": "wool",
+    "kind": "fiber",
+    "texture_description": "羊毛纤维可制成轻薄或厚重织物；不能由羊毛名称推定一定厚热或不刺痒。",
+    "weight_drape": "以具体织物重量、织造和后整理为准",
+    "breathability_notes": "透气性受结构密度、厚度、混纺和后整理影响；不作无条件排名",
+    "care_notes": "以具体衣物洗护标签为准",
+    "visual_style_tags": [],
+    "source_refs": [
+      "https://www.woolmark.com/industry/use-wool/product-innovations/cool-wool/"
+    ],
+    "verification_status": "DRAFT",
+    "human_verified": false,
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "material_id": "silk",
+    "name_zh": "丝绸",
+    "name_en": "silk",
+    "kind": "fiber",
+    "texture_description": "丝绸纤维与缎纹不同；天然丝的成分应核对标签，照片光泽不证明是真丝。",
+    "weight_drape": "以具体织物重量、织造和后整理为准",
+    "breathability_notes": "透气性受结构密度、厚度、混纺和后整理影响；不作无条件排名",
+    "care_notes": "以具体衣物洗护标签为准",
+    "visual_style_tags": [],
+    "source_refs": [
+      "https://silkmarkindia.com/index.php/faq/"
+    ],
+    "verification_status": "DRAFT",
+    "human_verified": false,
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "material_id": "satin",
+    "name_zh": "缎面",
+    "name_en": "satin",
+    "kind": "structure",
+    "texture_description": "缎纹长浮线常形成平滑光泽表面，可能易勾丝；缎面描述不确定纤维。",
+    "weight_drape": "以具体织物重量、织造和后整理为准",
+    "breathability_notes": "透气性受结构密度、厚度、混纺和后整理影响；不作无条件排名",
+    "care_notes": "以具体衣物洗护标签为准",
+    "visual_style_tags": [],
+    "source_refs": [
+      "https://cottonworks.com/learning-hub/weaving/basic-woven-fabric-designs/"
+    ],
+    "verification_status": "DRAFT",
+    "human_verified": false,
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "material_id": "polyester",
+    "name_zh": "聚酯",
+    "name_en": "polyester",
+    "kind": "fiber",
+    "texture_description": "聚酯是合成纤维类别；制造商说明其防皱特性，但具体柔软度与光泽依纱线和整理。",
+    "weight_drape": "以具体织物重量、织造和后整理为准",
+    "breathability_notes": "透气性受结构密度、厚度、混纺和后整理影响；不作无条件排名",
+    "care_notes": "以具体衣物洗护标签为准",
+    "visual_style_tags": [],
+    "source_refs": [
+      "https://www.toray.com/aboutus/download/pdf/toray_g_dl2018.pdf"
+    ],
+    "verification_status": "DRAFT",
+    "human_verified": false,
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "material_id": "viscose",
+    "name_zh": "粘胶",
+    "name_en": "viscose",
+    "kind": "fiber",
+    "texture_description": "粘胶是再生纤维素纤维；不是天然丝或棉，产品性能不能照搬某厂商所有特种纤维宣传。",
+    "weight_drape": "以具体织物重量、织造和后整理为准",
+    "breathability_notes": "透气性受结构密度、厚度、混纺和后整理影响；不作无条件排名",
+    "care_notes": "以具体衣物洗护标签为准",
+    "visual_style_tags": [],
+    "source_refs": [
+      "https://www.lenzing.com/technology-production/technologies/"
+    ],
+    "verification_status": "DRAFT",
+    "human_verified": false,
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "material_id": "knit",
+    "name_zh": "针织",
+    "name_en": "knit",
+    "kind": "structure",
+    "texture_description": "针织由纱线线圈形成，通常具有结构伸展性；针织不是羊毛成分，可用多种纤维。",
+    "weight_drape": "以具体织物重量、织造和后整理为准",
+    "breathability_notes": "透气性受结构密度、厚度、混纺和后整理影响；不作无条件排名",
+    "care_notes": "以具体衣物洗护标签为准",
+    "visual_style_tags": [],
+    "source_refs": [
+      "https://cottonworks.com/learning-hub/knitting/knit-basics/?highlight=jersey%2Bknit"
+    ],
+    "verification_status": "DRAFT",
+    "human_verified": false,
+    "accessed_at": "2026-10-11"
+  }
+]

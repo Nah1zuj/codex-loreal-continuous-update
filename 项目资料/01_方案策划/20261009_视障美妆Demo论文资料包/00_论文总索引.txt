@@ -1,0 +1,380 @@
+论文总索引｜2026-10-09
+26篇PDF＋1篇全文待获取；关键词与demo用途为整理建议。
+
+[C01] Should I Say “Disabled People” or “People with Disabilities”? Language Preferences of Disabled People Between Identity- and Person-First Language
+年份：2022｜作者：Ather Sharif; Aedan Liam McCall; Kianna Roces Bolante
+出处：Proceedings of the 24th International ACM SIGACCESS Conference on Computers and Accessibility
+主题：01_视障与语言交互
+关键词：身份称呼；语言偏好；残障表达
+阅读用途：用于设计称呼偏好和交互语气。
+范围限制：一般残障人群研究，不能默认所有视障用户偏好一致。
+版本：作者公开PDF
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：01_视障与语言交互/2022_残障身份称呼偏好_Identity-First vs Person-First_C01.pdf
+DOI：10.1145/3517428.3544813
+原始来源：https://doi.org/10.1145/3517428.3544813
+全文地址：https://athersharif.me/documents/assets-2022-identity-first-vs-person-first.pdf
+
+[C04] #SaytheWord: A disability culture commentary on the erasure of “disability”.
+年份：2019｜作者：Erin E. Andrews; Anjali J. Forber-Pratt; Linda R. Mona; Emily M. Lund; Carrie R. Pilarski; Rochelle Balter
+出处：Rehabilitation Psychology
+主题：01_视障与语言交互
+关键词：残障文化；身份；委婉表达
+阅读用途：用于检查文案是否抹去用户身份。
+范围限制：评论与文献讨论，不能当作功能有效性实验。
+版本：机构公开PDF
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：01_视障与语言交互/2019_残障身份与语言表达_SaytheWord_C04.pdf
+DOI：10.1037/rep0000258
+原始来源：https://doi.org/10.1037/rep0000258
+全文地址：https://cdn.vanderbilt.edu/vu-news/files/20190426152448/Andrews.Forber-Pratt.Mona_.Lund_.Pilarski.Balter-2019-RP-Say2.pdf
+
+[C13] The problem with inspiration porn: a tentative definition and a provisional critique
+年份：2016｜作者：Jan Grue
+出处：Disability & Society
+主题：01_视障与语言交互
+关键词：残障叙事；励志消费；传播伦理
+阅读用途：用于marketing文案审阅。
+范围限制：仅核验书目信息，未下载全文；不要凭摘要提炼正式规则。
+版本：全文待获取
+状态：书目已核对；全文未获取
+本地文件：01_视障与语言交互/2016_避免消费残障励志叙事_Inspiration Porn Critique_C13_待获取全文.txt
+DOI：10.1080/09687599.2016.1205473
+原始来源：https://doi.org/10.1080/09687599.2016.1205473
+全文地址：未获取
+
+[C15] Ableism differs by disability, gender and social context: Evidence from vignette experiments
+年份：2024｜作者：Shane Timmons; Frances McGinnity; Eamonn Carroll
+出处：British Journal of Social Psychology
+主题：01_视障与语言交互
+关键词：残障偏见；性别；情境；实验
+阅读用途：用于避免刻板化称呼与传播假设。
+范围限制：下载的是2023工作论文；期刊卷期年份2024，版本差异需留意。
+版本：ESRI工作论文版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：01_视障与语言交互/2024_残障偏见与情境差异_Ableism Vignette Experiments_C15.pdf
+DOI：10.1111/bjso.12696
+原始来源：https://doi.org/10.1111/bjso.12696
+全文地址：https://www.esri.ie/pubs/WP752.pdf
+
+[C17] Social Biases in NLP Models as Barriers for Persons with Disabilities
+年份：2020｜作者：Ben Hutchinson; Vinodkumar Prabhakaran; Emily Denton; Kellie Webster; Yu Zhong; Stephen Denuyl
+出处：Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics
+主题：01_视障与语言交互
+关键词：NLP偏见；残障；语言模型
+阅读用途：用于构造身份词变化的交互测试。
+范围限制：历史模型研究不能代表所接入模型的当前表现。
+版本：ACL正式开放全文
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：01_视障与语言交互/2020_语言模型中的残障偏见_Social Biases in NLP_C17.pdf
+DOI：10.18653/v1/2020.acl-main.487
+原始来源：https://doi.org/10.18653/v1/2020.acl-main.487
+全文地址：https://aclanthology.org/2020.acl-main.487.pdf
+
+[C18] Automated Ableism: An Exploration of Explicit Disability Biases in Sentiment and Toxicity Analysis Models
+年份：2023｜作者：Pranav Narayanan Venkit; Mukund Srinath; Shomir Wilson
+出处：Proceedings of the 3rd Workshop on Trustworthy Natural Language Processing (TrustNLP 2023)
+主题：01_视障与语言交互
+关键词：残障偏见；情感分析；毒性检测
+阅读用途：用于审视把身份词误当负面情绪的风险。
+范围限制：TrustNLP研讨会论文；不是用户情绪识别的直接效果证据。
+版本：ACL研讨会开放全文
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：01_视障与语言交互/2023_情感与毒性模型的残障偏见_Automated Ableism_C18.pdf
+DOI：10.18653/v1/2023.trustnlp-1.3
+原始来源：https://doi.org/10.18653/v1/2023.trustnlp-1.3
+全文地址：https://aclanthology.org/2023.trustnlp-1.3.pdf
+
+[D05] Comparing Tactile to Auditory Guidance for Blind Individuals
+年份：2019｜作者：Arnav Bharadwaj; Saurabh Bhaskar Shaw; Daniel Goldreich
+出处：Frontiers in Human Neuroscience
+主题：01_视障与语言交互
+关键词：盲人；触觉；听觉；引导；环境噪声
+阅读用途：用于讨论语音长度与其他感官通道。
+范围限制：导航任务，不是化妆实验；不要简单认定触觉一定优于语音。
+版本：期刊开放全文
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：01_视障与语言交互/2019_盲人触觉与听觉引导_Tactile vs Auditory Guidance_D05.pdf
+DOI：10.3389/fnhum.2019.00443
+原始来源：https://doi.org/10.3389/fnhum.2019.00443
+全文地址：https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2019.00443/pdf
+
+[D13] Opportunities and Pitfalls in Applying Emotion Recognition Software for Persons With a Visual Impairment: Simulated Real Life Conversations
+年份：2019｜作者：Hendrik Buimer; Renske Schellens; Tjerk Kostelijk; Abdellatif Nemri; Yan Zhao; Thea Van der Geest; Richard Van Wezel
+出处：JMIR mHealth and uHealth
+主题：01_视障与语言交互
+关键词：视障；情绪识别；真实场景；触觉反馈
+阅读用途：用于理解实验室识别与现实使用的差距。
+范围限制：相近用户、不同任务；不据此新增情绪识别功能。
+版本：大学存档期刊全文
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：01_视障与语言交互/2019_视障情绪识别的机会与局限_Emotion Recognition_D13.pdf
+DOI：10.2196/13722
+原始来源：https://doi.org/10.2196/13722
+全文地址：https://ris.utwente.nl/ws/files/177349490/Buimer2019opportunities.pdf
+
+[D27] Investigating the Accessibility of Voice Assistants With Impaired Users: Mixed Methods Study
+年份：2020｜作者：Fabio Masina; Valeria Orso; Patrik Pluchino; Giulia Dainese; Stefania Volpato; Cristian Nelini; Daniela Mapelli; Anna Spagnolli; Luciano Gamberini
+出处：Journal of Medical Internet Research
+主题：01_视障与语言交互
+关键词：语音助手；认知；语言能力；交互失败
+阅读用途：用于设计重复、输入替代和失败恢复。
+范围限制：主要涉及运动、认知等障碍人群，不能标成直接视障美妆证据。
+版本：大学存档期刊全文
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：01_视障与语言交互/2020_语音助手无障碍与交互失败_Voice Assistant Accessibility_D27.pdf
+DOI：10.2196/18431
+原始来源：https://doi.org/10.2196/18431
+全文地址：https://www.research.unipd.it/retrieve/ca7039b3-73d0-49ce-90d9-437f9affb33d/jmir-2020-9-e18431.pdf
+
+[D01] More than One Step at a Time: Designing Procedural Feedback for Non-visual Makeup Routines
+年份：2025｜作者：Franklin Mingzhe Li; Akihiko Oharazawa; Chloe Qingyu Zhu; Misty Fan; Daisuke Sato; Chieko Asakawa; Patrick Carrington
+出处：ASSETS 2025；下载版本为arXiv
+主题：02_美妆无障碍
+关键词：非视觉化妆；步骤反馈；触觉；免手持
+阅读用途：优先阅读，支持梳理妆前、妆中和修正任务。
+范围限制：当前下载arXiv版本；IBM页面确认ASSETS 2025会议发表。
+版本：arXiv v1公开版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：02_美妆无障碍/2025_非视觉化妆的步骤反馈_Non-visual Makeup Routines_D01.pdf
+DOI：10.48550/arXiv.2507.03942
+原始来源：https://doi.org/10.48550/arXiv.2507.03942
+全文地址：https://arxiv.org/pdf/2507.03942
+
+[SRC-PAPER-121] It Feels Like Taking a Gamble: Exploring Perceptions, Practices, and Challenges of Using Makeup and Cosmetics for People with Visual Impairments
+年份：2022｜作者：Franklin Mingzhe Li; Franchesca Spektor; Meng Xia; Mina Huh; Peter Cederberg; Yuqi Gong; Kristen Shinohara
+出处：CHI 2022
+主题：02_美妆无障碍
+关键词：视障化妆；用户实践；访谈；产品辨认
+阅读用途：优先阅读，提取真实任务和现有应对方式。
+范围限制：研究需求与实践，不是你们demo的效果证明。
+版本：作者公开CHI 2022全文
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：02_美妆无障碍/2022_视障化妆的实践与困难_It Feels Like Taking a Gamble_SRC-PAPER-121.pdf
+DOI：10.1145/3491102.3517490
+原始来源：https://doi.org/10.1145/3491102.3517490
+全文地址：https://minahuh.com/assets/pdf/CHI2022_BlindCosmetics.pdf
+
+[SRC-PAPER-122] Inclusive beauty: how buying and using cosmetics can be made more accessible for the visually impaired (VI) and blind consumer
+年份：2021｜作者：Akriti Pradhan; Gabriela Daniels
+出处：Cosmetics & Toiletries, 136(4), 2021
+主题：02_美妆无障碍
+关键词：化妆品购买；包装；信息读取；消费者
+阅读用途：用于梳理选品和使用中的信息障碍。
+范围限制：行业刊物与调查资料，不按顶级同行评审论文看待。
+版本：UAL存档作者稿
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：02_美妆无障碍/2021_化妆品购买与使用无障碍_Inclusive Beauty_SRC-PAPER-122.pdf
+DOI：未找到可靠记录
+原始来源：https://ualresearchonline.arts.ac.uk/id/eprint/16706/
+全文地址：https://ualresearchonline.arts.ac.uk/id/eprint/16706/1/210131%20C%26T%20paper%20draft.pdf
+
+[SRC-PAPER-123] Blind and partially sighted women’s make-up: A narrative of practice, perseverance and empowerment
+年份：2024｜作者：Gabriela Daniels; Ameerah Khadaroo
+出处：Critical Studies in Fashion & Beauty, 15(2), 2024
+主题：02_美妆无障碍
+关键词：盲人；低视力；化妆实践；自主表达；视频分析
+阅读用途：用于用户动机与marketing叙事讨论。
+范围限制：视频内容分析不能代表所有目标用户。
+版本：UAL存档作者稿
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：02_美妆无障碍/2024_盲人与低视力女性化妆实践_Blind Womens Makeup_SRC-PAPER-123.pdf
+DOI：10.1386/csfb_00078_1
+原始来源：https://ualresearchonline.arts.ac.uk/id/eprint/23071/
+全文地址：https://ualresearchonline.arts.ac.uk/id/eprint/23071/1/Daniels-Khadaroo-Blind%20girl%20makeup-Final.pdf
+
+[B03] PSGAN: Pose and Expression Robust Spatial-Aware GAN for Customizable Makeup Transfer
+年份：2020｜作者：Wentao Jiang; Si Liu; Chen Gao; Jie Cao; Ran He; Jiashi Feng; Shuicheng Yan
+出处：2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)
+主题：03_视觉算法
+关键词：妆容迁移；姿态；表情；区域
+阅读用途：用于理解妆容区域与姿态鲁棒性。
+范围限制：妆容迁移算法不是漏涂、越界检测器。
+版本：CVF会议开放版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：03_视觉算法/2020_姿态表情鲁棒的妆容迁移_PSGAN_B03.pdf
+DOI：10.1109/CVPR42600.2020.00524
+原始来源：https://doi.org/10.1109/CVPR42600.2020.00524
+全文地址：https://openaccess.thecvf.com/content_CVPR_2020/papers/Jiang_PSGAN_Pose_and_Expression_Robust_Spatial-Aware_GAN_for_Customizable_Makeup_CVPR_2020_paper.pdf
+
+[B21] Edge-Based Color Constancy
+年份：2007｜作者：J. van de Weijer; T. Gevers; A. Gijsenij
+出处：IEEE Transactions on Image Processing
+主题：03_视觉算法
+关键词：颜色恒常性；光照；灰边假设
+阅读用途：用于理解光照变化为何影响颜色测量。
+范围限制：下载的是公开稿件；不等同于期刊排版版，不能保证肤色或妆效判断。
+版本：公开稿件PDF
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：03_视觉算法/2007_光照与颜色恒常性_Edge-Based Color Constancy_B21.pdf
+DOI：10.1109/TIP.2007.901808
+原始来源：https://doi.org/10.1109/TIP.2007.901808
+全文地址：https://dept-info.labri.fr/~achille/ti/Activites/Note-de-lecture/Articles/edge_based_color_constancy_2007.pdf
+
+[B22] FC^4: Fully Convolutional Color Constancy with Confidence-Weighted Pooling
+年份：2017｜作者：Yuanming Hu; Baoyuan Wang; Stephen Lin
+出处：2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)
+主题：03_视觉算法
+关键词：颜色恒常性；光照估计；置信度加权
+阅读用途：用于评估光照归一化方法。
+范围限制：照明估计置信度不等于妆容判断置信度。
+版本：CVF会议开放版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：03_视觉算法/2017_带置信度的颜色恒常性_FC4_B22.pdf
+DOI：10.1109/CVPR.2017.43
+原始来源：https://doi.org/10.1109/CVPR.2017.43
+全文地址：https://openaccess.thecvf.com/content_cvpr_2017/papers/Hu_FC4_Fully_Convolutional_CVPR_2017_paper.pdf
+
+[B25] Robust Face Landmark Estimation under Occlusion
+年份：2013｜作者：Xavier P. Burgos-Artizzu; Pietro Perona; Piotr Dollar
+出处：2013 IEEE International Conference on Computer Vision
+主题：03_视觉算法
+关键词：人脸关键点；遮挡；定位
+阅读用途：用于规划手部、工具遮挡时的失败情况。
+范围限制：关键点定位不能单独证明妆容检查有效。
+版本：CVF会议开放版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：03_视觉算法/2013_遮挡下人脸关键点_Robust Face Landmark Estimation_B25.pdf
+DOI：10.1109/ICCV.2013.191
+原始来源：https://doi.org/10.1109/ICCV.2013.191
+全文地址：https://openaccess.thecvf.com/content_iccv_2013/papers/Burgos-Artizzu_Robust_Face_Landmark_2013_ICCV_paper.pdf
+
+[B27] Look at Boundary: A Boundary-Aware Face Alignment Algorithm
+年份：2018｜作者：Wenyan Wu; Chen Qian; Shuo Yang; Quan Wang; Yici Cai; Qiang Zhou
+出处：2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition
+主题：03_视觉算法
+关键词：人脸对齐；面部边界；WFLW
+阅读用途：用于查找姿态、模糊、遮挡的测试条件。
+范围限制：对齐算法不直接输出美妆质量。
+版本：CVF会议开放版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：03_视觉算法/2018_人脸边界与对齐_Look at Boundary_B27.pdf
+DOI：10.1109/CVPR.2018.00227
+原始来源：https://doi.org/10.1109/CVPR.2018.00227
+全文地址：https://openaccess.thecvf.com/content_cvpr_2018/papers/Wu_Look_at_Boundary_CVPR_2018_paper.pdf
+
+[B30] Real-time Facial Surface Geometry from Monocular Video on Mobile GPUs
+年份：2019｜作者：Yury Kartynnik; Artsiom Ablavatski; Ivan Grishchenko; Matthias Grundmann
+出处：arXiv, 2019
+主题：03_视觉算法
+关键词：移动端；人脸网格；468点；几何
+阅读用途：用于评估手机端区域定位的技术路径。
+范围限制：几何模型不直接识别漏涂或色差。
+版本：arXiv公开版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：03_视觉算法/2019_移动端实时人脸几何_Mobile Facial Surface Geometry_B30.pdf
+DOI：10.48550/arXiv.1907.06724
+原始来源：https://doi.org/10.48550/arXiv.1907.06724
+全文地址：https://arxiv.org/pdf/1907.06724
+
+[D23] VizWiz Grand Challenge: Answering Visual Questions from Blind People
+年份：2018｜作者：Danna Gurari; Qing Li; Abigale J. Stangl; Anhong Guo; Chi Lin; Kristen Grauman; Jiebo Luo; Jeffrey P. Bigham
+出处：2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition
+主题：03_视觉算法
+关键词：盲人拍照；视觉问答；图像质量；不可回答
+阅读用途：用于规划照片质量检查与拒绝判断场景。
+范围限制：视觉问答数据不是妆容标注数据。
+版本：CVF会议开放版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：03_视觉算法/2018_盲人拍照问答与不可回答情况_VizWiz Grand Challenge_D23.pdf
+DOI：10.1109/CVPR.2018.00380
+原始来源：https://doi.org/10.1109/CVPR.2018.00380
+全文地址：https://openaccess.thecvf.com/content_cvpr_2018/papers/Gurari_VizWiz_Grand_Challenge_CVPR_2018_paper.pdf
+
+[D24] VizWiz-Priv: A Dataset for Recognizing the Presence and Purpose of Private Visual Information in Images Taken by Blind People
+年份：2019｜作者：Danna Gurari; Qing Li; Chi Lin; Yinan Zhao; Anhong Guo; Abigale Stangl; Jeffrey P. Bigham
+出处：2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)
+主题：03_视觉算法
+关键词：盲人拍照；隐私；私密信息；数据集
+阅读用途：用于讨论相机输入和图像保存。
+范围限制：隐私检测研究不是妆容检测研究。
+版本：CVF会议开放版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：03_视觉算法/2019_盲人照片隐私识别_VizWiz-Priv_D24.pdf
+DOI：10.1109/CVPR.2019.00103
+原始来源：https://doi.org/10.1109/CVPR.2019.00103
+全文地址：https://openaccess.thecvf.com/content_CVPR_2019/papers/Gurari_VizWiz-Priv_A_Dataset_for_Recognizing_the_Presence_and_Purpose_of_CVPR_2019_paper.pdf
+
+[A15] Why Johnny Can’t Prompt: How Non-AI Experts Try (and Fail) to Design LLM Prompts
+年份：2023｜作者：J.D. Zamfirescu-Pereira; Richmond Y. Wong; Bjoern Hartmann; Qian Yang
+出处：Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems
+主题：04_人机协作与不确定性
+关键词：Prompt设计；非专家；提示词测试
+阅读用途：用于组织提示词迭代和失败案例。
+范围限制：属于开发方法参考，不是视障用户需求证据。
+版本：高校公开存档PDF
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：04_人机协作与不确定性/2023_非专家Prompt设计困难_Why Johnny Cant Prompt_A15.pdf
+DOI：10.1145/3544548.3581388
+原始来源：https://doi.org/10.1145/3544548.3581388
+全文地址：https://courses.cs.umbc.edu/graduate/691/spring24/pdf/3544548.3581388.pdf
+
+[A16] Guidelines for Human-AI Interaction
+年份：2019｜作者：Saleema Amershi; Dan Weld; Mihaela Vorvoreanu; Adam Fourney; Besmira Nushi; Penny Collisson; Jina Suh; Shamsi Iqbal; Paul N. Bennett; Kori Inkpen; Jaime Teevan; Ruth Kikin-Gil; Eric Horvitz
+出处：Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems
+主题：04_人机协作与不确定性
+关键词：能力边界；纠错；用户控制
+阅读用途：用于梳理首次说明、纠正和退出机制。
+范围限制：通用人机交互，不是视障美妆效果验证。
+版本：作者公开PDF
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：04_人机协作与不确定性/2019_人机交互设计准则_Guidelines for Human-AI Interaction_A16.pdf
+DOI：10.1145/3290605.3300233
+原始来源：https://doi.org/10.1145/3290605.3300233
+全文地址：https://www.microsoft.com/en-us/research/wp-content/uploads/2019/01/Guidelines-for-Human-AI-Interaction-camera-ready.pdf
+
+[A17] "I'm Not Sure, But...": Examining the Impact of Large Language Models' Uncertainty Expression on User Reliance and Trust
+年份：2024｜作者：Sunnie S. Y. Kim; Q. Vera Liao; Mihaela Vorvoreanu; Stephanie Ballard; Jennifer Wortman Vaughan
+出处：The 2024 ACM Conference on Fairness Accountability and Transparency
+主题：04_人机协作与不确定性
+关键词：不确定性表达；依赖；信任
+阅读用途：用于设计“无法可靠判断”的措辞测试。
+范围限制：研究任务不是美妆；措辞效果需在目标任务验证。
+版本：会议公开PDF
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：04_人机协作与不确定性/2024_不确定性表达与用户信任_Im Not Sure But_A17.pdf
+DOI：10.1145/3630106.3658941
+原始来源：https://doi.org/10.1145/3630106.3658941
+全文地址：https://facctconference.org/static/papers24/facct24-56.pdf
+
+[A19] A Systematic Review on Fostering Appropriate Trust in Human-AI Interaction: Trends, Opportunities and Challenges
+年份：2024｜作者：Siddharth Mehrotra; Chadha Degachi; Oleksandra Vereschak; Catholijn M. Jonker; Myrthe L. Tielman
+出处：ACM Journal on Responsible Computing
+主题：04_人机协作与不确定性
+关键词：适度信任；信任校准；系统综述
+阅读用途：用于定义何时应依赖或质疑AI。
+范围限制：综述背景，不能据此给视觉准确率。
+版本：arXiv公开版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：04_人机协作与不确定性/2024_适度信任系统综述_Appropriate Trust Review_A19.pdf
+DOI：10.1145/3696449
+原始来源：https://doi.org/10.1145/3696449
+全文地址：https://arxiv.org/pdf/2311.06305
+
+[A20] To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-assisted Decision-making
+年份：2021｜作者：Zana Buçinca; Maja Barbara Malaya; Krzysztof Z. Gajos
+出处：Proceedings of the ACM on Human-Computer Interaction, 2021
+主题：04_人机协作与不确定性
+关键词：过度依赖；认知强制；决策辅助
+阅读用途：用于讨论哪些节点需要确认和重新思考。
+范围限制：通用决策任务，额外确认也会增加交互负担。
+版本：arXiv公开版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：04_人机协作与不确定性/2021_减少AI过度依赖_To Trust or to Think_A20.pdf
+DOI：10.1145/3449287
+原始来源：https://doi.org/10.1145/3449287
+全文地址：https://arxiv.org/pdf/2102.09692
+
+[A25] Questioning the AI: Informing Design Practices for Explainable AI User Experiences
+年份：2020｜作者：Q. Vera Liao; Daniel Gruen; Sarah Miller
+出处：Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems
+主题：04_人机协作与不确定性
+关键词：可解释AI；用户提问；按需解释
+阅读用途：用于设计“为什么”和依据展开。
+范围限制：通用解释需求，需适配语音和视障操作。
+版本：arXiv公开版本
+状态：全文已下载；PDF可解析；首页题名已核对
+本地文件：04_人机协作与不确定性/2020_按需解释与用户提问_Questioning the AI_A25.pdf
+DOI：10.1145/3313831.3376590
+原始来源：https://doi.org/10.1145/3313831.3376590
+全文地址：https://arxiv.org/pdf/2001.02478

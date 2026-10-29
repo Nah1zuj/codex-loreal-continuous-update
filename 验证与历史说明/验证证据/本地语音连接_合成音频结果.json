@@ -1,0 +1,135 @@
+[
+  {
+    "input": "chat",
+    "mode": "quiet",
+    "events": [],
+    "metrics": {
+      "type": "metrics",
+      "pcm_frames": 128,
+      "asr_utterances": 0,
+      "wake_candidates": 0,
+      "emitted_utterances": 0,
+      "audio_saved": false,
+      "remote_asr_requests": 0
+    }
+  },
+  {
+    "input": "wake",
+    "mode": "quiet",
+    "events": [
+      {
+        "type": "transcript",
+        "text": "重新启动语音交流功能进入应照。",
+        "epoch": 1,
+        "kind": "wake"
+      }
+    ],
+    "metrics": {
+      "type": "metrics",
+      "pcm_frames": 115,
+      "asr_utterances": 1,
+      "wake_candidates": 1,
+      "emitted_utterances": 1,
+      "audio_saved": false,
+      "remote_asr_requests": 0
+    }
+  },
+  {
+    "input": "pause",
+    "mode": "speaking",
+    "events": [
+      {
+        "type": "transcript",
+        "text": "请终止对话。",
+        "epoch": 1,
+        "kind": "speech"
+      }
+    ],
+    "metrics": {
+      "type": "metrics",
+      "pcm_frames": 56,
+      "asr_utterances": 1,
+      "wake_candidates": 0,
+      "emitted_utterances": 1,
+      "audio_saved": false,
+      "remote_asr_requests": 0
+    }
+  },
+  {
+    "input": "chat",
+    "mode": "active",
+    "events": [
+      {
+        "type": "transcript",
+        "text": "今天下午我们去图书馆，然后一起吃饭。",
+        "epoch": 1,
+        "kind": "speech"
+      }
+    ],
+    "metrics": {
+      "type": "metrics",
+      "pcm_frames": 128,
+      "asr_utterances": 1,
+      "wake_candidates": 0,
+      "emitted_utterances": 1,
+      "audio_saved": false,
+      "remote_asr_requests": 0
+    }
+  },
+  {
+    "input": "wake2",
+    "mode": "quiet",
+    "events": [
+      {
+        "type": "transcript",
+        "text": "重新开启语音功能，进入应照。",
+        "epoch": 1,
+        "kind": "wake"
+      }
+    ],
+    "metrics": {
+      "type": "metrics",
+      "pcm_frames": 104,
+      "asr_utterances": 1,
+      "wake_candidates": 1,
+      "emitted_utterances": 1,
+      "audio_saved": false,
+      "remote_asr_requests": 0
+    }
+  },
+  {
+    "input": "negative",
+    "mode": "quiet",
+    "events": [],
+    "metrics": {
+      "type": "metrics",
+      "pcm_frames": 127,
+      "asr_utterances": 1,
+      "wake_candidates": 1,
+      "emitted_utterances": 0,
+      "audio_saved": false,
+      "remote_asr_requests": 0
+    }
+  },
+  {
+    "input": "english",
+    "mode": "quiet",
+    "events": [
+      {
+        "type": "transcript",
+        "text": "Resume voice, open, listen.",
+        "epoch": 1,
+        "kind": "wake"
+      }
+    ],
+    "metrics": {
+      "type": "metrics",
+      "pcm_frames": 73,
+      "asr_utterances": 1,
+      "wake_candidates": 1,
+      "emitted_utterances": 1,
+      "audio_saved": false,
+      "remote_asr_requests": 0
+    }
+  }
+]

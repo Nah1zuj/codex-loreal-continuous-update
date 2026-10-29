@@ -1,0 +1,29 @@
+.venv/
+.venv-windows/
+node_modules/
+dist/
+__pycache__/
+.pytest_cache/
+.env
+data/users/*
+!data/users/.gitkeep
+data/index.json
+work/
+*.log
+
+# Local research uploads/reports and review history (may contain private media).
+data/import/
+reports/
+data/references/raw/
+data/references/frames/
+data/references/drafts/
+data/references/verified/
+data/history/
+
+# Private local incoming research and snapshots
+_backups/
+_incoming/
+.worktrees/
+
+.venv-voice/
+.venv-voice-windows/

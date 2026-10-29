@@ -1,0 +1,13 @@
+这些是本轮验证用的合成语音，不是用户麦克风录音。
+Mac系统Tingting（中文）与Samantha（英文）生成，转换为16000Hz单声道16位PCM。
+chat：今天下午我们去图书馆，然后一起吃饭。
+wake：重新启动语音交流功能，进入映照。
+pause：请终止对话。
+wake2：重新开启语音功能，进入映照。
+negative：不要重新开启语音功能，这个词是什么意思？
+english：Resume voice. Open listen.
+
+先用项目入口启动服务，再运行：
+.venv-voice/bin/python voice/verify_stream.py voice/fixtures
+Windows使用.venv-voice-windows\Scripts\python.exe。
+验证通过并不表示真人麦克风、读屏、背景噪声或回声准确率已验证。

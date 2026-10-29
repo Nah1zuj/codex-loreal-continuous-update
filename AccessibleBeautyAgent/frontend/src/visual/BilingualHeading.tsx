@@ -1,0 +1,3 @@
+import {useTrace} from '../content/Locale'
+export function BilingualHeading({zh,en,level=1,id}:{zh:string;en:string;level?:1|2|3;id?:string}){const {display}=useTrace();const Tag=`h${level}` as 'h1'|'h2'|'h3';return <Tag id={id} className="bilingual-heading"><span lang={display==='english'?'en':'zh-CN'}>{display==='english'?en:zh}</span>{display==='bilingual'?<span className="heading-translation" lang="en">{en}</span>:null}</Tag>}
+export function BilingualLabel({zh,en}:{zh:string;en:string}){const {display}=useTrace();return <span className="visual-label"><span lang={display==='english'?'en':'zh-CN'}>{display==='english'?en:zh}</span>{display==='bilingual'?<small lang="en">{en}</small>:null}</span>}

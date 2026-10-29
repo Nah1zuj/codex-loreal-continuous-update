@@ -1,0 +1,6 @@
+import * as THREE from 'three'
+/** Four triangles per source face, preserving the licensed surface and normals. */
+export function fineTopology(source:THREE.BufferGeometry){const flat=source.index?source.toNonIndexed():source.clone(),p=flat.getAttribute('position'),n=flat.getAttribute('normal'),positions:number[]=[],normals:number[]=[]
+ for(let i=0;i<p.count;i+=3){const a=new THREE.Vector3().fromBufferAttribute(p,i),b=new THREE.Vector3().fromBufferAttribute(p,i+1),c=new THREE.Vector3().fromBufferAttribute(p,i+2),ab=a.clone().add(b).multiplyScalar(.5),bc=b.clone().add(c).multiplyScalar(.5),ca=c.clone().add(a).multiplyScalar(.5);const na=new THREE.Vector3().fromBufferAttribute(n,i),nb=new THREE.Vector3().fromBufferAttribute(n,i+1),nc=new THREE.Vector3().fromBufferAttribute(n,i+2),nab=na.clone().add(nb).normalize(),nbc=nb.clone().add(nc).normalize(),nca=nc.clone().add(na).normalize();for(const [v,normal] of [[a,na],[ab,nab],[ca,nca],[ab,nab],[b,nb],[bc,nbc],[ca,nca],[bc,nbc],[c,nc],[ab,nab],[bc,nbc],[ca,nca]]){positions.push(v.x,v.y,v.z);normals.push(normal.x,normal.y,normal.z)}}
+ flat.dispose();return new THREE.BufferGeometry().setAttribute('position',new THREE.Float32BufferAttribute(positions,3)).setAttribute('normal',new THREE.Float32BufferAttribute(normals,3))
+}

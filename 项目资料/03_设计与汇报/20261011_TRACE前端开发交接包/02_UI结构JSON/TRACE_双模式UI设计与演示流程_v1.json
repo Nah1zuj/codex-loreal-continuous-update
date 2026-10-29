@@ -1,0 +1,929 @@
+{
+  "schema_version": "1.0.0",
+  "document_type": "ui_design_specification",
+  "project": {
+    "name": "TRACE",
+    "name_zh": "听见你的美",
+    "tagline_en": "Beauty, translated across senses.",
+    "product_definition_zh": "同一个美妆助手，语音陪伴与视觉探索两种进入方式，由用户选择交互渠道。"
+  },
+  "metadata": {
+    "created_on": "2026-10-11",
+    "language": "zh-CN",
+    "status": "DESIGN_DRAFT",
+    "purpose": "将成员提供的V2文档整理为可供前端实现和演示走查使用的JSON设计规格。",
+    "sources": [
+      "TRACE_双模式入口与无障碍体验规范_v2.md",
+      "TRACE_双模式重构_Codex执行Prompt_v2.md"
+    ],
+    "scope_note": "附件中的执行指令是参考材料；本文件不代表完成代码重构、API接入、UI渲染、实机验证或知识审核。",
+    "document_reported_stack": [
+      "React 19",
+      "Vite 7",
+      "TypeScript",
+      "FastAPI"
+    ],
+    "repository_inspected": false,
+    "stack_verified": false,
+    "api_contract_status": "NOT_PROVIDED",
+    "api_endpoints": null,
+    "changes_needing_repository_check": [
+      "路由兼容",
+      "组件属性",
+      "Agent工具事件",
+      "会话状态所有者",
+      "真实权限逻辑",
+      "Prompt加载方式"
+    ]
+  },
+  "design_tokens": {
+    "status": "SEMANTIC_TOKENS_FROM_V2_EXACT_VALUES_PENDING",
+    "palette_names": [
+      "Ivory",
+      "Warm White",
+      "Oat",
+      "Blush Mist",
+      "Espresso",
+      "muted rose-brown"
+    ],
+    "palette_hex": null,
+    "heading_font_preferences": [
+      "Noto Serif SC",
+      "Cormorant Garamond"
+    ],
+    "font_availability": "NOT_VERIFIED",
+    "voice_style": [
+      "大字",
+      "高对比",
+      "稳定的大触控区域",
+      "少导航",
+      "单屏任务"
+    ],
+    "visual_style": [
+      "杂志式非对称布局",
+      "充分留白",
+      "暖浅色",
+      "轻量柔和动效"
+    ],
+    "touch_target_min_px": 44,
+    "touch_target_preferred_px": 48,
+    "text_contrast_target": "WCAG_AA",
+    "contrast_verified": false,
+    "reduced_motion_required": true,
+    "decorative_dots_aria_hidden": true
+  },
+  "shared_state": {
+    "design_status": "ADAPT_TO_EXISTING_STATE_OWNERS",
+    "experience_mode_values": [
+      "voice",
+      "visual",
+      null
+    ],
+    "audio_state_values": [
+      "idle",
+      "listening",
+      "thinking",
+      "speaking",
+      "paused",
+      "error"
+    ],
+    "camera_state_values": [
+      "closed",
+      "awaiting_consent",
+      "preview",
+      "quality_failed",
+      "capturing",
+      "analyzing",
+      "result",
+      "error"
+    ],
+    "preserve_on_mode_switch": [
+      "session_id",
+      "conversation_history",
+      "selected_look",
+      "current_step",
+      "explicitly_authorized_preferences"
+    ],
+    "mode_switch_effects": [
+      "停止当前录音",
+      "停止当前朗读",
+      "释放活动相机流",
+      "保持会话与步骤",
+      "用户重新激活麦克风"
+    ],
+    "initial_camera": "closed",
+    "initial_microphone": "inactive",
+    "initial_knowledge_status": "DRAFT_UNLESS_ALREADY_HUMAN_VERIFIED"
+  },
+  "pages": [
+    {
+      "id": "entry",
+      "proposed_route": "/",
+      "route_status": "CHECK_AGAINST_EXISTING_REPOSITORY",
+      "title_zh": "今天，你希望我怎样陪你？",
+      "mode": null,
+      "sections": [
+        {
+          "id": "hero",
+          "headline_zh": "美，可以从听见开始。",
+          "support_zh": "让美的信息，在感官之间流动。"
+        },
+        {
+          "id": "mode_choices",
+          "voice_description_zh": "用声音告诉我你的想法。我会一步一步陪你完成。",
+          "visual_description_zh": "探索妆容、造型与属于你的美学体验。"
+        },
+        {
+          "id": "footer",
+          "copy_zh": "任何模式都可以随时切换。"
+        }
+      ],
+      "controls": [
+        {
+          "id": "voice",
+          "component": "button",
+          "label_zh": "语音陪伴",
+          "aria_label_zh": "语音陪伴",
+          "event": "select_voice"
+        },
+        {
+          "id": "visual",
+          "component": "button",
+          "label_zh": "视觉探索",
+          "aria_label_zh": "视觉探索",
+          "event": "select_visual"
+        },
+        {
+          "id": "text",
+          "component": "button",
+          "label_zh": "文字开始",
+          "aria_label_zh": "文字开始",
+          "event": "start_text"
+        },
+        {
+          "id": "intro",
+          "component": "button",
+          "label_zh": "开启语音介绍",
+          "aria_label_zh": "开启语音介绍",
+          "event": "activate_intro"
+        },
+        {
+          "id": "help",
+          "component": "button",
+          "label_zh": "使用说明",
+          "aria_label_zh": "使用说明",
+          "event": "show_help"
+        },
+        {
+          "id": "language",
+          "component": "button",
+          "label_zh": "切换语言",
+          "aria_label_zh": "切换语言",
+          "event": "change_language"
+        }
+      ]
+    },
+    {
+      "id": "voice",
+      "proposed_route": "/voice",
+      "route_status": "CHECK_AGAINST_EXISTING_REPOSITORY",
+      "title_zh": "语音陪伴",
+      "mode": "voice",
+      "sections": [
+        {
+          "id": "current_status",
+          "component": "accessible_status",
+          "labels_zh": {
+            "idle": "等待你开始",
+            "listening": "正在聆听",
+            "thinking": "正在理解",
+            "speaking": "正在朗读",
+            "paused": "操作暂停",
+            "error": "暂时遇到问题"
+          }
+        },
+        {
+          "id": "orb",
+          "component": "decorative_voice_orb",
+          "aria_hidden": true,
+          "reduced_motion": "static"
+        },
+        {
+          "id": "latest_reply",
+          "component": "large_text",
+          "data_binding": "existing_session.latest_agent_message"
+        },
+        {
+          "id": "progress",
+          "component": "look_and_step",
+          "data_binding": "existing_session.selected_look_and_current_step"
+        },
+        {
+          "id": "text_input",
+          "component": "accessible_text_input",
+          "always_available": true
+        },
+        {
+          "id": "transcript",
+          "component": "collapsible_history",
+          "data_binding": "existing_session.history"
+        }
+      ],
+      "controls": [
+        {
+          "id": "talk",
+          "component": "button",
+          "label_zh": "按下说话",
+          "aria_label_zh": "按下说话",
+          "event": "talk"
+        },
+        {
+          "id": "repeat",
+          "component": "button",
+          "label_zh": "重复",
+          "aria_label_zh": "重复",
+          "event": "repeat"
+        },
+        {
+          "id": "slow",
+          "component": "button",
+          "label_zh": "慢一点",
+          "aria_label_zh": "慢一点",
+          "event": "slow"
+        },
+        {
+          "id": "next",
+          "component": "button",
+          "label_zh": "下一步",
+          "aria_label_zh": "下一步",
+          "event": "next"
+        },
+        {
+          "id": "why",
+          "component": "button",
+          "label_zh": "为什么",
+          "aria_label_zh": "为什么",
+          "event": "why"
+        },
+        {
+          "id": "echo",
+          "component": "button",
+          "label_zh": "帮我看看",
+          "aria_label_zh": "帮我看看",
+          "event": "request_echo"
+        },
+        {
+          "id": "stop",
+          "component": "button",
+          "label_zh": "停止",
+          "aria_label_zh": "停止",
+          "event": "stop"
+        },
+        {
+          "id": "mode",
+          "component": "button",
+          "label_zh": "切换为视觉探索",
+          "aria_label_zh": "切换为视觉探索",
+          "event": "switch_mode",
+          "target_mode": "visual"
+        },
+        {
+          "id": "settings",
+          "component": "button",
+          "label_zh": "无障碍设置",
+          "aria_label_zh": "无障碍设置",
+          "event": "open_accessibility_settings"
+        }
+      ]
+    },
+    {
+      "id": "explore",
+      "proposed_route": "/explore",
+      "route_status": "CHECK_AGAINST_EXISTING_REPOSITORY",
+      "title_zh": "视觉探索",
+      "mode": "visual",
+      "sections": [
+        {
+          "id": "hero",
+          "component": "editorial_hero",
+          "copy_zh": "TRACE · 听见你的美"
+        },
+        {
+          "id": "mood",
+          "component": "natural_language_intent",
+          "demo_scene": "Dinner"
+        },
+        {
+          "id": "looks",
+          "component": "look_cards",
+          "source": "existing_verified_look_kb",
+          "draft_display": "清晰标注DRAFT，不作为正式推荐"
+        },
+        {
+          "id": "modules",
+          "component": "accessible_navigation",
+          "items": [
+            "DOT",
+            "PAIR",
+            "THREAD",
+            "ECHO",
+            "IMPRINT"
+          ]
+        },
+        {
+          "id": "future_styling",
+          "component": "optional_future_section",
+          "topics": [
+            "发型",
+            "配饰",
+            "穿搭",
+            "香气"
+          ],
+          "show_as_live_recommendation": false
+        }
+      ],
+      "controls": [
+        {
+          "id": "voice",
+          "component": "button",
+          "label_zh": "开始语音陪伴",
+          "aria_label_zh": "开始语音陪伴",
+          "event": "select_voice"
+        },
+        {
+          "id": "guide",
+          "component": "button",
+          "label_zh": "开始分步指导",
+          "aria_label_zh": "开始分步指导",
+          "event": "open_guide"
+        },
+        {
+          "id": "read",
+          "component": "button",
+          "label_zh": "读取包装",
+          "aria_label_zh": "读取包装",
+          "event": "open_read"
+        },
+        {
+          "id": "pair",
+          "component": "button",
+          "label_zh": "比较方案",
+          "aria_label_zh": "比较方案",
+          "event": "open_pair"
+        },
+        {
+          "id": "memory",
+          "component": "button",
+          "label_zh": "偏好日记",
+          "aria_label_zh": "偏好日记",
+          "event": "open_memory"
+        }
+      ]
+    },
+    {
+      "id": "guide",
+      "proposed_route": "/guide",
+      "route_status": "CHECK_AGAINST_EXISTING_REPOSITORY",
+      "title_zh": "陪我完成",
+      "mode": "shared",
+      "sections": [
+        {
+          "id": "look",
+          "component": "look_heading",
+          "source": "existing_verified_look"
+        },
+        {
+          "id": "step",
+          "component": "single_action_instruction",
+          "source": "existing_verified_routine"
+        },
+        {
+          "id": "progress",
+          "component": "current_step_status"
+        }
+      ],
+      "controls": [
+        {
+          "id": "next",
+          "component": "button",
+          "label_zh": "下一步",
+          "aria_label_zh": "下一步",
+          "event": "next"
+        },
+        {
+          "id": "repeat",
+          "component": "button",
+          "label_zh": "重复",
+          "aria_label_zh": "重复",
+          "event": "repeat"
+        },
+        {
+          "id": "why",
+          "component": "button",
+          "label_zh": "为什么",
+          "aria_label_zh": "为什么",
+          "event": "why"
+        },
+        {
+          "id": "slow",
+          "component": "button",
+          "label_zh": "慢一点",
+          "aria_label_zh": "慢一点",
+          "event": "slow"
+        },
+        {
+          "id": "echo",
+          "component": "button",
+          "label_zh": "帮我看看",
+          "aria_label_zh": "帮我看看",
+          "event": "request_echo"
+        },
+        {
+          "id": "stop",
+          "component": "button",
+          "label_zh": "停止",
+          "aria_label_zh": "停止",
+          "event": "stop"
+        }
+      ]
+    },
+    {
+      "id": "camera",
+      "proposed_route": "/camera",
+      "route_status": "CHECK_AGAINST_EXISTING_REPOSITORY",
+      "title_zh": "帮我看看",
+      "mode": "shared",
+      "sections": [
+        {
+          "id": "consent",
+          "component": "current_use_camera_consent",
+          "default": "not_granted"
+        },
+        {
+          "id": "preview",
+          "component": "camera_preview",
+          "visible_after_consent": true
+        },
+        {
+          "id": "quality",
+          "component": "quality_status",
+          "requirements_binding": "camera_contract.quality_checks"
+        },
+        {
+          "id": "result",
+          "component": "observed_or_uncertain_feedback",
+          "source": "real_validated_tool_output_or_explicit_mock",
+          "raw_confidence_visible": false
+        }
+      ],
+      "controls": [
+        {
+          "id": "agree",
+          "component": "button",
+          "label_zh": "同意本次使用相机",
+          "aria_label_zh": "同意本次使用相机",
+          "event": "grant_current_camera_use"
+        },
+        {
+          "id": "decline",
+          "component": "button",
+          "label_zh": "暂不使用相机",
+          "aria_label_zh": "暂不使用相机",
+          "event": "decline_camera"
+        },
+        {
+          "id": "capture",
+          "component": "button",
+          "label_zh": "拍照确认",
+          "aria_label_zh": "拍照确认",
+          "event": "capture"
+        },
+        {
+          "id": "retry",
+          "component": "button",
+          "label_zh": "重新拍摄",
+          "aria_label_zh": "重新拍摄",
+          "event": "retry_capture"
+        },
+        {
+          "id": "skip",
+          "component": "button",
+          "label_zh": "跳过检查",
+          "aria_label_zh": "跳过检查",
+          "event": "decline_camera"
+        },
+        {
+          "id": "continue",
+          "component": "button",
+          "label_zh": "继续指导",
+          "aria_label_zh": "继续指导",
+          "event": "open_guide"
+        },
+        {
+          "id": "stop",
+          "component": "button",
+          "label_zh": "停止",
+          "aria_label_zh": "停止",
+          "event": "stop"
+        }
+      ]
+    },
+    {
+      "id": "read",
+      "proposed_route": "/read",
+      "route_status": "CHECK_AGAINST_EXISTING_REPOSITORY",
+      "title_zh": "读给我听",
+      "mode": "shared",
+      "sections": [
+        {
+          "id": "consent",
+          "component": "separate_dot_camera_consent"
+        },
+        {
+          "id": "question",
+          "component": "specific_reading_request"
+        },
+        {
+          "id": "result",
+          "component": "recognized_text_or_uncertain",
+          "guess_unreadable_text": false
+        }
+      ],
+      "controls": [
+        {
+          "id": "capture",
+          "component": "button",
+          "label_zh": "拍摄包装",
+          "aria_label_zh": "拍摄包装",
+          "event": "request_dot_capture"
+        },
+        {
+          "id": "retry",
+          "component": "button",
+          "label_zh": "重试",
+          "aria_label_zh": "重试",
+          "event": "retry_dot"
+        },
+        {
+          "id": "back",
+          "component": "button",
+          "label_zh": "返回",
+          "aria_label_zh": "返回",
+          "event": "go_back"
+        },
+        {
+          "id": "stop",
+          "component": "button",
+          "label_zh": "停止",
+          "aria_label_zh": "停止",
+          "event": "stop"
+        }
+      ]
+    },
+    {
+      "id": "memory",
+      "proposed_route": "/memory",
+      "route_status": "CHECK_AGAINST_EXISTING_REPOSITORY",
+      "title_zh": "记住我的习惯",
+      "mode": "shared",
+      "sections": [
+        {
+          "id": "preferences",
+          "component": "explicitly_confirmed_preferences",
+          "source": "existing_consent_controlled_memory"
+        },
+        {
+          "id": "new_preference",
+          "component": "exact_preference_confirmation",
+          "default_saved": false
+        }
+      ],
+      "controls": [
+        {
+          "id": "save",
+          "component": "button",
+          "label_zh": "确认保存这条偏好",
+          "aria_label_zh": "确认保存这条偏好",
+          "event": "save_memory"
+        },
+        {
+          "id": "decline",
+          "component": "button",
+          "label_zh": "暂不保存",
+          "aria_label_zh": "暂不保存",
+          "event": "decline_memory"
+        },
+        {
+          "id": "delete",
+          "component": "button",
+          "label_zh": "删除这条偏好",
+          "aria_label_zh": "删除这条偏好",
+          "event": "delete_memory"
+        }
+      ]
+    }
+  ],
+  "event_contract": {
+    "status": "DECLARATIVE_UI_EVENTS_NOT_IMPLEMENTED_APIS",
+    "select_voice": {
+      "mode": "voice",
+      "destination_page": "voice",
+      "auto_start_microphone": false
+    },
+    "select_visual": {
+      "mode": "visual",
+      "destination_page": "explore"
+    },
+    "start_text": {
+      "destination_page": "voice",
+      "input_channel": "text",
+      "auto_start_microphone": false,
+      "auto_read": false
+    },
+    "activate_intro": {
+      "requires": "user_gesture",
+      "action": "optional_tts_intro"
+    },
+    "talk": {
+      "requires": [
+        "user_gesture",
+        "browser_microphone_permission"
+      ],
+      "effects": [
+        "cancel_current_tts",
+        "start_single_utterance_capture"
+      ]
+    },
+    "submit_text": {
+      "handler": "existing_agent_send",
+      "api_endpoint": null
+    },
+    "repeat": {
+      "target": "current_instruction",
+      "advance_step": false,
+      "write_memory": false
+    },
+    "slow": {
+      "target": "tts_speed_and_instruction_detail",
+      "user_can_restore": true
+    },
+    "next": {
+      "handler": "existing_state_machine_next",
+      "advance_max_steps": 1
+    },
+    "why": {
+      "handler": "explain_current_step_with_source_and_limits",
+      "advance_step": false
+    },
+    "request_echo": {
+      "destination_page": "camera",
+      "requires": "separate_current_use_camera_consent"
+    },
+    "decline_camera": {
+      "destination_page": "guide",
+      "preserve_step": true
+    },
+    "capture": {
+      "requires": [
+        "current_use_camera_consent",
+        "quality_gate_pass",
+        "user_gesture"
+      ],
+      "frames": 3,
+      "stop_stream_after_capture": true
+    },
+    "switch_mode": {
+      "preserve_shared_state": true,
+      "stop_active_media": true
+    },
+    "stop": {
+      "effects": [
+        "cancel_tts",
+        "cancel_asr",
+        "release_camera",
+        "cancel_pending_ui_actions"
+      ],
+      "session_resume_policy": "CHECK_EXISTING_IMPLEMENTATION"
+    },
+    "save_memory": {
+      "requires": "explicit_confirmation_of_exact_preference",
+      "api_endpoint": null
+    },
+    "delete_memory": {
+      "requires": "user_request",
+      "api_endpoint": null
+    }
+  },
+  "camera_contract": {
+    "demonstration_task": "blush_presence",
+    "allowed_statuses": [
+      "NO_BLUSH",
+      "LEFT_ONLY",
+      "RIGHT_ONLY",
+      "BOTH",
+      "UNCERTAIN"
+    ],
+    "side_reference": "USER_LEFT_AND_RIGHT",
+    "preview_mirroring_does_not_change_side_reference": true,
+    "quality_checks": [
+      "face_count",
+      "pose",
+      "occlusion",
+      "lighting",
+      "blur"
+    ],
+    "quality_checks_implemented": false,
+    "capture_frames": 3,
+    "frames_independent_evidence": false,
+    "provider_name": null,
+    "provider_model": null,
+    "provider_capability_status": "NOT_TESTED",
+    "confidence_is_calibrated_probability": false,
+    "uncertain_copy_zh": "我现在还不能可靠判断。可以转正一点、调整光线后再试一次；也可以跳过检查。",
+    "corrective_instruction_on_uncertain": false,
+    "consent_copy_template_zh": "这次需要使用相机检查腮红状态。若使用远程模型，画面会发送给配置的服务提供商。你愿意继续吗？",
+    "consent_copy_status": "UPDATE_TO_MATCH_ACTUAL_PROVIDER_AND_STORAGE_BEFORE_USE",
+    "claims_excluded": [
+      "连续实时动捕纠妆",
+      "专业级颜色测量",
+      "可靠的微小左右差异判断",
+      "保证口红边界识别",
+      "外貌评分"
+    ],
+    "mock_output_must_be_labeled": true
+  },
+  "accessibility_and_fallbacks": {
+    "entry_requires_disability_disclosure": false,
+    "infer_disability_from_voice_or_video": false,
+    "identity_saved_as_health_label": false,
+    "autoplay_on_load": false,
+    "auto_mic_or_camera_on_load": false,
+    "keyboard_operable": true,
+    "semantic_headings": true,
+    "visible_focus_required": true,
+    "live_region_policy": "用户选择应用朗读；避免应用TTS与读屏重复播报，不依赖检测读屏软件。",
+    "fallbacks": [
+      {
+        "trigger": "microphone_denied_or_asr_unavailable",
+        "copy_zh": "可以使用文字输入继续。",
+        "action": "show_text_input",
+        "preserve_step": true
+      },
+      {
+        "trigger": "tts_failed",
+        "copy_zh": "语音暂时不可用，内容已显示在页面上。",
+        "action": "keep_accessible_text",
+        "preserve_step": true
+      },
+      {
+        "trigger": "network_timeout",
+        "copy_zh": "连接暂时没有回应。可以重试，当前步骤已保留。",
+        "action": "retry_or_stop",
+        "preserve_step": true
+      },
+      {
+        "trigger": "camera_denied",
+        "copy_zh": "可以跳过检查，继续当前步骤。",
+        "action": "return_to_guide",
+        "preserve_step": true
+      },
+      {
+        "trigger": "quality_failed_or_invalid_vision_json",
+        "copy_zh": "我现在不能可靠判断，可以重拍或跳过。",
+        "action": "retry_or_skip",
+        "preserve_step": true
+      }
+    ],
+    "long_term_memory_requires_explicit_consent": true,
+    "image_storage_and_provider_policy": "NOT_VERIFIED_NO_ABSOLUTE_PRIVACY_CLAIM"
+  },
+  "recording_journey": {
+    "status": "PROPOSED_SHOT_ORDER_NOT_A_TEST_REPORT",
+    "suggested_duration_seconds": [
+      60,
+      90
+    ],
+    "scenario": "Dinner / Soft Formal",
+    "knowledge_requirement": "只有人工审核的Look与Routine可作为正式推荐；演示占位数据必须标明。",
+    "shots": [
+      {
+        "order": 1,
+        "seconds": [
+          0,
+          10
+        ],
+        "page": "entry",
+        "action": "展示品牌与两种模式，选择语音陪伴。"
+      },
+      {
+        "order": 2,
+        "seconds": [
+          10,
+          25
+        ],
+        "page": "voice",
+        "action": "主动按下说话或文字输入Dinner需求，展示实际Agent回复。"
+      },
+      {
+        "order": 3,
+        "seconds": [
+          25,
+          40
+        ],
+        "page": "guide",
+        "action": "展示单步指导，操作重复或为什么。"
+      },
+      {
+        "order": 4,
+        "seconds": [
+          40,
+          60
+        ],
+        "page": "camera",
+        "action": "请求帮我看看，展示用途授权、主动拍摄和真实返回；模拟结果持续标注MOCK。"
+      },
+      {
+        "order": 5,
+        "seconds": [
+          60,
+          75
+        ],
+        "page": "explore",
+        "action": "切换到视觉探索，展示同一会话的妆容与步骤仍保留。"
+      },
+      {
+        "order": 6,
+        "seconds": [
+          75,
+          90
+        ],
+        "page": "memory",
+        "action": "可选：明确确认保存偏好；未完成接入时仅展示已标注的原型页面。"
+      }
+    ],
+    "recording_truthfulness": [
+      "区分真实运行、模拟结果和未接入界面",
+      "不把按钮存在当作功能通过",
+      "不把录制片段当作目标用户有效性验证"
+    ]
+  },
+  "acceptance_checklist": [
+    {
+      "id": "UI01",
+      "check": "Entry支持按钮、键盘和读屏选择模式",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "UI02",
+      "check": "拒绝麦克风后文字输入仍可用",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "UI03",
+      "check": "模式切换保持会话与步骤并停止活动媒体",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "UI04",
+      "check": "ECHO授权前不开相机，拒绝后可继续指导",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "UI05",
+      "check": "UNCERTAIN没有确定性补妆指令",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "UI06",
+      "check": "MOCK结果明确标注，DRAFT数据不冒充已审核知识",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "UI07",
+      "check": "移动端大字、焦点与reduced motion可用",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "UI08",
+      "check": "实际设备读屏走查、前后端回归与构建",
+      "status": "NOT_TESTED"
+    }
+  ],
+  "legacy_route_compatibility": {
+    "preserve": [
+      "/session",
+      "/dot",
+      "/pair",
+      "/camera",
+      "/memory",
+      "/story",
+      "/demo",
+      "/admin/*"
+    ],
+    "suggested_aliases": {
+      "/guide": "/session",
+      "/read": "/dot"
+    },
+    "existing_routes_verified": false
+  }
+}

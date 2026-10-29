@@ -1,0 +1,15 @@
+TRACE local speech implementation · 2026-10-17
+
+sherpa-onnx 1.13.8: https://github.com/k2-fsa/sherpa-onnx
+Keyword spotting documentation: https://k2-fsa.github.io/sherpa/onnx/kws/index.html
+Official model download locations and exact file hashes: MODEL-SOURCES.json
+The quiet branch uses customized keywords, then validates a wake candidate locally before exposing the remainder of the utterance.
+
+ASR: SenseVoice small, official sherpa-onnx quantized export.
+Original model/code project: https://github.com/FunAudioLLM/SenseVoice
+The export includes models/asr/LICENSE, referring to the FunASR license documentation:
+https://github.com/modelscope/FunASR#license
+Retain that notice alongside exported models. Model and library terms remain those supplied by their respective authors.
+
+Chinese and English synthesis are supplied by the browser/operating system.
+No service key is supplied in this package. Voice recognition runs locally; active conversation text uses the project's configured text provider. Paused ordinary speech is never sent to that provider.

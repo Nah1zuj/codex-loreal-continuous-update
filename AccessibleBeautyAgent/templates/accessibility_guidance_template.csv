@@ -1,0 +1,2 @@
+﻿guidance_id,category,principle,description,preferred_pattern,avoid_pattern,example_good,example_bad,source_ids,demo_data
+template_guidance,voice_instruction,one_action_at_a_time,一次给一个可操作动作。,先做一个动作，再等待确认。,一次罗列全部动作。,先取少量底妆。,把全部步骤一起完成。,template_source,True

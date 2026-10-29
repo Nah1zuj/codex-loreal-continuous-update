@@ -1,0 +1,262 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> accessible-beauty-agent@0.1.0 test
+> vitest run --reporter=dot
+
+
+ RUN  v5.0.3 [本机项目路径]/10月17日版正确安装包/AccessibleBeautyAgent/frontend
+
+··························································································································································Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > starts a new session when the old server session expired
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > exposes a start-steps action before guidance in the call shell
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > step buttons still send a text action after call end without requesting microphone
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+····Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > recovers an expired pre-stream text session without retrying consent actions
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > refuses a spoken journal save before reading and reviewing its draft
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > starts the local input adapter from one entry click and exposes call controls
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > starts the local input adapter from one entry click and exposes call controls
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > direct video route keeps camera and remote frames off until distinct gestures
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > retains the session, step and plan while switching shells and after microphone failure
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > retains the session, step and plan while switching shells and after microphone failure
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > retains the session, step and plan while switching shells and after microphone failure
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > ignores a late reply after ending the call while preserving text fallback
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > ignores a late reply after ending the call while preserving text fallback
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > stops local tracks and revokes granted consent when the call ends
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+·······Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > stops local tracks and revokes granted consent when the call ends
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > arms current-step frame analysis only after explicit remote consent and stops it before reopening camera
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > arms current-step frame analysis only after explicit remote consent and stops it before reopening camera
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > arms current-step frame analysis only after explicit remote consent and stops it before reopening camera
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > revokes a late remote grant after camera closure and stays off after hiding
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > revokes a late remote grant after camera closure and stays off after hiding
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > revokes a late remote grant after camera closure and stays off after hiding
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > revokes a late remote grant after camera closure and stays off after hiding
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > stops remote sampling when a server reply revokes camera consent
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > stops remote sampling when a server reply revokes camera consent
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > does not grant server consent when camera closes during the initial check request
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > does not grant server consent when camera closes during the initial check request
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > mirrors the front camera preview and leaves the environment camera unmirrored
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > uses only the call controller microphone and speech controls on legacy speak route
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > applies a fresh text session reply after the new-session action ends the previous call
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+·······Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > switches populated canonical guidance and controls without duplicate locales
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > keeps Reader decline status in the current locale after toggling
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > keeps wake listening and pauses replies when changing locale
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > keeps wake listening and pauses replies when changing locale
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > does not restart an ended call when switching from voice to visual
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > does not restart an ended call when switching from voice to visual
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > groups video preview and consent controls into a stage beside call guidance
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > preserves active speech across voice to visual and resumes recognition when it completes
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > preserves active speech across voice to visual and resumes recognition when it completes
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > preserves active speech across voice to visual and resumes recognition when it completes
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > routes the three-step voice flow, mentions a factual previous look once, and keeps wake input after finishing
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > routes the three-step voice flow, mentions a factual previous look once, and keeps wake input after finishing
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+·······Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > routes the three-step voice flow, mentions a factual previous look once, and keeps wake input after finishing
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > routes the three-step voice flow, mentions a factual previous look once, and keeps wake input after finishing
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > initializes Reflect from Listen through button without requiring microphone
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > initializes Reflect from Listen through button without requiring microphone
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > initializes Reflect from Listen through navigation without requiring microphone
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+stderr | src/components/CallExperience.test.tsx > initializes Reflect from Listen through navigation without requiring microphone
+THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.
+
+···
+
+ Test Files  35 passed (35)
+      Tests  182 passed (182)
+   Start at  12:23:29
+   Duration  1.89s (environment 45%, transform 24%, tests 19%, import 10%, worker 2%)
+
+    Isolate  35 workers spawned · ~295ms startup each (spawn + environment, per file)
+             at least ~500ms faster with isolate: false — reuses workers across files instead of one per file
+

@@ -1,0 +1,35 @@
+生成方式：内置 image_gen 图片生成工具。
+用途：第二次例会群内分享简图；会后任务为暂定，按讨论结果调整。
+最终生成提示词：
+Use case: infographic-diagram.
+Create ONE polished Chinese meeting briefing infographic, portrait 2:3, high resolution, intended to share in a WeChat project team group. Crisp very legible simplified Chinese typography, warm white background, dark charcoal text, restrained muted purple and teal accents, generous margins. Professional and approachable, like a beautifully typeset editorial briefing, not a promotional advertisement. Three clearly separated stacked cards labeled 01, 02, 03 with small simple line icons (documents, discussion, checklist), no people, no logos, no elaborate decoration. Title prominent, compact introductory goal, a clear small horizontal process arrow, three stacked content sections, final deliverables strip. All body text large enough to read on a phone. Make the tentative status of section 03 very visible with an amber pill. Do not invent any extra text. Typeset precisely the following Chinese text, retaining all content and hierarchy:
+
+第二次例会｜视障美妆项目
+从想法出发，把下一步讨论清楚
+
+本次目标：明确待验证的问题，商定探索任务
+妆前选择与准备 → 妆中操作 ⇄ 检查与修正
+
+01  会前准备｜带着材料来
+• 梳理原方案：保留什么？哪些还只是设想？
+• 了解已有方案：VMA 妆容检查、HAPTA 动作辅助
+• 每人带来一个具体困难或想法，注明依据
+
+02  会上讨论｜围绕一个真实任务
+以“涂口红”为例，暂不限定最终产品
+• 用户缺的是操作教学、位置提示，还是结果确认？
+• 用户自己做什么？系统帮什么？是否需要硬件？
+• 相比现有办法，我们可能改善哪一步？
+• 最大未知是什么？用什么小实验查清？
+
+03  会后探索｜暂定，按讨论结果调整
+• 用户研究：寻找访谈渠道，了解真实化妆经历
+• 体验验证：用人工模拟，测试提示是否有用
+• 技术验证：测试一个关键能力，记录失败案例
+• 文档整理：记录决定、待验证假设与任务分工
+
+会议结束要留下
+待验证问题 ＋ 负责人 ＋ 下次带回的证据
+
+先验证需要与能力，再决定首版做什么
+

@@ -1,0 +1,5 @@
+TRACE home apple artwork
+User supplied PNG: codex-clipboard-47f0f2e7-fb66-4819-8c98-2056d331334d.png
+Copied without image edits. RGBA1254x1254; alpha retained.
+Decorative 2D artwork with independent live WebGL particles.
+Original copyright remains with its owner; not represented as CC0.

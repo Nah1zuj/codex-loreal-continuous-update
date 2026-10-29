@@ -1,0 +1,44 @@
+[
+  {
+    "repository": "mrdoob/three.js",
+    "stars": 116285,
+    "pushed_at": "2026-10-12T11:05:20Z",
+    "license": "MIT",
+    "archived": false
+  },
+  {
+    "repository": "pmndrs/react-three-fiber",
+    "stars": 32903,
+    "pushed_at": "2026-10-12T10:44:46Z",
+    "license": "MIT",
+    "archived": false
+  },
+  {
+    "repository": "pmndrs/drei",
+    "stars": 9927,
+    "pushed_at": "2026-10-05T19:35:53Z",
+    "license": "MIT",
+    "archived": false
+  },
+  {
+    "repository": "darkroomengineering/lenis",
+    "stars": 16452,
+    "pushed_at": "2026-10-02T10:59:52Z",
+    "license": "MIT",
+    "archived": false
+  },
+  {
+    "repository": "14islands/r3f-scroll-rig",
+    "stars": 980,
+    "pushed_at": "2025-12-17T13:51:13Z",
+    "license": "MIT",
+    "archived": false
+  },
+  {
+    "repository": "MisterPrada/morph-particles",
+    "stars": 285,
+    "pushed_at": "2025-05-16T12:53:38Z",
+    "license": "No license found",
+    "archived": false
+  }
+]
