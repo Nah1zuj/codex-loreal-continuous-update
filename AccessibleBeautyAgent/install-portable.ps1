@@ -11,6 +11,7 @@ $marker='work/install-root-windows.txt'
 if((Test-Path .venv-portable) -and ((-not (Test-Path $marker)) -or ((Get-Content $marker -Raw) -ne $PSScriptRoot))){Rename-Item .venv-portable ('.venv-portable.previous-'+[DateTimeOffset]::Now.ToUnixTimeSeconds())}
 if(-not (Test-Path .venv-portable/Scripts/python.exe)){RunChecked $py.Source @('-3.12','-m','venv','.venv-portable')}
 RunChecked '.venv-portable/Scripts/python.exe' @('-m','pip','install','-r','backend/requirements-windows.txt','-r','voice/requirements.txt')
+RunChecked '.venv-portable/Scripts/python.exe' @('voice/setup_local_voice_models.py')
 Push-Location frontend
 try {RunChecked npm.cmd @('ci');RunChecked npm.cmd @('run','build')} finally {Pop-Location}
 RunChecked '.venv-portable/Scripts/python.exe' @('-c',"import sys;sys.path.insert(0,'voice');from setup_local_voice_models import ready;assert ready(),'Missing voice models'")

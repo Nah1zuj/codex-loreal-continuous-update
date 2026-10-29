@@ -14,6 +14,7 @@ if [ -d .venv-portable ] && [ "$(cat work/install-root.txt 2>/dev/null || true)"
 fi
 [ -x .venv-portable/bin/python ] || "$portable_python" -m venv .venv-portable
 .venv-portable/bin/python -m pip install -r backend/requirements-windows.txt -r voice/requirements.txt
+.venv-portable/bin/python voice/setup_local_voice_models.py
 (cd frontend && npm ci && npm run build)
 .venv-portable/bin/python -c "import sys;sys.path.insert(0,'voice');from setup_local_voice_models import ready;assert ready(),'本地语音模型不完整，请重新取得完整交付文件夹。'"
 printf '%s' "$PWD" > work/install-root.txt
