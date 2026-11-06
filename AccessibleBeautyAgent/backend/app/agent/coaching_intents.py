@@ -12,8 +12,8 @@ ADVANCE = {
     '我画好了继续', '画好了继续', '我已经做好了下一步呢', '已经做好了下一步',
 }
 FINISH = {
-    '今天完成了', '好的今天完成了', '结束今天', '结束课程', '结束教学',
-    'finishsession', 'finishfortoday', 'endthelesson',
+    '今天完成了', '好的今天完成了', '结束今天', '结束课程', '结束教学', '结束本次装扮',
+    'finishsession', 'finishfortoday', 'endthelesson', 'finishthislook',
 }
 CONDITIONAL = ('如果', '假如', '要是', '能不能', '可不可以', '是否', '吗', '呢', 'how', 'whatif', 'canwe', 'cani', 'shouldi', 'shouldwe')
 PROCEDURE = ('下一步', '开始', '跳过', '继续', '前一步', '上一步', '结束', '暂停', '保存',

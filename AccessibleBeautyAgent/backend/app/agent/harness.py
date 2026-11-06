@@ -91,6 +91,15 @@ class AgentHarness:
     def current_step(self, session):
         return self.coaching.current(session)
 
+    def session_snapshot(self, session):
+        if session.makeup_plan and self.coaching.visible_plan(session) is None:
+            session = session.model_copy(update={
+                'makeup_plan':None, 'last_response':'', 'last_tool_call':None,
+                'tool_calls':[], 'rag_documents':[],
+            })
+            return {**session.model_dump(),'course_unavailable':True}
+        return session.model_dump()
+
     def run_visual_check(self, task, images, session_context, demo=False):
         s = self.sessions.get(session_context['session_id'])
         if not s.camera_consent:
@@ -161,7 +170,7 @@ class AgentHarness:
         step = self.current_step(s)
         if remember:
             s.last_response = message
-        canonical={'message':message,'session':s.model_dump(),'step':step}
+        canonical={'message':message,'session':self.session_snapshot(s),'step':step}
         return {**localize_view({**canonical,'mode':self.settings.model_provider},s.locale),'canonical':canonical}
 
     def duplicate_reply(self, session, result):
@@ -172,7 +181,8 @@ class AgentHarness:
         message = '这项操作已提交。' if session.locale == 'zh-CN' else 'This command was already applied.'
         reply = self.respond(session, message, remember=False)
         if session.makeup_plan and session.makeup_plan.status == 'completed':
-            reply['summary'] = self.coaching.summary(session)
+            if (summary := self.coaching.summary(session)) is not None:
+                reply['summary'] = summary
         return {**reply, 'event':result['event'], 'duplicate':True}
 
     def chat(self, request):
@@ -187,13 +197,16 @@ class AgentHarness:
         ending = command in ('stop','停止','stop session','停止会话')
         if s.stage == Stage.COMPLETE and request.action=='message' and not ending:
             return self.respond(s,'本次会话已经结束。可以开始新会话。' if s.locale=='zh-CN' else 'This session has ended. You can start a new session.')
+        if request.action=='message' and not text and s.makeup_plan and self.coaching.visible_plan(s) is None:
+            raise self.coaching.unavailable_course()
         legacy = bool(s.makeup_plan and s.makeup_plan.legacy_routine)
         if s.makeup_plan and not legacy and text and request.action=='message' and command not in ('stop','停止','stop session','停止会话','stop camera','停止相机','关闭相机','check this','check with camera'):
             import json
             result=self.coaching.handle(s,request)
             if result and result.get('duplicate'):
                 return self.duplicate_reply(s, result)
-            if self.settings.model_provider == 'mock' or result.get('clarification_required'):
+            if (self.settings.model_provider == 'mock' or result.get('clarification_required')
+                    or self.coaching.visible_plan(s) is None):
                 message = self.coaching.reply_text(s, result, normalized, text)
             else:
                 message = self.language.companion(text, json.dumps(result, ensure_ascii=False), s.locale)

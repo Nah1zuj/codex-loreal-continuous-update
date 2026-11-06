@@ -79,6 +79,26 @@ def test_hardware_requires_loopback_or_https(tmp_path):
     with TestClient(create_app(Settings(memory_path=tmp_path/'https.sqlite')),base_url='http://remote.example') as client:
         assert client.get('/api/hardware/devices').status_code==403
 
+
+def test_http_mirror_hides_unavailable_coaching(tmp_path):
+    from fastapi.testclient import TestClient
+    from app.main import create_app
+    from app.config import Settings
+
+    settings = Settings(memory_path=tmp_path/'mirror-trial.sqlite',developer_mode=True)
+    with TestClient(create_app(settings),base_url='https://testserver') as client:
+        started = client.post('/api/experience/reflect',json={}).json()
+        sid = started['session']['session_id']
+        code = client.post('/api/hardware/pairing',json={'session_id':sid}).json()['code']
+        pair = client.post('/api/hardware/pair',json={'code':code,'name':'Mirror','capabilities':['display']}).json()
+        headers = {'Authorization':'Bearer '+pair['token']}
+        display = client.get('/api/hardware/display',headers=headers).json()
+        assert display['step']['review_status'] == 'DRAFT'
+
+        settings.developer_mode = False
+        display = client.get('/api/hardware/display',headers=headers).json()
+        assert display['step'] is None and display['progress'] is None
+
 def test_existing_app_works_without_optional_hardware_package(tmp_path,monkeypatch):
     import builtins
     from fastapi.testclient import TestClient

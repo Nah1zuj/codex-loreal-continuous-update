@@ -27,8 +27,8 @@ def build_makeup_router(agent):
             else:
                 message=step['instruction'] if step else ''
             reply=agent.respond(s,message)
-            if s.makeup_plan.status=='completed':
-                reply['summary']=agent.coaching.summary(s)
+            if s.makeup_plan.status=='completed' and (summary:=agent.coaching.summary(s)) is not None:
+                reply['summary']=summary
             return {**reply,'event':result['event'],'duplicate':result.get('duplicate',False)}
 
     @router.get('/events/{session_id}/{event_id}')
@@ -44,12 +44,12 @@ def build_makeup_router(agent):
                 current_step = agent.current_step(s)
             except RoutineUnavailable:
                 current_step = None
-            return {'event':result,'session':{**s.model_dump(),'current_step':current_step}}
+            return {'event':result,'session':{**agent.session_snapshot(s),'current_step':current_step}}
 
     @router.get('/{session_id}')
     def get(session_id:str):
         s=agent.sessions.get(session_id)
-        return {'plan':s.makeup_plan,'current_step':agent.coaching.current(s),'persistence_days':30}
+        return {'plan':agent.coaching.visible_plan(s),'current_step':agent.coaching.current(s),'persistence_days':30}
     @router.delete('/{session_id}')
     def remove(session_id:str,body:DeletePlan):
         if body.explicit_consent is not True:raise PermissionError('Confirm deletion of this coaching progress')

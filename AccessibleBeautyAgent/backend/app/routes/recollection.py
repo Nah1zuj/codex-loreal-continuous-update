@@ -88,6 +88,8 @@ def build_recollection_router(agent):
         with agent.sessions.lock:
             s=agent.sessions.get(body.session_id) if body.session_id else agent.sessions.create(owner(request))
             s.locale='en' if body.locale=='en' else 'zh-CN'
+            if s.makeup_plan and agent.coaching.visible_plan(s) is None:
+                raise agent.coaching.unavailable_course()
             if s.makeup_plan and s.makeup_plan.status=='completed':
                 return completed_reply(s)
             if not s.makeup_plan:
@@ -103,7 +105,8 @@ def build_recollection_router(agent):
         if not body.session_id:raise ValueError('尚未开始装扮，可以先进入倾听。')
         with agent.sessions.lock:
             s=agent.sessions.get(body.session_id)
-            if not s.makeup_plan or s.makeup_plan.status=='draft':raise ValueError('还没有开始映照步骤，请先完成倾听。')
+            if not s.makeup_plan or (s.makeup_plan.status=='draft' and agent.coaching.visible_plan(s) is not None):
+                raise ValueError('还没有开始映照步骤，请先完成倾听。')
             result=None
             if s.makeup_plan.status!='completed' or body.event_id:
                 result=agent.coaching.act(s,'finish',body.event_id,body.expected_step_id,
@@ -114,6 +117,9 @@ def build_recollection_router(agent):
 
     def completed_reply(s):
         summary=agent.coaching.summary(s)
+        if summary is None:
+            text='本次装扮体验已结束。' if s.locale=='zh-CN' else 'This look experience has ended.'
+            return {**agent.respond(s,text),'summary':None,'summary_candidate':None,'recollection':None}
         count=len(summary['completed_steps'])
         name=summary['chosen_look']
         if s.locale=='zh-CN':

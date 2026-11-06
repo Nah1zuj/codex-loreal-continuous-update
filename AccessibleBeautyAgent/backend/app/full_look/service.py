@@ -37,7 +37,10 @@ class FullLookService:
     def plan(self,s):
         self.editable(s)
         if s.todays_look is not None:return s.todays_look
-        if not s.selected_look and not s.makeup_plan:raise ValueError('请先表达场景并选择妆容方向。')
+        course = self.agent.coaching.visible_plan(s)
+        if not s.selected_look and course is None:
+            if s.makeup_plan:raise self.agent.coaching.unavailable_course()
+            raise ValueError('请先表达场景并选择妆容方向。')
         rows={
             'skincare':('保留你已知可耐受的基础妆前准备','可省略；不诊断皮肤，也不推断过敏安全。','Your familiar prep'),
             'makeup':('Soft Formal · 柔和正式','这是场景演示方向；你可以只做熟悉的步骤。','Soft Formal'),
@@ -57,7 +60,7 @@ class FullLookService:
         elif not s.selected_look:
             # Reuse the actual coaching plan. Do not select a legacy preset or
             # reset progress to satisfy the visual presentation.
-            sections['makeup'].suggestions=[self.suggestion('coaching_makeup','本次上妆计划','沿用当前步骤：'+'、'.join(step.title for step in s.makeup_plan.steps)+'。美没有统一的定义，按你喜欢的方式表达就好。','Your current makeup plan')]
+            sections['makeup'].suggestions=[self.suggestion('coaching_makeup','本次上妆计划','沿用当前步骤：'+'、'.join(step.title for step in course.steps)+'。美没有统一的定义，按你喜欢的方式表达就好。','Your current makeup plan')]
         s.todays_look=FullLook(plan_id='look_'+uuid.uuid4().hex,session_id=s.session_id,scene=s.scene or 'unspecified',desired_impression=s.desired_impression,sections=sections,uncertainties=['人工策划演示草稿，尚未作为真实商品推荐审核。','天气、衣橱、发长、皮肤与佩戴偏好未知；可以澄清或修改。'])
         self.agent.policies.validate_plan(s.todays_look)
         return s.todays_look

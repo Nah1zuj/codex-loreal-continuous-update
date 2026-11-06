@@ -59,13 +59,13 @@ def build_router(agent,settings,conversation):
             if not s.user_id.startswith(request.state.principal_prefix):
                 raise KeyError('Session not found')
             agent.sessions.revoke_media(s)
-            return {**s.model_dump(),'current_step':agent.current_step(s)}
+            return {**agent.session_snapshot(s),'current_step':agent.current_step(s)}
 
     @api.get('/session/{session_id}')
     def session(session_id: str, locale: str | None = None):
         with agent.sessions.lock:
             s=agent.sessions.get(session_id)
-            return localize_view({**s.model_dump(),'current_step':agent.current_step(s)},locale or 'zh-CN')
+            return localize_view({**agent.session_snapshot(s),'current_step':agent.current_step(s)},locale or 'zh-CN')
     @api.post('/look/search')
     def looks(body: LookRequest):
         return {'results':agent.retrieve_look(body.scene,body.desired_impression,body.avoid,body.preferences)}
@@ -130,7 +130,7 @@ def build_router(agent,settings,conversation):
         with agent.sessions.lock:
             s,images = authorize_images(body)
             result = agent.run_visual_check(body.task,images,{'session_id':s.session_id,'selected_look':s.selected_look,'mock_status':body.mock_status,'capture_kind':body.capture_kind},demo=body.demo)
-            return {**result,'session':s.model_dump(),'step':agent.current_step(s)}
+            return {**result,'session':agent.session_snapshot(s),'step':agent.current_step(s)}
     @api.get('/profile/{user_id}')
     def profile(user_id: str):
         return agent.get_user_profile(user_id)

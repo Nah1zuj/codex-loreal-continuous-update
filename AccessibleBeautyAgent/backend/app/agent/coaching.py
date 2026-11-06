@@ -21,6 +21,15 @@ class RoutineUnavailable(ValueError):
 
 class CoachingController:
     def __init__(self,agent):self.agent=agent
+
+    @staticmethod
+    def unavailable_course():
+        return CommandConflict('COURSE_UNAVAILABLE','课程尚未通过试用审核，或版本已变更。请返回并选择可用课程。')
+
+    def visible_plan(self, session):
+        plan = session.makeup_plan
+        return plan if plan and self.course_available(plan) else None
+
     def knowledge(self, locale, reviewed_only=True):
         return lesson_rows(self.agent.store, locale, reviewed_only=reviewed_only)
 
@@ -178,15 +187,16 @@ class CoachingController:
                         step = self.current(s)
                     except RoutineUnavailable:
                         step = None
-                    return {'duplicate':True,'plan':p.model_dump(),'step':step,'event':{
+                    return {'duplicate':True,'plan':p.model_dump() if self.course_available(p) else None,'step':step,'event':{
                         'event_id':event_id,'action':intent,'status':'committed',**details.get('result',{}),
                     }}
                 if ((expected_plan_id is not None and expected_plan_id!=p.id)
                         or (expected_revision is not None and expected_revision!=p.revision)
                         or (expected_step_id is not None and expected_step_id!=p.steps[p.active_index].id)):
                     raise CommandConflict('STALE_PLAN','教学进度已变化。请读取最新步骤后再操作。')
-                if not self.course_available(p):
-                    raise CommandConflict('COURSE_UNAVAILABLE','课程尚未通过试用审核，或版本已变更。请返回并选择可用课程。')
+                available = self.course_available(p)
+                if not available and intent not in ('finish', 'end_session'):
+                    raise self.unavailable_course()
                 requested=intent
                 if compatible_next and intent=='advance':
                     if p.status=='draft':intent='start'
@@ -230,7 +240,7 @@ class CoachingController:
                     if p.status=='active' and p.steps[p.active_index].status=='pending':p.steps[p.active_index].status='active'
                 elif intent in ('finish', 'end_session'):
                     # User ending early does not claim unperformed steps are completed.
-                    if p.status=='draft' and intent=='finish':raise ValueError('Start the plan before finishing')
+                    if available and p.status=='draft' and intent=='finish':raise ValueError('Start the plan before finishing')
                     p.status='completed';p.workflow='SESSION_COMPLETE'
                     if intent == 'end_session':
                         p.session_ended = True
@@ -257,12 +267,14 @@ class CoachingController:
             if changed and (intent in ('pause','resume','finish','end_session') or p.status=='completed'
                             or (p.legacy_routine and intent in ('advance','skip','previous','blush'))):
                 self.agent.sessions.revoke_media(s)
-            return {'plan':p.model_dump(),'step':self.current(s),'event':{
+            return {'plan':p.model_dump() if available else None,'step':self.current(s),'event':{
                 'event_id':event_id,'action':requested,'status':'committed',**result,
             }}
     def summary(self,s):
         p=s.makeup_plan
         if not p or p.status!='completed':raise ValueError('Finish the session before summarizing')
+        if not self.course_available(p):
+            return None
         completed = [step for step in p.steps if step.status == 'completed']
         if p.legacy_routine:
             source = self.agent.store.routine_map.get(p.legacy_routine.routine_id, {})
@@ -275,6 +287,7 @@ class CoachingController:
         if coaching_intent(user_text)!='save':raise PermissionError('Explicit journal confirmation required')
         if not s.makeup_plan or not s.makeup_plan.summary_presented:raise PermissionError('Read the completed session summary before saving')
         summary=self.summary(s)
+        if summary is None:raise self.unavailable_course()
         with self.agent.sessions.lock:
             with self.agent.memory.connect() as db:
                 db.execute('BEGIN IMMEDIATE')
@@ -309,6 +322,8 @@ class CoachingController:
         s.makeup_plan=p
     def handle(self,s,body):
         intent=coaching_intent(body.message)
+        if s.makeup_plan and intent!='finish' and self.visible_plan(s) is None:
+            raise self.unavailable_course()
         if intent=='ambiguous' and s.makeup_plan:
             return {'clarification_required':True,'state_unchanged':True}
         if not s.makeup_plan:
@@ -334,7 +349,8 @@ class CoachingController:
             result=self.act(s,intent,body.event_id,body.expected_step_id,
                             expected_plan_id=body.expected_plan_id,expected_revision=body.expected_revision,
                             compatible_next=True)
-            if s.makeup_plan.status=='completed':result['summary']=self.summary(s)
+            if s.makeup_plan.status=='completed' and (summary:=self.summary(s)) is not None:
+                result['summary']=summary
             return result
         return {'plan':s.makeup_plan.model_dump(),'step':self.current(s),'state_unchanged':True}
 
@@ -348,6 +364,8 @@ class CoachingController:
             return ('我会保留这一步。你想听当前步骤的说明，还是已经做完、准备进入下一步？'
                     if zh else 'Your step is unchanged. Would you like an explanation, or have you finished and want the next step?')
         plan = s.makeup_plan
+        if plan.status=='completed' and self.visible_plan(s) is None:
+            return '本次装扮体验已结束。' if zh else 'This look experience has ended.'
         label = ('待审核原创课程。' if zh else 'Original draft curriculum awaiting expert review. ') if (
             plan.knowledge_status == 'draft' and not data.get('state_unchanged')
         ) else ''

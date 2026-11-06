@@ -8,6 +8,7 @@ from fastapi.testclient import TestClient
 from app.config import Settings
 from app.knowledge.repository import KnowledgeRepository
 from app.main import create_app
+from app.services.model_client import RemoteModelClient
 
 
 FIXTURES = Path(__file__).parent / 'fixtures'
@@ -131,6 +132,95 @@ def test_trials_require_complete_approved_course_and_translation(tmp_path):
     with pytest.raises(ValueError,match='版本已变更'):
         restarted.coaching.act(saved,'advance','unsafe')
     assert saved.makeup_plan.active_index==0
+
+
+@pytest.mark.parametrize('exit_path', ['stop', 'finish', 'recollection'])
+def test_trial_restart_hides_stored_draft_and_allows_exit(tmp_path, monkeypatch, exit_path):
+    database = tmp_path/'draft_restart.sqlite'
+    developer_app = create_app(Settings(memory_path=database, developer_mode=True))
+    with TestClient(developer_app, base_url='https://testserver') as developer:
+        session = say(developer, '我想画自然日常妆')['session']
+        sid = session['session_id']
+        plan = say(developer, '开始', sid)['session']['makeup_plan']
+        lesson_text = plan['steps'][0]['instructions'][0]
+        confirmed_command = {'session_id':sid, 'action':'advance', 'event_id':'confirmed-draft-step',
+                             'expected_plan_id':plan['id'], 'expected_revision':plan['revision']}
+        confirmed = developer.post('/api/makeup/command', json=confirmed_command)
+        assert confirmed.status_code == 200
+        receipt = confirmed.json()['event']
+        browser_cookies = dict(developer.cookies)
+        assert say(developer, '再说一次', sid)['step']['instruction']
+
+        # A review change can also make an already running plan unavailable.
+        developer_app.state.settings.developer_mode = False
+        assert developer.get(f'/api/transcripts/{sid}').json()['messages'] == []
+        assert developer.post('/api/chat',json={'session_id':sid,'experience_mode':'visual'}).status_code == 409
+
+    def unexpected_transport(*args, **kwargs):
+        pytest.fail('An unavailable course reached the remote model transport')
+
+    monkeypatch.setattr(RemoteModelClient,'request',unexpected_transport)
+    monkeypatch.setattr(RemoteModelClient,'stream_chat',unexpected_transport)
+    trial_app = create_app(Settings(memory_path=database, developer_mode=False, admin_enabled=False,
+                                    model_provider='qwen', allow_remote_ai=True, api_key='dummy'))
+    with TestClient(trial_app, base_url='https://testserver', cookies=browser_cookies) as trial:
+        def assert_hidden(snapshot):
+            assert snapshot['makeup_plan'] is None
+            assert snapshot['course_unavailable'] is True
+            assert snapshot['routine_total_steps'] == 0
+            assert lesson_text not in json.dumps(snapshot, ensure_ascii=False)
+
+        restored = trial.post(f'/api/session/{sid}/restore')
+        assert restored.status_code == 200 and restored.json()['current_step'] is None
+        assert_hidden(restored.json())
+        snapshot = trial.get(f'/api/session/{sid}').json()
+        assert_hidden(snapshot)
+        assert trial.get(f'/api/makeup/{sid}').json() == {'plan':None, 'current_step':None, 'persistence_days':30}
+        saved_event = trial.get(f'/api/makeup/events/{sid}/{receipt["event_id"]}').json()
+        assert saved_event['event'] == receipt
+        assert_hidden(saved_event['session'])
+        blocked = trial.post('/api/makeup/command', json={**confirmed_command,
+                             'event_id':'blocked-trial-advance', 'expected_revision':receipt['revision']})
+        assert blocked.status_code == 409 and blocked.json()['code'] == 'COURSE_UNAVAILABLE'
+        assert trial.post('/api/experience/reflect',json={'session_id':sid}).status_code == 409
+        assert trial.post('/api/full-look/plan',json={'session_id':sid}).json()['code'] == 'COURSE_UNAVAILABLE'
+        assert frames(trial, '再说一次', sid)[-1]['code'] == 'COURSE_UNAVAILABLE'
+        check = trial.post('/api/chat',json={'session_id':sid,'message':'check this'}).json()
+        assert check['step'] is None
+        assert_hidden(check['session'])
+        local_permit = trial.post('/api/vision/local/permits',json={'session_id':sid,'scope':'photo'})
+        assert local_permit.status_code == 200 and local_permit.json()['scope'] == 'photo'
+
+        if exit_path == 'recollection':
+            response = trial.post('/api/recollection/finish',json={'session_id':sid,'event_id':'trial-exit'})
+            assert response.status_code == 200
+            exit_reply = response.json()
+            assert exit_reply['summary_candidate'] is None
+        else:
+            command = 'stop' if exit_path == 'stop' else 'finish this look'
+            events = frames(trial, command, sid)
+            assert events[-1]['type'] == 'final', events[-1]
+            for event in events:
+                if event['type'] == 'session':
+                    assert_hidden(event['session'])
+            exit_reply = events[-1]['reply']
+        assert_hidden(exit_reply['session'])
+        assert_hidden(exit_reply['canonical']['session'])
+        assert exit_reply.get('summary') is None
+        assert exit_reply['event']['plan_status'] == 'completed'
+        assert lesson_text not in json.dumps(exit_reply, ensure_ascii=False)
+
+        replay = trial.post('/api/makeup/command',json=confirmed_command).json()
+        assert replay['duplicate'] and replay['event'] == receipt
+        assert replay.get('summary') is None
+        assert_hidden(replay['session'])
+
+    with trial_app.state.agent.memory.connect() as db:
+        persisted = json.loads(db.execute('SELECT payload FROM makeup_sessions WHERE session_id=?',(sid,)).fetchone()[0])
+    assert persisted['steps'][0]['status'] == 'completed'
+    assert persisted['steps'][0]['instructions'] == [lesson_text]
+    assert persisted['status'] == 'completed'
+    assert persisted.get('session_ended',False) is (exit_path == 'stop')
 
 
 def test_retrieval_examples_check_source_applicability_and_admission(tmp_path):

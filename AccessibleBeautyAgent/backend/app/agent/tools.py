@@ -76,7 +76,10 @@ class ToolRegistry:
                 action={'start_makeup_session':'start','complete_current_step':'advance','advance_makeup_step':'advance','go_to_previous_step':'previous','pause_makeup_session':'pause','resume_makeup_session':'resume','request_visual_check':'visual','repeat_current_step':'repeat','explain_current_step':'explain'}
                 if name=='create_makeup_plan':
                     if not requested_coaching(user_text):raise PermissionError('Explicit makeup request required')
-                    result=s.makeup_plan.model_dump() if s.makeup_plan else c.create(s,value.needs,value.proposal).model_dump()
+                    if not s.makeup_plan:c.create(s,value.needs,value.proposal)
+                    plan=c.visible_plan(s)
+                    if plan is None:raise c.unavailable_course()
+                    result=plan.model_dump()
                 elif name=='search_reviewed_makeup_knowledge':
                     rows=c.knowledge(s.locale)
                     result={'results':[r for r in rows if any(term.lower() in (r['description']+' '+r['principle']).lower() for term in value.query.split())][:5],'reviewed_available':bool(rows)}
@@ -84,7 +87,10 @@ class ToolRegistry:
                     requested=coaching_intent(user_text)
                     if requested!=action[name] and not (action[name]=='start' and requested=='advance' and s.makeup_plan and s.makeup_plan.status=='draft'):raise PermissionError('Explicit action required')
                     result=c.act(s,action[name],event_id,expected_step_id,expected_plan_id=expected_plan_id,expected_revision=expected_revision)
-                elif name in ('get_current_step','get_active_makeup_plan'):result=c.current(s) if name=='get_current_step' else s.makeup_plan.model_dump() if s.makeup_plan else None
+                elif name=='get_current_step':result=c.current(s)
+                elif name=='get_active_makeup_plan':
+                    plan=c.visible_plan(s)
+                    result=plan.model_dump() if plan else None
                 elif name=='generate_session_summary':result=c.summary(s)
                 elif name=='save_confirmed_beauty_journal':result=c.save(s,user_text)
                 elif name=='analyze_makeup':

@@ -3,7 +3,7 @@ export interface Step {step_id:string;name:string;instruction:string;instruction
 export interface Session {current_step?:Step|null;last_response?:string;todays_look?:FullLook;experience_mode?:ExperienceMode|null;session_id:string;user_id:string;stage:Stage;scene:string|null;desired_impression:string[];avoid:string[];selected_look:string|null;selected_products:Array<{product_id:string;description:string}>;routine_id:string|null;routine_step:number;routine_total_steps:number;routine_started:boolean;camera_consent:boolean;memory_consent:boolean;visual_state:Visual|null;confidence:number;last_tool_call:unknown;rag_documents:unknown[];memory_candidate:Record<string,unknown>|null;memory_candidate_id?:string|null;memory_candidate_version?:string|null;stage_history:string[]}
 export interface Reply {canonical?:{message:string;session:Session;step:Step|null};message:string;session:Session;step:Step|null;mode?:string}
 export interface MakeupPlan {id:string;revision:number;status:'draft'|'active'|'completed';active_index:number;workflow:string;steps:Array<{id:string;title:string;status:string}>}
-export interface Session {makeup_plan?:MakeupPlan|null}
+export interface Session {makeup_plan?:MakeupPlan|null;course_unavailable?:boolean}
 export interface Visual {task:string;status:string;confidence:number;simulated:boolean;frame_results?:unknown[]}
 export interface VisionReply extends Reply {visual:Visual|null;gate:Record<string,unknown>}
 export interface MemoryEpisode {memory_id:string;version?:string;feedback:string;context:string;timestamp:string;preferred_finish?:string[];preferred_saturation?:string|null;avoid?:string[]}

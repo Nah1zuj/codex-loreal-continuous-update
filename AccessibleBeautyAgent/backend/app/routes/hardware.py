@@ -66,7 +66,7 @@ def build_hardware_router(agent):
         gateway.revoke(owner(request),device_id);return {'disconnected':True}
     @router.get('/display')
     def display(request:Request):
-        d,_=device(request);s=owned_session(d.owner,d.session_id);plan=s.makeup_plan
+        d,_=device(request);s=owned_session(d.owner,d.session_id);plan=agent.coaching.visible_plan(s)
         if plan and plan.legacy_routine:
             current = agent.current_step(s)
             step = {'title':current['name'],'instruction':current['instruction'],'review_status':current['review_status']} if current else None

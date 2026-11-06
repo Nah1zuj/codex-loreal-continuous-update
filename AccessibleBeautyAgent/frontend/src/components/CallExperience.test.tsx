@@ -107,6 +107,27 @@ it('displays a typed Story reply without application speech or a microphone requ
  expect(host.querySelector('.story-reply:not([aria-live])')?.textContent).toBe('A response to your voice.')
 })
 it('starts a new session when the old server session expired',async()=>{vi.mocked(api).mockImplementation(async(path:string,body?:any)=>{if(path==='/health')return {} as any;if(path.startsWith('/session/'))return {session_id:'expired',stage:'GUIDE',selected_products:[]} as any;if(body?.message==='stop')throw Object.assign(new Error('expired'),{status:404});return {session:{session_id:'fresh',stage:'INIT',selected_products:[]},step:null,message:'Fresh greeting'} as any});await render('/thread','expired');await act(async()=>button('New session').click());expect(host.textContent).toContain('Fresh greeting')})
+it.each([
+ ['/thread','Next action','Stop session'],
+ ['/voice','Next','End this session'],
+])('explains an unavailable course and can close its restored session from %s',async(path,nextLabel,stopLabel)=>{
+ const snapshot={session_id:'old-course',stage:'GUIDE',course_unavailable:true,makeup_plan:null,selected_products:[]}
+ const getUserMedia=vi.fn()
+ Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia}})
+ vi.mocked(api).mockClear()
+ vi.mocked(api).mockImplementation(async route=>{
+  if(route.startsWith('/session/'))return snapshot as never
+  if(route==='/chat')return {session:{...snapshot,stage:'COMPLETE'},step:null,message:'Session ended'} as never
+  return {} as never
+ })
+ await render(path,'old-course')
+ expect(host.querySelector('.notice [role="status"]')?.textContent).toContain('The previous course is unavailable')
+ expect(button(nextLabel).disabled).toBe(true)
+ await act(async()=>button(stopLabel).click())
+ expect(vi.mocked(api).mock.calls.find(([route])=>route==='/chat')?.[1]).toMatchObject({session_id:'old-course',message:'stop'})
+ expect(host.textContent).not.toContain('The previous course is unavailable')
+ expect(getUserMedia).not.toHaveBeenCalled()
+})
 it('exposes a start-steps action before guidance in the call shell',async()=>{vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock'} as any:{session_id:'ready',stage:'LOOK_SELECTED',selected_look:'clean_daily'} as any);await render('/voice','ready');expect(button('Start steps')).toBeTruthy()})
 it('step buttons still send a text action after call end without requesting microphone',async()=>{const getUserMedia=vi.fn();Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia}});vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock'} as any:path.startsWith('/session/')?{session_id:'ready',stage:'LOOK_SELECTED'} as any:{session:{session_id:'ready',stage:'GUIDE'},step:null,message:'First step'} as any);await render('/voice','ready');await act(async()=>window.dispatchEvent(new Event('pagehide')));vi.mocked(api).mockClear();await act(async()=>button('Start steps').click());expect(vi.mocked(api).mock.calls.filter(([path,body])=>path==='/chat'&&(body as any)?.message==='开始步骤')).toHaveLength(1);expect(getUserMedia).not.toHaveBeenCalled()})
 it('recovers an expired pre-stream text session without retrying consent actions',async()=>{

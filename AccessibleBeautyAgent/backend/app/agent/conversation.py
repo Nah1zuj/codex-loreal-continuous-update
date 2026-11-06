@@ -55,7 +55,11 @@ class ConversationService:
                 session.tool_calls=[]
                 session.memory_context_generation+=1
 
-    def history(self,sid):return list(self.turns.get(sid,[]))
+    def history(self,sid):
+        session = self.agent.sessions.sessions.get(sid)
+        if session and session.makeup_plan and self.agent.coaching.visible_plan(session) is None:
+            return []
+        return list(self.turns.get(sid,[]))
     def append(self,sid,role,text,locale):
         rows=self.turns.setdefault(sid,[])
         rows.append({'id':str(uuid.uuid4()),'session_id':sid,'role':role,'text':text[:4000],'language':locale,'timestamp':datetime.now(timezone.utc).isoformat()})
@@ -76,7 +80,7 @@ class ConversationService:
             remote_route = None
             remote_finished = False
             memory_generation=s.memory_context_generation
-            yield {'type':'session','session_id':s.session_id,'session':{**s.model_dump(),'current_step':self.agent.current_step(s)}}
+            yield {'type':'session','session_id':s.session_id,'session':{**self.agent.session_snapshot(s),'current_step':self.agent.current_step(s)}}
             text=body.message.strip()
             event_id=body.event_id or str(uuid.uuid4())
             body=body.model_copy(update={'event_id':event_id})
@@ -84,9 +88,10 @@ class ConversationService:
                 if await request.is_disconnected():return
                 if memory_generation!=s.memory_context_generation:
                     raise CommandConflict('MEMORY_CONTEXT_CHANGED','记忆已更新，请重新发送。 / Memory changed. Please retry.')
-                session_control=text.lower() in SESSION_CONTROLS or s.stage.value=='COMPLETE'
                 legacy = bool(s.makeup_plan and s.makeup_plan.legacy_routine)
                 intent = coaching_intent(text)
+                session_control=(text.lower() in SESSION_CONTROLS or s.stage.value=='COMPLETE'
+                                 or (intent=='finish' and s.makeup_plan and self.agent.coaching.visible_plan(s) is None))
                 legacy_command = legacy and intent in ('start','advance','skip','pause','resume','finish','previous','blush','save')
                 catalogue_start = s.makeup_plan is None and s.routine_id and intent in ('start','advance')
                 with self.agent.sessions.lock:
@@ -96,7 +101,7 @@ class ConversationService:
                 deferred_history = bool(session_control or legacy_command or catalogue_start)
                 if text and not duplicate and not deferred_history:self.append(s.session_id,'user',text,s.locale)
                 if coaching_result:
-                    yield {'type':'session','session_id':s.session_id,'session':{**s.model_dump(),'current_step':self.agent.current_step(s)}}
+                    yield {'type':'session','session_id':s.session_id,'session':{**self.agent.session_snapshot(s),'current_step':self.agent.current_step(s)}}
                     if coaching_result.get('event'):
                         yield {'type':'committed','event':coaching_result['event'],'generation':'in_progress'}
                 if intent=='ambiguous' and (s.makeup_plan or s.routine_id):
@@ -215,7 +220,7 @@ class ConversationService:
                                     if new_version!=plan_version:
                                         plan_version=new_version
                                         yield {'type':'session','session_id':s.session_id,
-                                               'session':{**s.model_dump(),'current_step':self.agent.current_step(s)}}
+                                               'session':{**self.agent.session_snapshot(s),'current_step':self.agent.current_step(s)}}
                             yield {'type':'tool','name':call['function']['name'],'ok':result['ok']}
                             messages.append({'role':'tool','tool_call_id':call['id'],'content':json.dumps(result,ensure_ascii=False)})
                     if not answer.strip() and not canonical_narration:raise RuntimeError('Text service returned no answer')
