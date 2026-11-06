@@ -1,9 +1,20 @@
 """Anonymous browser isolation, not a production account login system."""
 import hashlib,json,secrets,time
+from email.message import Message
 from http.cookies import SimpleCookie
 from urllib.parse import parse_qs,urlencode
+from starlette.datastructures import Headers
 from starlette.responses import JSONResponse
 from app.config import local_origins
+
+def _is_json_body(content_type):
+    # Match FastAPI's request-body parser before applying ownership to the data.
+    if not content_type:
+        return True
+    message=Message()
+    message['content-type']=content_type
+    subtype=message.get_content_subtype()
+    return message.get_content_maintype()=='application' and (subtype=='json' or subtype.endswith('+json'))
 
 class BrowserIdentityMiddleware:
     def __init__(self,app,agent,settings):
@@ -12,7 +23,7 @@ class BrowserIdentityMiddleware:
         with agent.memory.connect() as db:db.execute('CREATE TABLE IF NOT EXISTS browser_identities (token_hash TEXT PRIMARY KEY, principal TEXT NOT NULL, expires REAL NOT NULL)')
     async def __call__(self,scope,receive,send):
         if scope['type']!='http' or not scope['path'].startswith('/api') or scope['path']=='/api/health':return await self.app(scope,receive,send)
-        headers={k.decode().lower():v.decode() for k,v in scope['headers']}
+        headers=Headers(scope=scope)
         async def error(status,message):await JSONResponse({'detail':message},status_code=status)(scope,receive,send)
         origin=headers.get('origin')
         if origin and origin not in self.local_origins and origin!=scope.get('scheme','http')+'://'+headers.get('host',''):
@@ -64,7 +75,7 @@ class BrowserIdentityMiddleware:
                     raw+=event.get('body',b'')
                     if len(raw)>26_000_000:return await error(413,'Request is too large')
                     if not event.get('more_body'):break
-                if raw and 'application/json' in headers.get('content-type',''):
+                if raw and _is_json_body(headers.get('content-type')):
                     value=json.loads(raw)
                     if isinstance(value,dict):
                         if value.get('session_id'):own_session(value['session_id'])
