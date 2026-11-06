@@ -80,6 +80,34 @@ it('voice text camera commands request permission but cannot grant local analysi
  await say('close camera');expect(host.textContent).toContain('Camera closed')
 })
 it('keeps the welcome available on demand without starting speech or microphone on page load',async()=>{let starts=0;const spoken:string[]=[];Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel(){},speak(u:any){spoken.push(u.text)},pause(){},resume(){}}});(globalThis as any).SpeechSynthesisUtterance=class {constructor(public text:string){}};(window as any).SpeechRecognition=class {start(){starts++}abort(){}stop(){}};await render();expect(starts).toBe(0);expect(spoken).toHaveLength(0);await act(async()=>button('Read welcome').click());expect(spoken.join(' ')).toContain('microphone setup');expect(document.activeElement).toBe(document.body);expect(host.querySelector('[data-primary-voice]')?.textContent).toContain('Enable voice');expect(host.textContent).toContain('Text input')})
+it('announces a typed reply after pausing application voice',async()=>{
+ const speak=vi.fn<(utterance:SpeechSynthesisUtterance)=>void>()
+ Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel:vi.fn(),speak}})
+ ;(window as any).SpeechRecognition=class {start(){}abort(){}stop(){}}
+ vi.mocked(api).mockImplementation(async path=>path==='/chat'
+  ?{session:{session_id:'quiet-text',stage:'INTENT',selected_products:[]},step:null,message:'A response to your typed message.'} as any
+  :{} as any)
+ await render('/thread')
+ const announcement=host.querySelector('.conversation [role="status"]')!
+ expect(speak).not.toHaveBeenCalled()
+ await act(async()=>button('Enable voice guidance').click())
+ expect(speak).toHaveBeenCalledTimes(1)
+ expect(announcement.getAttribute('aria-live')).toBe('off')
+ await act(async()=>speak.mock.calls[0][0].onend?.({} as SpeechSynthesisEvent))
+ await act(async()=>button('Pause voice replies').click())
+ expect(host.querySelector('.voice-access-bar [data-call-state]')?.getAttribute('data-call-state')).toBe('quiet_wake')
+ speak.mockClear()
+
+ const input=host.querySelector<HTMLInputElement>('#message')!
+ await act(async()=>{
+  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!.call(input,'I enjoyed the park today')
+  input.dispatchEvent(new Event('input',{bubbles:true}))
+ })
+ await act(async()=>input.form!.querySelector('button')!.click())
+ expect(announcement.textContent).toBe('A response to your typed message.')
+ expect(announcement.getAttribute('aria-live')).toBe('polite')
+ expect(speak).not.toHaveBeenCalled()
+})
 it('displays a typed Story reply without application speech or a microphone request',async()=>{
  const speak=vi.fn((utterance:SpeechSynthesisUtterance)=>queueMicrotask(()=>utterance.onend?.({} as SpeechSynthesisEvent)))
  Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel:vi.fn(),speak}})
