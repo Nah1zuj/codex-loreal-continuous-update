@@ -133,7 +133,7 @@ def test_direct_label_read_without_configured_host_never_calls_transport(monkeyp
 
     monkeypatch.setattr(RemoteModelClient,'chat_json',unexpected_transport)
     settings = Settings(reading_provider='qwen',allow_remote_ai=True,
-                        api_key='fake-key-for-transport-test',base_url='https:///missing-host')
+                        api_key='fixture-label-key',base_url='https:///missing-host')
     service = ReadingService(settings)
     assert service.availability()['status']=='missing_configuration'
     with pytest.raises(RuntimeError, match='标签读取服务尚未配置'):
