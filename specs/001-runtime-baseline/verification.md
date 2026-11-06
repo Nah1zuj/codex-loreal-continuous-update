@@ -16,7 +16,7 @@
 | FR-104 真实 HTTP 代理 | PASS（mock 业务） | `scripts/live_smoke.py --port 61980`，网页、检索、模拟视觉、保存拒绝、保存和删除通过，数据库为隔离库。 |
 | FR-105 健康和诊断 | PASS | 启动冒烟及 `test_runtime_health.py`。诊断区分进程、SQLite、知识、资产和远程配置，不写浏览器身份、不输出测试凭据。 |
 | FR-106 Windows PowerShell / 干净安装 / 实体 | BLOCKED | 当前环境为 Mac，需 Windows 机器执行实际入口与回归。 |
-| 真实设备与独立清单评审 | NOT RUN | 分别由阶段 4、5、8 和实际评审者完成。下载语音资产的冷启动未作为通过项。 |
+| 真实设备与独立清单评审 | NOT RUN | 分别由阶段 4、5、8 和实际评审者完成。Mac 模型冷安装另见下方。 |
 
 ## 队友验收
 
@@ -29,6 +29,10 @@
 ## Windows 入口静态复核
 
 2026-11-07 在 macOS 使用 Microsoft 官方 PowerShell 7.6.8 arm64 归档，先核对发布页 SHA-256，再用语言解析器检查 `install-portable.ps1` 与 `start-portable.ps1`，两个文件均无语法错误。Windows PowerShell 5.1、真实安装和启停仍需 Windows 实机结果。[PowerShell 7.6.8 发布页](https://github.com/PowerShell/PowerShell/releases/tag/v7.6.8)
+
+## Mac 模型冷安装复核
+
+2026-11-07 在验收修订包的 Mac 净安装副本中，确认语音与视觉模型均缺失后，按发布说明下载固定版本并逐项核验 SHA-256。语音两套关键词和转写模型加载，健康报告为 `loaded`，九组合成音频 WebSocket 用例通过。实际 MediaPipe 对合成空白帧完成推理并返回无人脸。冷安装验证使用独立目录和 mock 文字配置，实际音视频采集另验。
 
 ## 收敛结论
 
