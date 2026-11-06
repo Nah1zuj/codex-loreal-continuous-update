@@ -36,13 +36,92 @@ class ReadingDestinationChanged(PermissionError):
     pass
 
 
-def attested(value, original):
+_LABEL_BREAK = re.compile(r'[\r\n;；|｜。]+|(?<!\bno)\.(?=\s|$)', re.IGNORECASE)
+_SHADE_MARKER = re.compile(r'^(?:shade\b(?:\s+(?:no\b\.?|number\b))?|色号)\s*(?:[:：=]\s*|[-–]\s+)?', re.IGNORECASE)
+_MISSING_SHADE = {
+    'not listed', 'not specified', 'not shown', 'not printed', 'not available',
+    'unknown', 'none', 'n/a', 'unavailable', '无', '未标注', '未注明', '未知', '未提供', '不详',
+}
+_COMPOSITION_MARKER = re.compile(
+    r'^(?:(?:composition|fabric(?:\s+composition)?|fib(?:er|re)(?:\s+(?:content|composition))?)\b'
+    r'\s*[:：]\s*|(?:面料(?:成分)?|成分|纤维(?:含量|成分))\s*[:：]?\s*)', re.IGNORECASE,
+)
+_FIBER = (
+    r'(?:organic cotton|recycled polyester|cotton|polyester|nylon|wool|linen|silk|rayon|viscose|'
+    r'elastane|spandex|lyocell|modal|acrylic|cashmere|hemp|棉|纯棉|有机棉|聚酯纤维|涤纶|锦纶|尼龙|'
+    r'羊毛|亚麻|蚕丝|真丝|粘胶纤维|黏胶纤维|氨纶|莱赛尔|莫代尔|腈纶|羊绒|苎麻|大麻)'
+)
+_PERCENT = r'\d{1,3}(?:[.,]\d+)?\s*[%％]'
+_FIBER_PERCENT = rf'(?:{_PERCENT}\s*{_FIBER}|{_FIBER}\s*{_PERCENT})'
+_FIBER_LIST = re.compile(rf'{_FIBER_PERCENT}(?:\s*(?:[,，/+]\s*|\s+){_FIBER_PERCENT})*', re.IGNORECASE)
+_INSTRUCTION_MARKER = re.compile(
+    r'^(?:directions(?: for use)?|instructions|(?:use|usage|care) instructions|how to use|use|usage|care|'
+    r'用法(?:用量)?|使用(?:方法|说明)|洗护(?:说明)?|洗涤(?:说明)?|保养(?:说明)?)\s*[:：]\s*', re.IGNORECASE,
+)
+_IMPERATIVE = re.compile(
+    r'^(?:(?:apply|use(?!\s+by\b)|wash|dry|rinse|iron|tumble dry|machine wash|hand wash|hang dry|'
+    r'do not|avoid|keep|store|pat|blend|spray|massage|remove|leave)\b|'
+    r'使用(?!(?:期限|日期|说明|方法))|涂抹|涂于|取适量|取少量|先取|轻拍|避开|避免|请勿|勿|'
+    r'手洗|机洗|水洗|漂洗|晾干|熨烫)', re.IGNORECASE,
+)
+
+
+def _label_clauses(text):
+    return [part.strip() for part in _LABEL_BREAK.split(text) if part.strip()]
+
+
+def _normalized(text):
+    return ' '.join(text.split()).casefold()
+
+
+def _explicit_value(marker, clause):
+    match = marker.match(clause)
+    return clause[match.end():].strip() if match else None
+
+
+def _attested_shade(value, clauses):
     if not value or not value.strip():
         return None
-    normal = ' '.join(value.split())
-    observed = ' '.join(original.split())
-    pattern = r'(?<!\w)' + re.escape(normal) + r'(?!\w)'
-    return value if re.search(pattern, observed, flags=re.IGNORECASE) else None
+    candidate = _normalized(value)
+    for clause in clauses:
+        field = _explicit_value(_SHADE_MARKER, clause)
+        if not field:
+            continue
+        field = _normalized(re.split(r'[,，]', field, maxsplit=1)[0])
+        if field not in _MISSING_SHADE and candidate in (field, field.removeprefix('#').strip()):
+            return value
+    return None
+
+
+def _composition_value(clause):
+    explicit = _explicit_value(_COMPOSITION_MARKER, clause)
+    if explicit:
+        return explicit
+    return clause if _FIBER_LIST.fullmatch(clause) else None
+
+
+def _instruction_value(clause):
+    explicit = _explicit_value(_INSTRUCTION_MARKER, clause)
+    if explicit:
+        return explicit
+    return clause if _IMPERATIVE.match(clause) else None
+
+
+def _attested_context(value, original, clauses, field_value):
+    if not value or _normalized(value) not in _normalized(original):
+        return None
+    wanted = [_normalized(clause) for clause in _label_clauses(value)]
+    if not wanted:
+        return None
+    # Keep clause order so a candidate cannot skip intervening unrelated text.
+    observed = []
+    for clause in clauses:
+        field = field_value(clause)
+        observed.append({_normalized(clause), _normalized(field)} if field else set())
+    for start in range(len(observed) - len(wanted) + 1):
+        if all(part in options for part, options in zip(wanted, observed[start:start + len(wanted)])):
+            return value
+    return None
 
 
 class ReadingService:
@@ -171,19 +250,13 @@ class ReadingService:
             summary = ('这张标签暂时读不清楚，请把包装靠近并保持平整后再试。' if locale=='zh-CN'
                        else 'The label was unreadable. Move it closer, keep it flat, and try again.')
 
-        shade = None
-        if clear and label_kind=='product':
-            for line in original.splitlines():
-                marker = re.search(r'(?:\bshade\b|色号)', line, flags=re.IGNORECASE)
-                if marker:
-                    shade = attested(result.shade, line[marker.end():])
-                    if shade:
-                        break
+        clauses = _label_clauses(original) if clear else []
         response = ReadingResult(
             status='READ' if clear else 'UNCERTAIN',label_kind=label_kind,summary=summary,
-            full_text=result.full_text,uncertain_characters=uncertainty,shade=shade,
-            composition=attested(result.composition,original) if clear and label_kind=='garment' else None,
-            instructions=attested(result.instructions,original) if clear else None,
+            full_text=result.full_text,uncertain_characters=uncertainty,
+            shade=_attested_shade(result.shade,clauses) if clear and label_kind=='product' else None,
+            composition=_attested_context(result.composition,original,clauses,_composition_value) if clear and label_kind=='garment' else None,
+            instructions=_attested_context(result.instructions,original,clauses,_instruction_value) if clear else None,
             confidence=result.confidence,service=provider,
         ).model_dump()
         self._record_result(key, attempt, 'verified')

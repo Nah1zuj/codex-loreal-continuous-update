@@ -162,6 +162,36 @@ def test_label_configuration_gap_and_verbatim_fields(tmp_path, monkeypatch):
         assert output['shade'] is None and output['composition'] is None
 
 
+@pytest.mark.parametrize('kind, field, text, supplied, expected', [
+    ('product', 'shade', 'Shade 02. Net 30 mL.', '30', None),
+    ('product', 'shade', '色号未标注，净含量 30 mL。', '30', None),
+    ('product', 'shade', 'Shade not listed; net 30 mL.', 'not listed', None),
+    ('product', 'shade', 'Shade 02. Net 30 mL.', '02', '02'),
+    ('product', 'shade', 'Shade No. #02', '#02', '#02'),
+    ('product', 'shade', '色号：2.5N 暖棕｜净含量 30 mL', '2.5N 暖棕', '2.5N 暖棕'),
+    ('garment', 'composition', 'Care: Wash with 100% cotton items.', '100% cotton', None),
+    ('garment', 'composition', '100% guaranteed', '100% guaranteed', None),
+    ('garment', 'composition', 'Fiber: 70% cotton, 30% polyester', '70% cotton, 30% polyester', '70% cotton, 30% polyester'),
+    ('garment', 'composition', '100%棉', '100%棉', '100%棉'),
+    ('garment', 'composition', 'Cotton 100%', 'Cotton 100%', 'Cotton 100%'),
+    ('product', 'instructions', 'Net contents: 30 mL.', '30 mL', None),
+    ('product', 'instructions', 'Directions: Apply sparingly. Net contents: 30 mL.', '30 mL', None),
+    ('product', 'instructions', 'Directions: After opening, apply sparingly.', 'After opening, apply sparingly.', 'After opening, apply sparingly.'),
+    ('product', 'instructions', 'Apply sparingly. Avoid eyes.', 'Apply sparingly. Avoid eyes.', 'Apply sparingly. Avoid eyes.'),
+    ('product', 'instructions', '使用方法：先取少量，再轻拍。', '先取少量，再轻拍。', '先取少量，再轻拍。'),
+])
+def test_clear_label_fields_require_matching_context(monkeypatch, kind, field, text, supplied, expected):
+    monkeypatch.setattr(RemoteModelClient,'chat_json',lambda *_: {
+        'full_text':text, field:supplied, 'confidence':.98,
+    })
+    settings = Settings(reading_provider='qwen',allow_remote_ai=True,api_key='dummy')
+    result = ReadingService(settings).read(b'substitute input',label_kind=kind)
+
+    assert result[field] == expected
+    assert result['status'] == 'READ' and result['full_text'] == text
+    assert result['uncertain_characters'] == []
+
+
 def test_label_verification_resets_for_provider_failure_and_changed_config(tmp_path, monkeypatch):
     unreadable = {'full_text':None,'confidence':0}
     responses = iter((unreadable, {'confidence':.9}, unreadable))
