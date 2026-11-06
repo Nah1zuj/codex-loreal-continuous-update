@@ -1,0 +1,21 @@
+/* Home composition only: preserve the feature row and the sculpture geometry. */
+.trace-app.trace-sculpture .reference-hero .hero-copy {
+  width: min(100%, 620px);
+  max-width: 58%;
+  margin-inline: auto;
+  text-align: center;
+}
+.trace-app.trace-sculpture .reference-hero .hero-subtitle,
+.trace-app.trace-sculpture .reference-hero .hero-subtitle small,
+.trace-app.trace-sculpture .reference-hero .hero-senses,
+.trace-app.trace-sculpture .reference-hero .hero-senses small {
+  margin-inline: auto;
+}
+.trace-app.trace-sculpture .reference-hero .hero-actions {
+  align-items: center;
+  justify-content: center;
+}
+@media(max-width:767px) {
+  .trace-app.trace-sculpture .reference-hero .hero-copy { max-width: 100%; }
+  .trace-app.trace-sculpture .reference-hero .hero-actions { align-items: center; }
+}

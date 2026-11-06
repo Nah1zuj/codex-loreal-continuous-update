@@ -1,0 +1,34 @@
+{
+  "values": [
+    "daily",
+    "dinner",
+    "presentation",
+    "social"
+  ],
+  "aliases": {
+    "dinner": [
+      "dinner",
+      "晚宴",
+      "晚餐",
+      "正式",
+      "约会"
+    ],
+    "presentation": [
+      "presentation",
+      "演讲",
+      "汇报"
+    ],
+    "daily": [
+      "daily",
+      "日常",
+      "上班",
+      "清爽"
+    ],
+    "social": [
+      "social",
+      "聚会",
+      "社交",
+      "朋友"
+    ]
+  }
+}

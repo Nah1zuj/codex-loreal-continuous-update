@@ -1,0 +1,27 @@
+ch óng x īn q ǐ d òng y ǔ y īn j iāo l iú g ōng n éng :2.0 #0.25 @重新启动语音交流功能
+ch óng x īn k āi q ǐ y ǔ y īn g ōng n éng :2.0 #0.25 @重新开启语音功能
+R IH0 Z UW1 M V OY1 S :2.0 #0.25 @resume_voice
+q ǐng zh ōng zh ǐ d uì h uà :2.0 #0.25 @请终止对话
+z àn t íng y ǔ y īn :2.0 #0.25 @暂停语音
+z àn t íng h uí y ìng :2.0 #0.25 @暂停回应
+t íng zh ǐ y ǔ y īn b ō b ào :2.0 #0.25 @停止语音播报
+t íng zh ǐ :2.0 #0.25 @停止
+P AO1 Z R IH0 P L AY1 Z :2.0 #0.25 @pause_replies
+P AO1 Z V OY1 S :2.0 #0.25 @pause_voice
+S T AA1 P S P IY1 K IH0 NG :2.0 #0.25 @stop_speaking
+S T AA1 P :2.0 #0.25 @stop
+k āi sh ǐ :2.0 #0.25 @开始
+j ié sh ù :2.0 #0.25 @结束
+k ě y ǐ k āi sh ǐ :2.0 #0.25 @可以开始
+x ià y ī b ù :2.0 #0.25 @下一步
+sh àng y ī b ù :2.0 #0.25 @上一步
+z ài sh uō y ī c ì :2.0 #0.25 @再说一次
+b āng zh ù :2.0 #0.25 @帮助
+t iào g uò :2.0 #0.25 @跳过
+j ié sh ù b ěn c ì zh uāng b àn :2.0 #0.25 @结束本次装扮
+N EH1 K S T :2.0 #0.25 @next
+P R IY1 V IY0 AH0 S :2.0 #0.25 @previous
+R IH0 P IY1 T :2.0 #0.25 @repeat
+HH EH1 L P :2.0 #0.25 @help
+S K IH1 P :2.0 #0.25 @skip
+F IH1 N IH0 SH DH IH1 S L UH1 K :2.0 #0.25 @finish_this_look

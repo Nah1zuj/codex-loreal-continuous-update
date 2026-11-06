@@ -1,0 +1,2 @@
+import {useTrace} from '../content/Locale'
+export function ThreadProgress({current,total}:{current:number;total:number}){const {c}=useTrace();return <div className="thread-progress"><ol aria-label={c.progress(current,total)}>{Array.from({length:total},(_,i)=><li key={i} aria-current={i+1===current?'step':undefined}><span className={i+1<=current?'completed':''} aria-hidden="true"/><span className="sr-only">{c.progress(i+1,total)}</span></li>)}</ol><p role="status">{c.progress(current,total)}</p></div>}

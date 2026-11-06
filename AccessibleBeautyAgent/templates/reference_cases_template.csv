@@ -1,0 +1,2 @@
+﻿reference_id,look_id,media_type,source_file,scene,overall_intensity,blush_visible,blush_intensity,blush_placement,blush_finish,lip_visible,lip_saturation,lip_finish,uncertainty_notes,source_ids,ai_generated_draft,human_verified,demo_data
+template_reference,template_look,image,data/references/raw/replace-with-your-image.jpg,dinner,medium_low,unknown,light_medium,upper_cheek,soft_diffused,unknown,medium_low,soft_satin,SAMPLE，未知字段请人工检查,template_source,False,False,True

@@ -1,0 +1,2 @@
+# Offline label-only evaluation; not required to serve camera/voice requests.
+jsonschema==4.26.0

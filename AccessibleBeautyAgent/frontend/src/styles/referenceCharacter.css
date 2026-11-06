@@ -1,0 +1,25 @@
+/* The supplied porcelain character is a transparent illustration, not a 3D scan.
+   All layers belong to their section; particles stay behind the portrait. */
+.reference-character-scene { isolation:isolate; }
+.reference-character-scene .sculpture-canvas { z-index:0; }
+.reference-apple-art { position:absolute; z-index:1; left:0; top:30px; width:32%; height:60%; object-fit:contain; object-position:left top; pointer-events:none; user-select:none; }
+.reference-character-scene[data-motion="on"] .reference-apple-art { animation:apple-art-float 9s ease-in-out infinite; }
+@keyframes apple-art-float { 0%,100% { transform:translateY(0) rotate(-1deg) } 50% { transform:translateY(-7px) rotate(1deg) } }
+.reference-character { position:absolute; z-index:1; right:0; bottom:0; width:44%; height:94%; object-fit:contain; object-position:right bottom; pointer-events:none; user-select:none; }
+.reference-character-scene[data-motion="on"] .reference-character { animation:porcelain-breathe 8s ease-in-out infinite; }
+.reference-hero .reference-character { width:32%; right:-1%; bottom:125px; height:80%; }
+.reference-hero .hero-art-caption { right:24px; top:30px; bottom:auto; max-width:190px; text-align:right; }
+@keyframes porcelain-breathe { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-3px) } }
+.profile-portrait .reference-character { width:100%; height:100%; object-position:center top; }
+.makeup-art .reference-character { width:90%; height:100%; object-position:center; }
+.full-look-exhibition .reference-character { width:55%; height:92%; right:18%; object-position:center bottom; }
+.story-chapter .reference-character,.story-agency .reference-character { width:49%; height:90%; }
+.scene-memory .reference-character { opacity:.35; }
+@media(max-width:767px) {
+ .reference-hero .reference-apple-art { top:auto; bottom:430px; left:0; width:42%; height:190px; }
+ .reference-hero .reference-character { width:100%; height:340px; bottom:260px; object-position:center; }
+ .story-hero .reference-character,.story-chapter .reference-character,.story-agency .reference-character { width:100%; height:350px; bottom:0; object-position:center; }
+ .full-look-exhibition .reference-character { width:100%; right:0; height:360px; top:0; bottom:auto; }
+ .makeup-art .reference-character { width:100%; }
+}
+@media(prefers-reduced-motion:reduce) { .reference-character-scene[data-motion="on"] .reference-character,.reference-character-scene[data-motion="on"] .reference-apple-art { animation:none; transform:none; } }

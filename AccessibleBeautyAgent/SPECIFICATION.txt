@@ -1,0 +1,1394 @@
+You are the lead full-stack / AI engineer for a hackathon MVP.
+
+You are working on a project called:
+
+Accessible Beauty Agent
+L'Oréal Hackathon Track 3 — 无界体验家
+
+You must BUILD the actual runnable local codebase, not merely give me explanations,
+architecture suggestions, pseudo-code, or isolated snippets.
+
+==================================================
+0. WORKING MODE
+==================================================
+
+My machine is Windows.
+
+Create the entire project inside:
+
+D:\AccessibleBeautyAgent
+
+If this exact directory cannot be accessed in your current environment,
+create the project in the current workspace using folder:
+
+AccessibleBeautyAgent
+
+and clearly tell me the actual path you used.
+
+IMPORTANT:
+
+- Do NOT modify files outside the project directory.
+- Do NOT delete unrelated files.
+- Do NOT hard-code API keys.
+- Use .env and .env.example.
+- Prefer simple, stable, debuggable implementations.
+- Build the system incrementally.
+- After each major module, run relevant checks/tests.
+- Fix errors you encounter instead of leaving broken code.
+- Do not stop after creating empty files.
+- Every critical file must contain a working implementation or a documented mock implementation.
+- If an external API credential is unavailable, implement a mock/local fallback so the system remains runnable.
+- The project must still launch without paid API credentials.
+
+The target is a 5–7 day hackathon MVP, therefore engineering stability is more important
+than production-scale architecture.
+
+==================================================
+1. PRODUCT GOAL
+==================================================
+
+The product is a voice-first multimodal Beauty Agent designed primarily
+for users who cannot reliably depend on visual information,
+especially blind and low-vision users.
+
+The MVP should demonstrate this complete journey:
+
+User Voice
+→ Understand beauty intention
+→ Retrieve a target makeup Look
+→ Retrieve step-by-step routine
+→ Voice guidance
+→ User asks for visual check
+→ Camera capture
+→ Face quality gate
+→ Visual analysis
+→ Structured visual result
+→ Agent converts visual result into accessible language
+→ Continue routine
+→ User gives preference feedback
+→ Ask for memory consent
+→ Save Beauty Memory
+
+Example main demo:
+
+User:
+“今晚有一个比较正式的 dinner，
+我想比平时更有存在感，但是不要显得太成熟。”
+
+The system should infer approximately:
+
+scene = dinner
+desired_impression = polished / slightly_present
+avoid = too_mature / high_saturation
+
+Then retrieve a Soft Formal makeup direction.
+
+==================================================
+2. CRITICAL PRODUCT BOUNDARIES
+==================================================
+
+DO NOT build an AI that judges whether a person is beautiful.
+
+DO NOT claim:
+- perfect makeup
+- attractiveness score
+- professional quality
+- exact beauty ranking
+
+Visual AI should primarily report measurable or obvious states.
+
+V1 visual tasks:
+
+1. blush_presence
+Allowed states:
+- NO_BLUSH
+- LEFT_ONLY
+- RIGHT_ONLY
+- BOTH
+- UNCERTAIN
+
+2. lip_presence
+Allowed states:
+- NOT_APPLIED
+- APPLIED
+- OBVIOUS_OVERFLOW
+- UNCERTAIN
+
+lip_presence is P1.
+blush_presence is P0.
+
+Fine-grained blush symmetry,
+gradient quality,
+millimeter lip-boundary detection,
+personalized facial geometry,
+emotion recognition,
+and beauty scoring are NOT P0.
+
+Design the architecture so these can be added later,
+but do not let them block the MVP.
+
+==================================================
+3. REQUIRED TECH STACK
+==================================================
+
+Frontend:
+
+- React
+- Vite
+- TypeScript
+- standard CSS or Tailwind, choose whichever produces fewer dependencies
+- browser Camera API via getUserMedia
+- accessible semantic HTML
+- ARIA labels
+- keyboard support
+
+Backend:
+
+- Python
+- FastAPI
+- Pydantic
+- Uvicorn
+
+Vision:
+
+- MediaPipe Face Landmarker or equivalent local face landmark module
+- local face/pose/image-quality gate
+- visual model adapter abstraction
+
+Agent / Language:
+
+Create an adapter-based architecture.
+
+Primary intended remote model:
+Alibaba Cloud Qwen / Model Studio
+
+But the project MUST support:
+
+MODEL_PROVIDER=mock
+
+so that the entire application is locally testable
+without any API credentials.
+
+Voice architecture:
+
+Create abstraction for:
+
+- realtime voice provider
+- text chat fallback
+- TTS fallback
+- push-to-talk fallback
+
+Do not make realtime WebRTC the only way to test the application.
+
+==================================================
+4. DIRECTORY STRUCTURE
+==================================================
+
+Create approximately:
+
+AccessibleBeautyAgent/
+│
+├─ frontend/
+│  ├─ src/
+│  │  ├─ pages/
+│  │  ├─ components/
+│  │  ├─ realtime/
+│  │  ├─ vision/
+│  │  ├─ accessibility/
+│  │  ├─ state/
+│  │  ├─ api/
+│  │  └─ types/
+│  ├─ package.json
+│  └─ ...
+│
+├─ backend/
+│  ├─ app/
+│  │  ├─ main.py
+│  │  ├─ config.py
+│  │  ├─ schemas/
+│  │  ├─ routes/
+│  │  ├─ agent/
+│  │  ├─ vision/
+│  │  ├─ rag/
+│  │  ├─ memory/
+│  │  ├─ products/
+│  │  ├─ looks/
+│  │  └─ services/
+│  ├─ requirements.txt
+│  └─ ...
+│
+├─ data/
+│  ├─ demo/
+│  ├─ knowledge/
+│  ├─ references/
+│  ├─ products/
+│  └─ users/
+│
+├─ prompts/
+│  ├─ agent_system.md
+│  ├─ accessibility_policy.md
+│  ├─ vision_blush.md
+│  ├─ vision_lip.md
+│  └─ reference_analysis.md
+│
+├─ scripts/
+│  ├─ ingest_kb.py
+│  ├─ validate_kb.py
+│  ├─ rebuild_index.py
+│  └─ analyze_reference_media.py
+│
+├─ tests/
+│  ├─ agent/
+│  ├─ vision/
+│  ├─ rag/
+│  └─ regression/
+│
+├─ docs/
+│  ├─ ARCHITECTURE.md
+│  ├─ KNOWLEDGE_BASE_GUIDE.md
+│  ├─ API.md
+│  ├─ RUNBOOK.md
+│  └─ DEVELOPMENT_STATUS.md
+│
+├─ .env.example
+├─ .gitignore
+├─ README.md
+└─ start-dev.ps1
+
+You may improve the directory structure if needed,
+but keep clear module separation.
+
+==================================================
+5. FIRST IMPLEMENTATION PRIORITY
+==================================================
+
+Implement in this order:
+
+PHASE 1
+Basic local app and API
+
+PHASE 2
+Session state + Agent Harness
+
+PHASE 3
+Demo Beauty Knowledge Base
+
+PHASE 4
+RAG infrastructure
+
+PHASE 5
+Camera + Vision Gate
+
+PHASE 6
+Visual model adapter
+
+PHASE 7
+Voice / realtime provider adapter
+
+PHASE 8
+Beauty Memory
+
+PHASE 9
+Full workflow
+
+PHASE 10
+Regression tests
+
+Do NOT start by polishing UI.
+
+==================================================
+6. SESSION STATE
+==================================================
+
+Create an explicit session model similar to:
+
+{
+  "session_id": "...",
+  "stage": "INTENT",
+  "scene": null,
+  "desired_impression": [],
+  "avoid": [],
+  "preference_refs": [],
+  "selected_look": null,
+  "selected_products": [],
+  "routine_id": null,
+  "routine_step": 0,
+  "camera_consent": false,
+  "memory_consent": false,
+  "visual_state": null,
+  "confidence": 0.0
+}
+
+Recommended states:
+
+INIT
+ONBOARDING
+INTENT
+CLARIFY
+LOOK_SELECTED
+GUIDE
+CHECK_REQUESTED
+CAMERA_CONSENT
+VISION_GATE
+VISION_CHECK
+VERIFY
+FEEDBACK
+MEMORY_CONSENT
+COMPLETE
+
+Implement this as an actual state-machine/service,
+not only as documentation.
+
+==================================================
+7. AGENT HARNESS
+==================================================
+
+Create an Agent Harness with strict tool boundaries.
+
+Core tools:
+
+get_user_profile(user_id)
+
+retrieve_look(
+    scene,
+    desired_impression,
+    avoid,
+    preferences
+)
+
+retrieve_products(
+    look_id,
+    scene,
+    preferences
+)
+
+compare_products(product_ids)
+
+start_routine(routine_id)
+
+advance_routine(session_id)
+
+run_visual_check(
+    task,
+    images,
+    session_context
+)
+
+log_feedback(
+    user_id,
+    session_id,
+    feedback
+)
+
+propose_memory_update(
+    feedback
+)
+
+save_memory(
+    user_id,
+    memory_candidate,
+    explicit_consent
+)
+
+delete_memory(
+    user_id,
+    memory_id,
+    explicit_consent
+)
+
+Agent must NOT invent outputs that should come from a tool.
+
+If product information is unavailable:
+say it is unavailable.
+
+If vision confidence is low:
+do not invent a visual conclusion.
+
+==================================================
+8. AGENT SYSTEM POLICY
+==================================================
+
+Create prompts/agent_system.md.
+
+Core behavior:
+
+You are an Accessible Beauty Companion.
+
+You help the user understand, choose and perform makeup routines
+through voice-first interaction.
+
+Rules:
+
+1.
+Give one actionable instruction at a time.
+
+2.
+Default to concise responses.
+
+3.
+Expand when the user asks:
+“为什么”
+“详细一点”
+“慢一点”
+“重复”
+
+4.
+Never judge attractiveness.
+
+5.
+Never say makeup is objectively beautiful or perfect.
+
+6.
+Never invent camera observations.
+
+7.
+All visual claims must be based on run_visual_check.
+
+8.
+Camera activation requires explicit user consent.
+
+9.
+Long-term memory requires explicit user consent.
+
+10.
+If confidence is insufficient,
+explain the uncertainty and request a retry.
+
+11.
+Recommendations are suggestions.
+The final decision belongs to the user.
+
+12.
+Support commands:
+repeat
+slow down
+why
+skip
+stop
+check this
+stop camera
+
+==================================================
+9. DEMO BEAUTY KB
+==================================================
+
+I will later build the real knowledge base myself.
+
+For now create DEMO / MOCK content
+that can later be replaced without modifying application logic.
+
+Create three looks:
+
+clean_daily
+soft_formal
+warm_social
+
+Example:
+
+soft_formal:
+
+scene:
+- dinner
+- presentation
+
+desired_impression:
+- polished
+- slightly_present
+- controlled
+
+avoid:
+- too_mature
+- high_saturation
+- heavy_makeup
+
+base:
+natural_polished
+
+blush:
+intensity: light_medium
+placement: upper_cheek
+
+lip:
+saturation: medium_low
+finish: soft_satin
+
+Create sensible demo data for the other two looks.
+
+Clearly label the files as SAMPLE DATA.
+
+==================================================
+10. ROUTINE KNOWLEDGE
+==================================================
+
+Create routines.json.
+
+Each routine step should support:
+
+{
+  "step_id": "...",
+  "name": "...",
+  "instruction": "...",
+  "instruction_slow": "...",
+  "instruction_repeat": "...",
+  "explanation_why": "...",
+  "visual_check_required": true,
+  "visual_task": "blush_presence"
+}
+
+The Soft Formal routine should contain approximately:
+
+1. preparation/base
+2. blush
+3. lip
+4. optional final check
+
+Do not overcomplicate eye makeup in MVP.
+
+==================================================
+11. RAG ARCHITECTURE
+==================================================
+
+I WILL BUILD THE REAL KNOWLEDGE BASE LATER.
+
+Therefore:
+
+Build the RAG infrastructure now,
+but keep it independent from the current demo data.
+
+Implement a local ingestion pipeline.
+
+Knowledge types must include:
+
+LOOK
+ROUTINE
+REFERENCE_CASE
+PRODUCT
+ACCESSIBILITY_GUIDANCE
+
+Design metadata such as:
+
+document_id
+document_type
+look_id
+scene
+makeup_area
+source_type
+source
+verified
+parent_id
+tags
+
+Implement:
+
+A. Parent-child document hierarchy
+
+Example:
+
+PARENT:
+Soft Formal Look
+
+CHILDREN:
+- overall definition
+- blush technique
+- lip technique
+- reference case 01
+- reference case 02
+
+B. Hybrid Retrieval
+
+Support:
+
+semantic retrieval
++
+keyword/BM25-like retrieval
+
+If implementing a full BM25 dependency creates instability,
+use a simple lexical scoring fallback.
+
+C. Optional reranking interface
+
+Create:
+
+reranker.py
+
+with:
+
+MockReranker
+RemoteRerankerAdapter
+
+Do not require remote reranking for local startup.
+
+D. Metadata filtering
+
+Allow filters such as:
+
+scene=dinner
+look_id=soft_formal
+makeup_area=blush
+
+E. Retrieval response
+
+Return:
+
+{
+  "query": "...",
+  "results": [
+    {
+      "document_id": "...",
+      "document_type": "...",
+      "content": "...",
+      "score": 0.0,
+      "source": "...",
+      "metadata": {}
+    }
+  ]
+}
+
+==================================================
+12. VECTOR DATABASE
+==================================================
+
+Choose the simplest stable local option.
+
+Preferred:
+
+FAISS
+
+or another lightweight local vector implementation.
+
+DO NOT introduce Docker,
+PostgreSQL,
+Milvus,
+Elasticsearch,
+or other infrastructure that makes a hackathon demo harder to run.
+
+Create embedding-provider abstraction:
+
+MockEmbeddingProvider
+RemoteEmbeddingProvider
+
+If no API key exists,
+the mock/local search must still work.
+
+==================================================
+13. FUTURE KNOWLEDGE-BASE INPUT FORMAT
+==================================================
+
+My future knowledge will come partly from
+human-reviewed image/video analysis.
+
+Create support for a file such as:
+
+reference_cases.json
+
+Example schema:
+
+{
+  "reference_id": "soft_formal_ref_001",
+  "look_id": "soft_formal",
+  "media_type": "image",
+  "source_file": "...",
+  "human_verified": true,
+
+  "scene": ["dinner"],
+
+  "overall": {
+    "intensity": "medium_low",
+    "contrast": "medium_low"
+  },
+
+  "blush": {
+    "visible": true,
+    "intensity": "light_medium",
+    "placement": "upper_cheek",
+    "finish": "soft"
+  },
+
+  "lip": {
+    "visible": true,
+    "saturation": "medium_low",
+    "finish": "soft_satin"
+  },
+
+  "notes": "...",
+
+  "source": "team_reference",
+  "verified": true
+}
+
+The RAG pipeline must be able to ingest this format later.
+
+==================================================
+14. REFERENCE MEDIA ANALYSIS SCRIPT
+==================================================
+
+Create:
+
+scripts/analyze_reference_media.py
+
+Do NOT pretend it can accurately build the final KB automatically.
+
+Its responsibility is:
+
+input:
+image / extracted video frame
+
+output:
+draft structured JSON
+
+Then mark:
+
+human_verified = false
+
+I will manually review it.
+
+Use an adapter:
+
+VisionReferenceAnalyzer
+
+Implement:
+
+MockVisionReferenceAnalyzer
+
+and placeholder support for:
+
+QwenVisionReferenceAnalyzer
+
+Expected fields:
+
+scene suitability
+overall intensity
+overall contrast
+base finish
+blush visibility
+blush approximate placement
+blush intensity
+lip visibility
+lip saturation
+lip finish
+eye definition
+uncertainty notes
+
+Never output attractiveness judgments.
+
+==================================================
+15. CAMERA PIPELINE
+==================================================
+
+Frontend:
+
+Use:
+
+navigator.mediaDevices.getUserMedia()
+
+Camera must be OFF by default.
+
+Workflow:
+
+User requests visual check
+→ Agent asks for consent
+→ user confirms
+→ camera opens
+→ capture three frames
+→ process
+→ camera may remain preview-only or close based on state
+
+Capture approximately:
+
+frame 1: t=0
+frame 2: t≈250 ms
+frame 3: t≈500 ms
+
+Resize before upload.
+
+Target:
+
+max dimension approximately 768–1024 px
+JPEG quality approximately 0.8
+
+Do not upload continuous video.
+
+==================================================
+16. FACE QUALITY GATE
+==================================================
+
+Create local visual preprocessing.
+
+Use MediaPipe Face Landmarker where feasible.
+
+Its purpose is NOT to judge makeup.
+
+It only determines:
+
+face_detected
+face_size_ok
+pose_ok
+lighting_ok
+occlusion_warning
+gate_pass
+
+Return a structured result:
+
+{
+  "face_detected": true,
+  "lighting_score": 0.82,
+  "pose_score": 0.91,
+  "gate_pass": true,
+  "failure_reason": null
+}
+
+If gate_pass = false,
+DO NOT call the makeup visual evaluator.
+
+Instead return an accessible retry instruction.
+
+Examples:
+
+“现在光线有些暗，我没办法可靠判断。
+可以移到亮一点的位置再试一次吗？”
+
+“你的脸现在稍微偏了一点。
+可以朝正前方转一点吗？”
+
+==================================================
+17. VISUAL MODEL ADAPTER
+==================================================
+
+Create:
+
+VisionProvider interface
+
+Implement:
+
+MockVisionProvider
+
+RemoteQwenVisionProvider
+
+Remote provider configuration via .env.
+
+The application must work in mock mode.
+
+P0 task:
+
+blush_presence
+
+Output schema:
+
+{
+  "task": "blush_presence",
+  "left_visible": true,
+  "right_visible": true,
+  "obvious_difference": false,
+  "image_quality": "good",
+  "confidence": 0.86,
+  "status": "BOTH"
+}
+
+Allowed status:
+
+NO_BLUSH
+LEFT_ONLY
+RIGHT_ONLY
+BOTH
+UNCERTAIN
+
+==================================================
+18. THREE-FRAME CONSENSUS
+==================================================
+
+Implement actual aggregation logic.
+
+Example:
+
+BOTH
+BOTH
+BOTH
+→ BOTH
+
+BOTH
+LEFT_ONLY
+BOTH
+→ BOTH with reduced confidence
+
+BOTH
+LEFT_ONLY
+UNCERTAIN
+→ UNCERTAIN
+
+Use:
+
+majority vote
++
+average/adjusted confidence
+
+If no reliable majority:
+UNCERTAIN.
+
+==================================================
+19. CONFIDENCE GATE
+==================================================
+
+Implement explicit thresholds in config.
+
+Suggested defaults:
+
+>= 0.80:
+high confidence
+
+0.60–0.79:
+moderate confidence
+
+< 0.60:
+uncertain
+
+Do not hard-code this throughout the application.
+Put thresholds in configuration.
+
+The Agent response policy:
+
+HIGH:
+“I can clearly detect...”
+
+MODERATE:
+“It appears that..., but my confidence is moderate.”
+
+LOW:
+“I can't reliably judge this image yet.”
+
+==================================================
+20. VISUAL PROMPT
+==================================================
+
+Create prompts/vision_blush.md:
+
+You are a visual measurement component.
+
+You are NOT judging beauty or attractiveness.
+
+TASK:
+
+Determine whether visible blush is present
+on the user's left cheek and right cheek.
+
+Allowed states:
+
+NO_BLUSH
+LEFT_ONLY
+RIGHT_ONLY
+BOTH
+UNCERTAIN
+
+Only classify visually obvious states.
+
+Do not infer subtle asymmetry.
+
+If lighting, head pose, occlusion or image quality
+makes the result unreliable,
+return UNCERTAIN.
+
+Return JSON only.
+
+==================================================
+21. MEMORY
+==================================================
+
+Implement two layers.
+
+Profile Memory:
+
+{
+  "preferred_finish": ["natural"],
+  "preferred_saturation": "low",
+  "avoid": ["heavy_gloss"]
+}
+
+Episodic Memory:
+
+{
+  "context": "dinner",
+  "feedback": "lip shade slightly too strong",
+  "timestamp": "..."
+}
+
+MVP storage:
+
+SQLite preferred,
+JSON acceptable if implementation is significantly simpler.
+
+Long-term write rule:
+
+explicit_consent == true
+
+Otherwise DO NOT persist.
+
+==================================================
+22. PRODUCT KB
+==================================================
+
+Create 10–15 SAMPLE products only.
+
+Schema:
+
+product_id
+brand
+category
+finish
+saturation
+undertone
+contexts
+look_ids
+claims
+source
+source_type
+verified
+
+Do not invent claims in Agent responses.
+
+Retrieval should use:
+
+scene fit
+look fit
+finish fit
+user preference fit
+risk penalty
+
+Exact weights should live in config.
+
+==================================================
+23. FASTAPI ROUTES
+==================================================
+
+At minimum:
+
+GET  /api/health
+
+POST /api/chat
+
+GET  /api/session/{session_id}
+
+POST /api/look/search
+
+POST /api/routine/start
+
+POST /api/routine/advance
+
+POST /api/vision/gate
+
+POST /api/vision/check
+
+POST /api/rag/search
+
+POST /api/products/search
+
+GET  /api/profile/{user_id}
+
+POST /api/memory
+
+DELETE /api/memory/{memory_id}
+
+POST /api/feedback
+
+If implementing realtime Qwen later requires
+a special endpoint such as:
+
+POST /api/realtime/connect
+
+prepare the route/service abstraction now,
+but do not let it block local mock execution.
+
+==================================================
+24. FRONTEND PAGES
+==================================================
+
+Create:
+
+Home
+
+Session
+
+Camera Check
+
+Beauty Memory
+
+Developer Debug Panel
+
+The Debug Panel is important for the hackathon.
+
+It should display:
+
+session state
+selected look
+routine step
+last tool call
+last visual result
+confidence
+RAG retrieved documents
+API errors
+
+Make the debug panel easily hidden before final presentation.
+
+==================================================
+25. ACCESSIBLE UI
+==================================================
+
+Critical controls:
+
+Start conversation
+Repeat
+Slow down
+Why
+Next
+Check with camera
+Stop camera
+Stop session
+
+Use:
+
+large click targets
+semantic buttons
+visible focus states
+aria-labels
+keyboard navigation
+status announcements
+
+Do not rely only on color.
+
+==================================================
+26. MOCK MODE
+==================================================
+
+The system MUST start successfully with:
+
+MODEL_PROVIDER=mock
+VISION_PROVIDER=mock
+EMBEDDING_PROVIDER=mock
+
+Provide deterministic mock scenarios.
+
+For example:
+
+demo command/query:
+“今晚有一个正式 dinner，我想精致一点但别太成熟”
+
+should retrieve:
+
+soft_formal
+
+Mock visual results should be selectable in Developer Mode:
+
+NO_BLUSH
+LEFT_ONLY
+RIGHT_ONLY
+BOTH
+UNCERTAIN
+
+This lets us develop the full UX before remote AI services work.
+
+==================================================
+27. TESTS
+==================================================
+
+Implement real tests.
+
+At minimum:
+
+Test 1:
+Dinner + polished + avoid too mature
+→ soft_formal
+
+Test 2:
+memory write without consent
+→ rejected
+
+Test 3:
+vision gate fail
+→ visual provider NOT called
+
+Test 4:
+3 frames BOTH/BOTH/BOTH
+→ BOTH
+
+Test 5:
+BOTH/LEFT_ONLY/UNCERTAIN
+→ UNCERTAIN
+
+Test 6:
+RAG metadata filter scene=dinner
+→ only valid documents
+
+Test 7:
+missing product field
+→ Agent does not fabricate it
+
+Test 8:
+low visual confidence
+→ no deterministic correction
+
+==================================================
+28. HEALTH CHECK
+==================================================
+
+GET /api/health should return something like:
+
+{
+  "status": "ok",
+  "backend": true,
+  "agent": true,
+  "rag": true,
+  "vision": true,
+  "memory": true,
+  "provider_mode": "mock"
+}
+
+==================================================
+29. STARTUP
+==================================================
+
+Create:
+
+start-dev.ps1
+
+It should make local development as easy as possible.
+
+Also create exact setup instructions in README.md.
+
+Expected user experience:
+
+1.
+Open PowerShell.
+
+2.
+cd D:\AccessibleBeautyAgent
+
+3.
+Run documented setup command.
+
+4.
+Run start-dev.ps1
+
+5.
+Backend starts.
+
+6.
+Frontend starts.
+
+7.
+Browser opens or gives localhost URL.
+
+==================================================
+30. DOCUMENTATION
+==================================================
+
+README.md must contain:
+
+- What this project does
+- Architecture
+- Required software
+- Windows setup
+- Mock mode
+- Remote API mode
+- How to run frontend
+- How to run backend
+- How to rebuild the RAG index
+- How to add a new Look
+- How to add reference cases
+- How to add products
+- How to run tests
+- Known limitations
+
+Create:
+
+docs/KNOWLEDGE_BASE_GUIDE.md
+
+This document is especially important.
+
+Explain exactly what files I need to prepare later
+when I manually build the beauty knowledge base.
+
+==================================================
+31. DEVELOPMENT STATUS
+==================================================
+
+Maintain:
+
+docs/DEVELOPMENT_STATUS.md
+
+Use sections:
+
+DONE
+WORKING
+NOT IMPLEMENTED
+BLOCKED
+NEXT
+
+Do not pretend something is complete if it is only mocked.
+
+Explicitly distinguish:
+
+IMPLEMENTED
+MOCKED
+PLACEHOLDER
+FUTURE
+
+==================================================
+32. EXECUTION STRATEGY
+==================================================
+
+Now execute the task.
+
+First:
+
+1. inspect the environment
+2. create project directory
+3. create repository structure
+4. create backend skeleton
+5. create frontend skeleton
+6. create demo KB
+7. implement session state
+8. implement Agent tools
+9. implement local RAG
+10. implement mock vision
+11. implement camera
+12. implement MediaPipe gate if feasible
+13. implement memory
+14. implement tests
+15. run tests
+16. run frontend build
+17. fix errors
+18. write documentation
+
+Do not wait for the real knowledge base.
+
+Use sample data and clearly isolate it.
+
+==================================================
+33. STOP CONDITION
+==================================================
+
+Do not stop merely because the project files exist.
+
+Before finishing your response, verify as much as possible that:
+
+- backend starts
+- /api/health works
+- tests pass
+- frontend builds
+- demo data loads
+- RAG search returns results
+- sample Dinner request matches Soft Formal
+- mock vision returns structured JSON
+- memory consent rule works
+
+At the end, report:
+
+1. exact project path
+2. what is fully implemented
+3. what is mocked
+4. what still needs API credentials
+5. commands to start the project
+6. commands to run tests
+7. which files I should edit next for my real Beauty KB
+8. any errors that remain
+
+Do not redesign the product unless a technical blocker genuinely requires it.
+Do not spend time adding decorative animations before the entire workflow runs.

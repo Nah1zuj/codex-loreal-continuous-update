@@ -1,0 +1,4 @@
+import catalog from '../../../data/locales/guidance.en.json'
+import type {Locale} from './traceBrand'
+/** Static, authored demo catalog; unknown source text is retained honestly. */
+export function guidanceText(text:string,locale:Locale){if(locale==='zh-CN')return text.replaceAll('Soft Formal · 柔和正式','柔和正式').replaceAll('Clean Daily · 清爽日常','清爽日常').replaceAll('Warm Social · 温暖社交','温暖社交');if(!/[\u3400-\u9fff]/.test(text))return text;const rows=catalog as Record<string,string>;if(rows[text])return rows[text];let result=text;for(const key of Object.keys(rows).sort((a,b)=>b.length-a.length))result=result.split(key).join(rows[key]);result=result.replace(/：/g,': ').replace(/；/g,'; ').replace(/。/g,'. ');return /[\u3400-\u9fff]/.test(result)?'Original text (translation unavailable): '+text:result}

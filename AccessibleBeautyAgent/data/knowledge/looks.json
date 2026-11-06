@@ -1,0 +1,175 @@
+{
+  "records": [
+    {
+      "source": "demo_team",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "look_id": "clean_daily",
+      "name": "Clean Daily · 清爽日常",
+      "description": "",
+      "scene": [
+        "daily"
+      ],
+      "desired_impression": [
+        "natural",
+        "fresh"
+      ],
+      "avoid": [
+        "heavy_makeup",
+        "high_saturation"
+      ],
+      "overall": {
+        "intensity": null,
+        "contrast": null
+      },
+      "base": {
+        "finish": "light_natural",
+        "coverage": null
+      },
+      "blush": {
+        "visible": null,
+        "intensity": "light",
+        "placement": "upper_cheek",
+        "finish": null
+      },
+      "lip": {
+        "visible": null,
+        "saturation": "low",
+        "finish": "natural"
+      },
+      "eye": {
+        "definition": null
+      },
+      "routine_id": "clean_daily_routine",
+      "routine_ids": [
+        "clean_daily_routine"
+      ],
+      "reference_ids": [],
+      "product_ids": []
+    },
+    {
+      "source": "demo_team",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "look_id": "soft_formal",
+      "name": "Soft Formal · 柔和正式",
+      "description": "",
+      "scene": [
+        "dinner",
+        "presentation"
+      ],
+      "desired_impression": [
+        "polished",
+        "slightly_present",
+        "controlled"
+      ],
+      "avoid": [
+        "too_mature",
+        "high_saturation",
+        "heavy_makeup"
+      ],
+      "overall": {
+        "intensity": null,
+        "contrast": null
+      },
+      "base": {
+        "finish": "natural_polished",
+        "coverage": null
+      },
+      "blush": {
+        "visible": null,
+        "intensity": "light_medium",
+        "placement": "upper_cheek",
+        "finish": null
+      },
+      "lip": {
+        "visible": null,
+        "saturation": "medium_low",
+        "finish": "soft_satin"
+      },
+      "eye": {
+        "definition": null
+      },
+      "routine_id": "soft_formal_routine",
+      "routine_ids": [
+        "soft_formal_routine"
+      ],
+      "reference_ids": [],
+      "product_ids": []
+    },
+    {
+      "source": "demo_team",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "look_id": "warm_social",
+      "name": "Warm Social · 温暖社交",
+      "description": "",
+      "scene": [
+        "social"
+      ],
+      "desired_impression": [
+        "warm",
+        "approachable"
+      ],
+      "avoid": [
+        "sharp_contrast",
+        "heavy_makeup"
+      ],
+      "overall": {
+        "intensity": null,
+        "contrast": null
+      },
+      "base": {
+        "finish": "natural",
+        "coverage": null
+      },
+      "blush": {
+        "visible": null,
+        "intensity": "medium",
+        "placement": "cheek",
+        "finish": null
+      },
+      "lip": {
+        "visible": null,
+        "saturation": "medium",
+        "finish": "soft_satin"
+      },
+      "eye": {
+        "definition": null
+      },
+      "routine_id": "warm_social_routine",
+      "routine_ids": [
+        "warm_social_routine"
+      ],
+      "reference_ids": [],
+      "product_ids": []
+    }
+  ]
+}

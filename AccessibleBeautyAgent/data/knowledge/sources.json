@@ -1,0 +1,58 @@
+{
+  "label": "CANONICAL KNOWLEDGE — demo_data flags preserve sample provenance",
+  "records": [
+    {
+      "source": "unknown",
+      "source_type": "team_reference",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "source_id": "source_1a57b2a9613645449b437869d6e331bc",
+      "title": "kb_acceptance.jpg",
+      "creator": null,
+      "url": null,
+      "local_file": "data/references/raw/1a57b2a9613645449b437869d6e331bc.jpg",
+      "accessed_at": null,
+      "notes": ""
+    },
+    {
+      "source": "unknown",
+      "source_type": "original",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 2,
+      "updated_at": "2026-10-11T18:21:15.047689+00:00",
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "source_id": "trace_original_v2",
+      "title": "TRACE original accessibility conversation drafts",
+      "creator": "TRACE development team",
+      "url": null,
+      "local_file": "data/import/trace-original-tutorials.json",
+      "accessed_at": null,
+      "notes": "{\"permission\": \"original\", \"evidence\": \"New project-authored text; not copied from external tutorials. Expert accessibility and makeup review required.\", \"attribution\": \"TRACE V2 original draft\", \"accessed_at\": \"2026-10-11T18:01:55.046135+00:00\"}"
+    },
+    {
+      "source_id": "trace_original_phase4",
+      "title": "TRACE original bilingual coaching drafts",
+      "source": "TRACE engineering",
+      "source_type": "original",
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "local_file": "data/knowledge/accessibility_guidance.json",
+      "notes": "Original authored text; not expert-reviewed; no downloaded training material."
+    }
+  ]
+}

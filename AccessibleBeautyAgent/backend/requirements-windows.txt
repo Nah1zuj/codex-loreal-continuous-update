@@ -1,0 +1,14 @@
+# Windows desktop runtime: use one OpenCV package for MediaPipe.
+fastapi==0.115.12
+starlette==0.46.2
+uvicorn==0.34.3
+pydantic>=2.10,<3
+python-dotenv>=1,<2
+httpx[socks]>=0.28,<1
+anyio==4.9.0
+numpy>=2.2,<3
+opencv-contrib-python>=4.11,<5
+Pillow>=11,<13
+pytest>=8,<10
+openpyxl==3.1.5
+-r requirements-landmarks.txt

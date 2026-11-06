@@ -1,0 +1,1494 @@
+You are continuing development of the existing project:
+
+Accessible Beauty Agent
+L'Oréal Hackathon Track 3
+
+IMPORTANT:
+
+This is PHASE 2.
+
+The basic engineering framework should already exist from Phase 1.
+
+Your task now is NOT to redesign the application
+and NOT to rebuild the project from scratch.
+
+Your task is to build a robust,
+human-reviewable Beauty Knowledge Base production framework
+on top of the existing codebase.
+
+==================================================
+0. FIRST ACTION: INSPECT BEFORE MODIFYING
+==================================================
+
+Before changing anything:
+
+1. Inspect the existing repository.
+2. Read:
+   - README.md
+   - docs/DEVELOPMENT_STATUS.md
+   - existing backend schemas
+   - existing RAG implementation
+   - existing frontend routes/pages
+   - existing data files
+   - existing tests
+3. Determine what Phase 1 already implemented.
+4. Reuse existing modules wherever possible.
+5. Do NOT create duplicate services or duplicate data models.
+6. Do NOT break currently working functionality.
+
+The project should remain in:
+
+D:\AccessibleBeautyAgent
+
+or the actual path already used by Phase 1.
+
+Do not modify files outside this repository.
+
+==================================================
+1. PHASE 2 GOAL
+==================================================
+
+Build a complete framework that allows a non-engineer
+to gradually create the real Beauty Knowledge Base.
+
+The future workflow should become:
+
+Research / Image / Video / Product information
+↓
+Import or upload
+↓
+AI draft analysis
+↓
+Structured schema
+↓
+Human review
+↓
+Verify
+↓
+Save to knowledge base
+↓
+Validate
+↓
+Build / rebuild RAG index
+↓
+Test retrieval
+↓
+Accessible Beauty Agent uses the new knowledge
+
+I should NOT need to manually modify Python source code
+every time I add new beauty knowledge.
+
+==================================================
+2. KNOWLEDGE TYPES
+==================================================
+
+The knowledge base must support at least five core types:
+
+1. LOOK
+
+A makeup concept / style definition.
+
+Examples:
+- clean_daily
+- soft_formal
+- warm_social
+
+2. ROUTINE
+
+Step-by-step instructions for completing a Look.
+
+3. REFERENCE_CASE
+
+A human-reviewed image or video-frame example
+used to ground what a Look or makeup state means.
+
+4. PRODUCT
+
+A real beauty product record.
+
+5. ACCESSIBILITY_GUIDANCE
+
+Interaction and instruction principles
+specifically relevant to blind / low-vision users.
+
+Keep these types separate,
+but allow them to link to each other.
+
+==================================================
+3. CREATE A CANONICAL DATA MODEL
+==================================================
+
+Create or improve Pydantic schemas for:
+
+BeautyLook
+BeautyRoutine
+RoutineStep
+ReferenceCase
+BeautyProduct
+AccessibilityGuidance
+SourceRecord
+KnowledgeDocument
+
+Do not scatter schema definitions across random files.
+
+Use a clean schema package.
+
+Example:
+
+backend/app/schemas/
+    beauty_look.py
+    beauty_routine.py
+    reference_case.py
+    beauty_product.py
+    accessibility.py
+    source.py
+    knowledge.py
+
+==================================================
+4. BEAUTY LOOK SCHEMA
+==================================================
+
+The BeautyLook schema should support approximately:
+
+{
+  "look_id": "soft_formal",
+  "name": "Soft Formal",
+
+  "description": "...",
+
+  "scenes": [
+    "dinner",
+    "presentation"
+  ],
+
+  "desired_impression": [
+    "polished",
+    "controlled",
+    "slightly_present"
+  ],
+
+  "avoid": [
+    "too_mature",
+    "high_saturation",
+    "heavy_makeup"
+  ],
+
+  "overall": {
+    "intensity": "medium_low",
+    "contrast": "medium_low"
+  },
+
+  "base": {
+    "finish": "natural_polished",
+    "coverage": "light_medium"
+  },
+
+  "blush": {
+    "intensity": "light_medium",
+    "placement": "upper_cheek",
+    "finish": "soft_diffused"
+  },
+
+  "lip": {
+    "saturation": "medium_low",
+    "finish": "soft_satin"
+  },
+
+  "eye": {
+    "definition": "light_medium"
+  },
+
+  "routine_ids": [],
+  "reference_ids": [],
+  "product_ids": [],
+
+  "source_ids": [],
+
+  "verified": false,
+  "version": 1
+}
+
+Make fields optional where appropriate.
+
+Use enums / controlled vocabularies
+for attributes where consistency matters.
+
+==================================================
+5. CONTROLLED VOCABULARY
+==================================================
+
+Create configuration files for controlled values.
+
+Example:
+
+data/config/
+    scenes.json
+    impressions.json
+    makeup_areas.json
+    intensity_levels.json
+    finishes.json
+    saturation_levels.json
+    reference_status.json
+
+Examples:
+
+Intensity:
+
+very_low
+low
+light_medium
+medium
+medium_high
+high
+
+Saturation:
+
+very_low
+low
+medium_low
+medium
+medium_high
+high
+
+Do not lock the system so tightly
+that new values cannot be added later.
+
+==================================================
+6. ROUTINE SCHEMA
+==================================================
+
+Routine should support:
+
+{
+  "routine_id": "...",
+  "look_id": "...",
+  "name": "...",
+
+  "steps": [
+    {
+      "step_id": "...",
+      "order": 1,
+
+      "makeup_area": "blush",
+
+      "instruction": "...",
+
+      "instruction_slow": "...",
+
+      "instruction_repeat": "...",
+
+      "explanation_why": "...",
+
+      "visual_check_required": true,
+
+      "visual_task": "blush_presence",
+
+      "success_condition": "...",
+
+      "fallback_instruction": "..."
+    }
+  ],
+
+  "verified": false
+}
+
+==================================================
+7. REFERENCE CASE SCHEMA
+==================================================
+
+This is one of the most important schemas.
+
+Create approximately:
+
+{
+  "reference_id": "...",
+
+  "look_id": "soft_formal",
+
+  "media_type": "image",
+
+  "source_file": "...",
+
+  "source_id": "...",
+
+  "frame_timestamp": null,
+
+  "scene": [
+    "dinner"
+  ],
+
+  "overall": {
+    "intensity": "medium_low",
+    "contrast": "medium_low"
+  },
+
+  "base": {
+    "finish": "natural"
+  },
+
+  "blush": {
+    "visible": true,
+    "intensity": "light_medium",
+    "placement": "upper_cheek",
+    "finish": "soft_diffused"
+  },
+
+  "lip": {
+    "visible": true,
+    "saturation": "medium_low",
+    "finish": "soft_satin"
+  },
+
+  "eye": {
+    "definition": "light_medium"
+  },
+
+  "quality": {
+    "face_visible": true,
+    "lighting": "good",
+    "pose": "acceptable"
+  },
+
+  "uncertainty_notes": "...",
+
+  "ai_generated_draft": true,
+
+  "human_verified": false,
+
+  "review_notes": "",
+
+  "verified_by": null,
+
+  "verified_at": null
+}
+
+The application must distinguish:
+
+AI DRAFT
+
+from
+
+HUMAN VERIFIED
+
+knowledge.
+
+==================================================
+8. SOURCE TRACEABILITY
+==================================================
+
+Every important knowledge record should support source tracking.
+
+Create SourceRecord:
+
+{
+  "source_id": "...",
+  "source_type": "official_product_page | academic | team_reference | tutorial | other",
+  "title": "...",
+  "creator": "...",
+  "url": "...",
+  "local_file": "...",
+  "accessed_at": "...",
+  "notes": "..."
+}
+
+Do not require every field.
+
+But preserve provenance whenever available.
+
+==================================================
+9. PRODUCT SCHEMA
+==================================================
+
+Product schema should support:
+
+{
+  "product_id": "...",
+
+  "brand": "...",
+  "name": "...",
+
+  "category": "lip",
+
+  "finish": "soft_satin",
+
+  "saturation": "medium_low",
+
+  "undertone": "neutral",
+
+  "contexts": [
+    "dinner"
+  ],
+
+  "look_ids": [
+    "soft_formal"
+  ],
+
+  "claims": [],
+
+  "source_ids": [],
+
+  "verified": false
+}
+
+The system must NEVER infer missing official product claims.
+
+Missing data stays null / unknown.
+
+==================================================
+10. ACCESSIBILITY GUIDANCE SCHEMA
+==================================================
+
+Create structured accessibility guidance.
+
+Example:
+
+{
+  "guidance_id": "voice_instruction_001",
+
+  "category": "voice_instruction",
+
+  "principle": "one_action_at_a_time",
+
+  "description": "...",
+
+  "preferred_pattern": "...",
+
+  "avoid_pattern": "...",
+
+  "example_good": "...",
+
+  "example_bad": "...",
+
+  "source_ids": [],
+
+  "verified": true
+}
+
+Categories may include:
+
+voice_instruction
+spatial_instruction
+confirmation
+camera_consent
+memory_consent
+error_recovery
+progressive_disclosure
+user_control
+
+==================================================
+11. EXCEL / CSV IMPORT WORKFLOW
+==================================================
+
+I prefer maintaining research data in spreadsheets.
+
+Create spreadsheet-friendly templates.
+
+If possible create:
+
+templates/
+    beauty_looks_template.csv
+    products_template.csv
+    accessibility_guidance_template.csv
+    reference_cases_template.csv
+
+If XLSX generation is practical,
+also provide:
+
+templates/beauty_kb_template.xlsx
+
+with separate sheets:
+
+LOOKS
+ROUTINES
+ROUTINE_STEPS
+REFERENCE_CASES
+PRODUCTS
+ACCESSIBILITY
+SOURCES
+
+The import system should accept CSV
+and preferably XLSX.
+
+Create:
+
+scripts/import_kb.py
+
+Example usage:
+
+python scripts/import_kb.py --file templates/beauty_kb.xlsx
+
+or:
+
+python scripts/import_kb.py --file data/import/products.csv
+
+The script should:
+
+1. read input
+2. normalize fields
+3. validate schema
+4. report errors
+5. NOT silently discard invalid rows
+6. create structured JSON records
+7. preserve source information
+8. generate an import report
+
+==================================================
+12. IMPORT REPORT
+==================================================
+
+Each import should produce something like:
+
+reports/import_2026xxxx_xxxx.json
+
+with:
+
+{
+  "total_rows": 50,
+  "accepted": 44,
+  "warnings": 4,
+  "rejected": 2,
+
+  "errors": [
+    {
+      "row": 18,
+      "field": "look_id",
+      "message": "missing required field"
+    }
+  ]
+}
+
+Make errors understandable to a non-engineer.
+
+==================================================
+13. KNOWLEDGE VALIDATION
+==================================================
+
+Improve:
+
+scripts/validate_kb.py
+
+Validation should check:
+
+- duplicate IDs
+- missing required fields
+- unknown controlled vocabulary
+- broken look_id references
+- broken routine_id references
+- missing source references
+- products linked to nonexistent Looks
+- references linked to nonexistent Looks
+- invalid verification states
+- malformed URLs where applicable
+
+Output:
+
+PASS
+WARNING
+ERROR
+
+Do not treat every warning as fatal.
+
+==================================================
+14. KNOWLEDGE ADMIN PAGE
+==================================================
+
+Create a developer/admin knowledge-management interface.
+
+Suggested route:
+
+/admin/knowledge
+
+This is NOT a public user page.
+
+It is an internal research tool.
+
+The page should support:
+
+A. Dashboard
+
+Show:
+
+total Looks
+total Routines
+total Reference Cases
+verified references
+unverified references
+products
+accessibility guidance records
+RAG document count
+
+B. Browse records
+
+Tabs:
+
+Looks
+Routines
+References
+Products
+Accessibility
+Sources
+
+C. Edit structured records
+
+Allow field editing.
+
+D. Validation state
+
+Clearly show:
+
+DRAFT
+AI GENERATED
+HUMAN VERIFIED
+INVALID
+
+==================================================
+15. REFERENCE IMAGE REVIEW TOOL
+==================================================
+
+Create:
+
+/admin/references
+
+Workflow:
+
+1. Upload reference image.
+2. Choose or enter Look.
+3. Run AI Analysis.
+4. Display image and structured draft side by side.
+5. Allow human editing.
+6. Click:
+   Verify & Save
+7. Save as human_verified=true.
+8. Make it available for KB ingestion.
+
+UI idea:
+
+LEFT:
+
+Reference Image
+
+RIGHT:
+
+Look
+Scene
+Overall Intensity
+Overall Contrast
+
+Blush:
+Visible
+Intensity
+Placement
+Finish
+
+Lip:
+Visible
+Saturation
+Finish
+
+Eye:
+Definition
+
+AI Confidence
+
+Uncertainty Notes
+
+Buttons:
+
+Analyze
+Save Draft
+Verify & Save
+Reject
+
+Do NOT automatically verify AI output.
+
+==================================================
+16. BATCH IMAGE ANALYSIS
+==================================================
+
+Improve or create:
+
+scripts/analyze_reference_media.py
+
+Support:
+
+python scripts/analyze_reference_media.py \
+  --input data/references/soft_formal \
+  --look-id soft_formal
+
+The script should:
+
+- scan supported image files
+- analyze them one by one
+- produce structured JSON drafts
+- mark all as human_verified=false
+- continue if one file fails
+- generate processing report
+
+Do not overwrite existing verified data.
+
+==================================================
+17. VIDEO PREPROCESSING FRAMEWORK
+==================================================
+
+Create:
+
+scripts/extract_video_frames.py
+
+This tool should help convert tutorial videos
+into possible reference frames.
+
+Do NOT automatically send every frame to the AI.
+
+Support options such as:
+
+--interval 5
+
+meaning one frame every approximately 5 seconds,
+
+and preferably:
+
+--timestamps
+
+for manually specified timestamps.
+
+Example:
+
+python scripts/extract_video_frames.py \
+  --file tutorial.mp4 \
+  --timestamps 00:20,00:45,01:10
+
+Save:
+
+source video
+timestamp
+frame path
+
+into metadata.
+
+The intended workflow is:
+
+Video
+→ Selected Frames
+→ AI Draft Analysis
+→ Human Review
+→ Reference Case
+
+==================================================
+18. AI REFERENCE ANALYSIS
+==================================================
+
+Create adapter-based reference analysis.
+
+Interface:
+
+ReferenceAnalyzer
+
+Implement:
+
+MockReferenceAnalyzer
+
+RemoteVisionReferenceAnalyzer
+
+The Remote analyzer should use the existing visual-model abstraction
+if possible.
+
+Do not create a second unrelated vision architecture.
+
+Reference analysis task:
+
+Describe structured makeup attributes,
+not beauty.
+
+Fields:
+
+overall intensity
+overall contrast
+base finish
+blush visibility
+blush intensity
+blush placement
+blush finish
+lip visibility
+lip saturation
+lip finish
+eye definition
+image quality
+uncertainty
+
+Return JSON.
+
+==================================================
+19. REFERENCE ANALYSIS PROMPT
+==================================================
+
+Create or improve:
+
+prompts/reference_analysis.md
+
+Use approximately:
+
+You are analyzing an image for a structured beauty reference database.
+
+Your task is NOT to judge attractiveness,
+beauty, identity, personality or quality.
+
+Extract only visible makeup attributes.
+
+Only make observations supported by the image.
+
+If a field cannot be reliably determined,
+return null or "uncertain".
+
+Use controlled vocabulary whenever possible.
+
+Return structured JSON only.
+
+Analyze:
+
+- overall makeup intensity
+- overall contrast
+- base finish
+- blush visibility
+- blush approximate placement
+- blush intensity
+- blush finish
+- lip visibility
+- lip saturation
+- lip finish
+- eye definition
+- image quality
+- uncertainty notes
+
+==================================================
+20. HUMAN REVIEW IS AUTHORITATIVE
+==================================================
+
+Implement this data principle:
+
+human_verified=true
+
+must take precedence over
+later automated analysis.
+
+Automated re-analysis must NEVER silently overwrite
+human-verified knowledge.
+
+If a record already has human_verified=true:
+
+create a suggested revision
+or warn the user.
+
+Do not overwrite.
+
+==================================================
+21. VERSIONING
+==================================================
+
+Implement simple knowledge version tracking.
+
+It does not need to be enterprise-grade.
+
+Each edited record should support:
+
+version
+updated_at
+review_notes
+
+If feasible:
+
+save previous versions under:
+
+data/history/
+
+Do not over-engineer this.
+
+==================================================
+22. KNOWLEDGE STORAGE
+==================================================
+
+For the hackathon,
+prefer transparent local storage.
+
+Recommended structure:
+
+data/
+  knowledge/
+    looks/
+    routines/
+    accessibility/
+
+  references/
+    raw/
+    frames/
+    drafts/
+    verified/
+
+  products/
+
+  sources/
+
+  indexes/
+
+  history/
+
+Avoid introducing a large database server.
+
+SQLite may be used for admin metadata
+if already used in Phase 1.
+
+Canonical knowledge should remain exportable
+as JSON / CSV.
+
+==================================================
+23. RAG DOCUMENT CONVERSION
+==================================================
+
+Create a transformation layer:
+
+Canonical Knowledge
+↓
+RAG Documents
+
+Do not directly embed arbitrary raw JSON.
+
+Create:
+
+backend/app/rag/document_builder.py
+
+Convert knowledge into readable retrieval documents.
+
+Example Parent:
+
+Title:
+Soft Formal
+
+Content:
+Soft Formal is intended for dinner and presentation contexts...
+
+Metadata:
+document_type=LOOK
+look_id=soft_formal
+
+Children:
+
+Soft Formal — Blush
+Soft Formal — Lip
+Soft Formal — Routine
+Soft Formal — Reference Case 001
+
+==================================================
+24. PARENT-CHILD RAG
+==================================================
+
+Implement a clear Parent / Child system.
+
+Example:
+
+Parent:
+LOOK: soft_formal
+
+Children:
+
+LOOK_COMPONENT: soft_formal_blush
+LOOK_COMPONENT: soft_formal_lip
+
+ROUTINE_STEP:
+soft_formal_step_blush
+
+REFERENCE_CASE:
+soft_formal_ref_001
+
+PRODUCT:
+lip_001
+
+Each Child should preserve:
+
+parent_id
+look_id
+document_type
+makeup_area
+scene
+verified
+
+==================================================
+25. VERIFIED KNOWLEDGE FILTER
+==================================================
+
+Production retrieval should default to:
+
+verified=true
+
+unless explicitly running in:
+
+developer mode
+
+or:
+
+research mode.
+
+Unverified AI drafts should NOT automatically become
+authoritative Agent knowledge.
+
+==================================================
+26. RAG SEARCH DEBUGGER
+==================================================
+
+Create:
+
+/admin/rag
+
+This page is extremely important.
+
+It should allow me to type:
+
+“今晚 dinner，正式一点，但不要显得太成熟”
+
+Then show:
+
+Query
+
+Parsed filters
+
+Semantic results
+
+Lexical results
+
+Final merged results
+
+Reranked results
+
+Metadata
+
+Scores
+
+Source
+
+Verification status
+
+This makes RAG debugging visible.
+
+==================================================
+27. RAG RETRIEVAL PIPELINE
+==================================================
+
+Implement approximately:
+
+User Query
+↓
+Query Understanding
+↓
+Metadata Filter
+↓
+Semantic Search
++
+Lexical Search
+↓
+Merge
+↓
+Optional Rerank
+↓
+Verification Filter
+↓
+Top Results
+
+Do not require the remote reranker.
+
+==================================================
+28. RAG INDEX MANAGEMENT
+==================================================
+
+Create:
+
+scripts/rebuild_index.py
+
+Support:
+
+python scripts/rebuild_index.py
+
+and preferably:
+
+python scripts/rebuild_index.py --type LOOK
+
+or:
+
+--look-id soft_formal
+
+The script should:
+
+1. validate knowledge
+2. build retrieval documents
+3. create/update index
+4. report document counts
+5. run smoke retrieval tests
+
+==================================================
+29. ADMIN BUTTON FOR REBUILD
+==================================================
+
+In the admin interface,
+add:
+
+Validate Knowledge
+
+Rebuild RAG Index
+
+Run Smoke Test
+
+buttons.
+
+These can call backend admin APIs.
+
+Show success/error messages clearly.
+
+==================================================
+30. KNOWLEDGE PIPELINE STATUS
+==================================================
+
+Admin dashboard should make this flow visible:
+
+RAW
+↓
+AI ANALYZED
+↓
+HUMAN REVIEWED
+↓
+VERIFIED
+↓
+INDEXED
+
+For each Reference Case,
+show its current state.
+
+==================================================
+31. CREATE A STARTER DEMO DATASET
+==================================================
+
+Do not wait for me to provide real knowledge.
+
+Keep or improve sample data for:
+
+Clean Daily
+
+Soft Formal
+
+Warm Social
+
+But mark it clearly:
+
+demo_data=true
+
+Do not pretend demo data is research-validated.
+
+==================================================
+32. CREATE KB GUIDE FOR ME
+==================================================
+
+Create:
+
+docs/KNOWLEDGE_BASE_WORKFLOW.md
+
+Write it for a non-engineer.
+
+Explain:
+
+HOW TO ADD A NEW LOOK
+
+HOW TO ADD A ROUTINE
+
+HOW TO ADD A PRODUCT
+
+HOW TO ADD A PHOTO
+
+HOW TO ANALYZE A PHOTO
+
+HOW TO REVIEW AI OUTPUT
+
+HOW TO VERIFY A REFERENCE
+
+HOW TO IMPORT EXCEL
+
+HOW TO VALIDATE THE KB
+
+HOW TO REBUILD RAG
+
+HOW TO TEST WHETHER RAG CAN FIND IT
+
+HOW TO CORRECT A RECORD
+
+HOW TO DELETE / DEPRECATE A RECORD
+
+==================================================
+33. CREATE RESEARCH TODO TEMPLATE
+==================================================
+
+Create:
+
+docs/KB_RESEARCH_CHECKLIST.md
+
+Include something like:
+
+LOOK
+
+[ ] Look definition
+[ ] scene
+[ ] desired impression
+[ ] avoid attributes
+[ ] base
+[ ] blush
+[ ] lip
+[ ] eye
+[ ] source
+[ ] reference cases
+[ ] human review
+
+REFERENCE IMAGE
+
+[ ] source recorded
+[ ] image imported
+[ ] AI analyzed
+[ ] manually reviewed
+[ ] uncertain fields corrected
+[ ] verified
+
+PRODUCT
+
+[ ] official source
+[ ] category
+[ ] finish
+[ ] saturation
+[ ] contexts
+[ ] missing fields remain unknown
+[ ] verified
+
+==================================================
+34. AUTOMATED TESTS
+==================================================
+
+Add tests for:
+
+1.
+Invalid Look is rejected.
+
+2.
+Reference linked to nonexistent Look
+creates validation error.
+
+3.
+Human-verified record cannot be silently overwritten.
+
+4.
+Only verified documents enter production retrieval.
+
+5.
+Soft Formal reference can be filtered by:
+look_id=soft_formal.
+
+6.
+Dinner query retrieves Soft Formal.
+
+7.
+CSV import handles missing field.
+
+8.
+Duplicate ID is detected.
+
+9.
+RAG Parent / Child relationships remain valid.
+
+10.
+Rebuilding index does not destroy canonical knowledge.
+
+==================================================
+35. DO NOT OVERBUILD
+==================================================
+
+Do not add:
+
+authentication systems
+cloud object storage
+enterprise permissions
+Kubernetes
+Docker clusters
+distributed databases
+
+unless already necessary in the project.
+
+This is a 5–7 day hackathon.
+
+The priority is:
+
+visible
+testable
+editable
+auditable
+stable
+
+==================================================
+36. USER EXPERIENCE GOAL
+==================================================
+
+After you finish this Phase,
+I should be able to do something approximately like:
+
+1.
+Open:
+
+http://localhost:xxxx/admin/references
+
+2.
+Upload:
+
+soft_formal_001.jpg
+
+3.
+Select:
+
+Soft Formal
+
+4.
+Click:
+
+Analyze
+
+5.
+AI returns structured attributes.
+
+6.
+I manually change:
+
+blush intensity
+from medium
+to light_medium
+
+7.
+Click:
+
+Verify & Save
+
+8.
+Open:
+
+/admin/rag
+
+9.
+Click:
+
+Rebuild Index
+
+10.
+Search:
+
+“Dinner，想正式一点但不要太成熟”
+
+11.
+Soft Formal and its verified references
+appear in retrieval results.
+
+This complete workflow is the Phase 2 acceptance test.
+
+==================================================
+37. EXECUTE, DO NOT ONLY PLAN
+==================================================
+
+Now implement the system.
+
+Do not only write an architecture proposal.
+
+Proceed approximately:
+
+1. inspect existing repo
+2. report existing architecture internally
+3. improve schemas
+4. add controlled vocabularies
+5. add templates
+6. implement importer
+7. implement validator
+8. implement reference analyzer framework
+9. implement image admin
+10. implement video-frame extraction
+11. implement human verification
+12. implement canonical → RAG document builder
+13. implement Parent/Child relationships
+14. implement verified-only retrieval
+15. implement RAG debugger
+16. implement rebuild index
+17. write tests
+18. run tests
+19. build frontend
+20. fix errors
+21. update documentation
+
+==================================================
+38. FINAL VERIFICATION
+==================================================
+
+Before finishing,
+verify as much as technically possible:
+
+- existing app still works
+- backend starts
+- frontend builds
+- old tests still pass
+- new tests pass
+- sample CSV imports
+- invalid records are reported
+- image draft can be created
+- human verification can be saved
+- verified data can be indexed
+- Dinner query retrieves Soft Formal
+- admin pages load
+- RAG debug information displays
+- human-verified records are protected
+
+==================================================
+39. FINAL REPORT
+==================================================
+
+At the end,
+give me a concise report containing:
+
+A.
+Files created
+
+B.
+Files modified
+
+C.
+What is fully implemented
+
+D.
+What is mocked
+
+E.
+What requires an external AI API
+
+F.
+How I start the system
+
+G.
+How I upload my first real image
+
+H.
+How I verify the image
+
+I.
+How I import an Excel / CSV file
+
+J.
+How I rebuild the RAG index
+
+K.
+How I test retrieval
+
+L.
+Exactly which data files I should work on next
+
+M.
+Any remaining errors
+
+Do not claim a feature works unless you actually implemented
+or successfully tested it.
+
+Do not redesign the main Accessible Beauty Agent product.
+This Phase exists specifically to make real Beauty Knowledge
+easy for me to build and maintain.

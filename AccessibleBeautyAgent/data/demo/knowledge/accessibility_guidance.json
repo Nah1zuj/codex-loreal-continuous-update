@@ -1,0 +1,23 @@
+{
+  "label": "SAMPLE DATA — fictional hackathon content, not product claims",
+  "records": [
+    {
+      "document_id": "guidance_one_step",
+      "scene": [
+        "daily",
+        "dinner",
+        "presentation",
+        "social"
+      ],
+      "content": "一次给一个可执行指令。说明左右时以用户自己的左右为准。不确定就重拍，不做美丑评分。",
+      "source": "demo_team",
+      "source_type": "sample",
+      "verified": false,
+      "tags": [
+        "voice",
+        "blush",
+        "accessibility"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+﻿routine_id,step_id,order,name,makeup_area,instruction,instruction_slow,instruction_repeat,explanation_why,visual_check_required,visual_task,success_condition,fallback_instruction
+template_routine,base,1,准备,base,先取少量常用底妆。,慢慢取少量常用底妆。,重复：先取少量底妆。,少量起步便于调整。,False,,完成准备,你也可以跳过。

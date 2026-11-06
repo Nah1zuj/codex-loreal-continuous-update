@@ -1,0 +1,7 @@
+{
+  "label":"SAMPLE DATA / deterministic mock scenarios",
+  "dinner_intent":{"message":"今晚有一个正式 dinner，我想精致一点但别太成熟","expected_look":"soft_formal"},
+  "blush_statuses":["NO_BLUSH","LEFT_ONLY","RIGHT_ONLY","BOTH","UNCERTAIN"],
+  "lip_statuses":["NOT_APPLIED","APPLIED","OBVIOUS_OVERFLOW","UNCERTAIN"],
+  "feedback":{"message":"唇色稍微太强，下次想淡一点","expected_saturation":"low"}
+}

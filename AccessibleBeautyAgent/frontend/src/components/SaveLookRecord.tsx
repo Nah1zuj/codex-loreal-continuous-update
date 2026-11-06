@@ -1,0 +1,13 @@
+import {useEffect,useState} from 'react'
+import {api} from '../api/client'
+import {useTrace} from '../content/Locale'
+import type {Session} from '../types'
+export function SaveLookRecord({session,onError}:{session:Session;onError:(message:string)=>void}){
+ const {t,d,locale}=useTrace(),plan=session.todays_look
+ const [open,setOpen]=useState(false),[approved,setApproved]=useState(false),[draft,setDraft]=useState(''),[busy,setBusy]=useState(false),[saved,setSaved]=useState(false)
+ useEffect(()=>{setOpen(false);setApproved(false);setSaved(false);setDraft('')},[session.session_id,plan?.version])
+ if(!plan)return null
+ function review(){setDraft(Object.entries(plan!.sections).map(([domain,section])=>`${t(({skincare:'护肤与妆前',makeup:'妆容',hair:'发型',outfit:'穿搭',accessories:'配饰',fragrance:'香氛'} as Record<string,string>)[domain],domain)}: ${section.state==='skipped'?t('已跳过','Skipped'):section.suggestions.map(s=>locale==='en'?s.display_name_en||d(s.display_name_zh):d(s.display_name_zh)).join(' / ')} (${section.state==='confirmed'?t('已确认','Confirmed'):section.state==='skipped'?t('已跳过','Skipped'):t('建议，尚未确认','Proposed, not yet confirmed')})`).join('\n').slice(0,2000));setApproved(false);setOpen(true)}
+ async function save(){if(!approved||busy||saved)return;setBusy(true);try{const now=new Date();await api('/journal',{user_id:session.user_id,session_id:session.session_id,date:`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`,look:t('今天的整体造型','Today’s Full Look'),reflection:draft,explicit_consent:true,save_transcript:false});setSaved(true);setOpen(false)}catch(e){onError(e instanceof Error?e.message:t('保存失败','Save failed'))}finally{setBusy(false)}}
+ return <section className="look-record-save">{saved?<p role="status">{t('造型文字记录已保存到拾光日历。没有保存照片或聊天原文。','Your text look record was saved to the calendar. Photos and full chat were not saved.')}</p>:<button onClick={review}>{t('保存这份造型 · 先审阅','Save this look · Review first')}</button>}{open?<form onSubmit={e=>{e.preventDefault();void save()}}><label htmlFor="look-record-draft">{t('待保存的私人造型记录','Private look record to save')}</label><textarea id="look-record-draft" maxLength={2000} value={draft} onChange={e=>{setDraft(e.target.value);setApproved(false)}} rows={6}/><label><input type="checkbox" checked={approved} onChange={e=>setApproved(e.target.checked)}/>{t('我已审阅，同意保存这份文字记录。','I reviewed and agree to save this text record.')}</label><div className="controls"><button className="primary" disabled={!approved||busy||!draft.trim()}>{t('确认保存造型记录','Confirm save look record')}</button><button type="button" disabled={busy} onClick={()=>setOpen(false)}>{t('取消','Cancel')}</button></div></form>:null}</section>
+}

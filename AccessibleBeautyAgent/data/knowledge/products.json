@@ -1,0 +1,344 @@
+{
+  "records": [
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_01",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "base",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "daily"
+      ],
+      "look_ids": [
+        "clean_daily"
+      ],
+      "claims": []
+    },
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_02",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "blush",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "daily"
+      ],
+      "look_ids": [
+        "clean_daily"
+      ],
+      "claims": []
+    },
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_03",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "lip",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "daily"
+      ],
+      "look_ids": [
+        "clean_daily"
+      ],
+      "claims": []
+    },
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_04",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "brush",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "daily"
+      ],
+      "look_ids": [
+        "clean_daily"
+      ],
+      "claims": []
+    },
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_05",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "base",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "dinner",
+        "presentation"
+      ],
+      "look_ids": [
+        "soft_formal"
+      ],
+      "claims": []
+    },
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_06",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "blush",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "dinner",
+        "presentation"
+      ],
+      "look_ids": [
+        "soft_formal"
+      ],
+      "claims": []
+    },
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_07",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "lip",
+      "finish": "soft_satin",
+      "saturation": "medium_low",
+      "undertone": "neutral",
+      "contexts": [
+        "dinner",
+        "presentation"
+      ],
+      "look_ids": [
+        "soft_formal"
+      ],
+      "claims": []
+    },
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_08",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "brush",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "dinner",
+        "presentation"
+      ],
+      "look_ids": [
+        "soft_formal"
+      ],
+      "claims": []
+    },
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_09",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "base",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "social"
+      ],
+      "look_ids": [
+        "warm_social"
+      ],
+      "claims": []
+    },
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_10",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "blush",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "social"
+      ],
+      "look_ids": [
+        "warm_social"
+      ],
+      "claims": []
+    },
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_11",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "lip",
+      "finish": "soft_satin",
+      "saturation": "medium",
+      "undertone": "neutral",
+      "contexts": [
+        "social"
+      ],
+      "look_ids": [
+        "warm_social"
+      ],
+      "claims": []
+    },
+    {
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [],
+      "product_id": "sample_12",
+      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "",
+      "category": "brush",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "social"
+      ],
+      "look_ids": [
+        "warm_social"
+      ],
+      "claims": []
+    }
+  ]
+}

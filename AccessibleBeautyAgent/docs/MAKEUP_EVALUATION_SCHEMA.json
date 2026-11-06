@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Authorized makeup evaluation sample, no embedded pixels",
+  "type": "object",
+  "required": ["sampleId", "imageReference", "consentStatus", "allowedUse", "makeupRegion", "modelVersion"],
+  "additionalProperties": false,
+  "properties": {
+    "sampleId": {"type": "string", "minLength": 1},
+    "imageReference": {"type": "string", "description": "Controlled local asset reference; evaluator does not fetch or open images."},
+    "consentStatus": {"enum": ["granted", "withdrawn", "pending"]},
+    "allowedUse": {"type": "array", "items": {"enum": ["evaluate", "calibrate", "train"]}},
+    "makeupRegion": {"enum": ["blush", "lips", "face"]},
+    "lightingCondition": {"enum": ["even", "dim", "asymmetric", "clipped", "unknown"]},
+    "poseCategory": {"type": "string"},
+    "modelVersion": {"type": "string"},
+    "sourceType": {"enum": ["real_labeled", "synthetic"]},
+    "comparisonPairId": {"type": ["string", "null"]},
+    "humanLabels": {"type": "object", "properties": {"classification": {"type": "string"}, "regionBox": {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4}, "stablePair": {"type": "boolean"}, "changeDirection": {"enum": ["decreased", "increased", "unchanged", "uncomparable"]}}, "additionalProperties": false},
+    "modelPredictions": {"type": "object", "properties": {"classification": {"type": "string"}, "regionBox": {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4}, "changeDirection": {"enum": ["decreased", "increased", "unchanged", "uncomparable"]}, "features": {"type": "object", "additionalProperties": {"type": "number"}}}, "additionalProperties": false}
+  }
+}

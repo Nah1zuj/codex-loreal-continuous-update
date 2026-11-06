@@ -1,0 +1,13 @@
+{
+  "values": [
+    "very_low",
+    "low",
+    "light",
+    "medium_low",
+    "light_medium",
+    "medium",
+    "medium_high",
+    "high",
+    "minimal"
+  ]
+}

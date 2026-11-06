@@ -1,0 +1,8 @@
+sherpa-onnx==1.13.8
+numpy>=2,<3
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+websockets>=13,<16
+pypinyin>=0.50,<1
+sentencepiece>=0.2,<1
+certifi>=2025

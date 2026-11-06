@@ -1,0 +1,14 @@
+{
+  "values": [
+    "natural",
+    "light_natural",
+    "natural_polished",
+    "soft",
+    "soft_diffused",
+    "soft_satin",
+    "heavy_gloss",
+    "matte",
+    "satin",
+    "glossy"
+  ]
+}
