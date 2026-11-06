@@ -3,7 +3,6 @@ import json,re,time,uuid
 from datetime import datetime
 from pydantic import ValidationError
 from app.schemas.makeup import MakeupPlan,MakeupStep,PlanNeeds,PlanProposal,Lesson
-from app.schemas.models import Stage
 from app.agent.coaching_intents import coaching_intent
 
 TEMPLATES={
@@ -13,6 +12,12 @@ TEMPLATES={
     'evening':('柔和晚间','Gentle evening',['prep','foundation','eyes','blush','lips','finish']),
     'beginner':('简单初学','Simple beginner',['prep','blush','lips','finish']),
 }
+
+class CommandConflict(ValueError):
+    def __init__(self, code, message):
+        self.code = code
+        super().__init__(message)
+
 
 class CoachingController:
     def __init__(self,agent):self.agent=agent
@@ -48,15 +53,8 @@ class CoachingController:
         with self.agent.sessions.lock:
             with self.agent.memory.connect() as db:
                 db.execute('INSERT OR REPLACE INTO makeup_sessions VALUES (?,?,?,?,?)',(s.session_id,s.user_id,s.locale,plan.model_dump_json(),time.time()))
-                db.execute('DELETE FROM makeup_events WHERE session_id=?',(s.session_id,))
-            s.makeup_plan=plan;self.sync(s)
+            s.makeup_plan=plan;self.agent.sessions.project_plan(s)
         return plan
-    def sync(self,s):
-        p=s.makeup_plan
-        if not p:return
-        s.routine_step=p.active_index;s.routine_total_steps=len(p.steps);s.routine_started=p.status!='draft'
-        s.stage=Stage.FEEDBACK if p.status=='completed' else Stage.GUIDE if p.status=='active' else Stage.LOOK_SELECTED
-        s.scene=p.occasion
     def current(self,s):
         p=s.makeup_plan
         if not p or p.status=='draft' or p.status=='completed':return None
@@ -66,19 +64,61 @@ class CoachingController:
         lesson=Lesson.model_validate(row['teaching']) if row else step
         prefix=('美没有统一的定义，按你喜欢的方式表达就好。' if s.locale=='zh-CN' else 'Beauty has no single definition. Express yourself in your own way. ') if p.knowledge_status=='draft' else ''
         return {'step_id':step.id,'name':row['principle'] if row else step.title,'instruction':prefix+' '.join(lesson.preparation+lesson.instructions+lesson.accessibilityInstructions),'instruction_repeat':prefix+' '.join(lesson.instructions),'instruction_slow':prefix+' '.join(lesson.instructions+lesson.commonMistakes),'explanation_why':lesson.purpose,'visual_check_required':False,'visual_task':step.optionalVisualCheck,'status':step.status,'source_id':step.source_id,'review_status':step.review_status}
-    def act(self,s,intent,event_id=None,expected_step_id=None):
+    def event(self,s,event_id):
+        with self.agent.memory.connect() as db:
+            row=db.execute(
+                'SELECT e.intent,r.details FROM makeup_events e JOIN makeup_sessions p ON p.session_id=e.session_id '
+                'LEFT JOIN makeup_event_receipts r ON r.session_id=e.session_id AND r.event_id=e.event_id '
+                'WHERE e.session_id=? AND p.user_id=? AND e.event_id=?',
+                (s.session_id,s.user_id,event_id),
+            ).fetchone()
+        if row is None:
+            return None
+        details=json.loads(row[1]) if row[1] else {}
+        return {'event_id':event_id,'action':row[0],'status':'committed',**details.get('result',{})}
+
+    def act(self,s,intent,event_id=None,expected_step_id=None,*,expected_plan_id=None,expected_revision=None,compatible_next=False):
         event_id=event_id or str(uuid.uuid4())
+        expectation={'plan_id':expected_plan_id,'revision':expected_revision,'step_id':expected_step_id}
         with self.agent.sessions.lock:
             with self.agent.memory.connect() as db:
                 db.execute('BEGIN IMMEDIATE')
                 row=db.execute('SELECT payload FROM makeup_sessions WHERE session_id=? AND user_id=?',(s.session_id,s.user_id)).fetchone()
                 if not row:raise ValueError('No plan for this owner')
                 p=MakeupPlan.model_validate_json(row[0])
-                if db.execute('SELECT 1 FROM makeup_events WHERE session_id=? AND event_id=?',(s.session_id,event_id)).fetchone():
-                    s.makeup_plan=p;self.sync(s);return {'duplicate':True,'plan':p.model_dump(),'step':self.current(s)}
-                if expected_step_id and expected_step_id!=p.steps[p.active_index].id:raise ValueError('Step changed; read current step before retrying')
+                previous=db.execute(
+                    'SELECT e.intent,r.details FROM makeup_events e LEFT JOIN makeup_event_receipts r '
+                    'USING(session_id,event_id) WHERE e.session_id=? AND e.event_id=?',
+                    (s.session_id,event_id),
+                ).fetchone()
+                if previous:
+                    details=json.loads(previous[1]) if previous[1] else {}
+                    if previous[0]!=intent or (details and details['expected']!=expectation):
+                        raise CommandConflict('EVENT_MISMATCH','此事件已用于其他操作。请刷新当前步骤。')
+                    if s.makeup_plan!=p:
+                        s.makeup_plan=p
+                        self.agent.sessions.project_plan(s)
+                    return {'duplicate':True,'plan':p.model_dump(),'step':self.current(s),'event':{
+                        'event_id':event_id,'action':intent,'status':'committed',**details.get('result',{}),
+                    }}
+                if ((expected_plan_id is not None and expected_plan_id!=p.id)
+                        or (expected_revision is not None and expected_revision!=p.revision)
+                        or (expected_step_id is not None and expected_step_id!=p.steps[p.active_index].id)):
+                    raise CommandConflict('STALE_PLAN','教学进度已变化。请读取最新步骤后再操作。')
+                requested=intent
+                if compatible_next and intent=='advance':
+                    if p.status=='draft':intent='start'
+                    elif p.workflow=='PAUSED':intent='resume'
+                if intent in ('repeat','explain','visual'):
+                    if intent=='visual':
+                        s.visual_state=None
+                        s.confidence=0
+                    return {'plan':p.model_dump(),'step':self.current(s),'visual_request':intent=='visual',
+                            'frame_obtained':False if intent=='visual' else None}
+                before=p.model_dump()
                 if intent=='start':
                     if p.status=='completed':raise ValueError('Session is complete')
+                    if p.workflow=='PAUSED':raise ValueError('Resume the paused plan before continuing')
                     p.status='active';p.workflow='WAITING_FOR_USER'
                     if p.steps[p.active_index].status=='pending':p.steps[p.active_index].status='active'
                 elif intent=='pause':
@@ -104,15 +144,26 @@ class CoachingController:
                     # User ending early does not claim unperformed steps are completed.
                     if p.status=='draft':raise ValueError('Start the plan before finishing')
                     p.status='completed';p.workflow='SESSION_COMPLETE'
-                elif intent not in ('repeat','explain','visual'):raise ValueError('Unknown action')
-                p.revision+=1
-                p.summary_presented=False
-                db.execute('UPDATE makeup_sessions SET payload=?,locale=?,updated_at=? WHERE session_id=? AND user_id=?',(p.model_dump_json(),s.locale,time.time(),s.session_id,s.user_id))
-                db.execute('INSERT INTO makeup_events VALUES (?,?,?)',(s.session_id,event_id,intent))
-            s.makeup_plan=p;self.sync(s)
-            if p.status=='completed' and getattr(self.agent,'recollection',None):self.agent.recollection.remember(s)
-            if intent=='visual':s.visual_state=None;s.confidence=0
-            return {'plan':p.model_dump(),'step':self.current(s),'visual_request':intent=='visual','frame_obtained':False if intent=='visual' else None}
+                else:raise ValueError('Unknown action')
+                changed=p.model_dump()!=before
+                if changed:
+                    p.revision+=1
+                    p.summary_presented=False
+                    db.execute('UPDATE makeup_sessions SET payload=?,locale=?,updated_at=? WHERE session_id=? AND user_id=?',
+                               (p.model_dump_json(),s.locale,time.time(),s.session_id,s.user_id))
+                result={'plan_id':p.id,'revision':p.revision,'step_id':p.steps[p.active_index].id,
+                        'plan_status':p.status,'workflow':p.workflow}
+                db.execute('INSERT INTO makeup_events(session_id,event_id,intent) VALUES (?,?,?)',
+                           (s.session_id,event_id,requested))
+                db.execute('INSERT INTO makeup_event_receipts(session_id,event_id,details) VALUES (?,?,?)',
+                           (s.session_id,event_id,json.dumps({'expected':expectation,'result':result})))
+            s.makeup_plan=p
+            self.agent.sessions.project_plan(s)
+            if changed and (intent in ('pause','resume','finish') or p.status=='completed'):
+                self.agent.sessions.revoke_media(s)
+            return {'plan':p.model_dump(),'step':self.current(s),'event':{
+                'event_id':event_id,'action':requested,'status':'committed',**result,
+            }}
     def summary(self,s):
         p=s.makeup_plan
         if not p or p.status!='completed':raise ValueError('Finish the session before summarizing')
@@ -137,6 +188,7 @@ class CoachingController:
         return {'saved':True,'id':mid,'date':p.date,'transcript_saved':False,'media_saved':False}
     def mark_summary_presented(self,s,revision):
         with self.agent.memory.connect() as db:
+            db.execute('BEGIN IMMEDIATE')
             row=db.execute('SELECT payload FROM makeup_sessions WHERE session_id=? AND user_id=?',(s.session_id,s.user_id)).fetchone()
             if not row:return
             p=MakeupPlan.model_validate_json(row[0])
@@ -155,9 +207,9 @@ class CoachingController:
             else:return None
         if intent=='save':return self.save(s,body.message)
         if intent in ('advance','start','pause','resume','previous','blush','finish','repeat','explain','visual','skip'):
-            if intent=='advance' and s.makeup_plan.status=='draft':intent='start'
-            if intent=='advance' and s.makeup_plan.workflow=='PAUSED':intent='resume'
-            result=self.act(s,intent,body.event_id,body.expected_step_id)
+            result=self.act(s,intent,body.event_id,body.expected_step_id,
+                            expected_plan_id=body.expected_plan_id,expected_revision=body.expected_revision,
+                            compatible_next=True)
             if s.makeup_plan.status=='completed':result['summary']=self.summary(s)
             return result
         return {'plan':s.makeup_plan.model_dump(),'step':self.current(s),'state_unchanged':True}

@@ -42,6 +42,7 @@ class Session(BaseModel):
     routine_total_steps: int = 0
     routine_started: bool = False
     camera_consent: bool = False
+    media_epoch: int = Field(default=0, exclude=True)
     memory_consent: bool = False
     visual_state: dict | None = None
     confidence: float = 0
@@ -56,6 +57,8 @@ class Session(BaseModel):
 class ChatRequest(BaseModel):
     event_id: str | None = Field(default=None,min_length=1,max_length=80)
     expected_step_id: str | None = Field(default=None,max_length=120)
+    expected_plan_id: str | None = Field(default=None,min_length=1,max_length=80)
+    expected_revision: int | None = Field(default=None,ge=0)
     locale: Literal['zh-CN','en'] | None = None
     session_id: str | None = None
     user_id: str = Field(default='demo', min_length=1, max_length=80)
@@ -83,6 +86,10 @@ class ProductRequest(BaseModel):
 class RoutineRequest(BaseModel):
     session_id: str
     routine_id: str | None = None
+    event_id: str | None = Field(default=None,min_length=1,max_length=80)
+    expected_step_id: str | None = Field(default=None,max_length=120)
+    expected_plan_id: str | None = Field(default=None,min_length=1,max_length=80)
+    expected_revision: int | None = Field(default=None,ge=0)
 
 Task = Literal['blush_presence', 'lip_presence']
 BlushStatus = Literal['NO_BLUSH', 'LEFT_ONLY', 'RIGHT_ONLY', 'BOTH', 'UNCERTAIN']

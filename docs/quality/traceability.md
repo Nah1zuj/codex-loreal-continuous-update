@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 | [基线](baseline.md) | 原始代码和环境 | evidence/stage-0.md |
 | 1 | [001-runtime-baseline](../../specs/001-runtime-baseline/spec.md) | 阶段 0 | 该规格 verification |
-| 2 | 002-session-control | 1 | 会话命令契约、SQLite 和竞争回归 |
+| 2 | [002-session-control](../../specs/002-session-control/spec.md) | 1 | [会话命令、SQLite 和回归](../../specs/002-session-control/verification.md) |
 | 3 | 003-dialogue-knowledge | 2 | 真实文字、课程审核与检索 |
 | 4 | 004-voice-interaction | 2、3 | 合成音频与双平台设备 |
 | 5 | 005-local-vision | 2 | 视觉样例与撤销 |

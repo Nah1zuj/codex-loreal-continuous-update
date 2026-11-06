@@ -38,7 +38,7 @@ class ToolRegistry:
             'get_memory':'Read only previously confirmed preferences for this session owner.',
             'advance_step':'Advance only after the user explicitly asks for the next step.'}[name],
             'parameters':schema.model_json_schema()}} for name,schema in self.schemas.items() if name not in COACHING_TOOLS]+[{'type':'function','function':{'name':name,'description':('Create a grounded draft plan using server-owned knowledge IDs. No step progress or user ownership may be invented.' if name=='create_makeup_plan' else 'Owner-scoped makeup operation. Mutations require the matching explicit user command. Visual reads cannot capture frames, grant camera consent or verify uncalibrated makeup. Saving requires an explicitly confirmed completed summary.'),'parameters':schema.model_json_schema()}} for name,schema in COACHING_TOOLS.items()]
-    def execute(self,s,name,args,user_text='',event_id=None,expected_step_id=None):
+    def execute(self,s,name,args,user_text='',event_id=None,expected_step_id=None,*,expected_plan_id=None,expected_revision=None):
         if name not in self.schemas:return {'ok':False,'error':'unknown_tool'}
         try:value=self.schemas[name].model_validate(args)
         except ValidationError:return {'ok':False,'error':'invalid_arguments'}
@@ -57,7 +57,7 @@ class ToolRegistry:
                 elif name in action:
                     requested=coaching_intent(user_text)
                     if requested!=action[name] and not (action[name]=='start' and requested=='advance' and s.makeup_plan and s.makeup_plan.status=='draft'):raise PermissionError('Explicit action required')
-                    result=c.act(s,action[name],event_id,expected_step_id)
+                    result=c.act(s,action[name],event_id,expected_step_id,expected_plan_id=expected_plan_id,expected_revision=expected_revision)
                 elif name in ('get_current_step','get_active_makeup_plan'):result=c.current(s) if name=='get_current_step' else s.makeup_plan.model_dump() if s.makeup_plan else None
                 elif name=='generate_session_summary':result=c.summary(s)
                 elif name=='save_confirmed_beauty_journal':result=c.save(s,user_text)
@@ -91,6 +91,6 @@ class ToolRegistry:
                 s.todays_look=None;result=self.agent.full_look.plan(s).model_dump()
             elif name=='current_step':result=self.agent.current_step(s)
             elif name=='get_memory':result=self.agent.memory.profile(s.user_id)['profile']
-            else:result=self.agent.coaching.act(s,'advance',event_id,expected_step_id) if s.makeup_plan else self.agent.advance_routine(s.session_id)
+            else:result=self.agent.coaching.act(s,'advance',event_id,expected_step_id,expected_plan_id=expected_plan_id,expected_revision=expected_revision) if s.makeup_plan else self.agent.advance_routine(s.session_id)
             return {'ok':True,'result':result}
         except (ValueError,KeyError,PermissionError):return {'ok':False,'error':'tool_unavailable'}

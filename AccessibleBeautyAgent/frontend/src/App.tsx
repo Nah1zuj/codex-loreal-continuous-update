@@ -11,6 +11,10 @@ import {BilingualText} from './components/BilingualText'
 import {humanError} from './content/errors'
 import {useEffect,useRef,useState,type FormEvent} from 'react'
 import {api} from './api/client'
+import {
+  expectedPlan, forgetPendingCommand, readCommittedCommand, readPendingCommand,
+  rememberPendingCommand, replyFromSnapshot,
+} from './api/sessionCommands'
 import {ReadingControls} from './components/ReadingControls'
 import {streamChat} from './api/stream'
 import type {Health,Reply,Session as SessionModel,Step,VisionReply,ExperienceMode} from './types'
@@ -114,7 +118,26 @@ export default function App(){
   useEffect(()=>{const release=()=>{++latest.current;requestAbort.current?.abort();call.current?.end();tts.stop();revokeCamera()};const hide=()=>{if(document.hidden)release()};window.addEventListener('pagehide',release);document.addEventListener('visibilitychange',hide);return()=>{window.removeEventListener('pagehide',release);document.removeEventListener('visibilitychange',hide);call.current?.end();revokeCamera()}},[])
   useEffect(()=>{api<Health>('/health').then(setHealth).catch(()=>setError(c.connectionError))},[])
   useEffect(()=>()=>{voice.current.abort()},[])
-  useEffect(()=>{let active=true;const generation=latest.current;const id=sessionStorage.getItem('trace.session_id');if(id)api<SessionModel>('/session/'+encodeURIComponent(id)).then(r=>{if(active&&generation===latest.current){setSession(r);setStep(r.current_step??null);if(r.last_response)setMessages([{role:'agent',text:r.last_response}]);if(r.experience_mode)setExperienceMode(r.experience_mode)}}).catch(()=>{if(active&&generation===latest.current)setError(t("上次会话暂时无法恢复","Could not restore previous session"))});return ()=>{active=false}},[])
+  useEffect(()=>{
+    let active=true
+    const generation=latest.current
+    const id=sessionStorage.getItem('trace.session_id')
+    if(id)api<SessionModel>('/session/'+encodeURIComponent(id)+'/restore',undefined,'POST').then(snapshot=>{
+      if(!active||generation!==latest.current)return
+      acceptSnapshot(snapshot,snapshot.current_step??null)
+      if(snapshot.last_response)setMessages([{role:'agent',text:snapshot.last_response}])
+      if(snapshot.experience_mode)setExperienceMode(snapshot.experience_mode)
+      void recoverPendingCommand()
+    }).catch(()=>{
+      if(active&&generation===latest.current)setError(t('上次会话暂时无法恢复','Could not restore previous session'))
+    })
+    return ()=>{active=false}
+  },[])
+  useEffect(()=>{
+    const online=()=>void recoverPendingCommand()
+    window.addEventListener('online',online)
+    return ()=>window.removeEventListener('online',online)
+  },[locale])
   useEffect(()=>{if(session)sessionStorage.setItem('trace.session_id',session.session_id)},[session?.session_id])
   useEffect(()=>{const url=pageUrl(page,demoMode);if(window.location.pathname+window.location.search!==url)window.history.replaceState({},'',url)},[page,demoMode])
   useEffect(()=>{if(page==='home')document.querySelector<HTMLButtonElement>('[data-primary-voice]')?.focus();else titleRef.current?.focus();document.title='TRACE · '+(page==='voice'?t("语音陪伴","Voice Companion"):page==='explore'?t("视觉探索","Visual Experience"):page==='full-look'?t("今日造型","Today's Look"):page==='home'?c.home:page==='session'?bilingual(modules.thread.label['zh-CN'],modules.thread.label.en,locale):page==='camera'?bilingual(modules.echo.label['zh-CN'],modules.echo.label.en,locale):page==='memory'?bilingual(modules.imprint.label['zh-CN'],modules.imprint.label.en,locale):page==='dot'?bilingual(modules.dot.label['zh-CN'],modules.dot.label.en,locale):page==='pair'?bilingual(modules.pair.label['zh-CN'],modules.pair.label.en,locale):page==='story'?c.story:page==='demo'?c.demo:c.intro);document.documentElement.lang=locale},[page,locale])
@@ -146,16 +169,30 @@ export default function App(){
       if(!recallOffered.current&&recollection.current?.enabled&&recollection.current.latest){recallOffered.current=true;return t('现在是第二步，倾听。','Step two, Listen. ')+returnGreeting(recollection.current,locale,false)+t('说完成进入映照。',' Say done to enter Reflect.')}
       return t('现在是第二步，倾听。请先说开始，再告诉我今天的场合和妆容需求，最后说结束。要进入映照，请说开始、完成、结束。','Step two, Listen. What is today’s occasion and desired look? Say done to enter Reflect.')
     }
-    if(command?.command==='reflect'||(command?.command==='next'&&(pageRef.current==='voice'||sessionRef.current?.makeup_plan?.status==='completed'))){
+    if(command?.command==='reflect'||(command?.command==='next'&&pageRef.current==='voice')){
       const sid=await ensureVisualSession()
       const reply=await api<Reply>('/experience/reflect',{session_id:sid,locale,reuse_previous:reusePrevious.current},undefined,signal)
       if(signal?.aborted)return ''
       apply(reply,false,true);setExperienceMode('voice');await navigate('explore',true,true);return reply.message
     }
     if(command?.command==='finish'){
-      const reply=await api<Reply>('/recollection/finish',{session_id:sessionRef.current?.session_id,locale},undefined,signal)
-      if(signal?.aborted)return ''
-      apply(reply,false,true);recollection.current=await api<RecollectionView>('/recollection');return reply.message
+      const current=sessionRef.current
+      const requestId=++latest.current
+      const eventId=crypto.randomUUID()
+      const body={session_id:current?.session_id,locale,event_id:eventId,...expectedPlan(current?.makeup_plan)}
+      if(current?.makeup_plan)rememberPendingCommand({sessionId:current.session_id,eventId})
+      let reply:Reply
+      try{
+        reply=await api<Reply>('/recollection/finish',body,undefined,signal)
+      }catch(error){
+        if(!current||requestId!==latest.current||signal?.aborted)throw error
+        const result=await readCommittedCommand(current.session_id,eventId,signal)
+        if(!result)throw error
+        reply=replyFromSnapshot(result.session,t('本次装扮体验已结束。','This look experience has ended.'))
+      }
+      forgetPendingCommand(eventId)
+      if(requestId!==latest.current||signal?.aborted||sessionRef.current?.session_id!==current?.session_id)return ''
+      apply(reply,false,true);return reply.message
     }
     if(command?.command==='help')return pageRef.current==='home'?t('说可以开始，进入倾听。需要安静说请终止对话，恢复说重新启动语音交流功能。','Say let’s begin to enter Listen. Say pause replies to wait quietly, and resume voice to continue.'):pageRef.current==='voice'?t('请先说开始，再告诉我场合和妆容需求，最后说结束。要进入映照，请说开始、完成、结束。','Tell me the occasion and look. Say done to enter Reflect, repeat, or use page navigation.'):t('请先说开始，再说下一步、上一步、再说一次、跳过或帮我看看，最后说结束。每次只提交起止词之间的内容。','Say next, previous, repeat, skip, or check my blush. Say finish this look to finish. Say pause replies to pause.')
     if(command?.command==='repeat')return sessionRef.current?.current_step?.instruction??step?.instruction??(lastSpoken.current||welcomeText)
@@ -168,9 +205,32 @@ export default function App(){
     return send(message,'message',undefined,false,true,onDelta,signal)
   }
   useEffect(()=>{const pop=()=>void navigate(pageFromPath(window.location.pathname),false);window.addEventListener('popstate',pop);return ()=>window.removeEventListener('popstate',pop)},[page,demoMode])
+  async function recoverPendingCommand(){
+    const pending=readPendingCommand()
+    const requestId=latest.current
+    if(!pending||pending.sessionId!==sessionRef.current?.session_id)return
+    try{
+      const known=await readCommittedCommand(pending.sessionId,pending.eventId)
+      if(!known||requestId!==latest.current||sessionRef.current?.session_id!==pending.sessionId)return
+      const message=t('操作已提交。已同步当前进度。','Your command was applied. Current progress was restored.')
+      setError('')
+      apply(replyFromSnapshot(known.session,message),false,true)
+      forgetPendingCommand(pending.eventId)
+    }catch{/* Keep the event ID for the next reconnect. */}
+  }
+  function acceptSnapshot(incomingSession:SessionModel,incomingStep:Step|null){
+    const previous=sessionRef.current?.makeup_plan
+    const incoming=incomingSession.makeup_plan
+    if(previous&&incoming&&previous.id===incoming.id&&incoming.revision<previous.revision)return false
+    const closeMedia=incoming&&previous?.workflow!==incoming.workflow
+      &&(incoming.workflow==='PAUSED'||incoming.status==='completed')
+    sessionRef.current=incomingSession;setSession(incomingSession);setStep(incomingStep)
+    if(closeMedia){cameraControls.current?.close();setCameraPanel(false)}
+    return true
+  }
   function apply(reply:Reply,slow=false,silent=false){
     reply=reply.canonical?{...reply,...reply.canonical}:reply
-    sessionRef.current=reply.session;setSession(reply.session);setStep(reply.step)
+    if(!acceptSnapshot(reply.session,reply.step))return
     setMessages(m=>[...m,{role:'agent' as const,text:reply.message}].slice(-30))
     if(autoSpeak&&!silent)tts.speak(d(reply.message),slow)
     if(!['voice','explore','speak'].includes(pageRef.current)&&reply.session.stage==='CAMERA_CONSENT')setPage('camera')
@@ -219,13 +279,34 @@ export default function App(){
       }
       let recoveredSession=false
       const plan=sessionRef.current?.makeup_plan
-      const requestBody={session_id:newSession?undefined:sessionRef.current?.session_id,user_id:'demo',message,action,consent,locale,experience_mode:experienceMode,event_id:crypto.randomUUID(),expected_step_id:newSession?undefined:plan?.steps[plan.active_index]?.id}
+      const requestBody={session_id:newSession?undefined:sessionRef.current?.session_id,user_id:'demo',message,action,consent,locale,experience_mode:experienceMode,event_id:crypto.randomUUID(),...expectedPlan(newSession?null:plan)}
       const delta=(part:string)=>{if(requestId===latest.current){setStreamingText(value=>value+part);onDelta?.(part)}}
-      const received=(incoming:SessionModel)=>{if(requestId===latest.current&&(!sessionRef.current||sessionRef.current.session_id===incoming.session_id)){sessionRef.current=incoming;setSession(incoming);if('current_step' in incoming)setStep(incoming.current_step??null)}}
+      const received=(incoming:SessionModel)=>{if(requestId===latest.current&&(!sessionRef.current||sessionRef.current.session_id===incoming.session_id))acceptSnapshot(incoming,incoming.current_step??null)}
       const requestSignal=signal?AbortSignal.any([signal,abort.signal]):abort.signal
       async function requestText(){
-        try{return await streamChat(requestBody,delta,requestSignal,received)}
-        catch(failure){
+        if(plan&&requestBody.session_id&&action==='message'){
+          rememberPendingCommand({sessionId:requestBody.session_id,eventId:requestBody.event_id})
+        }
+        try{
+          const reply=await streamChat(requestBody,delta,requestSignal,received)
+          forgetPendingCommand(requestBody.event_id)
+          return reply
+        }catch(failure){
+          if(plan&&requestBody.session_id&&action==='message'&&requestId===latest.current&&!requestSignal.aborted){
+            const known=await readCommittedCommand(requestBody.session_id,requestBody.event_id,requestSignal).catch(()=>null)
+            if(known){
+              forgetPendingCommand(requestBody.event_id)
+              const fallback=t('操作已提交。已同步当前进度。','Your command was applied. Current progress was restored.')
+              const instruction=known.session.current_step?.instruction
+              return replyFromSnapshot(known.session,instruction?fallback+' '+instruction:fallback)
+            }
+            if((failure as {code?:string}).code==='STALE_PLAN'){
+              forgetPendingCommand(requestBody.event_id)
+              const snapshot=await api<SessionModel>('/session/'+encodeURIComponent(requestBody.session_id),undefined,'GET',requestSignal)
+              received(snapshot)
+            }
+            throw failure
+          }
           // HTTP 404 happens before any SSE delta/tool. Retry only ordinary text,
           // never consent/local frames or a partially generated stream.
           if((failure as {status?:number}).status!==404||!requestBody.session_id||action!=='message'||consent!==undefined||requestId!==latest.current||requestSignal.aborted)throw failure

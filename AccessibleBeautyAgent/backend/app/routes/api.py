@@ -59,6 +59,15 @@ def build_router(agent,settings):
     def chat(body: ChatRequest):
         with agent.sessions.lock:
             return agent.chat(body)
+    @api.post('/session/{session_id}/restore')
+    def restore_session(session_id:str,request:Request):
+        with agent.sessions.lock:
+            s=agent.sessions.get(session_id)
+            if not s.user_id.startswith(request.state.principal_prefix):
+                raise KeyError('Session not found')
+            agent.sessions.revoke_media(s)
+            return {**s.model_dump(),'current_step':agent.current_step(s)}
+
     @api.get('/session/{session_id}')
     def session(session_id: str, locale: str | None = None):
         with agent.sessions.lock:
@@ -76,18 +85,30 @@ def build_router(agent,settings):
     @api.post('/rag/search')
     def rag(body: SearchRequest):
         return agent.retriever.search(body.query,body.filters,body.limit)
+    def routine_command(body: RoutineRequest, action: str):
+        with agent.sessions.lock:
+            s = agent.sessions.get(body.session_id)
+            if s.makeup_plan:
+                result = agent.coaching.act(
+                    s, action, body.event_id, body.expected_step_id,
+                    expected_plan_id=body.expected_plan_id, expected_revision=body.expected_revision,
+                )
+                step = result['step']
+                return {
+                    **agent.respond(s,step['instruction'] if step else '本次装扮体验已结束。'),
+                    'event': result['event'],
+                }
+            step = (agent.start_routine(body.routine_id or s.routine_id,s)
+                    if action=='start' else agent.advance_routine(s.session_id))
+            return agent.respond(s,step['instruction'] if step else '流程完成。你希望下次调整什么？')
+
     @api.post('/routine/start')
     def start(body: RoutineRequest):
-        with agent.sessions.lock:
-            s = agent.sessions.get(body.session_id)
-            step = agent.start_routine(body.routine_id or s.routine_id,s)
-            return agent.respond(s,step['instruction'])
+        return routine_command(body, 'start')
+
     @api.post('/routine/advance')
     def advance(body: RoutineRequest):
-        with agent.sessions.lock:
-            s = agent.sessions.get(body.session_id)
-            step = agent.advance_routine(s.session_id)
-            return agent.respond(s,step['instruction'] if step else '流程完成。你希望下次调整什么？')
+        return routine_command(body, 'advance')
 
     def authorize_images(body):
         s = agent.sessions.get(body.session_id)

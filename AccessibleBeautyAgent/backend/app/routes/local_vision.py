@@ -60,6 +60,7 @@ def build_local_vision_router(agent):
         # A failed new request must never leave an older assessment masquerading as fresh.
         request_token=str(uuid.uuid4())
         with agent.sessions.lock:
+            media_epoch=s.media_epoch
             s.visual_state=None;s.confidence=0;invalidate(s.session_id,request_token)
         now=time.time()
         if not now-30<=body.captured_at<=now+5:raise ValueError('Frame is stale; capture again')
@@ -92,7 +93,7 @@ def build_local_vision_router(agent):
         reviewed=[row for row in agent.coaching.knowledge(locale) if ('blush' if target=='blush' else 'lips') in row.get('tags',[])]
         observation['knowledge']={'reviewed_available':bool(reviewed),'source_ids':[row['guidance_id'] for row in reviewed[:3]],'guidance_status':'reviewed' if reviewed else 'unavailable'}
         with agent.sessions.lock:
-            if epochs.get(s.session_id)!=request_token:raise ValueError('Local check cancelled; capture again after consent')
+            if s.media_epoch!=media_epoch or epochs.get(s.session_id)!=request_token:raise ValueError('Local check cancelled; capture again after consent')
             if body.baseline_consent and measurement:
                 measurements[s.session_id]=(now,measurement)
                 while len(measurements)>200:measurements.popitem(last=False)
@@ -116,7 +117,7 @@ def build_local_vision_router(agent):
                 action=choice.get('next_action');action='lighting' if not result['gate'].get('gate_pass') else 'recheck' if body.capture_kind=='photo' else action
                 if action in actions:message+=' '+actions[action][0 if locale=='zh-CN' else 1];observation['feedback_source']='local_evidence_deepseek_bounded_followup'
             except (RuntimeError,PermissionError,ValueError,KeyError,TypeError):observation['feedback_source']='local_evidence_text_fallback'
-        if s.visual_state is not observation or epochs.get(s.session_id)!=request_token:raise ValueError('Local check cancelled; no fresh observation available')
+        if s.media_epoch!=media_epoch or s.visual_state is not observation or epochs.get(s.session_id)!=request_token:raise ValueError('Local check cancelled; no fresh observation available')
         return {**agent.respond(s,message),'observation':s.visual_state,'provider':'local_opencv','frame_saved':False}
     @router.get('/local/{session_id}')
     def observations(session_id:str):

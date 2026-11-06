@@ -65,3 +65,13 @@ class PlanProposal(BaseModel):
     model_config=ConfigDict(extra='forbid')
     lesson_ids:list[str]=Field(min_length=1,max_length=20)
 
+
+
+class CoachingCommand(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    session_id: str = Field(min_length=1, max_length=80)
+    event_id: str = Field(min_length=1, max_length=80)
+    action: Literal['start', 'advance', 'skip', 'pause', 'resume', 'finish', 'previous']
+    expected_plan_id: str = Field(min_length=1, max_length=80)
+    expected_revision: int = Field(ge=0)
+    expected_step_id: str | None = Field(default=None, min_length=1, max_length=120)

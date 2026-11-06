@@ -136,3 +136,42 @@ it.each(['button','navigation'])('initializes Reflect from Listen through %s wit
  expect(vi.mocked(api).mock.calls.some(([path,body])=>path==='/experience/reflect'&&(body as any).session_id==='listen-next')).toBe(true)
  expect(host.textContent).toContain('Apply a thin layer.')
 })
+
+it('looks up the original coaching event after reconnect without submitting again',async()=>{
+ const session={session_id:'reconnect',stage:'GUIDE',selected_products:[],camera_consent:false,
+  current_step:{step_id:'prep',instruction:'Prepare your skin.'},
+  makeup_plan:{id:'plan-1',revision:1,status:'active',workflow:'WAITING_FOR_USER',active_index:0,
+   steps:[{id:'prep',title:'Prepare',status:'active'},{id:'base',title:'Base',status:'pending'}]}}
+ const advanced={...session,current_step:{step_id:'base',instruction:'Apply a thin base.'},
+  makeup_plan:{...session.makeup_plan,revision:2,active_index:1}}
+ let disconnected=true
+ let eventId=''
+ vi.mocked(api).mockImplementation(async(path:string,body?:any)=>{
+  if(path==='/health')return {provider_mode:'mock',providers:{vision:'mock'}} as any
+  if(path==='/session/reconnect/restore')return session as any
+  if(path==='/chat'&&body?.message==='下一步'){
+   eventId=body.event_id
+   throw new Error('Connection lost')
+  }
+  if(path.startsWith('/makeup/events/')){
+   if(disconnected)throw new Error('Still offline')
+   return {event:{event_id:eventId,status:'committed'},session:advanced} as any
+  }
+  return {} as any
+ })
+ await render('/explore','reconnect')
+ const input=host.querySelector<HTMLInputElement>('#message')!
+ await act(async()=>{
+  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!.call(input,'next')
+  input.dispatchEvent(new Event('input',{bubbles:true}))
+  input.dispatchEvent(new Event('change',{bubbles:true}))
+ })
+ await act(async()=>input.form!.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})))
+ expect(eventId).toBeTruthy()
+ disconnected=false
+ await act(async()=>window.dispatchEvent(new Event('online')))
+ expect(host.textContent).toContain('Current progress was restored.')
+ expect(host.textContent).toContain('Apply a thin base.')
+ expect(vi.mocked(api).mock.calls.filter(([path,body])=>path==='/chat'&&(body as any)?.message==='下一步')).toHaveLength(1)
+ expect(vi.mocked(api).mock.calls.some(([path])=>path==='/makeup/events/reconnect/'+eventId)).toBe(true)
+})

@@ -12,6 +12,7 @@ from app.routes.recollection import build_recollection_router
 from app.vision.service import VisionService
 from app.agent.state import SessionStore
 from app.agent.harness import AgentHarness
+from app.agent.coaching import CommandConflict
 from app.routes.full_look import build_full_look_router
 from app.routes.reading import build_reading_router
 from app.routes.api import build_router
@@ -51,6 +52,9 @@ def create_app(settings=None):
     @app.exception_handler(PermissionError)
     async def forbidden(request: Request, exc: PermissionError):
         return JSONResponse(status_code=403,content={'detail':str(exc)})
+    @app.exception_handler(CommandConflict)
+    async def command_conflict(request: Request, exc: CommandConflict):
+        return JSONResponse(status_code=409,content={'code':exc.code,'detail':str(exc)})
     @app.exception_handler(ValueError)
     async def invalid(request: Request, exc: ValueError):
         # Reject invalid provider output without trusting it as observation.

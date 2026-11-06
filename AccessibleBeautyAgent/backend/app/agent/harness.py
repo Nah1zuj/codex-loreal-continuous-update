@@ -152,6 +152,8 @@ class AgentHarness:
         command = text.lower()
         from app.agent.coaching_intents import coaching_intent
         normalized=coaching_intent(text)
+        if s.stage == Stage.COMPLETE and request.action=='message':
+            return self.respond(s,'本次会话已经结束。可以开始新会话。' if s.locale=='zh-CN' else 'This session has ended. You can start a new session.')
         if s.makeup_plan and text and request.action=='message' and command not in ('stop','停止','stop session','停止会话','stop camera','停止相机','关闭相机','check this','check with camera'):
             import json
             result=self.coaching.handle(s,request)
@@ -161,7 +163,7 @@ class AgentHarness:
             return self.respond(s,message)
         if not s.makeup_plan:
             command={'start':'开始','advance':'next','repeat':'重复','visual':'check this'}.get(normalized,command)
-        if command.rstrip('。.!！?？') in {'我想开始下一步','我想继续下一步','请告诉我下一步','下一步怎么做','我做好了','我完成了','i want to start the next step','i finished this step'}:command='next'
+        if command.rstrip('。.!！?？') in {'我想开始下一步','我想继续下一步','我做好了','我完成了','i want to start the next step','i finished this step'}:command='next'
         start_commands={'开始步骤','start routine','开始','我想开始步骤','开始化妆吧','请带我一步一步做','i want to start the steps','开始化妆','开始辅导','带我开始步骤'}
         starting=command.rstrip('。.!！?？') in start_commands
         if request.action == 'camera_consent':
@@ -185,8 +187,14 @@ class AgentHarness:
             self.sessions.stop(s)
             return self.respond(s,'已保存你同意的偏好。今天的流程结束了。' if request.consent else '未保存长期偏好。今天的流程结束了。')
         if command in ('stop','停止','stop session','停止会话'):
+            operation=None
+            if s.makeup_plan and s.makeup_plan.status=='active':
+                operation=self.coaching.act(s,'finish',request.event_id,request.expected_step_id,
+                                            expected_plan_id=request.expected_plan_id,expected_revision=request.expected_revision)
             self.sessions.stop(s)
-            return self.respond(s,'会话已停止，相机已关闭。')
+            reply=self.respond(s,'会话已停止，相机已关闭。' if s.locale=='zh-CN' else 'The session has ended and camera access was revoked.')
+            if operation:reply['event']=operation['event']
+            return reply
         if command in ('stop camera','停止相机','关闭相机'):
             s.camera_consent=False
             if s.stage in (Stage.CAMERA_CONSENT,Stage.VISION_GATE,Stage.VISION_CHECK,Stage.VERIFY):

@@ -47,9 +47,10 @@ class BrowserIdentityMiddleware:
         path=scope['path']
         try:
             for base in ('/api/session/','/api/transcripts/','/api/full-look/','/api/vision/local/','/api/makeup/'):
-                if (scope['method']=='GET' and path.startswith(base)) or (scope['method']=='DELETE' and path.startswith(('/api/vision/local/','/api/makeup/'))):
-                    sid=path.rsplit('/',1)[1]
-                    if sid not in {'plan','revise','confirm','memory-candidate'}:own_session(sid)
+                method_matches = scope['method']=='GET' or (scope['method']=='DELETE' and base in ('/api/vision/local/','/api/makeup/'))
+                if method_matches and path.startswith(base):
+                    sid=path[len(base):]
+                    if '/' not in sid and sid not in {'plan','revise','confirm','memory-candidate'}:own_session(sid)
             if path.startswith('/api/profile/'):scope['path']='/api/profile/'+owner(path.rsplit('/',1)[1])
             query=parse_qs(scope.get('query_string',b'').decode())
             if 'user_id' in query:query['user_id']=[owner(query['user_id'][0])]

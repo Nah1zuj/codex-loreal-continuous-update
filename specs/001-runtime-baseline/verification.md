@@ -5,7 +5,7 @@
 | 需求 | 状态 | 证据 |
 |---|---|---|
 | FR-101 干净安装 | PASS（Mac） | 从暂存源码导出干净副本，无 `.env`、个人 SQLite、模型和虚拟环境。执行 `./install-portable.sh`，Python 依赖安装、`pip check`、npm 依赖及构建通过。 |
-| FR-101 Windows Python 依赖 | PASS（交叉解析） | `uv pip compile backend/requirements-runtime.txt --python-version 3.12 --python-platform x86_64-pc-windows-msvc --only-binary :all:` 解析 48 项，额外锁定 Windows 的 colorama。 |
+| FR-101 Windows Python 依赖 | PASS（交叉解析） | `uv pip compile backend/requirements-runtime.txt --python-version 3.12 --python-platform x86_64-pc-windows-msvc --only-binary :all:` 解析 48 项，额外锁定 Windows 的 colorama。另从 Mac 下载了 CPython 3.12 Windows x64 的运行依赖轮包，未在 Windows 执行。 |
 | FR-102 模型校验 | PASS | `voice/setup_local_voice_models.py`、`scripts/setup_local_landmarks.py --check`。语音模型通过真实本机加载；视觉资产摘要匹配，现有合成空白像素推理回归通过。 |
 | FR-102 合成语音 | PASS | `voice/verify_stream.py voice/fixtures --port 61980` 通过 7 组真实本机 WebSocket 及模型样例，`unittest discover -s voice -p test_bounded.py` 通过 9 项。输入为合成音频。 |
 | FR-102 缺模型降级 | PASS（Mac） | 干净副本中运行 `scripts/verify_runtime.py --missing-voice`，语音状态 `assets_missing_or_invalid`，真实 HTTP 文字会话与恢复通过。 |
