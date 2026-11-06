@@ -1,10 +1,13 @@
 """Verify running HTTP services with disposable test data and cleanup."""
-import uuid
+import argparse,uuid
 import httpx
 
 def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--port', type=int, required=True, help='Frontend port of an isolated launcher')
+    args=parser.parse_args()
     user='smoke_'+uuid.uuid4().hex
-    with httpx.Client(base_url='http://127.0.0.1:8000',timeout=30) as c:
+    with httpx.Client(base_url=f'http://127.0.0.1:{args.port}',timeout=30,trust_env=False) as c:
         def post(path,data,status=200):
             r=c.post('/api'+path,json=data)
             assert r.status_code==status,(path,r.status_code,r.text)
@@ -29,7 +32,7 @@ def main():
         response=c.delete('/api/memory/'+saved['memory_id'],params={'user_id':user,'explicit_consent':'true'})
         assert response.status_code==200
         assert c.get('/api/profile/'+user).json()['episodes']==[]
-        assert httpx.get('http://127.0.0.1:5173').status_code==200
+        assert c.get('/').status_code==200
         post('/chat',{'session_id':sid,'message':'stop'})
     print('LIVE PASS: backend health, frontend HTTP, dinner Look, filtered RAG, structured mock vision, consent refusal, persistence and deletion.')
 

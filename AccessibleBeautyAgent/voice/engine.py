@@ -1,7 +1,7 @@
 """Offline audio decoding. Quiet mode never calls ordinary ASR before a wake candidate."""
 from pathlib import Path
 from collections import deque
-import threading,re
+import os,threading,re
 import numpy as np
 import sherpa_onnx
 
@@ -26,10 +26,12 @@ class Models:
         k=ROOT/'models/kws-bilingual';a=ROOT/'models/asr'
         self.lock=threading.Lock()
         self.kws={}
+        directory=Path(os.getenv('TRACE_WORK_DIR',ROOT.parent/'work'))
+        directory.mkdir(parents=True,exist_ok=True)
         for mode,phrases in [('quiet',WAKE),('active',CONTROL)]:
             tokens=sherpa_onnx.text2token([phrase.upper() if phrase.isascii() else phrase for phrase in phrases],tokens=str(k/'tokens.txt'),tokens_type='phone+ppinyin',lexicon=str(k/'en.phone'))
             if len(tokens)!=len(phrases):raise RuntimeError('Keyword encoding incomplete')
-            keywords=ROOT/(mode+'-keywords.txt')
+            keywords=directory/(mode+'-keywords.txt')
             keywords.write_text('\n'.join(' '.join(row)+' :2.0 #0.25 @'+phrase.replace(' ','_') for row,phrase in zip(tokens,phrases))+'\n')
             self.kws[mode]=sherpa_onnx.KeywordSpotter(tokens=str(k/'tokens.txt'),encoder=str(k/'encoder-epoch-13-avg-2-chunk-8-left-64.int8.onnx'),decoder=str(k/'decoder-epoch-13-avg-2-chunk-8-left-64.onnx'),joiner=str(k/'joiner-epoch-13-avg-2-chunk-8-left-64.int8.onnx'),keywords_file=str(keywords),num_threads=2)
         self.asr=sherpa_onnx.OfflineRecognizer.from_sense_voice(model=str(a/'model.int8.onnx'),tokens=str(a/'tokens.txt'),num_threads=2,language='auto',use_itn=True)

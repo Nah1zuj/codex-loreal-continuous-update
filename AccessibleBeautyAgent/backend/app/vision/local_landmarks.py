@@ -15,7 +15,7 @@ class LocalLandmarks:
             if self.detector is None:
                 if not MODEL.is_file():self.status='model_missing';return None
                 try:
-                    manifest=json.loads(MODEL.with_suffix('.manifest.json').read_text(encoding='utf-8'))
+                    manifest=json.loads(Path(__file__).with_name('face-landmarker.json').read_text(encoding='utf-8'))
                     if hashlib.sha256(MODEL.read_bytes()).hexdigest()!=manifest['sha256']:self.status='model_integrity_failed';return None
                     import mediapipe as mp
                     self.mp=mp

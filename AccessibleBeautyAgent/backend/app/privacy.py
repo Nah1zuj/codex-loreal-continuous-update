@@ -3,17 +3,19 @@ import hashlib,json,secrets,time
 from http.cookies import SimpleCookie
 from urllib.parse import parse_qs,urlencode
 from starlette.responses import JSONResponse
+from app.config import local_origins
 
 class BrowserIdentityMiddleware:
     def __init__(self,app,agent,settings):
         self.app=app;self.agent=agent;self.settings=settings
+        self.local_origins=set(local_origins())
         with agent.memory.connect() as db:db.execute('CREATE TABLE IF NOT EXISTS browser_identities (token_hash TEXT PRIMARY KEY, principal TEXT NOT NULL, expires REAL NOT NULL)')
     async def __call__(self,scope,receive,send):
-        if scope['type']!='http' or not scope['path'].startswith('/api'):return await self.app(scope,receive,send)
+        if scope['type']!='http' or not scope['path'].startswith('/api') or scope['path']=='/api/health':return await self.app(scope,receive,send)
         headers={k.decode().lower():v.decode() for k,v in scope['headers']}
         async def error(status,message):await JSONResponse({'detail':message},status_code=status)(scope,receive,send)
         origin=headers.get('origin')
-        if origin and origin not in {'http://localhost:5173','http://127.0.0.1:5173','http://localhost:5174','http://127.0.0.1:5174','http://localhost:5180','http://127.0.0.1:5180'} and origin!=scope.get('scheme','http')+'://'+headers.get('host',''):
+        if origin and origin not in self.local_origins and origin!=scope.get('scheme','http')+'://'+headers.get('host',''):
             return await error(403,'Origin is not permitted')
         if scope['path'].startswith('/api/admin') and (not self.settings.developer_mode or (scope.get('client') or ('',))[0] not in {'127.0.0.1','::1','testclient'}):
             return await error(403,'Admin is restricted to local development; configure account authentication before production')

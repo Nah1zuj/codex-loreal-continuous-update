@@ -1,26 +1,45 @@
 """Loopback-only speech worker; no persistence, provider keys or network inference."""
-import asyncio,json
+import asyncio,json,logging,os
 from contextlib import asynccontextmanager
+from pathlib import Path
 from fastapi import FastAPI,WebSocket,WebSocketDisconnect
-from engine import Models,AudioSession
+from setup_local_voice_models import check
 
 models=None
 connections=0
+model_status='not_loaded'
+frontend_port=os.getenv('TRACE_FRONTEND_PORT')
+default_frontend=json.loads((Path(__file__).resolve().parents[1]/'runtime.json').read_text(encoding='utf-8'))['frontend']
+frontend_ports=[frontend_port] if frontend_port else [default_frontend,5174,5173]
+allowed_origins={f'http://{host}:{port}' for host in ('localhost','127.0.0.1') for port in frontend_ports}
 @asynccontextmanager
 async def lifespan(app):
-    global models
-    models=await asyncio.to_thread(Models)
-    yield
-    models=None
+    global models,model_status
+    try:
+        if await asyncio.to_thread(check):
+            model_status='assets_missing_or_invalid'
+        else:
+            from engine import Models
+            models=await asyncio.to_thread(Models)
+            model_status='loaded'
+    except (ImportError,OSError,RuntimeError,ValueError):
+        logging.getLogger(__name__).exception('Local speech model loading failed')
+        model_status='load_failed'
+    try:
+        yield
+    finally:
+        models=None
+        model_status='not_loaded'
 app=FastAPI(title='TRACE local voice',lifespan=lifespan)
 @app.get('/voice/health')
-def health():return {'ready':models is not None,'processing':'on_this_computer','engine':'sherpa-onnx','microphone_required':True,'audio_saved':False,'quiet_mode':'keyword_only','supported_languages':['zh-CN','en'],'connections':connections}
+def health():return {'ready':models is not None,'model_status':model_status,'device_verified':False,'processing':'on_this_computer','engine':'sherpa-onnx','microphone_required':True,'audio_saved':False,'quiet_mode':'keyword_only','supported_languages':['zh-CN','en'],'connections':connections}
 @app.websocket('/voice/stream')
 async def stream(ws:WebSocket):
     global connections
-    if ws.headers.get('origin') not in {'http://127.0.0.1:5180','http://localhost:5180','http://127.0.0.1:5174','http://localhost:5174','http://127.0.0.1:5173','http://localhost:5173'} or connections>=4 or models is None:
+    if ws.headers.get('origin') not in allowed_origins or connections>=4 or models is None:
         await ws.close(code=1008);return
     await ws.accept();connections+=1
+    from engine import AudioSession
     session=AudioSession(models)
     try:
         await ws.send_json({'type':'ready','processing':'on_this_computer'})

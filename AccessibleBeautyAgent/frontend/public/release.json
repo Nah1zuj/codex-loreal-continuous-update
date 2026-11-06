@@ -1,5 +1,4 @@
 {
-  "release": "TRACE-20261020-portable",
-  "frontend": "http://127.0.0.1:5180",
-  "source": "10月17日版正确安装包 + 10月20日语音与切换修复"
+  "release": "TRACE-20261107-runtime",
+  "source": "Spec Kit 001-runtime-baseline"
 }

@@ -10,6 +10,7 @@ class VisualSessionStart(BaseModel):
     experience_mode:Literal['visual']='visual'
 from app.schemas.models import ChatRequest, LookRequest, ProductRequest, RoutineRequest, SearchRequest, VisionRequest, MemoryRequest, FeedbackRequest
 from app.vision.gate import decode_image
+from app.vision.local_landmarks import MODEL
 from app.services.voice import BrowserVoiceFallback, QwenRealtimePlaceholder
 
 def build_router(agent,settings):
@@ -23,7 +24,37 @@ def build_router(agent,settings):
             return s.model_dump()
     @api.get('/health')
     def health():
-        return {'experience_revision':'harness-v2-20261017','status':'ok','backend':True,'agent':True,'rag':bool(agent.retriever.documents),'vision':True,'memory':agent.memory.healthy(),'provider_mode':settings.model_provider,'providers':{'language':settings.model_provider,'vision':settings.vision_provider,'embedding':settings.embedding_provider,'voice':settings.voice_provider},'developer_mode':settings.developer_mode,'research_mode':settings.research_mode,'allow_remote_ai':settings.allow_remote_ai,'reading_provider':settings.reading_provider,'reference_provider':settings.reference_provider,'policy_version':agent.policies.version,'policy_manifest':agent.policies.manifest(),'remote_ready':settings.allow_remote_ai and bool(settings.deepseek_api_key if settings.model_provider=='deepseek' else (settings.compatible_api_key if settings.model_provider=='openai_compatible' else settings.api_key))}
+        remote_key = {
+            'deepseek': settings.deepseek_api_key,
+            'openai_compatible': settings.compatible_api_key,
+            'qwen': settings.api_key,
+        }.get(settings.model_provider)
+        compatible_endpoint = settings.model_provider != 'openai_compatible' or (
+            bool(settings.compatible_base_url) and bool(settings.compatible_model)
+        )
+        remote_ready = bool(settings.allow_remote_ai and remote_key and compatible_endpoint)
+        memory_ready = agent.memory.healthy()
+        rag_ready = bool(agent.retriever.documents)
+        return {
+            'experience_revision': 'harness-v2-20261017',
+            'status': 'ok', 'backend': True, 'agent': True, 'rag': rag_ready,
+            'vision': True, 'memory': memory_ready, 'provider_mode': settings.model_provider,
+            'providers': {
+                'language': settings.model_provider, 'vision': settings.vision_provider,
+                'embedding': settings.embedding_provider, 'voice': settings.voice_provider,
+            },
+            'developer_mode': settings.developer_mode, 'research_mode': settings.research_mode,
+            'allow_remote_ai': settings.allow_remote_ai, 'reading_provider': settings.reading_provider,
+            'reference_provider': settings.reference_provider, 'policy_version': agent.policies.version,
+            'policy_manifest': agent.policies.manifest(), 'remote_ready': remote_ready,
+            'readiness': {
+                'service_reachable': True,
+                'sqlite_ready': memory_ready, 'knowledge_loaded': rag_ready,
+                'vision_asset_present': MODEL.is_file(),
+                'vision_inference_verified': False,
+                'remote_text_configured': remote_ready, 'remote_text_verified': False,
+            },
+        }
     @api.post('/chat')
     def chat(body: ChatRequest):
         with agent.sessions.lock:

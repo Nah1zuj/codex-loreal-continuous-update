@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from app.config import Settings
+from app.config import Settings, local_origins
 from app.rag.knowledge import KnowledgeStore
 from app.rag.retriever import HybridRetriever
 from app.looks.service import LookService
@@ -41,7 +41,7 @@ def create_app(settings=None):
     app.state.conversation=ConversationService(agent)
     app.state.settings = settings
     app.state.knowledge_admin=KnowledgeAdminService(agent,settings)
-    app.add_middleware(CORSMiddleware,allow_origins=['http://localhost:5173','http://127.0.0.1:5173','http://localhost:5174','http://127.0.0.1:5174','http://localhost:5180','http://127.0.0.1:5180'],allow_methods=['GET','POST','DELETE'],allow_headers=['Content-Type'])
+    app.add_middleware(CORSMiddleware,allow_origins=local_origins(),allow_methods=['GET','POST','DELETE'],allow_headers=['Content-Type'])
     app.add_middleware(BrowserIdentityMiddleware,agent=agent,settings=settings)
     @app.get('/api/identity')
     def identity():return {'mode':'private_browser','account_login':False,'retention_days':30}
