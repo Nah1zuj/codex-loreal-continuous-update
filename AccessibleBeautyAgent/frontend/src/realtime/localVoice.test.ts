@@ -54,3 +54,28 @@ it('button capture controls use the acknowledged mode and report recording state
  provider.finishCapture();expect(JSON.parse(socket.sent.at(-1))).toMatchObject({type:'capture',action:'end',epoch:command.epoch})
  provider.stop()
 })
+
+it('reports a current over-limit recording and ignores an obsolete over-limit event',async()=>{
+ const provider=new LocalRecognitionProvider(),input={...handlers(),onCapture:vi.fn()}
+ provider.setLocale('en');provider.setMode('bounded');provider.startCycle(input);await settle()
+ const socket=sockets[0],epoch=JSON.parse(socket.sent.at(-1)).epoch
+ const event={type:'capture',recording:false,discarded:true,reason:'duration_limit',epoch}
+ socket.onmessage({data:JSON.stringify({...event,epoch:epoch-1})})
+ expect(input.onProgress).not.toHaveBeenCalledWith(expect.stringContaining('120 seconds'))
+ socket.onmessage({data:JSON.stringify(event)})
+ expect(input.onProgress).toHaveBeenCalledWith(expect.stringContaining('120 seconds'))
+ expect(input.onCapture).toHaveBeenCalledWith(false)
+ expect(input.onText).not.toHaveBeenCalled()
+ provider.stop()
+})
+
+it('cancels the startup deadline immediately while permission is still pending',async()=>{
+ vi.useFakeTimers()
+ capture.mockImplementation(()=>new Promise(()=>{}))
+ const provider=new LocalRecognitionProvider(),input=handlers()
+ provider.startCycle(input);await settle()
+ expect(vi.getTimerCount()).toBeGreaterThan(0)
+ provider.stop();await settle()
+ expect(vi.getTimerCount()).toBe(0)
+ expect(input.onError).not.toHaveBeenCalled()
+})

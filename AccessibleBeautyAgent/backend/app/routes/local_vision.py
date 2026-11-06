@@ -1,134 +1,196 @@
-import time,uuid,asyncio
-from collections import OrderedDict
+import asyncio
+import time
 from typing import Literal
-from fastapi import APIRouter
-from pydantic import BaseModel,ConfigDict,Field,StrictBool
+from uuid import uuid4
+
+from fastapi import APIRouter, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.routing import APIRoute
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from starlette.responses import JSONResponse
+
 from app.vision.gate import decode_image
 from app.vision.local_regions import LocalRegionAnalyzer
+from app.vision.local_session import LocalVisionSessions
+
+Scope = Literal['camera', 'adaptive', 'photo']
+
+
+class LocalPermit(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    session_id: str
+    scope: Scope
+
 
 class LocalFrame(BaseModel):
-    model_config=ConfigDict(extra='forbid')
-    session_id:str
-    capture_kind:Literal['camera','photo']='camera'
-    image:str=Field(max_length=3_000_000)
-    frame_id:str=Field(min_length=1,max_length=80)
-    captured_at:float
-    explicit_consent:StrictBool=False
-    baseline_consent:StrictBool=False
-    target:Literal['auto','blush','lips']='auto'
-    locale:Literal['zh-CN','en']|None=None
+    model_config = ConfigDict(extra='forbid')
+    session_id: str
+    permit_id: str | None = Field(default=None, max_length=80)
+    capture_kind: Literal['camera', 'photo'] = 'camera'
+    adaptive: StrictBool = False
+    image: str = Field(max_length=3_000_000)
+    frame_id: str = Field(min_length=1, max_length=80)
+    captured_at: float = Field(allow_inf_nan=False)
+    explicit_consent: StrictBool = False
+    baseline_consent: StrictBool = False
+    compare_baseline: StrictBool = False
+    baseline_version: int | None = Field(default=None, ge=0)
+    target: Literal['auto', 'blush', 'lips'] = 'auto'
+    locale: Literal['zh-CN', 'en'] | None = None
+
+
+class LocalRevoke(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    permit_id: str | None = Field(default=None, max_length=80)
+    baseline: StrictBool = False
+
+
+class PrivateFrameRoute(APIRoute):
+    def get_route_handler(self):
+        handler = super().get_route_handler()
+
+        async def handle(request: Request):
+            try:
+                return await handler(request)
+            except RequestValidationError:
+                # The generic validation response echoes its input.
+                return JSONResponse({'detail': 'Invalid local visual request.'}, status_code=422)
+
+        return handle
+
+
+def describe_photo(result):
+    # Selected files may be mirrored. Only describe image coordinates.
+    result['comparison'] = None
+    result['status'] = 'UNCERTAIN'
+    result['assessment'] = {'status': 'uncertain', 'scope': 'uploaded_photo_orientation_unknown'}
+    regions = {'left_cheek': 'image_right_cheek', 'right_cheek': 'image_left_cheek'}
+    result['regions'] = {regions.get(key, key): value for key, value in result.get('regions', {}).items()}
+    if result['gate'].get('gate_pass'):
+        if result.get('source') == 'local_opencv_proxy':
+            result['message'] = '本地关键点模型不可用，仅提供画面质量和区域代理数值。'
+            result['message_en'] = 'The local landmark model is unavailable; only image quality and coarse color values are reported. '
+        else:
+            result['message'] = '已检查图片中的面部定位与局部颜色。'
+            result['message_en'] = 'Face position and local colors were inspected. '
+        result['message'] += '照片方向未知，只标注图像坐标。'
+        result['message_en'] += 'The photo orientation is unknown; any side labels refer to image coordinates.'
+
 
 def build_local_vision_router(agent):
-    router=APIRouter(prefix='/api/vision')
-    analyzer=LocalRegionAnalyzer(agent.vision.gate);measurements=OrderedDict();seen=OrderedDict();history=OrderedDict();epochs=OrderedDict()
-    sweeper=None
-    def expire():
-        now=time.time()
-        with agent.sessions.lock:
-            for sid in list(history):
-                history[sid]=[row for row in history.get(sid,[]) if now-row['captured_at']<900]
-                if not history[sid]:history.pop(sid,None)
-            for sid,(stamp,_) in list(measurements.items()):
-                if now-stamp>=900:measurements.pop(sid,None)
-            for session in list(agent.sessions.sessions.values()):
-                observation=session.visual_state
-                if observation and observation.get('task')=='local_region_measurement' and now-observation.get('captured_at',0)>=900:
-                    session.visual_state=None;session.confidence=0
-    def invalidate(sid,token):
-        epochs[sid]=token;epochs.move_to_end(sid)
-        while len(epochs)>200:epochs.popitem(last=False)
+    router = APIRouter(prefix='/api/vision/local', route_class=PrivateFrameRoute)
+    analyzer = LocalRegionAnalyzer(agent.vision.gate)
+    local = LocalVisionSessions(agent.sessions)
+    agent.sessions.on_media_revoked = local.drop
+    sweeper = None
+
     async def sweep():
         while True:
-            await asyncio.sleep(30)
-            expire()
+            await asyncio.sleep(5)
+            with agent.sessions.lock:
+                local.expire(time.time())
+
     async def start_sweep():
         nonlocal sweeper
-        sweeper=asyncio.create_task(sweep())
+        sweeper = asyncio.create_task(sweep())
+
     async def stop_sweep():
         if sweeper:
             sweeper.cancel()
-            try:await sweeper
-            except asyncio.CancelledError:pass
-    router.add_event_handler('startup',start_sweep)
-    router.add_event_handler('shutdown',stop_sweep)
-    router.add_event_handler('shutdown',analyzer.landmarks.close)
-    @router.post('/local')
-    def local(body:LocalFrame):
-        if body.explicit_consent is not True:raise PermissionError('Local frame analysis requires consent')
-        if body.capture_kind=='photo' and body.baseline_consent:raise ValueError('Uploaded photos cannot establish an oriented live-camera baseline')
-        s=agent.sessions.get(body.session_id)
-        # A failed new request must never leave an older assessment masquerading as fresh.
-        request_token=str(uuid.uuid4())
-        with agent.sessions.lock:
-            media_epoch=s.media_epoch
-            s.visual_state=None;s.confidence=0;invalidate(s.session_id,request_token)
-        now=time.time()
-        if not now-30<=body.captured_at<=now+5:raise ValueError('Frame is stale; capture again')
-        token=(s.session_id,body.frame_id)
-        if token in seen:raise ValueError('Capture a new frame for recheck')
-        seen[token]=now
-        while len(seen)>1000 or (seen and now-next(iter(seen.values()))>1800):seen.popitem(last=False)
-        expire()
-        previous=measurements.get(s.session_id)
-        target=body.target
-        if target=='auto':
-            step=agent.current_step(s) or {}
-            target='lips' if step.get('visual_task')=='lip_presence' else 'blush'
-        all_rows=[row for row in history.get(s.session_id,[]) if now-row['captured_at']<900]
-        rows=[row for row in all_rows if row.get('target')==target]
-        recent=next((row['measurement'] for row in reversed(rows) if row.get('measurement')),None)
-        result=analyzer.analyze(decode_image(body.image),previous[1] if previous else recent,target)
-        measurement=result.pop('measurement')
-        if body.capture_kind=='photo':
-            # Uploaded photos may be mirrored. Never infer the person's sides or
-            # compare an unknown-oriented photo to a live-camera baseline.
-            measurement=None;result['comparison']=None;result['status']='UNCERTAIN'
-            result['assessment']={'status':'uncertain','scope':'uploaded_photo_orientation_unknown'}
-            result['regions']={({'left_cheek':'image_right_cheek','right_cheek':'image_left_cheek'}.get(k,k)):v for k,v in result.get('regions',{}).items()}
-            if result['gate'].get('gate_pass'):
-                result['message']='已检查图片中的面部定位与局部颜色。照片是否镜像未知，暂不判断你本人左右，也不能确认需要补色。请保持均匀光线，或使用实时摄像头继续检查。'
-                result['message_en']='Face geometry and local colors were inspected. Photo orientation is unknown: your physical sides and a need for more makeup cannot be confirmed. Use even light or continue with the live camera.'
-        observation={'task':'local_region_measurement',**result,'capture_kind':body.capture_kind,'orientation':'unknown' if body.capture_kind=='photo' else 'unmirrored','frame_id':body.frame_id,'captured_at':body.captured_at,'observation_id':str(uuid.uuid4()),'target':target}
-        locale=body.locale or s.locale
-        reviewed=[row for row in agent.coaching.knowledge(locale) if ('blush' if target=='blush' else 'lips') in row.get('tags',[])]
-        observation['knowledge']={'reviewed_available':bool(reviewed),'source_ids':[row['guidance_id'] for row in reviewed[:3]],'guidance_status':'reviewed' if reviewed else 'unavailable'}
-        with agent.sessions.lock:
-            if s.media_epoch!=media_epoch or epochs.get(s.session_id)!=request_token:raise ValueError('Local check cancelled; capture again after consent')
-            if body.baseline_consent and measurement:
-                measurements[s.session_id]=(now,measurement)
-                while len(measurements)>200:measurements.popitem(last=False)
-            history[s.session_id]=(all_rows+[{'observation':observation,'measurement':measurement,'captured_at':body.captured_at,'target':target}])[-10:]
-            while len(history)>200:history.popitem(last=False)
-            s.visual_state=observation;s.confidence=0
-        message=result['message'] if locale=='zh-CN' else result.get('message_en','Local color measurements are uncalibrated. Makeup coverage cannot be confirmed.')
-        # DeepSeek may choose a bounded follow-up, never generate or overwrite visual facts.
-        observation['feedback_source']='local_evidence'
-        if agent.settings.model_provider=='deepseek' and agent.settings.allow_remote_ai:
             try:
-                import json
-                from app.services.model_client import RemoteModelClient
-                choice=RemoteModelClient(agent.settings,'deepseek').chat_json(agent.settings.deepseek_model,
-                    'Select one next_action from recheck, keep, preference, lighting. Return JSON only. Visual facts are authoritative; do not produce new observations or infer traits.',
-                    json.dumps({'target':target,'assessment':result.get('assessment'),'warnings':result.get('quality_warnings',[]),'current_step':(agent.current_step(s) or {}).get('name'),'reviewed_knowledge':[{'id':row['guidance_id'],'principle':row['principle'],'description':row['description']} for row in reviewed[:3]]},ensure_ascii=False))
-                actions={'recheck':('调整后可以说“再看一次”。','After adjusting, you can say check again.'),
-                         'keep':('你也可以保持现在的表达，继续下一步。','You can also keep your expression and continue to the next step.'),
-                         'preference':('你更想保留两侧差异，还是让颜色更接近？','Would you prefer to keep the difference or bring the colors closer?'),
-                         'lighting':('我们先调整到均匀光线，再取一张新画面。','Let us find even light, then capture a fresh frame.')}
-                action=choice.get('next_action');action='lighting' if not result['gate'].get('gate_pass') else 'recheck' if body.capture_kind=='photo' else action
-                if action in actions:message+=' '+actions[action][0 if locale=='zh-CN' else 1];observation['feedback_source']='local_evidence_deepseek_bounded_followup'
-            except (RuntimeError,PermissionError,ValueError,KeyError,TypeError):observation['feedback_source']='local_evidence_text_fallback'
-        if s.media_epoch!=media_epoch or s.visual_state is not observation or epochs.get(s.session_id)!=request_token:raise ValueError('Local check cancelled; no fresh observation available')
-        return {**agent.respond(s,message),'observation':s.visual_state,'provider':'local_opencv','frame_saved':False}
-    @router.get('/local/{session_id}')
-    def observations(session_id:str):
-        agent.sessions.get(session_id)
-        expire()
-        return {'observations':[row['observation'] for row in history.get(session_id,[]) if time.time()-row['captured_at']<900],'images_saved':False}
-    @router.delete('/local/{session_id}')
-    def clear(session_id:str):
-        s=agent.sessions.get(session_id)
+                await sweeper
+            except asyncio.CancelledError:
+                pass
+
+    router.add_event_handler('startup', start_sweep)
+    router.add_event_handler('shutdown', stop_sweep)
+    router.add_event_handler('shutdown', analyzer.landmarks.close)
+
+    @router.post('/permits')
+    def authorize(body: LocalPermit):
         with agent.sessions.lock:
-            invalidate(session_id,None);measurements.pop(session_id,None);history.pop(session_id,None)
-            s.visual_state=None;s.confidence=0
-        return {'cleared':True}
+            session = agent.sessions.get(body.session_id)
+            permit, baseline_version = local.grant(session, body.scope, time.time())
+            return {'permit_id': permit.permit_id, 'expires_at': permit.expires_at,
+                    'scope': body.scope, 'baseline_version': baseline_version}
+
+    @router.post('')
+    def observe(body: LocalFrame):
+        if body.explicit_consent is not True:
+            raise PermissionError('Local frame analysis requires consent.')
+        scope = 'photo' if body.capture_kind == 'photo' else 'adaptive' if body.adaptive else 'camera'
+        if (scope == 'photo' and (body.adaptive or body.compare_baseline)) or (body.baseline_consent and scope != 'camera'):
+            raise ValueError('Only a manual camera frame can establish a baseline.')
+        with agent.sessions.lock:
+            session = agent.sessions.get(body.session_id)
+            target = body.target
+            if target == 'auto':
+                step = agent.current_step(session) or {}
+                target = 'lips' if step.get('visual_task') == 'lip_presence' else 'blush'
+            locale = body.locale or session.locale
+            state, token, baseline = local.begin(
+                session, scope, body.permit_id, body.frame_id, body.captured_at, body.baseline_consent,
+                body.compare_baseline, body.baseline_version, time.time(),
+            )
+
+        result = analyzer.analyze(decode_image(body.image), baseline['measurement'] if baseline else None, target)
+        measurement = result.pop('measurement')
+        if scope == 'photo':
+            describe_photo(result)
+        elif baseline and result.get('comparison'):
+            result['comparison']['baseline_frame_id'] = baseline['frame_id']
+        observation = {
+            'task': 'local_region_measurement', **result,
+            'capture_kind': body.capture_kind,
+            'orientation': 'unknown' if scope == 'photo' else 'unmirrored',
+            'frame_id': body.frame_id, 'captured_at': body.captured_at,
+            'observation_id': str(uuid4()), 'target': target, 'baseline_saved': False,
+        }
+        reviewed = [row for row in agent.coaching.knowledge(locale) if target in row.get('tags', [])]
+        observation['knowledge'] = {
+            'reviewed_available': bool(reviewed),
+            'source_ids': [row['guidance_id'] for row in reviewed[:3]],
+            'guidance_status': 'reviewed' if reviewed else 'unavailable',
+        }
+        message = result['message'] if locale == 'zh-CN' else result['message_en']
+        with agent.sessions.lock:
+            local.publish(state, scope, token, observation, measurement, body.baseline_consent, time.time())
+            return {**agent.respond(session, message, remember=False), 'observation': observation,
+                    'provider': observation['source'], 'frame_saved': False}
+
+    @router.get('/{session_id}')
+    def observations(session_id: str):
+        with agent.sessions.lock:
+            session = agent.sessions.get(session_id)
+            local.expire(time.time())
+            state = local.states.get(session_id)
+            latest = session.visual_state if state and state.observation_scope else None
+            return {'observations': [latest] if latest and latest.get('task') == 'local_region_measurement' else [],
+                    'baseline_available': bool(state and state.baseline), 'images_saved': False}
+
+    @router.delete('/{session_id}')
+    def clear(session_id: str, body: LocalRevoke | None = None):
+        permit_id = body.permit_id if body else None
+        baseline = body.baseline if body else False
+        with agent.sessions.lock:
+            session = agent.sessions.get(session_id)
+            local.expire(time.time())
+            state = local.states.get(session_id)
+            if state:
+                if baseline:
+                    permit = state.permits.get('camera')
+                    if not permit or permit.permit_id != permit_id:
+                        raise PermissionError('Allow local single-frame checks before clearing a baseline.')
+                    local.clear_baseline(state)
+                    return {'cleared': True, 'baseline_version': state.baseline_version}
+                elif permit_id:
+                    scope = next((scope for scope, permit in state.permits.items() if permit.permit_id == permit_id), None)
+                    if scope:
+                        local.revoke_scope(state, scope)
+                else:
+                    local.drop(session)
+            if baseline:
+                raise PermissionError('No local camera authorization is active.')
+        return {'cleared': True}
+
     return router

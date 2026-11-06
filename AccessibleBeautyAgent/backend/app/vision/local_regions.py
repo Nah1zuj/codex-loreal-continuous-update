@@ -1,50 +1,76 @@
-"""RAM-only face-box proxy measurements, never a calibrated makeup classifier."""
-import cv2,numpy as np
+"""RAM-only local quality and uncalibrated color measurements."""
+import cv2
+import numpy as np
+
+from app.vision.local_landmarks import LocalLandmarks
+from app.vision.makeup_observation import observe_makeup
+
 
 class LocalRegionAnalyzer:
-    def __init__(self,gate):
-        self.gate=gate
-        from app.vision.local_landmarks import LocalLandmarks
-        self.landmarks=LocalLandmarks()
-    def analyze(self,raw,baseline=None,target='blush'):
-        detected=self.landmarks.detect(raw)
-        if detected is not None:
-            from app.vision.makeup_observation import observe_makeup
-            result=observe_makeup(raw,detected,target,baseline)
-            result['landmark_status']=self.landmarks.status
-            result['landmark_count']=result['geometry'].get('landmark_count',0)
-            return result
-        gate=self.gate.evaluate(raw)
-        result={'status':'UNCERTAIN','confidence':None,'calibrated':False,'method':'opencv_face_box_region_proxy','regions':{},'measurement':None,'comparison':None,'gate':gate,'message':'本地颜色测量尚未校准，不能据此判断是否需要补色。'}
+    def __init__(self, gate):
+        self.gate = gate
+        self.landmarks = LocalLandmarks()
+
+    def analyze(self, raw, baseline=None, target='blush'):
+        detected = self.landmarks.detect(raw)
+        if detected is None:
+            result = self.proxy(raw)
+            result['source'] = 'local_opencv_proxy'
+        else:
+            result = observe_makeup(raw, detected, target, baseline)
+            result['source'] = 'local_mediapipe'
+        result['landmark_status'] = self.landmarks.status
+        result['landmark_count'] = result.get('geometry', {}).get('landmark_count', 0)
+        result['quality'] = {
+            'usable': result['gate']['gate_pass'],
+            'warnings': result['quality_warnings'],
+        }
+        return result
+
+    def proxy(self, raw):
+        gate = self.gate.evaluate(raw)
+        warnings = ['landmark_model_unavailable']
+        if not gate['gate_pass']:
+            count = gate.get('face_count')
+            reason = ('no_face' if count == 0 else 'multiple_faces' if count and count > 1 else
+                      'lighting' if gate.get('lighting_ok') is False else
+                      'face_size' if gate.get('face_size_ok') is False else
+                      'pose_or_occlusion' if gate.get('occlusion_warning') else
+                      'blur' if gate.get('blur_score', 20) < 20 else 'quality_gate_failed')
+            warnings.append(reason)
+        result = {
+            'status': 'UNCERTAIN', 'confidence': None, 'calibrated': False, 'simulated': False,
+            'method': 'opencv_face_box_region_proxy', 'regions': {}, 'measurement': None,
+            'comparison': None, 'gate': gate, 'quality_warnings': warnings,
+            'assessment': {'status': 'uncertain', 'scope': 'coarse_color_proxy_only'},
+            'message': '本地关键点模型不可用，仅提供画面质量和区域代理数值，不作前后比较。',
+            'message_en': 'The local landmark model is unavailable. Only image quality and coarse color values are available; before/after comparison is unavailable.',
+        }
         if not gate['gate_pass'] or not gate.get('face_box'):
-            result['message']=gate.get('failure_reason') or 'Face geometry unavailable'
+            detail = gate.get('failure_reason') or '画面中未找到可靠的面部区域。'
+            result['message'] = '本地关键点模型不可用，画面质量检查未通过。' + detail
+            result['message_en'] = 'The local landmark model is unavailable and the quality check did not pass. Capture one clear, unobstructed face in even light.'
             return result
-        pixels=cv2.imdecode(np.frombuffer(raw,np.uint8),cv2.IMREAD_COLOR)
-        if pixels is None:raise ValueError('Invalid image')
-        x,y,w,h=gate['face_box'];height,width=pixels.shape[:2]
-        if x<0 or y<0 or w<=0 or h<=0 or x+w>width or y+h>height:raise ValueError('Invalid face geometry')
-        lab=cv2.cvtColor(pixels,cv2.COLOR_BGR2LAB)
-        # Captured pixels are unmirrored: image-right is the person's left.
-        # CSS preview mirroring must not swap spoken body directions.
-        boxes={'left_cheek':(.65,.48,.86,.68),'right_cheek':(.14,.48,.35,.68),'lip_proxy':(.33,.70,.67,.84)}
-        for name,(a,b,c,d) in boxes.items():
-            region=lab[y+int(h*b):y+int(h*d),x+int(w*a):x+int(w*c)]
-            values=np.median(region.reshape(-1,3),axis=0)
-            result['regions'][name]={'lightness':round(float(values[0]),3),'redness':round(float(values[1])-128,3),'yellow_blue':round(float(values[2])-128,3),'area':int(region.shape[0]*region.shape[1])}
-        result['measurement']={'regions':result['regions'],'face_ratio':w*h/(width*height),'lighting':float(np.mean(lab[y:y+h,x:x+w,0]))}
-        result['landmark_status']=self.landmarks.status
-        result['landmark_count']=0
-        if detected and detected['face_count']==1:
-            from app.vision.local_landmarks import region_measurements
-            try:
-                result['regions'],result['measurement'],result['landmark_count']=region_measurements(raw,detected['points'])
-                result['method']='mediapipe_landmark_relative_color_measurement'
-            except ValueError:
-                result['regions']={};result['measurement']=None;result['message']='关键点超出画面；无法比较妆效。';return result
-        elif detected:
-            result['regions']={};result['measurement']=None;result['message']='关键点检测没有找到唯一人脸；无法比较妆效。';return result
-        if baseline:
-            comparable=baseline.get('method')==result['method'] and abs(baseline['lighting']-result['measurement']['lighting'])<15 and abs(baseline['face_ratio']-result['measurement']['face_ratio'])<.08
-            result['comparison']={'comparable':comparable,'redness_delta':{name:round(row['redness']-baseline['regions'][name]['redness'],3) for name,row in result['regions'].items()} if comparable else {},'interpretation':'measurement_only_not_makeup_decision'}
-        result['measurement']['method']=result['method']
+        pixels = cv2.imdecode(np.frombuffer(raw, np.uint8), cv2.IMREAD_COLOR)
+        if pixels is None:
+            raise ValueError('Invalid image')
+        x, y, width, height = gate['face_box']
+        image_height, image_width = pixels.shape[:2]
+        if min(x, y) < 0 or min(width, height) <= 0 or x + width > image_width or y + height > image_height:
+            raise ValueError('Invalid face geometry')
+        lab = cv2.cvtColor(pixels, cv2.COLOR_BGR2LAB)
+        # CSS preview mirroring does not change the captured camera pixels.
+        boxes = {'left_cheek': (.65, .48, .86, .68), 'right_cheek': (.14, .48, .35, .68),
+                 'lip_proxy': (.33, .70, .67, .84)}
+        for name, (a, b, c, d) in boxes.items():
+            region = lab[y + int(height * b):y + int(height * d), x + int(width * a):x + int(width * c)]
+            if not region.size:
+                continue
+            values = np.median(region.reshape(-1, 3), axis=0)
+            result['regions'][name] = {
+                'lightness': round(float(values[0]), 3),
+                'redness': round(float(values[1]) - 128, 3),
+                'yellow_blue': round(float(values[2]) - 128, 3),
+                'area': int(region.shape[0] * region.shape[1]),
+            }
         return result

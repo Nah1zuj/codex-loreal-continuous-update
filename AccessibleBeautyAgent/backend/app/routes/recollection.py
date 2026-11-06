@@ -1,6 +1,6 @@
 import hashlib,uuid
 from fastapi import APIRouter,Request
-from pydantic import BaseModel,ConfigDict,Field
+from pydantic import BaseModel,ConfigDict,Field,StrictBool
 
 class ExperienceCommand(BaseModel):
     model_config=ConfigDict(extra='forbid')
@@ -16,15 +16,73 @@ class RecallSetting(BaseModel):
     model_config=ConfigDict(extra='forbid')
     enabled:bool
 
+class SummaryEdits(BaseModel):
+    model_config=ConfigDict(extra='forbid',str_strip_whitespace=True)
+    name:str|None=Field(default=None,min_length=1,max_length=100)
+    note:str|None=Field(default=None,max_length=1200)
+
+
+class SummaryDecision(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    version:str=Field(pattern=r'^[a-f0-9]{64}$')
+    edits:SummaryEdits=Field(default_factory=SummaryEdits)
+    explicit_consent:StrictBool=False
+
+
+class SummaryConsent(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    explicit_consent:StrictBool
+
+
 def build_recollection_router(agent):
     router=APIRouter(prefix='/api')
-    def owner(request):return request.state.principal_prefix+hashlib.sha256(b'demo').hexdigest()[:24]
+    def owner(request,user_id=None):
+        prefix=request.state.principal_prefix
+        if user_id is not None and not user_id.startswith(prefix):
+            raise KeyError('Summary owner not found')
+        return user_id or prefix+hashlib.sha256(b'demo').hexdigest()[:24]
+
+    def subject(request,candidate_id):
+        return agent.recollection.subject(candidate_id,request.state.principal_prefix)
     @router.get('/recollection')
-    def view(request:Request):return agent.recollection.view(owner(request))
+    def view(request:Request,user_id:str|None=None):return agent.recollection.view(owner(request,user_id))
     @router.post('/recollection/settings')
     def setting(body:RecallSetting,request:Request):return agent.recollection.setting(owner(request),body.enabled)
     @router.delete('/recollection')
     def clear(request:Request):return agent.recollection.clear(owner(request))
+    @router.get('/recollection/candidate/{session_id}')
+    def candidate(session_id:str,request:Request):
+        candidate_id=f'plan:{session_id}'
+        return agent.recollection.prepare(subject(request,candidate_id),candidate_id)
+
+    @router.post('/recollection/candidates/{candidate_id}/preview')
+    def preview(candidate_id:str,body:SummaryEdits,request:Request):
+        return agent.recollection.prepare(subject(request,candidate_id),candidate_id,body.model_dump(exclude_none=True))
+
+    @router.post('/recollection/candidates/{candidate_id}/confirm')
+    def confirm(candidate_id:str,body:SummaryDecision,request:Request):
+        if body.explicit_consent is not True:
+            raise PermissionError('请先审阅并确认这份摘要。')
+        return agent.recollection.decide(subject(request,candidate_id),candidate_id,body.version,
+                                        body.edits.model_dump(exclude_none=True),save=True)
+
+    @router.post('/recollection/candidates/{candidate_id}/reject')
+    def reject(candidate_id:str,body:SummaryDecision,request:Request):
+        return agent.recollection.decide(subject(request,candidate_id),candidate_id,body.version,
+                                        body.edits.model_dump(exclude_none=True),save=False)
+
+    @router.post('/recollection/{record_id}/reuse')
+    def reuse(record_id:str,body:SummaryConsent,request:Request):
+        if body.explicit_consent is not True:
+            raise PermissionError('请确认要沿用这份摘要的风格。')
+        return agent.recollection.select(subject(request,record_id),record_id)
+
+    @router.delete('/recollection/{record_id}')
+    def remove(record_id:str,body:SummaryConsent,request:Request):
+        if body.explicit_consent is not True:
+            raise PermissionError('请明确确认删除这份摘要。')
+        return agent.recollection.remove(subject(request,record_id),record_id)
+
     @router.post('/experience/reflect')
     def reflect(body:ExperienceCommand,request:Request):
         with agent.sessions.lock:
@@ -33,7 +91,8 @@ def build_recollection_router(agent):
             if s.makeup_plan and s.makeup_plan.status=='completed':
                 return completed_reply(s)
             if not s.makeup_plan:
-                agent.coaching.create(s,{'style':'natural','occasion':s.scene or 'daily','aesthetic':' '.join(s.desired_impression)[:400]})
+                style=agent.recollection.reusable_style(s.user_id) if body.reuse_previous else 'natural'
+                agent.coaching.create(s,{'style':style,'occasion':s.scene or 'daily','aesthetic':' '.join(s.desired_impression)[:400]})
             if s.makeup_plan.status=='draft':agent.coaching.act(s,'start',str(uuid.uuid4()))
             elif s.makeup_plan.workflow=='PAUSED':agent.coaching.act(s,'resume',str(uuid.uuid4()))
             instruction=agent.current_step(s)['instruction']
@@ -58,8 +117,12 @@ def build_recollection_router(agent):
         count=len(summary['completed_steps'])
         name=summary['chosen_look']
         if s.locale=='zh-CN':
-            text=f'本次{name}体验已结束。你确认完成了{count}个步骤。你可以继续交流，或打开私人日志。'
+            text=f'本次{name}体验已结束。你确认完成了{count}个步骤。可到拾光查看并决定是否保存摘要。'
         else:
-            text=f'Your {name} experience has ended with {count} confirmed steps. You can continue the conversation or open your private journal.'
-        return {**agent.respond(s,text),'summary':summary,'recollection':None}
+            text=f'Your {name} experience has ended with {count} confirmed steps. Open Trace to review and decide whether to save the summary.'
+        try:
+            candidate=agent.recollection.prepare(s.user_id,f'plan:{s.session_id}')
+        except KeyError:
+            candidate=None
+        return {**agent.respond(s,text),'summary':summary,'summary_candidate':candidate,'recollection':None}
     return router

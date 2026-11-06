@@ -1,16 +1,22 @@
 from app.vision.gate import LocalFaceGate, demo_gate
-from app.vision.providers import MockVisionProvider, RemoteQwenVisionProvider,RemoteDeepSeekVisionProvider
+from app.vision.providers import MockVisionProvider
 from app.vision.consensus import aggregate
 from app.schemas.models import VisualResult
 from app.vision.language import accessible_result
+
+def require_local_demo(settings):
+    if settings.vision_provider != 'mock':
+        raise PermissionError('Face image analysis is local in this release; use local visual checks.')
+
 
 class VisionService:
     def __init__(self, settings, gate=None, provider=None):
         self.settings = settings
         self.gate = gate or LocalFaceGate()
-        self.provider = provider or (MockVisionProvider() if settings.vision_provider=='mock' else (RemoteDeepSeekVisionProvider(settings) if settings.vision_provider=='deepseek' else RemoteQwenVisionProvider(settings)))
+        self.provider = provider or MockVisionProvider()
 
     def check(self, task, images, context=None, demo=False):
+        require_local_demo(self.settings)
         context = context or {}
         video_sample = context.get("capture_kind") == "video_sample"
         if len(images)!=(1 if video_sample else 3) and not demo:

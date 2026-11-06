@@ -3,6 +3,7 @@ from collections import Counter
 from app.rag.embeddings import tokenize,MockEmbeddingProvider,RemoteEmbeddingProvider
 from app.rag.reranker import MockReranker,RemoteRerankerAdapter
 from app.knowledge.vocabulary import Vocabulary
+from app.knowledge.policy import eligible, is_reviewed
 from app.knowledge.repository import atomic_json
 
 class HybridRetriever:
@@ -15,15 +16,17 @@ class HybridRetriever:
         self.df=Counter(t for count in self.counts for t in count)
         self.avg_len=sum(sum(x.values()) for x in self.counts)/max(1,len(self.counts))
     def permitted(self,metadata):
-        if metadata.get('status') in ('REJECTED','DEPRECATED'):return False
-        if self.settings.developer_mode or self.settings.research_mode:return True
-        return metadata.get('verified') is True and not metadata.get('demo_data',False)
+        if metadata.get('subtype')=='makeup_lesson':
+            return bool(metadata.get('source_rights_confirmed')) and (
+                is_reviewed(metadata) or (self.settings.developer_mode and eligible(metadata,self.settings))
+            )
+        return eligible(metadata,self.settings)
     def search(self,query,filters=None,limit=5):return self._search(query,filters or {},limit)
     def debug_search(self,query,filters=None,limit=20):
         parsed=Vocabulary().parse_query(query);parsed.update(filters or {})
-        return {**self._search(query,parsed,limit),'parsed_filters':parsed,'policy':'research/developer' if self.settings.developer_mode or self.settings.research_mode else 'verified-only (non-demo)'}
+        return {**self._search(query,parsed,limit),'parsed_filters':parsed,'policy':'research/developer' if self.settings.developer_mode or self.settings.research_mode else 'human-reviewed (non-demo)'}
     def _search(self,query,filters,limit):
-        allowed={'scene','look_id','makeup_area','document_type','verified','source_type','parent_id','demo_data','status','subtype'}
+        allowed={'scene','look_id','makeup_area','document_type','verified','source_type','parent_id','demo_data','status','subtype','language'}
         if any(k not in allowed for k in filters):raise ValueError('Unsupported metadata filter')
         query_vector=self.embedding.embed([query])[0];tokens=set(tokenize(query));hits=[]
         for doc,vector,count in zip(self.documents,self.vectors,self.counts):

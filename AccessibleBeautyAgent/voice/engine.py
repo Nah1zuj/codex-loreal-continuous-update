@@ -42,7 +42,8 @@ class Models:
 
 class AudioSession:
     MAX_SAMPLES=16000*12
-    def __init__(self,models):
+    def __init__(self,models,*,defer_transcription=False):
+        self.defer_transcription=defer_transcription
         self.models=models;self.mode='quiet';self.epoch=0
         self.metrics={'pcm_frames':0,'asr_utterances':0,'wake_candidates':0,'emitted_utterances':0,'audio_saved':False,'remote_asr_requests':0}
         self.reset()
@@ -98,7 +99,7 @@ class AudioSession:
         data=np.concatenate(self.capture_frames) if self.capture_frames else None
         epoch,manual=self.epoch,self.manual_capture
         self.reset()
-        if data is None or len(data)<1600:return {'type':'capture','recording':False,'discarded':True,'epoch':epoch}
+        if data is None or len(data)<1600:return {'type':'capture','recording':False,'discarded':True,'reason':'no_audio','epoch':epoch}
         self.metrics['asr_utterances']+=1
         text=self.models.transcribe(data).strip()
         if manual:
@@ -108,7 +109,7 @@ class AudioSession:
             begin=text.find('开始');end=text.find('结束',begin+2) if begin>=0 else -1
             body=text[begin+2:end] if end>=0 else text[begin+2:] if explicit and begin>=0 else ''
         body=body.strip(' ，,。.!！?？：:；;')
-        if not body:return {'type':'capture','recording':False,'discarded':True,'epoch':epoch}
+        if not body:return {'type':'capture','recording':False,'discarded':True,'reason':'unrecognized','epoch':epoch}
         self.metrics['emitted_utterances']+=1
         return {'type':'transcript','text':body,'epoch':epoch,'kind':'bounded'}
     def feed_bounded(self,samples):
@@ -125,7 +126,9 @@ class AudioSession:
         if candidate=='结束':self.capture_ended=True
         if self.capture_size>16000*120:
             epoch=self.epoch;self.reset()
-            return {'type':'capture','recording':False,'discarded':True,'epoch':epoch}
-        if self.capture_ended and self.silence>=8320:return self.finish_capture()
+            return {'type':'capture','recording':False,'discarded':True,'reason':'duration_limit','epoch':epoch}
+        if self.capture_ended and self.silence>=8320:
+            if self.defer_transcription:return {'type':'transcribing','epoch':self.epoch}
+            return self.finish_capture()
         return None
     def dispose(self):self.capture_frames.clear();self.capturing=False;self.frames.clear();self.size=0;self.stream=None;self.candidate=''

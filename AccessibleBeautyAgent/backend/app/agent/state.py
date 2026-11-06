@@ -26,6 +26,7 @@ class SessionStore:
         self.sessions = {}
         self.lock = RLock()
         self.touched={}
+        self.on_media_revoked = None
     def create(self, user_id='demo'):
         # No durable transcript without review; expire abandoned sessions in RAM.
         with self.lock:
@@ -64,10 +65,20 @@ class SessionStore:
         session.stage_history.append(target.value)
     def project_plan(self, session):
         plan = session.makeup_plan
-        session.routine_step = plan.active_index
-        session.routine_total_steps = len(plan.steps)
-        session.routine_started = plan.status != 'draft'
-        session.stage = Stage.FEEDBACK if plan.status == 'completed' else Stage.GUIDE if plan.status == 'active' else Stage.LOOK_SELECTED
+        if plan.legacy_routine:
+            session.routine_id = plan.legacy_routine.routine_id
+            session.selected_look = plan.legacy_routine.look_id
+        if plan.session_ended:
+            stage = Stage.COMPLETE
+        elif plan.status == 'completed':
+            stage = Stage.FEEDBACK
+        elif plan.status == 'active':
+            stage = Stage.GUIDE
+        else:
+            stage = Stage.LOOK_SELECTED
+        if session.stage != stage:
+            session.stage = stage
+            session.stage_history.append(stage.value)
         session.scene = plan.occasion
 
     def revoke_media(self, session):
@@ -75,6 +86,8 @@ class SessionStore:
         session.visual_state = None
         session.confidence = 0
         session.media_epoch += 1
+        if self.on_media_revoked:
+            self.on_media_revoked(session)
         if session.stage in {Stage.CHECK_REQUESTED, Stage.CAMERA_CONSENT, Stage.VISION_GATE, Stage.VISION_CHECK, Stage.VERIFY}:
             session.stage = Stage.GUIDE if session.routine_started else Stage.LOOK_SELECTED
             session.stage_history.append(session.stage.value)

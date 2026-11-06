@@ -69,7 +69,7 @@ class BrowserIdentityMiddleware:
                     if isinstance(value,dict):
                         if value.get('session_id'):own_session(value['session_id'])
                         if 'user_id' in value:value['user_id']=owner(value['user_id'])
-                        elif path in {'/api/chat','/api/chat/stream','/api/journal','/api/feedback'}:value['user_id']=owner('demo')
+                        elif path in {'/api/chat','/api/chat/stream','/api/journal','/api/feedback'} or (path.startswith('/api/journal/') and path!='/api/journal/draft'):value['user_id']=owner('demo')
                     raw=json.dumps(value,ensure_ascii=False).encode()
                     scope['headers']=[(k,v) for k,v in scope['headers'] if k.lower()!=b'content-length']+[(b'content-length',str(len(raw)).encode())]
         except (PermissionError,KeyError):return await error(404,'Private resource not found')

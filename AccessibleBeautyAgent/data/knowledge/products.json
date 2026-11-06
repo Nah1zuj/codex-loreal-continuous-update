@@ -339,6 +339,36 @@
         "warm_social"
       ],
       "claims": []
+    },
+    {
+      "product_id": "maybelline_matte_ink",
+      "brand": "Maybelline New York",
+      "name": "Super Stay Matte Ink Liquid Lipstick",
+      "category": "lip",
+      "finish": "matte",
+      "source": "maybelline_matte_ink_us_official",
+      "source_ids": [
+        "maybelline_matte_ink_us_official"
+      ],
+      "source_type": "official_brand",
+      "status": "DRAFT",
+      "verified": false,
+      "demo_data": false
+    },
+    {
+      "product_id": "maybelline_vinyl_ink",
+      "brand": "Maybelline New York",
+      "name": "Super Stay Vinyl Ink Longwear Liquid Lipcolor",
+      "category": "lip",
+      "finish": "glossy",
+      "source": "maybelline_vinyl_ink_us_official",
+      "source_ids": [
+        "maybelline_vinyl_ink_us_official"
+      ],
+      "source_type": "official_brand",
+      "status": "DRAFT",
+      "verified": false,
+      "demo_data": false
     }
   ]
 }

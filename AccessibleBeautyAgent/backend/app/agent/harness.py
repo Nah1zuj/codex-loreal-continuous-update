@@ -3,6 +3,7 @@ from app.schemas.models import Stage,Intent
 from app.schemas.full_look import RevisionRequest
 from app.full_look.service import FullLookService
 from app.policies.registry import PolicyRegistry
+from app.agent.coaching import CoachingController, RoutineUnavailable
 from app.agent.providers import MockLanguageProvider, QwenLanguageProvider,DeepSeekLanguageProvider,OpenAICompatibleLanguageProvider
 
 class AgentHarness:
@@ -16,7 +17,6 @@ class AgentHarness:
         self.retriever, self.looks, self.products = retriever, looks, products
         self.memory, self.vision = memory, vision
         self.policies=PolicyRegistry()
-        from app.agent.coaching import CoachingController
         self.coaching=CoachingController(self)
         self.full_look=FullLookService(self)
         providers={'mock':MockLanguageProvider,'deepseek':DeepSeekLanguageProvider,'qwen':QwenLanguageProvider,'openai_compatible':OpenAICompatibleLanguageProvider}
@@ -38,48 +38,58 @@ class AgentHarness:
     def compare_products(self, product_ids):
         return self.products.compare(product_ids)
 
-    def require_available_routine(self,routine_id,session):
+    def disable_routine(self, session):
+        session.routine_unavailable = True
+        self.sessions.stop(session)
+        raise RoutineUnavailable('知识或流程已更新/停用，请重新开始会话并选择妆容。')
+
+    def require_available_routine(self, routine_id, session, *, expected_version=None, expected_look=None):
         from app.knowledge.policy import eligible
-        routine=self.store.routine_map.get(routine_id)
-        look=self.store.look_map.get(session.selected_look)
-        if not routine or not look or not eligible(routine,self.settings) or not eligible(look,self.settings) or routine_id not in look['routine_ids']:
-            session.routine_started=False;session.camera_consent=False
-            self.sessions.stop(session)
-            raise ValueError('知识或流程已更新/停用，请重新开始会话并选择妆容。')
+        routine = self.store.routine_map.get(routine_id)
+        look = self.store.look_map.get(expected_look or session.selected_look)
+        if (not routine or not look or routine['look_id'] != look['look_id'] or not eligible(routine, self.settings)
+                or not eligible(look, self.settings) or routine_id not in look['routine_ids']
+                or (expected_version is not None and routine['version'] != expected_version)):
+            self.disable_routine(session)
         return routine
 
+    def routine_command(self, session, action, request, *, routine_id=None, compatible_next=False):
+        """Translate catalogue entry points into the shared command transaction."""
+        with self.sessions.lock:
+            if routine_id and routine_id not in self.store.routine_map:
+                raise KeyError('Routine not found')
+            initial = None
+            if not session.makeup_plan:
+                if action != 'start' and not (action == 'advance' and compatible_next):
+                    raise ValueError('请先开始步骤。')
+                if session.stage not in (Stage.LOOK_SELECTED, Stage.VERIFY):
+                    raise ValueError('当前阶段不能开始流程。')
+                chosen_id = routine_id or session.routine_id
+                if chosen_id and chosen_id in self.store.routine_map:
+                    if self.store.routine_map[chosen_id]['look_id'] != session.selected_look:
+                        raise ValueError('Routine does not match selected look')
+                initial = self.coaching.legacy_plan(session, chosen_id)
+            elif routine_id and routine_id != session.routine_id:
+                raise ValueError('Routine does not match active plan')
+            return self.coaching.act(
+                session, action, request.event_id, request.expected_step_id,
+                expected_plan_id=request.expected_plan_id, expected_revision=request.expected_revision,
+                compatible_next=compatible_next, initial_plan=initial,
+            )
+
     def start_routine(self, routine_id, session):
-        if routine_id not in self.store.routine_map:
-            raise KeyError('Routine not found')
-        if session.stage not in (Stage.LOOK_SELECTED,Stage.VERIFY):
-            raise ValueError('当前阶段不能开始流程。')
-        if self.store.routine_map[routine_id]['look_id'] != session.selected_look:
-            raise ValueError('Routine does not match selected look')
-        self.require_available_routine(routine_id,session)
-        session.routine_id = routine_id
-        session.routine_step = 0
-        session.routine_total_steps = len(self.store.routine_map[routine_id]['steps'])
-        session.routine_started = True
-        self.sessions.transition(session,Stage.GUIDE)
-        return self.record(session,'start_routine',{'routine_id':routine_id},self.current_step(session))
+        # Internal compatibility entry used by catalogue tooling.
+        from app.schemas.models import RoutineRequest
+        request = RoutineRequest(session_id=session.session_id)
+        return self.routine_command(session, 'start', request, routine_id=routine_id)['step']
 
-    def current_step(self, s):
-        if s.makeup_plan:return self.coaching.current(s)
-        if not s.routine_id or not s.routine_started:
-            return None
-        steps = self.require_available_routine(s.routine_id,s)['steps']
-        return steps[s.routine_step] if s.routine_step < len(steps) else None
+    def select_routine(self, session, look):
+        session.selected_look = look['look_id']
+        session.routine_id = look['routine_id']
+        session.proposed_routine_step_count = len(self.store.routine_map.get(session.routine_id, {}).get('steps', ()))
 
-    def advance_routine(self, session_id):
-        s = self.sessions.get(session_id)
-        if not s.routine_started or s.stage not in (Stage.GUIDE,Stage.VERIFY):
-            raise ValueError('请先开始步骤，并结束当前相机检查。')
-        s.camera_consent = False
-        self.require_available_routine(s.routine_id,s)
-        s.routine_step += 1
-        step = self.current_step(s)
-        self.sessions.transition(s,Stage.GUIDE if step else Stage.FEEDBACK)
-        return self.record(s,'advance_routine',{'session_id':session_id},step)
+    def current_step(self, session):
+        return self.coaching.current(session)
 
     def run_visual_check(self, task, images, session_context, demo=False):
         s = self.sessions.get(session_context['session_id'])
@@ -120,7 +130,7 @@ class AgentHarness:
             raise ValueError('请先完成或跳过流程，再提供偏好反馈。')
         candidate = self.propose_memory_update(feedback)
         candidate['context'] = s.scene or 'unspecified'
-        s.memory_candidate = candidate
+        self.prepare_session_preference(s,candidate)
         self.sessions.transition(s,Stage.MEMORY_CONSENT)
         return self.record(s,'log_feedback',{'session_id':session_id},candidate)
 
@@ -133,15 +143,37 @@ class AgentHarness:
         if 'heavy_gloss' in feedback or '太亮' in feedback:
             candidate['avoid'] = ['heavy_gloss']
         return candidate
-    def save_memory(self, user_id, memory_candidate, explicit_consent):
-        return self.memory.save(user_id,memory_candidate,explicit_consent)
-    def delete_memory(self, user_id, memory_id, explicit_consent):
-        return self.memory.delete(user_id,memory_id,explicit_consent)
+    def prepare_session_preference(self,s,candidate):
+        preview=self.memory.prepare(s.user_id,candidate,scope=f'session:{s.session_id}')
+        s.memory_candidate=preview['candidate']
+        s.memory_candidate_id=preview['candidate_id']
+        s.memory_candidate_version=preview['candidate_version']
 
-    def respond(self, s, message):
-        s.last_response = message
-        canonical={'message':message,'session':s.model_dump(),'step':self.current_step(s)}
+    def delete_memory(self, user_id, memory_id, explicit_consent):
+        with self.sessions.lock:
+            result=self.memory.delete(user_id,memory_id,explicit_consent)
+            callback=getattr(self,'on_preferences_deleted',None)
+            if callback:
+                callback(user_id)
+            return result
+
+    def respond(self, s, message, *, remember=True):
+        step = self.current_step(s)
+        if remember:
+            s.last_response = message
+        canonical={'message':message,'session':s.model_dump(),'step':step}
         return {**localize_view({**canonical,'mode':self.settings.model_provider},s.locale),'canonical':canonical}
+
+    def duplicate_reply(self, session, result):
+        if result.get('saved'):
+            message = '这份私人日志已保存。' if session.locale == 'zh-CN' else 'This private journal entry was already saved.'
+            return {**self.respond(session, message, remember=False), 'saved':True,
+                    'record_id':result['id'], 'duplicate':True}
+        message = '这项操作已提交。' if session.locale == 'zh-CN' else 'This command was already applied.'
+        reply = self.respond(session, message, remember=False)
+        if session.makeup_plan and session.makeup_plan.status == 'completed':
+            reply['summary'] = self.coaching.summary(session)
+        return {**reply, 'event':result['event'], 'duplicate':True}
 
     def chat(self, request):
         s = self.sessions.get(request.session_id) if request.session_id else self.sessions.create(request.user_id)
@@ -152,20 +184,29 @@ class AgentHarness:
         command = text.lower()
         from app.agent.coaching_intents import coaching_intent
         normalized=coaching_intent(text)
-        if s.stage == Stage.COMPLETE and request.action=='message':
+        ending = command in ('stop','停止','stop session','停止会话')
+        if s.stage == Stage.COMPLETE and request.action=='message' and not ending:
             return self.respond(s,'本次会话已经结束。可以开始新会话。' if s.locale=='zh-CN' else 'This session has ended. You can start a new session.')
-        if s.makeup_plan and text and request.action=='message' and command not in ('stop','停止','stop session','停止会话','stop camera','停止相机','关闭相机','check this','check with camera'):
+        legacy = bool(s.makeup_plan and s.makeup_plan.legacy_routine)
+        if s.makeup_plan and not legacy and text and request.action=='message' and command not in ('stop','停止','stop session','停止会话','stop camera','停止相机','关闭相机','check this','check with camera'):
             import json
             result=self.coaching.handle(s,request)
-            context=json.dumps(result,ensure_ascii=False)
-            message=self.language.companion(text,context,s.locale) if self.settings.model_provider!='mock' else ('待审核课程。' if s.locale=='zh-CN' else 'Draft curriculum. ')+(self.current_step(s)['instruction'] if self.current_step(s) else json.dumps(result,ensure_ascii=False))
-            if result and result.get('summary'):self.coaching.mark_summary_presented(s,result['plan']['revision'])
-            return self.respond(s,message)
-        if not s.makeup_plan:
-            command={'start':'开始','advance':'next','repeat':'重复','visual':'check this'}.get(normalized,command)
-        if command.rstrip('。.!！?？') in {'我想开始下一步','我想继续下一步','我做好了','我完成了','i want to start the next step','i finished this step'}:command='next'
-        start_commands={'开始步骤','start routine','开始','我想开始步骤','开始化妆吧','请带我一步一步做','i want to start the steps','开始化妆','开始辅导','带我开始步骤'}
-        starting=command.rstrip('。.!！?？') in start_commands
+            if result and result.get('duplicate'):
+                return self.duplicate_reply(s, result)
+            if self.settings.model_provider == 'mock' or result.get('clarification_required'):
+                message = self.coaching.reply_text(s, result, normalized, text)
+            else:
+                message = self.language.companion(text, json.dumps(result, ensure_ascii=False), s.locale)
+            if result.get('summary'):
+                self.coaching.mark_summary_presented(s, result['plan']['revision'])
+            reply = self.respond(s, message)
+            if result.get('event'):
+                reply['event'] = result['event']
+            if result.get('summary'):
+                reply['summary'] = result['summary']
+            return reply
+        if not s.makeup_plan or legacy:
+            command = {'repeat':'重复', 'visual':'check this'}.get(normalized, command)
         if request.action == 'camera_consent':
             if s.stage != Stage.CAMERA_CONSENT and not (request.consent is False and s.camera_consent):
                 raise ValueError('当前没有待确认的相机请求。')
@@ -173,27 +214,42 @@ class AgentHarness:
                 raise ValueError('请明确选择同意或拒绝。')
             s.camera_consent = request.consent
             self.sessions.transition(s,Stage.VISION_GATE if request.consent else (Stage.GUIDE if s.routine_started else Stage.LOOK_SELECTED))
-            return self.respond(s,'已同意这一次三帧检查。你可以打开相机，随时停止。' if request.consent else '已拒绝相机检查，可以继续步骤。')
+            return self.respond(s,'已允许本次本地演示检查。' if request.consent else '已拒绝检查，可以继续步骤。')
         if request.action == 'memory_consent':
-            if s.stage != Stage.MEMORY_CONSENT or not s.memory_candidate:
-                raise ValueError('当前没有待确认的记忆候选。')
             if request.consent is None:
                 raise ValueError('请明确选择保存或不保存。')
-            s.memory_consent = request.consent
+            scope=f'session:{s.session_id}'
+            if s.stage != Stage.MEMORY_CONSENT or not s.memory_candidate:
+                if request.consent and self.memory.replay(
+                    s.user_id,request.memory_candidate_id,request.memory_candidate_version,scope,
+                ):
+                    return self.respond(s,'已保存你同意的偏好。')
+                raise ValueError('当前没有待确认的记忆候选。')
             if request.consent:
-                saved = self.save_memory(s.user_id,s.memory_candidate,True)
+                if (request.memory_candidate_id!=s.memory_candidate_id
+                        or request.memory_candidate_version!=s.memory_candidate_version):
+                    raise ValueError('偏好候选已变更，请重新审阅。')
+                saved=self.memory.save(s.user_id,s.memory_candidate,True,scope=scope,
+                                       candidate_id=request.memory_candidate_id,
+                                       candidate_version=request.memory_candidate_version)
                 self.record(s,'save_memory',{'explicit_consent':True},saved)
-            s.memory_candidate = None
+            s.memory_consent=request.consent
+            s.memory_candidate=None
+            s.memory_candidate_id=None
+            s.memory_candidate_version=None
             self.sessions.stop(s)
             return self.respond(s,'已保存你同意的偏好。今天的流程结束了。' if request.consent else '未保存长期偏好。今天的流程结束了。')
-        if command in ('stop','停止','stop session','停止会话'):
-            operation=None
-            if s.makeup_plan and s.makeup_plan.status=='active':
-                operation=self.coaching.act(s,'finish',request.event_id,request.expected_step_id,
-                                            expected_plan_id=request.expected_plan_id,expected_revision=request.expected_revision)
-            self.sessions.stop(s)
-            reply=self.respond(s,'会话已停止，相机已关闭。' if s.locale=='zh-CN' else 'The session has ended and camera access was revoked.')
-            if operation:reply['event']=operation['event']
+        if ending:
+            operation = None
+            if s.makeup_plan:
+                operation = self.routine_command(s, 'end_session', request)
+            elif s.stage != Stage.COMPLETE:
+                self.sessions.stop(s)
+            duplicate = bool(operation and operation.get('duplicate'))
+            message = '会话已停止，相机已关闭。' if s.locale=='zh-CN' else 'The session has ended and camera access was revoked.'
+            reply = self.respond(s, message, remember=not duplicate)
+            if operation:
+                reply.update(event=operation['event'], duplicate=duplicate)
             return reply
         if command in ('stop camera','停止相机','关闭相机'):
             s.camera_consent=False
@@ -205,9 +261,11 @@ class AgentHarness:
         if command in ('check this','检查','相机检查','check','帮我看看','check with camera'):
             if s.stage not in (Stage.GUIDE,Stage.LOOK_SELECTED,Stage.VERIFY):
                 return self.respond(s,'请先选择妆容方向，或处理当前同意请求。')
+            if self.settings.vision_provider!='mock' or not self.settings.developer_mode:
+                return self.respond(s,'请进入映照，明确允许本地单帧检查。' if s.locale=='zh-CN' else 'Open Reflect and allow a local single-frame check.')
             self.sessions.transition(s,Stage.CHECK_REQUESTED)
             self.sessions.transition(s,Stage.CAMERA_CONSENT)
-            return self.respond(s,'是否同意开启相机并提交三张照片做这一次检查？照片不保存。若使用远程视觉服务，照片会发送给配置的服务商。')
+            return self.respond(s,'是否体验一次本地模拟检查？演示不使用真实照片。' if s.locale=='zh-CN' else 'Would you like a local simulated check? This demo uses no real photos.')
         if request.experience_mode is not None and not text and s.last_response:
             return self.respond(s,s.last_response or self.full_look.summary(s))
         names={'cotton':('棉','cotton'),'linen':('亚麻','linen'),'wool':('羊毛','wool'),'silk':('丝绸','silk'),'satin':('缎面','satin'),'polyester':('聚酯','polyester'),'viscose':('粘胶','viscose','rayon'),'knit':('针织','knit')}
@@ -240,6 +298,42 @@ class AgentHarness:
             return self.respond(s,self.policies.guidance(step,{'instruction_repeat':'repeat','instruction_slow':'expanded','explanation_why':'why'}[field]))
         if text and s.stage not in (Stage.MEMORY_CONSENT,Stage.COMPLETE) and any(word in command for word in ('全品类','欧莱雅','整套建议','full look recommendations','loreal','l’oréal')):
             return self.respond(s,self.language.companion(text,s.last_response+'\n'+'\n'.join(s.story_context)[-2000:],s.locale))
+        if legacy and normalized == 'ambiguous':
+            return self.respond(s, self.coaching.reply_text(s, {'clarification_required': True}, normalized, text))
+        if legacy and normalized == 'save':
+            saved = self.coaching.save(s, text)
+            return {**self.respond(s, '私人记录已保存。' if s.locale == 'zh-CN' else 'Your private record was saved.'),
+                    'saved': saved}
+        if normalized in ('start', 'advance', 'skip', 'pause', 'resume', 'finish', 'previous', 'blush'):
+            prefix = ''
+            if not s.makeup_plan and s.stage in (Stage.INTENT, Stage.CLARIFY) and normalized in ('start', 'advance'):
+                if not s.routine_id:
+                    rows = self.retrieve_look('daily', ['natural'], [], self.get_user_profile(s.user_id)['profile'])
+                    if not rows:
+                        return self.respond(s, '暂时没有可用的基础流程。' if s.locale == 'zh-CN' else 'No basic routine is currently available.')
+                    look = rows[0]['look']
+                    self.select_routine(s, look)
+                    s.scene = 'daily'
+                self.sessions.transition(s, Stage.LOOK_SELECTED)
+                prefix = ('先从简单的日常流程开始，你可以随时换方向或停止。\n' if s.locale == 'zh-CN'
+                          else 'We can start with a simple everyday routine. Change direction or stop whenever you like.\n')
+            if s.makeup_plan or s.stage in (Stage.LOOK_SELECTED, Stage.VERIFY):
+                result = self.routine_command(s, normalized, request, compatible_next=True)
+                if result.get('duplicate'):
+                    return self.duplicate_reply(s, result)
+                step = result['step']
+                if s.makeup_plan.status == 'completed':
+                    message = '流程结束。你希望下次保留或调整什么？' if s.locale == 'zh-CN' else 'Guidance has ended. What would you keep or change?'
+                elif s.makeup_plan.workflow == 'PAUSED':
+                    message = '已暂停，步骤保留。' if s.locale == 'zh-CN' else 'Paused. Your step is preserved.'
+                else:
+                    message = prefix + step['instruction']
+                if s.makeup_plan.status == 'completed':
+                    self.coaching.mark_summary_presented(s, s.makeup_plan.revision)
+                reply = {**self.respond(s, message), 'event':result['event'], 'duplicate':False}
+                if s.makeup_plan.status == 'completed':
+                    reply['summary'] = self.coaching.summary(s)
+                return reply
         if s.stage == Stage.FEEDBACK:
             if not text:
                 return self.respond(s,'这次体验中，你希望下次保留或调整什么？')
@@ -247,27 +341,6 @@ class AgentHarness:
             return self.respond(s,'我整理了下面的偏好候选。是否同意保存用于下次建议？你可以选择不保存。')
         if s.stage == Stage.MEMORY_CONSENT:
             return self.respond(s,'请使用“同意保存”或“不保存”按钮明确选择。')
-        if (starting or command in ('next','下一步','继续')) and s.stage in (Stage.INTENT,Stage.CLARIFY):
-            if not s.routine_id:
-                rows=self.retrieve_look('daily',['natural'],[],self.get_user_profile(s.user_id)['profile'])
-                if not rows:return self.respond(s,'暂时没有可用的基础流程。' if s.locale=='zh-CN' else 'No basic routine is currently available.')
-                look=rows[0]['look'];s.scene='daily';s.selected_look=look['look_id'];s.routine_id=look['routine_id']
-                s.routine_total_steps=len(self.store.routine_map[s.routine_id]['steps'])
-            self.sessions.transition(s,Stage.LOOK_SELECTED)
-            self.start_routine(s.routine_id,s)
-            prefix='先从简单的日常流程开始，你可以随时换方向或停止。\n' if s.locale=='zh-CN' else 'We can start with a simple everyday routine. Change direction or stop whenever you like.\n'
-            return self.respond(s,prefix+self.current_step(s)['instruction'])
-        if command in ('next','下一步','继续','skip','跳过'):
-            if s.stage == Stage.LOOK_SELECTED or (s.stage == Stage.VERIFY and not s.routine_started):
-                self.start_routine(s.routine_id,s)
-            else:
-                self.advance_routine(s.session_id)
-            step = self.current_step(s)
-            return self.respond(s,step['instruction'] if step else ('流程结束。你希望下次保留或调整什么？\n' if s.locale=='zh-CN' else 'Guidance has ended. What would you keep or change?\n')+self.language.companion('造型收尾：提供可选全品类建议。Guidance ended; makeup results are not visually verified. Offer optional full look recommendations.', '\n'.join(s.story_context)[-2000:],s.locale))
-        if starting:
-            if s.stage==Stage.LOOK_SELECTED:self.start_routine(s.routine_id,s)
-            if s.stage==Stage.GUIDE:return self.respond(s,self.current_step(s)['instruction'])
-            return self.respond(s,'先告诉我今天的场景，例如日常自然妆。选好方向以后，我会带你做第一步。' if s.locale=='zh-CN' else 'Tell me the occasion first, such as a natural everyday look. After choosing a direction, we can begin the first step.')
         if s.stage in (Stage.INTENT,Stage.CLARIFY,Stage.LOOK_SELECTED):
             if not text:
                 return self.respond(s,'欢迎。可以先聊聊今天的故事，或你希望拥有的感觉。' if s.locale=='zh-CN' else 'Welcome. Tell me about your day, or how you would like to feel.')
@@ -294,8 +367,7 @@ class AgentHarness:
                 self.sessions.transition(s,Stage.CLARIFY)
                 return self.respond(s,'目前没有匹配的妆容知识，暂时无法提供可靠建议。')
             look = next((row['look'] for row in rows if row['look']['look_id']=='soft_formal'),rows[0]['look']) if cafe else rows[0]['look']
-            s.selected_look,s.routine_id = look['look_id'],look['routine_id']
-            s.routine_total_steps = len(self.store.routine_map[s.routine_id]['steps'])
+            self.select_routine(s, look)
             s.selected_products = self.record(s,'retrieve_products',{'look_id':look['look_id']},self.retrieve_products(look['look_id'],s.scene,profile))
             rag = self.retriever.search(text+' '+s.scene,{'look_id':look['look_id']})
             s.rag_documents = rag['results']

@@ -27,7 +27,11 @@ def main():
         assert continued['session']['routine_started'] and continued['session']['routine_step']==0
         post('/memory',{'user_id':user,'candidate':{'feedback':'Disposable live test'},'explicit_consent':False},403)
         assert c.get('/api/profile/'+user).json()['episodes']==[]
-        saved=post('/memory',{'user_id':user,'candidate':{'feedback':'Disposable live test','preferred_saturation':'low'},'explicit_consent':True})
+        candidate=post('/memory/preview',{'user_id':user,'candidate':{
+            'feedback':'Disposable live test','preferred_saturation':'low'}})
+        confirmation={'user_id':user,**candidate,'explicit_consent':True}
+        saved=post('/memory',confirmation)
+        assert post('/memory',confirmation)['memory_id']==saved['memory_id']
         assert c.get('/api/profile/'+user).json()['profile']['preferred_saturation']=='low'
         response=c.delete('/api/memory/'+saved['memory_id'],params={'user_id':user,'explicit_consent':'true'})
         assert response.status_code==200

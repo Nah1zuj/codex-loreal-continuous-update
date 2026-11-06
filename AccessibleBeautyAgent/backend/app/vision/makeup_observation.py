@@ -7,11 +7,12 @@ import math
 import cv2
 import numpy as np
 
-VERSION='trace-local-lab-v1'
+VERSION='trace-local-lab-v2'
 THRESHOLDS={'min_face_ratio':.08,'max_face_ratio':.85,'min_luminance':45,
             'max_luminance':220,'min_sharpness':20,'max_cheek_light_delta':12,
             'max_nose_offset':.22,'max_roll_degrees':20,'color_difference':3,
-            'comparison_light_delta':8,'comparison_size_delta':.04,'comparison_pose_delta':.08}
+            'comparison_light_delta':8,'comparison_size_delta':.04,'comparison_pose_delta':.08,
+            'comparison_roll_delta':6}
 
 def empty(reason='face_unavailable'):
     return {'status':'UNCERTAIN','confidence':None,'calibrated':False,'simulated':False,
@@ -77,7 +78,7 @@ def observe_makeup(raw,detected,target='blush',previous=None):
         return result
     difference=regions['left_cheek']['redness']-regions['right_cheek']['redness']
     result['measurement']={'method':result['method'],'version':VERSION,'target':target,'lighting':(regions['left_cheek']['lightness']+regions['right_cheek']['lightness'])/2,
-                           'face_ratio':ratio,'pose':nose_offset,'bounds':geometry['face_bounds'],'regions':regions,'difference':difference}
+                           'face_ratio':ratio,'pose':nose_offset,'roll':roll,'bounds':geometry['face_bounds'],'regions':regions,'difference':difference}
     result['assessment']['measured_features']={'left_minus_right_lab_a':round(difference,3),'imbalance_proxy':round(abs(difference),3)}
     if target=='lips':
         result['assessment']['scope']='lip_region_color_only_not_product_coverage'
@@ -90,14 +91,14 @@ def observe_makeup(raw,detected,target='blush',previous=None):
         result['message']=('这张画面中，两侧脸颊的红色分量接近。' if abs(difference)<=3 else f'这张画面中，你的{side}脸颊红色分量更明显。')+'这是未校准的区域颜色比较，不能确认差异来自腮红，也不表示必须修改。你希望保留现在的表达，还是调整后再比较？'
         result['message_en']=('The cheek red components are similar in this frame. ' if abs(difference)<=3 else f'Your {side_en} cheek has a more prominent red component in this frame. ')+'This uncalibrated color comparison cannot attribute the difference to blush and does not require correction. Keep this expression or adjust and recheck?'
     if previous:
-        comparable=previous.get('version')==VERSION and previous.get('target')==target and abs(previous['lighting']-result['measurement']['lighting'])<=THRESHOLDS['comparison_light_delta'] and abs(previous['face_ratio']-ratio)<=THRESHOLDS['comparison_size_delta'] and abs(previous['pose']-nose_offset)<=THRESHOLDS['comparison_pose_delta'] and max(abs(a-b) for a,b in zip(previous['bounds'],geometry['face_bounds']))<.06
+        comparable=previous.get('version')==VERSION and previous.get('target')==target and abs(previous['lighting']-result['measurement']['lighting'])<=THRESHOLDS['comparison_light_delta'] and abs(previous['face_ratio']-ratio)<=THRESHOLDS['comparison_size_delta'] and abs(previous['pose']-nose_offset)<=THRESHOLDS['comparison_pose_delta'] and abs(previous['roll']-roll)<=THRESHOLDS['comparison_roll_delta'] and max(abs(a-b) for a,b in zip(previous['bounds'],geometry['face_bounds']))<.06
         result['comparison']={'comparable':comparable,'claim':'color_difference_change_not_makeup_improvement','redness_delta':{},'imbalance_delta':None}
         if comparable:
             change=round(abs(difference)-abs(previous['difference']),3)
             result['comparison'].update(imbalance_delta=change,redness_delta={name:round(row['redness']-previous['regions'][name]['redness'],3) for name,row in regions.items()})
-            result['message']+=(' 与上一张可比画面相比，两侧颜色差距'+('减小了。' if change<-.5 else '增大了。' if change>.5 else '变化不明显。')+'这不等同于妆效改善。') if target!='lips' else ' 与上一张画面的唇部颜色变化数值可在详情查看，不代表覆盖改善。'
-            result['message_en']+=' Compared with the previous compatible frame, '+('the cheek color gap decreased. ' if change<-.5 else 'the cheek color gap increased. ' if change>.5 else 'the cheek color gap changed little. ')+'This is not proof of makeup improvement.' if target!='lips' else ' Lip color changes are in the details and do not establish improved coverage.'
+            result['message']+=(' 与授权的可比基线相比，两侧颜色差距'+('减小了。' if change<-.5 else '增大了。' if change>.5 else '变化不明显。')+'这不等同于妆效改善。') if target!='lips' else ' 与基线画面的唇部颜色变化数值可在详情查看，不代表覆盖改善。'
+            result['message_en']+=' Compared with the authorized compatible baseline, '+('the cheek color gap decreased. ' if change<-.5 else 'the cheek color gap increased. ' if change>.5 else 'the cheek color gap changed little. ')+'This is not proof of makeup improvement.' if target!='lips' else ' Lip color changes are in the details and do not establish improved coverage.'
         else:
-            result['message']+=' 光线、位置或角度与上一张不够接近，不能作前后比较。'
-            result['message_en']+=' Light, position or pose differs too much from the previous frame for a before/after comparison.'
+            result['message']+=' 光线、位置或角度与授权基线不够接近，不能作前后比较。'
+            result['message_en']+=' Light, position or pose differs too much from the authorized baseline for a before/after comparison.'
     return result

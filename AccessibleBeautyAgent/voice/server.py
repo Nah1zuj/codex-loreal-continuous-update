@@ -40,7 +40,14 @@ async def stream(ws:WebSocket):
         await ws.close(code=1008);return
     await ws.accept();connections+=1
     from engine import AudioSession
-    session=AudioSession(models)
+    session=AudioSession(models,defer_transcription=True)
+
+    async def transcribe_capture(explicit=False):
+        if not session.capturing:return
+        await ws.send_json({'type':'transcribing','epoch':session.epoch})
+        event=await asyncio.to_thread(session.finish_capture,explicit)
+        if event:await ws.send_json(event)
+
     try:
         await ws.send_json({'type':'ready','processing':'on_this_computer'})
         while True:
@@ -54,13 +61,18 @@ async def stream(ws:WebSocket):
                     await ws.send_json({'type':'mode','mode':session.mode,'epoch':session.epoch})
                 elif command.get('type')=='capture':
                     if command.get('epoch')!=session.epoch or command.get('action') not in {'start','end'}:continue
-                    event=await asyncio.to_thread(session.begin_capture if command['action']=='start' else lambda:session.finish_capture(explicit=True))
-                    if event:await ws.send_json(event)
+                    if command['action']=='end':
+                        await transcribe_capture(explicit=True)
+                    elif event:=session.begin_capture():
+                        await ws.send_json(event)
                 elif command.get('type')=='metrics':await ws.send_json({'type':'metrics',**session.metrics})
                 else:raise ValueError('Unknown control message')
             elif message.get('bytes') is not None:
                 event=await asyncio.to_thread(session.feed,message['bytes'])
-                if event:await ws.send_json(event)
+                if event and event['type']=='transcribing':
+                    await transcribe_capture()
+                elif event:
+                    await ws.send_json(event)
     except WebSocketDisconnect:pass
     except (ValueError,KeyError,TypeError):
         await ws.close(code=1008)

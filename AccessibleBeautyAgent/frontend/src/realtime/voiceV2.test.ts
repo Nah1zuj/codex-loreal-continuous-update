@@ -42,11 +42,14 @@ it('uses stage context and observed ASR homophones for deterministic navigation'
  expect(routeVoice('进入应照','home')).toEqual({command:'reflect'})
  expect(routeVoice('2','voice')).toBeNull();expect(wakeInput('不要重新开启语音功能')).toBeNull()
 })
-it('return greetings distinguish discussed looks from confirmed completed steps',()=>{
- const item={session_id:'old',name:'自然日常',date:'2026-10-17',occasion:'daily',style:'natural',completed_steps:[],all_steps_completed:false}
+it('offers only an explicitly selected style and never speaks a private record title',()=>{
+ const item={session_id:'old',name:'Private title',note:'Secret note',date:'2026-10-17',occasion:'daily',style:'natural',completed_steps:['底妆'],all_steps_completed:false}
  const view={enabled:true,latest:item,entries:[item],retention_days:30}
- expect(returnGreeting(view,'zh-CN')).toContain('聊到了');expect(returnGreeting({...view,latest:{...item,completed_steps:['底妆']}},'zh-CN')).toContain('一起尝试了')
- expect(returnGreeting({...view,enabled:false},'zh-CN')).not.toContain('上次')
+ expect(returnGreeting(view,'en')).not.toContain('previous style')
+ const spoken=returnGreeting({...view,latest:{...item,reusable:true}},'en')
+ expect(spoken).toContain('selected a previous style')
+ expect(spoken).not.toContain('Private title')
+ expect(spoken).not.toContain('Secret note')
 })
 
 it('never claims wake listening while the browser is still withholding the microphone',()=>{

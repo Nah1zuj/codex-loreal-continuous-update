@@ -39,7 +39,9 @@ class BoundedTests(unittest.TestCase):
    self.assertEqual(event['type'],'capture');self.assertTrue(event['discarded'])
  def test_timeout_discards_without_transcription(self):
   self.feed('开始');self.s.capture_size=16000*120
-  self.assertTrue(self.feed()['discarded']);self.assertEqual(self.m.calls,[])
+  event=self.feed()
+  self.assertTrue(event['discarded']);self.assertEqual(event['reason'],'duration_limit')
+  self.assertEqual(self.m.calls,[]);self.assertEqual(self.s.capture_frames,[])
  def test_dispose_releases_capture(self):
   self.feed('开始');self.s.dispose();self.assertEqual(self.s.capture_frames,[])
  def test_button_capture_ignores_waiting_audio_and_requires_explicit_end(self):

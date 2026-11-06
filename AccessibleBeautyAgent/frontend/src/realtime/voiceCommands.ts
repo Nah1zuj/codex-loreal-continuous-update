@@ -7,6 +7,8 @@ export function wakeInput(text:string):string|null{
 export function isSoftPause(text:string){return ['请终止对话','暂停语音','暂停回应','停止语音播报','停止','stop','pause replies','pause voice','stop speaking'].some(word=>normalizeVoice(text)===normalizeVoice(word))}
 export function isMicrophoneClosePhrase(text:string){return ['关闭麦克风','完全停止聆听','退出语音','close microphone'].some(word=>normalizeVoice(text)===normalizeVoice(word))}
 export function routeVoice(text:string,page:string):{page?:'home'|'voice'|'explore'|'memory'|'full-look'|'story';command?:'begin'|'reflect'|'finish'|'help'|'repeat'|'next'|'previous'|'skip'|'clearRecall'|'disableRecall'|'enableRecall'}|null{
+ // Keep questions intact so the server can ask for clarification.
+ if(/[?？]/.test(text))return null
  const value=normalizeVoice(text)
  if(page==='voice'&&/^(?:请|我要|我想)?(?:进入|去|开始)(?:映照|应照|硬照|印照)(?:环节)?(?:完?完成|了)?$/.test(value))return {command:'reflect'}
  if(['可以开始','开始体验',"let'sbegin",'letsbegin','let’sbegin'].includes(value))return {command:'begin'}

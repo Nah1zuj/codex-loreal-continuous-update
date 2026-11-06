@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 from app.main import create_app
 from app.config import Settings
+from test_local_vision_permits import grant
 
 def test_browser_owners_cannot_read_each_others_sessions_journals_or_memory(tmp_path):
     app=create_app(Settings(memory_path=tmp_path/'private.sqlite'))
@@ -45,6 +46,8 @@ def test_local_frames_need_consent_freshness_and_unique_ids(tmp_path):
         frame={'session_id':sid,'image':base64.b64encode(raw).decode(),'frame_id':'new-1','captured_at':time.time(),'explicit_consent':False}
         assert c.post('/api/vision/local',json=frame).status_code==403
         frame['explicit_consent']=True
+        assert c.post('/api/vision/local',json=frame).status_code==403
+        frame['permit_id']=grant(c,sid)['permit_id']
         result=c.post('/api/vision/local',json=frame)
         assert result.status_code==200 and result.json()['observation']['confidence'] is None
         assert result.json()['frame_saved'] is False

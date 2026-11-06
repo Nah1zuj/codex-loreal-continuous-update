@@ -1,5 +1,6 @@
 from fastapi import APIRouter,Request
 from app.schemas.makeup import CoachingCommand
+from app.agent.coaching import RoutineUnavailable
 from pydantic import BaseModel,StrictBool,ConfigDict
 
 class DeletePlan(BaseModel):
@@ -16,6 +17,8 @@ def build_makeup_router(agent):
                 s,body.action,body.event_id,body.expected_step_id,
                 expected_plan_id=body.expected_plan_id,expected_revision=body.expected_revision,
             )
+            if result.get('duplicate'):
+                return agent.duplicate_reply(s, result)
             step=result['step']
             if s.makeup_plan.status=='completed':
                 message='本次装扮体验已结束。' if s.locale=='zh-CN' else 'This look experience has ended.'
@@ -37,7 +40,11 @@ def build_makeup_router(agent):
             result=agent.coaching.event(s,event_id)
             if result is None:
                 raise KeyError('Command not found')
-            return {'event':result,'session':{**s.model_dump(),'current_step':agent.current_step(s)}}
+            try:
+                current_step = agent.current_step(s)
+            except RoutineUnavailable:
+                current_step = None
+            return {'event':result,'session':{**s.model_dump(),'current_step':current_step}}
 
     @router.get('/{session_id}')
     def get(session_id:str):
@@ -51,7 +58,9 @@ def build_makeup_router(agent):
             with agent.memory.connect() as db:
                 db.execute('DELETE FROM makeup_events WHERE session_id=?',(session_id,))
                 db.execute('DELETE FROM makeup_sessions WHERE session_id=? AND user_id=?',(session_id,s.user_id))
-            s.makeup_plan=None;s.routine_started=False;s.routine_step=0;s.visual_state=None
+            s.makeup_plan = None
+            s.routine_id = None
+            s.proposed_routine_step_count = 0
             agent.sessions.stop(s)
         return {'deleted':True,'journal_deleted':False}
     return router
