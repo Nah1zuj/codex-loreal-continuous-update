@@ -26,6 +26,10 @@
 
 `/api/health` 分别报告当前文字供应商配置就绪，以及本次后端运行中同一配置下是否已收到并完成一条远程流式答复。本地命令、mock、取消和缺少正常结束标记的流均不计入通过。按浏览器隔离的 `/api/diagnostics` 可查看每轮的服务来源及响应证据，凭据和回复正文不进入诊断。回环 HTTP 替身通过了配置与实际调用状态切换，真实供应商等待已批准配置。[联调步骤](../../docs/quality/release-runbook.md#真实文字与标签联调)
 
+## Windows 入口静态复核
+
+2026-11-07 在 macOS 使用 Microsoft 官方 PowerShell 7.6.8 arm64 归档，先核对发布页 SHA-256，再用语言解析器检查 `install-portable.ps1` 与 `start-portable.ps1`，两个文件均无语法错误。Windows PowerShell 5.1、真实安装和启停仍需 Windows 实机结果。[PowerShell 7.6.8 发布页](https://github.com/PowerShell/PowerShell/releases/tag/v7.6.8)
+
 ## 收敛结论
 
 Mac 软件链路和回归通过。Windows 运行与独立评审依然开放。阶段 2 先推进可独立验证的会话和隐私整改。原版本代码回退点为 `trace-baseline-20261107`，本阶段无数据库迁移。
