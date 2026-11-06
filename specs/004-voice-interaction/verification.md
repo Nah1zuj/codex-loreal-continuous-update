@@ -12,3 +12,5 @@
 | FR-406 双平台实体 | NOT RUN | 麦克风、耳机、扬声器、背景声、回声与断连应在 Mac 和 Windows 实体检查，自动化和合成设备不能作为该项证据。 |
 
 同一浏览器实际服务中，`verify_stream.py` 共 9 个用例通过。Python `-m unittest discover -s voice -p test_bounded.py` 9 项通过。浏览器复现及本地配置说明见 [会话验证](../002-session-control/verification.md)。
+
+验收修订版新增中文关键词编码回归，语音单元测试增至 10 项。原实现在模拟 CP1252 时写入失败，修复后两份关键词文件均为 UTF-8。在本机实际模型上另用 `LC_ALL=C PYTHONUTF8=0` 和含中文空格的独立目录启动模型，验证默认编码为 US-ASCII 时仍可加载两套关键词和转写模型。实体麦克风、扬声器、耳机和 Windows 启动另行验收。

@@ -1,7 +1,42 @@
 """Audio gate regression checks, without microphone or network."""
+import os
+from pathlib import Path
+from tempfile import TemporaryDirectory
 import unittest,threading
+from unittest.mock import patch
+
 import numpy as np
-from engine import AudioSession
+from engine import AudioSession, Models as SpeechModels, WAKE, sherpa_onnx
+
+
+class ModelInitializationTests(unittest.TestCase):
+    def test_bilingual_keyword_files_use_utf8_under_a_legacy_locale(self):
+        original_open = Path.open
+
+        def open_with_legacy_encoding(path, mode='r', buffering=-1, encoding=None,
+                                      errors=None, newline=None):
+            if 'b' not in mode and encoding in (None, 'locale'):
+                encoding = 'cp1252'
+            return original_open(path, mode, buffering, encoding, errors, newline)
+
+        with TemporaryDirectory() as temporary:
+            work = Path(temporary) / '语音 测试'
+            with (
+                patch.dict(os.environ, {'TRACE_WORK_DIR': str(work)}),
+                patch.object(Path, 'open', open_with_legacy_encoding),
+                patch.object(sherpa_onnx, 'text2token',
+                             side_effect=lambda phrases, **_: [['test']] * len(phrases)),
+                patch.object(sherpa_onnx, 'KeywordSpotter'),
+                patch.object(sherpa_onnx.OfflineRecognizer, 'from_sense_voice'),
+            ):
+                SpeechModels()
+
+            quiet_keywords = (work / 'quiet-keywords.txt').read_text(encoding='utf-8')
+            active_keywords = (work / 'active-keywords.txt').read_text(encoding='utf-8')
+            self.assertIn(f'@{WAKE[0]}\n', quiet_keywords)
+            self.assertIn('@开始\n', active_keywords)
+
+
 class Stream:
  def accept_waveform(self,*args):pass
 class Spotter:

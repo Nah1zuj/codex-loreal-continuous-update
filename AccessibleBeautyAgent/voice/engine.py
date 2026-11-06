@@ -32,7 +32,9 @@ class Models:
             tokens=sherpa_onnx.text2token([phrase.upper() if phrase.isascii() else phrase for phrase in phrases],tokens=str(k/'tokens.txt'),tokens_type='phone+ppinyin',lexicon=str(k/'en.phone'))
             if len(tokens)!=len(phrases):raise RuntimeError('Keyword encoding incomplete')
             keywords=directory/(mode+'-keywords.txt')
-            keywords.write_text('\n'.join(' '.join(row)+' :2.0 #0.25 @'+phrase.replace(' ','_') for row,phrase in zip(tokens,phrases))+'\n')
+            keyword_lines = [f"{' '.join(row)} :2.0 #0.25 @{phrase.replace(' ', '_')}"
+                             for row, phrase in zip(tokens, phrases)]
+            keywords.write_text('\n'.join(keyword_lines) + '\n', encoding='utf-8')
             self.kws[mode]=sherpa_onnx.KeywordSpotter(tokens=str(k/'tokens.txt'),encoder=str(k/'encoder-epoch-13-avg-2-chunk-8-left-64.int8.onnx'),decoder=str(k/'decoder-epoch-13-avg-2-chunk-8-left-64.onnx'),joiner=str(k/'joiner-epoch-13-avg-2-chunk-8-left-64.int8.onnx'),keywords_file=str(keywords),num_threads=2)
         self.asr=sherpa_onnx.OfflineRecognizer.from_sense_voice(model=str(a/'model.int8.onnx'),tokens=str(a/'tokens.txt'),num_threads=2,language='auto',use_itn=True)
     def transcribe(self,samples):
