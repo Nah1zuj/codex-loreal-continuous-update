@@ -28,6 +28,13 @@ beforeEach(()=>{
 })
 let root:Root;let host:HTMLDivElement
 ;(globalThis as any).IS_REACT_ACT_ENVIRONMENT=true
+function syntheticCamera(){
+ let trackState:MediaStreamTrackState='live'
+ const track=Object.assign(new EventTarget(),{stop:vi.fn(()=>{trackState='ended'})})
+ Object.defineProperty(track,'readyState',{get:()=>trackState})
+ const media={getTracks:()=>[track],getVideoTracks:()=>[track]}
+ return {media,stop:track.stop,end:()=>{trackState='ended';track.dispatchEvent(new Event('ended'))}}
+}
 function switchLanguage(mode:string){const select=host.querySelector<HTMLSelectElement>('.language-display select')!;select.value=mode;select.dispatchEvent(new Event('change',{bubbles:true}))}
 function button(text:string){return [...host.querySelectorAll('button')].find(b=>b.textContent?.includes(text))!}
 it('region previews change only the digital illustration and do not advance coaching',async()=>{await render('/explore');const {api}=await import('../api/client');vi.mocked(api).mockClear();await act(async()=>button('Blush').click());expect(button('Blush').getAttribute('aria-pressed')).toBe('true');expect(api).not.toHaveBeenCalled();await act(async()=>button('Lips').click());expect(button('Lips').getAttribute('aria-pressed')).toBe('true');expect(api).not.toHaveBeenCalled()})
@@ -161,9 +168,9 @@ import {api} from '../api/client'
 it('retains the session, step and plan while switching shells and after microphone failure',async()=>{const session={session_id:'same',stage:'GUIDE',camera_consent:false,memory_consent:false,scene:'Cafe',todays_look:{scene:'Cafe',sections:{},version:1}};vi.mocked(api).mockImplementation(async(path:string,body?:any)=>path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:{session,step:{instruction:'Apply blush',visual_task:'blush_presence'},message:'Your plan'} as any);(window as any).SpeechRecognition=class {start(){this.onerror?.({error:'not-allowed'})}onerror:any;abort(){}stop(){}};await render();await act(async()=>button('Voice Companion').click());const input=host.querySelector<HTMLInputElement>('#message')!;await act(async()=>{const setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!;setter.call(input,'Cafe today');input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}))});await act(async()=>{input.form!.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}))});expect(host.textContent).toContain('Apply blush');await act(async()=>button('Visual').click());expect(host.textContent).toContain('Apply blush');expect(host.textContent).toContain('Cafe');expect(host.textContent).toContain('Face checks stay on this computer.');expect(host.querySelector('#message')).toBeTruthy();const chats=vi.mocked(api).mock.calls.filter(([path])=>path==='/chat');expect(chats.at(-1)?.[1]).toMatchObject({session_id:'same'})})
 it('ignores a late reply after ending the call while preserving text fallback',async()=>{let resolve:any;vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:new Promise(r=>{resolve=r}));let recognition:any;(window as any).SpeechRecognition=class {onresult:any;start(){recognition=this}abort(){}stop(){}};await render();await act(async()=>button('Voice Companion').click());await act(async()=>recognition.onresult({results:[{isFinal:true,0:{transcript:'Cafe'}}]}));await act(async()=>button('Close microphone').click());await act(async()=>resolve({session:{session_id:'late',stage:'GUIDE'},step:null,message:'Late forbidden reply'}));expect(host.textContent).not.toContain('Late forbidden reply');expect(host.querySelector('#message')).toBeTruthy();expect(host.textContent).toContain('Microphone closed')})
 it('stops camera tracks and revokes a local permit when the call ends',async()=>{
- const stop=vi.fn()
+ const {media,stop}=syntheticCamera()
  const session={session_id:'camera-session',stage:'GUIDE',camera_consent:false,memory_consent:false,selected_products:[]}
- Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:vi.fn().mockResolvedValue({getTracks:()=>[{stop}]})}})
+ Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:vi.fn().mockResolvedValue(media)}})
  vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue()
  vi.mocked(api).mockImplementation(async(path:string)=>{
   if(path==='/health')return {provider_mode:'mock',providers:{vision:'mock'}} as any
@@ -180,13 +187,48 @@ it('stops camera tracks and revokes a local permit when the call ends',async()=>
  expect(host.textContent).toContain('Camera: off')
  expect(host.textContent).toContain('Face checks stay on this computer.')
 })
+it('revokes checks and discards a pending observation when the active camera track ends',async()=>{
+ const {media,stop,end}=syntheticCamera()
+ const session={session_id:'camera-loss',stage:'GUIDE',camera_consent:false,selected_products:[]}
+ let finish!:(reply:unknown)=>void
+ let frameSignal:AbortSignal|undefined
+ vi.mocked(api).mockImplementation(async(path,_body,_method,signal)=>{
+  if(path.startsWith('/session/'))return session as any
+  if(path==='/vision/local/permits')return {permit_id:'active-camera',expires_at:Date.now()/1000+900,baseline_version:1} as any
+  if(path==='/vision/local'){frameSignal=signal;return new Promise(resolve=>{finish=resolve})}
+  return {} as any
+ })
+ const getUserMedia=vi.fn().mockResolvedValue(media)
+ Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia}})
+ vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue()
+ vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockReturnValue({drawImage:vi.fn(),getImageData:()=>({data:new Uint8ClampedArray(4096)})} as any)
+ vi.spyOn(HTMLCanvasElement.prototype,'toDataURL').mockReturnValue('data:image/jpeg;base64,c3ludGhldGlj')
+ await render('/explore','camera-loss')
+ const video=host.querySelector('video')!
+ Object.defineProperties(video,{readyState:{value:2},videoWidth:{value:320},videoHeight:{value:240}})
+ await act(async()=>button('Enable camera').click())
+ await act(async()=>button('Allow local single-frame checks').click())
+ await act(async()=>button('Check fresh frame').click())
+ expect(frameSignal?.aborted).toBe(false)
+
+ await act(async()=>end())
+ expect(frameSignal?.aborted).toBe(true)
+ expect(api).toHaveBeenCalledWith('/vision/local/camera-loss',{permit_id:'active-camera'},'DELETE',undefined,true)
+ expect(video.srcObject).toBeNull()
+ expect(stop).toHaveBeenCalledOnce()
+ expect(getUserMedia).toHaveBeenCalledOnce()
+ expect(button('Allow local single-frame checks').disabled).toBe(true)
+ expect(host.querySelector('.video-stage [role="alert"]')?.textContent).toContain('enable the camera')
+ await act(async()=>finish({session,step:null,message:'Late observation',observation:{}}))
+ expect(host.textContent).not.toContain('Late observation')
+})
 import {VideoCall} from '../pages/VideoCall'
 it('offers only local face checks even with a legacy remote provider configured',async()=>{
  const configured={provider_mode:'mock',providers:{vision:'qwen'}}
  const session={session_id:'local-face',stage:'GUIDE',camera_consent:false,selected_products:[]}
- const stop=vi.fn()
+ const {media,stop}=syntheticCamera()
  vi.mocked(api).mockImplementation(async(path:string,body?:any)=>path==='/health'?configured as any:path==='/session'?session as any:{session:{...session,camera_consent:body?.consent===true},step:null,message:'Ready'} as any)
- Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:vi.fn().mockResolvedValue({getTracks:()=>[{stop}]})}})
+ Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:vi.fn().mockResolvedValue(media)}})
  vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue()
  await render('/explore')
  await act(async()=>button('Enable camera').click())
@@ -199,7 +241,7 @@ it('offers only local face checks even with a legacy remote provider configured'
  expect(host.textContent).toContain('Camera: off')
  Object.defineProperty(document,'hidden',{configurable:true,value:false})
 })
-it('mirrors the front camera preview and leaves the environment camera unmirrored',async()=>{vi.mocked(api).mockImplementation(async(path:string)=>path==='/session'?{session_id:'entry',stage:'INTENT',camera_consent:false,selected_products:[]} as any:path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:{} as any);Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:vi.fn().mockResolvedValue({getTracks:()=>[{stop:()=>{}}]})}});vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue();await render('/explore');await act(async()=>button('Enable camera').click());expect(host.querySelector('video')?.style.transform).toBe('scaleX(-1)');await act(async()=>button('Switch camera').click());expect(host.querySelector('video')?.style.transform).toBe('none')})
+it('mirrors the front camera preview and leaves the environment camera unmirrored',async()=>{vi.mocked(api).mockImplementation(async(path:string)=>path==='/session'?{session_id:'entry',stage:'INTENT',camera_consent:false,selected_products:[]} as any:path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:{} as any);Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:vi.fn().mockResolvedValueOnce(syntheticCamera().media).mockResolvedValueOnce(syntheticCamera().media)}});vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue();await render('/explore');await act(async()=>button('Enable camera').click());expect(host.querySelector('video')?.style.transform).toBe('scaleX(-1)');await act(async()=>button('Switch camera').click());expect(host.querySelector('video')?.style.transform).toBe('none')})
 it('uses only the call controller microphone and speech controls on legacy speak route',async()=>{let starts=0;(window as any).SpeechRecognition=class {start(){starts++}abort(){}stop(){}};await render('/speak');expect(host.querySelector('.voice-controls')).toBeNull();await act(async()=>button('Enable voice').click());expect(starts).toBe(1)})
 it('applies a fresh text session reply after the new-session action ends the previous call',async()=>{let resolveStart:any;vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:new Promise(r=>{resolveStart=r}));await render('/thread');await act(async()=>button('New session').click());await act(async()=>resolveStart({session:{session_id:'fresh',stage:'GUIDE',camera_consent:false,selected_products:[],routine_step:0,routine_total_steps:1},step:{instruction:'Fresh instruction'},message:'Fresh session reply'}));expect(host.textContent).toContain('Fresh session reply');expect(host.textContent).toContain('Fresh instruction')})
 

@@ -1,7 +1,8 @@
 import {useEffect,useRef,useState} from 'react'
 import {BilingualText} from '../components/BilingualText'
 import {api} from '../api/client'
-import {openCamera,stopStream,captureStillFrame} from '../vision/camera'
+import {captureStillFrame} from '../vision/camera'
+import {CameraStreamController,hasLiveVideoTrack} from '../realtime/cameraStream'
 import {useSpeech} from '../accessibility/useSpeech'
 import {useTrace} from '../content/Locale'
 import {ModuleHeader} from '../components/ModuleHeader'
@@ -39,9 +40,9 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
   const [busy,setBusy]=useState(false)
   const [result,setResult]=useState<ReadingReply|null>(null)
   const [selected,setSelected]=useState<ResultField>('summary')
-  const [notice,setNotice]=useState<''|'readEnded'|'declineRead'>('')
+  const [notice,setNotice]=useState<''|'readEnded'|'declineRead'|'previewLost'>('')
   const video=useRef<HTMLVideoElement>(null)
-  const stream=useRef<MediaStream|null>(null)
+  const camera=useRef(new CameraStreamController(undefined,{width:{ideal:1024},height:{ideal:768}}))
   const generation=useRef(0)
   const pending=useRef<AbortController|null>(null)
   const tts=useSpeech()
@@ -53,25 +54,26 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
     failed:t('远程标签服务最近一次调用失败。','The latest request to the remote label service failed.'),
   }
 
-  function releaseStream(){
-    stopStream(stream.current)
-    stream.current=null
-    if(video.current)video.current.srcObject=null
-  }
-
   function close(){
     generation.current++
     pending.current?.abort()
     pending.current=null
-    releaseStream()
+    camera.current.stop()
     setActive(false)
     setOpening(false)
     setReady(false)
     setBusy(false)
   }
 
+  function previewLost(){
+    close()
+    setNotice('previewLost')
+  }
+
   useEffect(()=>{
     const controller=new AbortController()
+    const preview=camera.current
+    preview.onUnexpectedEnd=previewLost
     api<Availability>('/reading/availability',undefined,'GET',controller.signal)
       .then(service=>{if(!controller.signal.aborted)setAvailability(service)})
       .catch(error=>{if(!controller.signal.aborted)onError(error instanceof Error?error.message:c.requestError)})
@@ -82,22 +84,26 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
       controller.abort()
       generation.current++
       pending.current?.abort()
-      releaseStream()
+      preview.onUnexpectedEnd=undefined
+      preview.stop()
       window.removeEventListener('pagehide',close)
       document.removeEventListener('visibilitychange',hide)
     }
   },[])
 
   async function open(){
+    const element=video.current
+    if(!element)return
     const id=++generation.current
     setOpening(true)
+    setReady(false)
     setNotice('')
     try{
-      const media=await openCamera('environment')
-      if(id!==generation.current){stopStream(media);return}
-      stream.current=media
+      const state=await camera.current.requestPreview(element,'environment')
+      if(id!==generation.current)return
+      if(state!=='live')throw new Error(camera.current.error||c.requestError)
       setActive(true)
-      if(video.current){video.current.srcObject=media;await video.current.play()}
+      setReady(element.readyState>=2&&hasLiveVideoTrack(element.srcObject))
     }catch(error){
       if(id===generation.current){close();onError(error instanceof Error?error.message:c.requestError)}
     }finally{if(id===generation.current)setOpening(false)}
@@ -106,7 +112,7 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
   async function read(demo:boolean){
     if(pending.current)return
     const provider=availability?.provider
-    if(!demo&&(!remote||!ready||provider==='mock'))return
+    if(!demo&&(!remote||!active||!ready||provider==='mock'))return
     if(demo&&!demoAvailable)return
     const id=++generation.current
     const controller=new AbortController()
@@ -114,8 +120,14 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
     setBusy(true)
     setResult(null)
     try{
-      const image=demo?undefined:captureStillFrame(video.current!)
-      releaseStream()
+      let image:string|undefined
+      if(!demo){
+        const element=video.current
+        if(!element||!hasLiveVideoTrack(element.srcObject)){previewLost();return}
+        image=captureStillFrame(element)
+        if(!hasLiveVideoTrack(element.srcObject)){previewLost();return}
+      }
+      camera.current.stop()
       setActive(false)
       setReady(false)
       const response=await api<ReadingReply>('/reading/read',{
@@ -132,7 +144,7 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
         setActive(false)
         setReady(false)
         pending.current=null
-        releaseStream()
+        camera.current.stop()
         if(!demo){
           const signal=AbortSignal.any([controller.signal,AbortSignal.timeout(4000)])
           void api<Availability>('/reading/availability',undefined,'GET',signal)
@@ -172,13 +184,13 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
         t('正在检查标签读取服务。','Checking the label reading service.')}</p>}
     <div className="camera-preview reading-preview">
       <video ref={video} hidden={!active} playsInline muted aria-label={c.readReady}
-        onLoadedData={()=>{if(stream.current)setReady(true)}}/>
+        onLoadedData={({currentTarget})=>{if(currentTarget.readyState>=2&&hasLiveVideoTrack(currentTarget.srcObject))setReady(true)}}/>
       {active?<TraceDotGrid activeDots={[1,3,5]} size="large"/>:<p>{busy?c.readWait:c.cameraClosed}</p>}
     </div>
     <div className="controls">
       {remote?<><button disabled={active||opening||busy} onClick={()=>void open()}>
         {t('打开本地标签预览','Open local label preview')}
-      </button><button className="primary" disabled={!ready||busy} onClick={()=>void read(false)}>
+      </button><button className="primary" disabled={!active||!ready||busy} onClick={()=>void read(false)}>
         {t('允许并发送一张标签图','Allow and send one label image')}
       </button></>:null}
       <button onClick={()=>{close();setNotice('declineRead')}}>
@@ -187,7 +199,7 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
       </button>
       {demoAvailable?<button disabled={busy||active||opening} onClick={()=>void read(true)}>{c.readSample}</button>:null}
     </div>
-    <p role="status">{busy?c.readWait:notice?c[notice]:''}</p>
+    <p role="status">{busy?c.readWait:notice==='previewLost'?t('标签预览已中断。请重新打开本地标签预览，再决定是否发送一张图。','Label preview ended. Open a new local label preview before choosing to send an image.'):notice?c[notice]:''}</p>
     {result?<article className="reading-result">
       <h2><BilingualText text={c.readSummary}/></h2>
       <p className="notice">{result.simulated?t('虚构演示标签','Fictional demo label'):

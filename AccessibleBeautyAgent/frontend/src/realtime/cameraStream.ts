@@ -3,6 +3,10 @@ import type {CameraState} from '../types'
 export type CameraFacingMode = 'user' | 'environment'
 type CameraDevices = Pick<MediaDevices, 'getUserMedia'>
 
+export function hasLiveVideoTrack(source: HTMLMediaElement['srcObject']): boolean {
+  return !!source && 'getVideoTracks' in source && source.getVideoTracks().some(track => track.readyState === 'live')
+}
+
 /** Local preview only. Call request/switch from camera gestures and stop on route exit/unmount.
  * Camera permission is independent of microphone and remote frame-analysis consent.
  */
@@ -13,8 +17,13 @@ export class CameraStreamController {
   private facingMode: CameraFacingMode = 'user'
   private currentState: CameraState = 'off'
   private currentError: string | null = null
+  private removeTrackEndListeners: (() => void) | null = null
+  onUnexpectedEnd?: () => void
 
-  constructor(private readonly mediaDevices: CameraDevices | undefined = globalThis.navigator?.mediaDevices) {}
+  constructor(
+    private readonly mediaDevices: CameraDevices | undefined = globalThis.navigator?.mediaDevices,
+    private readonly dimensions: Pick<MediaTrackConstraints, 'width' | 'height'> = {},
+  ) {}
 
   get state(): CameraState { return this.currentState }
   get error(): string | null { return this.currentError }
@@ -32,15 +41,34 @@ export class CameraStreamController {
     }
     try {
       // ideal allows browsers with a single camera to provide their available camera.
-      const stream = await this.mediaDevices.getUserMedia({audio:false, video:{facingMode:{ideal:facingMode}}})
+      const stream = await this.mediaDevices.getUserMedia({audio:false, video:{facingMode:{ideal:facingMode}, ...this.dimensions}})
       if (generation !== this.generation) {
         stream.getTracks().forEach(track => track.stop())
         return this.state
       }
       this.stream = stream
+      const tracks = stream.getVideoTracks()
+      const ended = () => {
+        if (generation !== this.generation || this.stream !== stream) return
+        this.stop()
+        this.currentState = 'unavailable'
+        this.currentError = '摄像头已断开或权限已撤回，请手动重试。'
+        this.onUnexpectedEnd?.()
+      }
+      for (const track of tracks) track.addEventListener('ended', ended)
+      this.removeTrackEndListeners = () => {
+        for (const track of tracks) track.removeEventListener('ended', ended)
+      }
+      if (!hasLiveVideoTrack(stream)) {
+        ended()
+        return this.state
+      }
       video.srcObject = stream
       await video.play()
-      if (generation === this.generation) this.currentState = 'live'
+      if (generation === this.generation) {
+        if (hasLiveVideoTrack(stream)) this.currentState = 'live'
+        else ended()
+      }
     } catch (error) {
       if (generation !== this.generation) return this.state
       this.releasePreview()
@@ -72,6 +100,8 @@ export class CameraStreamController {
   }
 
   private releasePreview(): void {
+    this.removeTrackEndListeners?.()
+    this.removeTrackEndListeners = null
     this.stream?.getTracks().forEach(track => track.stop())
     this.stream = null
     if (this.video) this.video.srcObject = null

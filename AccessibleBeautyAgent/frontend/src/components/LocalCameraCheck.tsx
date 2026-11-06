@@ -2,6 +2,7 @@ import {useEffect,useRef,useState,type RefObject} from 'react'
 import {api} from '../api/client'
 import {grantLocalPermit,revokeLocalBaseline,revokeLocalPermit} from '../vision/localConsent'
 import {captureVideoFrame} from '../realtime/frameAnalysis'
+import {hasLiveVideoTrack} from '../realtime/cameraStream'
 import {useTrace} from '../content/Locale'
 import type {Reply} from '../types'
 import {LocalFrameOverlay,validNativeBounds,type BoundsObservation} from './LocalFrameOverlay'
@@ -150,6 +151,7 @@ export function LocalCameraCheck({video,live,sessionId,register,registerPermissi
   if(signal?.aborted)throw new Error('Local check cancelled')
   if(request.current||baselineClearing.current)throw new Error(t('检查正在进行，请稍后重试。','A check is running. Try again shortly.'))
   const element=video.current
+  const source=element.srcObject
   if(element.currentTime>0&&element.currentTime===lastVideoTime.current)throw new Error(t('视频尚未更新，请等待新画面。','Video has not advanced. Wait for a fresh frame.'))
   const frame=captureVideoFrame(element)
   if(!frame)throw new Error(t('还没有清晰的新画面，请重试。','A fresh frame is not ready. Try again.'))
@@ -176,7 +178,7 @@ export function LocalCameraCheck({video,live,sessionId,register,registerPermissi
     explicit_consent:true,adaptive,baseline_consent:saveBaseline,compare_baseline:compareBaseline,
     baseline_version:grants.current.camera?.baselineVersion,target:target??'auto',locale,
    },undefined,signal?AbortSignal.any([signal,abort.signal]):abort.signal)
-   if(request.current!==capture||grants.current[scope]!==grant||abort.signal.aborted||signal?.aborted)throw new Error('Local check cancelled')
+   if(request.current!==capture||grants.current[scope]!==grant||abort.signal.aborted||signal?.aborted||element.srcObject!==source||!hasLiveVideoTrack(source))throw new Error('Local check cancelled')
    if(result.observation.baseline_saved){baselineActive.current=true;setBaselineAvailable(true)}
    setStatus(result.message)
    setObservation(result.observation)
