@@ -14,7 +14,7 @@ from app.vision.service import require_local_demo
 from app.vision.local_landmarks import MODEL
 from app.services.voice import BrowserVoiceFallback, QwenRealtimePlaceholder
 
-def build_router(agent,settings):
+def build_router(agent,settings,conversation):
     api = APIRouter(prefix='/api')
     @api.post('/session')
     def start_visual_session(body:VisualSessionStart,request:Request):
@@ -25,15 +25,7 @@ def build_router(agent,settings):
             return s.model_dump()
     @api.get('/health')
     def health():
-        remote_key = {
-            'deepseek': settings.deepseek_api_key,
-            'openai_compatible': settings.compatible_api_key,
-            'qwen': settings.api_key,
-        }.get(settings.model_provider)
-        compatible_endpoint = settings.model_provider != 'openai_compatible' or (
-            bool(settings.compatible_base_url) and bool(settings.compatible_model)
-        )
-        remote_ready = bool(settings.allow_remote_ai and remote_key and compatible_endpoint)
+        remote_ready, remote_verified = conversation.remote_text_readiness()
         memory_ready = agent.memory.healthy()
         rag_ready = bool(agent.retriever.documents)
         return {
@@ -53,7 +45,7 @@ def build_router(agent,settings):
                 'sqlite_ready': memory_ready, 'knowledge_loaded': rag_ready,
                 'vision_asset_present': MODEL.is_file(),
                 'vision_inference_verified': False,
-                'remote_text_configured': remote_ready, 'remote_text_verified': False,
+                'remote_text_configured': remote_ready, 'remote_text_verified': remote_verified,
             },
         }
     @api.post('/chat')

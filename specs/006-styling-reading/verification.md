@@ -15,3 +15,5 @@
 已核对官方来源。妆效仅表示厂商产品线描述，适用性、配方、价格和购买信息未纳入比较。[Maybelline Matte Ink](https://www.maybelline.com/lip-makeup/lipstick/superstay-matte-ink-liquid-lipstick) · [Maybelline Vinyl Ink](https://www.maybelline.com/lip-makeup/lipstick/super-stay-vinyl-ink-longwear-liquid-lipstick)
 
 Qwen 适配使用官方兼容接口的图片和 JSON 输出参数。真实凭证与测试标签到位后，按实际环境的同意流程验证上传一次、返回原文及低质量图片的降级提示。[图片接口文档](https://www.alibabacloud.com/help/en/model-studio/vision/) · [JSON 输出文档](https://www.alibabacloud.com/help/en/model-studio/qwen-structured-output)
+
+联调复核覆盖已配置、有效响应和最近一次调用失败三种状态。目的地主机不匹配或未获授权时，替身收到零张图片。回环 HTTP 替身验证了清晰原文及模糊结果的端到端协议，后者保留难辨标记且不接受虚构色号。实际标签识别准确性和外部供应商访问仍待现场联调。[联调步骤](../../docs/quality/release-runbook.md#真实文字与标签联调)

@@ -62,7 +62,7 @@ def create_app(settings=None):
     @app.exception_handler(RuntimeError)
     async def provider_error(request: Request, exc: RuntimeError):
         return JSONResponse(status_code=503,content={'detail':str(exc)})
-    app.include_router(build_router(agent,settings))
+    app.include_router(build_router(agent,settings,app.state.conversation))
     app.include_router(build_recollection_router(agent))
     app.include_router(build_makeup_router(agent))
     app.include_router(build_conversation_router(app.state.conversation))

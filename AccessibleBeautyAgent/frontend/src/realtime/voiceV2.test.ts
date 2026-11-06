@@ -89,11 +89,19 @@ it('resuming a bounded page discards unframed wake tails',()=>{
  expect(send).not.toHaveBeenCalled()
 })
 
-it('announces a speech service failure without blaming microphone permission',()=>{
- const {input,call,utterances}=setup();call.start()
+it.each([
+ ['zh-CN','本地语音服务连接失败','继续使用文字'],
+ ['en','The local speech connection failed','continue with text'],
+] as const)('announces actionable speech service recovery in %s',(locale,reason,fallback)=>{
+ const {input,call,utterances}=setup();call.setLocale(locale);call.start()
  input.handlers?.onError('本地语音服务未确认就绪。请重新开启语音引导。')
- expect(call.state).toBe('error');expect(utterances.at(-1).text).toContain('本地语音服务连接失败')
- expect(utterances.at(-1).text).not.toContain('麦克风暂时未能连接')
+ expect(call.state).toBe('error')
+ const message=utterances.at(-1).text
+ expect(message).toContain(reason)
+ expect(message).toContain(fallback)
+ expect(message).toContain('启动Demo_Mac.command')
+ expect(message).toContain('启动Demo_Windows.bat')
+ expect(message).not.toMatch(/麦克风暂时未能连接|microphone permission/i)
 })
 
 it('accepts common explicit Listen completion phrases without treating unfinished input as completion',()=>{

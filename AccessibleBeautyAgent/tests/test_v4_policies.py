@@ -29,6 +29,6 @@ def test_remote_unclear_characters_drop_high_confidence_composition(monkeypatch)
  from app.reading.service import ReadingService
  from app.services.model_client import RemoteModelClient
  monkeypatch.setattr(RemoteModelClient,'chat_json',lambda *args:{'summary':'看不清','composition':'100% cotton','confidence':.99,'uncertain_characters':['百分比不清楚']})
- s=ReadingService(Settings(reading_provider='deepseek',allow_remote_ai=True,deepseek_vision_model='stub'))
+ s=ReadingService(Settings(reading_provider='deepseek',allow_remote_ai=True,deepseek_vision_model='stub',deepseek_api_key='stub'))
  r=s.read(b'fake',label_kind='garment')
  assert r['status']=='UNCERTAIN' and r['composition'] is None

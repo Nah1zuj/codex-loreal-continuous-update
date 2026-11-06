@@ -21,11 +21,15 @@ it('keeps preview local, refuses without a POST and sends one explicitly authori
   const preview={} as MediaStream
   vi.mocked(openCamera).mockResolvedValue(preview)
   vi.mocked(captureStillFrame).mockReturnValue('data:image/jpeg;base64,fixture')
-  vi.mocked(api).mockImplementation(async(path:string)=>(
-    path==='/reading/availability'?{provider:'qwen',status:'configured',service_name:'Alibaba Cloud Model Studio (Qwen)'}:
-    {label_kind:'garment',status:'UNCERTAIN',summary:'Partial text',uncertain_characters:['[unknown]'],
-     full_text:'Label ABC\nFiber: 1[unknown]0% cotton',service:'qwen',simulated:false}
-  ) as never)
+  let remoteVerification='unverified'
+  vi.mocked(api).mockImplementation(async(path:string)=>{
+    if(path==='/reading/availability')return {provider:'qwen',status:'configured',
+      service_name:'Alibaba Cloud Model Studio (Qwen)',destination_host:'label.example',
+      remote_verification:remoteVerification} as never
+    remoteVerification='verified'
+    return {label_kind:'garment',status:'UNCERTAIN',summary:'Partial text',uncertain_characters:['[unknown]'],
+     full_text:'Label ABC\nFiber: 1[unknown]0% cotton',service:'qwen',simulated:false} as never
+  })
   const host=document.createElement('div')
   document.body.append(host)
   const root=createRoot(host)
@@ -34,11 +38,13 @@ it('keeps preview local, refuses without a POST and sends one explicitly authori
     const click=(label:string)=>act(async()=>[...host.querySelectorAll('button')].find(button=>button.textContent===label)!.click())
     const submitted=()=>vi.mocked(api).mock.calls.filter(([path])=>path==='/reading/read')
     expect(host.textContent).toContain('Alibaba Cloud Model Studio (Qwen)')
+    expect(host.textContent).toContain('A live request has yet to be verified in this run.')
     await click('Open local label preview')
     await act(async()=>host.querySelector('video')!.dispatchEvent(new Event('loadeddata')))
     expect(submitted()).toHaveLength(0)
     await click('Close without sending')
     expect(submitted()).toHaveLength(0)
+    expect(host.textContent).toContain('A live request has yet to be verified in this run.')
     expect(stopStream).toHaveBeenCalledWith(preview)
 
     await click('Open local label preview')
@@ -46,8 +52,10 @@ it('keeps preview local, refuses without a POST and sends one explicitly authori
     await click('Allow and send one label image')
     expect(submitted()).toHaveLength(1)
     expect(submitted()[0][1]).toMatchObject({
-      explicit_consent:true,remote_upload_consent:true,authorized_provider:'qwen',demo:false,
+      explicit_consent:true,remote_upload_consent:true,authorized_provider:'qwen',
+      authorized_destination_host:'label.example',demo:false,
     })
+    expect(host.textContent).toContain('The remote label service returned a valid result in this run.')
     expect(host.textContent).toContain('[unknown]')
     await click('Read all text')
     expect(host.querySelector('pre')?.textContent).toBe('Label ABC\nFiber: 1[unknown]0% cotton')

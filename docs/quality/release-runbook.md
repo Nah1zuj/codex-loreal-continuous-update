@@ -21,6 +21,30 @@
 | 软件故障验证 | 无模型、目录移动、断网重连、后端中断、重启、长会话及停止媒体 | 环境与 Git 版本、运行证据、清理后的媒体及连接状态 |
 | 专业与试用 | 由具备资质的人员审阅实际课程，让目标用户独立完成场景 | 审核人、课程版本、试用条件和真实反馈 |
 
+## 真实文字与标签联调
+
+由项目负责人准备一份仅用于联调的私有配置，按 [本地运行说明](../../AccessibleBeautyAgent/README.md) 填入已批准的供应商、模型、凭据和 `ALLOW_REMOTE_AI=true`。凭据保存在本机配置中。为标签准备清晰与模糊各一张虚构 JPEG 或 PNG，只保留测试文字。每张图在运行前核对内容和目标主机。
+
+在应用目录启动独立的回环后端。替换 `trace_config` 为私有配置路径，按实际情况选用空闲端口。日常项目配置和数据库无需参与。
+
+```bash
+mkdir -p work
+trace_check_dir="$(mktemp -d "$PWD/work/remote-check.XXXXXX")"
+TRACE_ENV_FILE="$trace_config" MEMORY_PATH="$trace_check_dir/check.sqlite" \
+VISION_PROVIDER=mock REFERENCE_PROVIDER=mock EMBEDDING_PROVIDER=mock RERANKER_PROVIDER=mock \
+DEVELOPER_MODE=true ADMIN_ENABLED=false \
+.venv-portable/bin/python -m uvicorn app.main:app --app-dir backend --host 127.0.0.1 --port 64527
+```
+
+在另一窗口从应用目录先运行不带 `--execute` 的命令。按私有配置选择 `--provider`。标签服务另需指定界面显示的实际目标主机。
+
+```bash
+.venv-portable/bin/python scripts/verify_remote_services.py --port 64527 text --provider "$trace_text_provider"
+.venv-portable/bin/python scripts/verify_remote_services.py --port 64527 label --provider "$trace_label_provider" --destination-host "$trace_label_host"
+```
+
+确认目的地后，文字命令加 `--execute`，会向所选文字服务发送一条固定虚构语句。标签命令每次加 `--execute --image "$trace_label_file"`，再按样本加 `--expect-text "$trace_label_expected"` 或 `--expect-uncertain`。一次只发送一张经确认的测试图。文字检查须收到完成事件和实际供应商响应证据。清晰标签须返回已知原文，模糊标签须保留不确定性且不推断色号、成分或用法。必要时现场复核原文及难辨片段，记录版本、供应商、日期和结果。配置就绪和替身测试分别记录。联调结束后用 Control+C 停止后端。
+
 ## 打包和回退
 
 用应用 Python 执行 `scripts/pack_source.py work/trace-internal.zip --commit HEAD`。归档从固定 Git 提交读取，排除运行目录、旧启动器、密钥、数据库及非公开运行资产。界面公开素材保留。测试语音样本留在开发检出中。解压后按运行说明安装，缺少模型可先验证文字路径。打包工具应从有 Git 元数据的开发目录运行。

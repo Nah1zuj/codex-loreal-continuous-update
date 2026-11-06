@@ -13,6 +13,7 @@ interface Availability {
   service_name:string
   destination_host?:string|null
   status:'demo'|'disabled'|'configured'|'missing_configuration'
+  remote_verification?:'unverified'|'verified'|'failed'
 }
 interface ReadingReply {
   label_kind:'product'|'garment'
@@ -46,6 +47,11 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
   const tts=useSpeech()
   const remote=availability?.status==='configured'&&availability.provider!=='mock'
   const demoAvailable=availability?.status==='demo'||(!availability&&health?.reading_provider==='mock'&&health.developer_mode)
+  const verificationText={
+    unverified:t('远程标签服务已配置，当前运行尚未验证实际调用。','The remote label service is configured. A live request has yet to be verified in this run.'),
+    verified:t('远程标签服务在当前运行已返回有效结果。','The remote label service returned a valid result in this run.'),
+    failed:t('远程标签服务最近一次调用失败。','The latest request to the remote label service failed.'),
+  }
 
   function releaseStream(){
     stopStream(stream.current)
@@ -114,7 +120,9 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
       setReady(false)
       const response=await api<ReadingReply>('/reading/read',{
         image,demo,explicit_consent:true,remote_upload_consent:!demo,
-        authorized_provider:demo?undefined:provider,label_kind:labelKind,locale,
+        authorized_provider:demo?undefined:provider,
+        authorized_destination_host:demo?undefined:availability?.destination_host??undefined,
+        label_kind:labelKind,locale,
       },undefined,controller.signal)
       if(id===generation.current){setResult(response);setSelected('summary');setNotice('readEnded')}
     }catch(error){if(id===generation.current)onError(error instanceof Error?error.message:c.requestError)}
@@ -125,6 +133,14 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
         setReady(false)
         pending.current=null
         releaseStream()
+        if(!demo){
+          const signal=AbortSignal.any([controller.signal,AbortSignal.timeout(4000)])
+          void api<Availability>('/reading/availability',undefined,'GET',signal)
+            .then(service=>{if(id===generation.current)setAvailability(service)})
+            .catch(()=>{
+              if(id===generation.current)setAvailability(service=>service?{...service,remote_verification:'unverified'}:null)
+            })
+        }
       }
     }
   }
@@ -143,13 +159,17 @@ export function Reading({health,onError}:{health:Health|null;onError:(text:strin
       </select>
     </label>
     <p>{t('只读取标签文字。照片外观无法证明成分。','The reader transcribes label text. Appearance cannot establish composition.')}</p>
-    {remote?<p className="notice">
-      {t('打开相机只作本地预览。只有点击允许并发送，才会向以下服务发送一张标签图供文字读取。请让画面只包含标签。',
-         'Opening the camera previews locally. Choosing Allow and send sends one label image to the service below for text reading. Frame only the label.')}
-      {' '}{availability.service_name}{availability.destination_host?' · '+availability.destination_host:''}
-    </p>:<p className="notice">{availability?
-      t('真实标签读取服务当前未启用或未配置。','Real label reading is disabled or unconfigured.'):
-      t('正在检查标签读取服务。','Checking the label reading service.')}</p>}
+    {remote?<>
+      <p className="notice">{verificationText[availability.remote_verification??'unverified']}</p>
+      <p className="notice">
+        {t('打开相机只作本地预览。只有点击允许并发送，才会向以下服务发送一张标签图供文字读取。请让画面只包含标签。',
+           'Opening the camera previews locally. Choosing Allow and send sends one label image to the service below for text reading. Frame only the label.')}
+        {' '}{availability.service_name}{availability.destination_host?' · '+availability.destination_host:''}
+      </p>
+    </>:<p className="notice">{demoAvailable?
+      t('当前可体验虚构标签演示。','Fictional demo labels are available.'):
+      availability?t('真实标签读取服务当前未启用或未配置。','Real label reading is disabled or unconfigured.'):
+        t('正在检查标签读取服务。','Checking the label reading service.')}</p>}
     <div className="camera-preview reading-preview">
       <video ref={video} hidden={!active} playsInline muted aria-label={c.readReady}
         onLoadedData={()=>{if(stream.current)setReady(true)}}/>
