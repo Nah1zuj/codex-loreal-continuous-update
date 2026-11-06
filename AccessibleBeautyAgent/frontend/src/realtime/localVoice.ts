@@ -63,23 +63,23 @@ export class LocalRecognitionProvider implements RecognitionEngine{
  private async connect(signal:AbortSignal){
   if(!this.available)throw new Error('当前浏览器缺少本地音频采集能力，请使用支持麦克风与AudioWorklet的浏览器。')
   const version=this.generation
-  this.handlers?.onProgress?.('正在检查本机语音服务')
+  this.handlers?.onProgress?.(this.locale==='en'?'Checking the local voice service':'正在检查本机语音服务')
   const health=await fetch('/local-voice/health',{signal:AbortSignal.any([signal,AbortSignal.timeout(12000)])}).then(async response=>{if(!response.ok)throw new Error('本地语音服务尚未启动，请使用本项目启动入口。');return response.json()})
   if(!health.ready)throw new Error('本地中文语音模型尚未就绪。')
   if(version!==this.generation)return
-  this.handlers?.onProgress?.('等待浏览器与系统提供麦克风。请完成首次许可。')
+  this.handlers?.onProgress?.(this.locale==='en'?'Waiting for microphone access. Allow it in your browser and system settings when prompted.':'等待浏览器与系统提供麦克风。请完成首次许可。')
   const acquisition=navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false}).then(stream=>{if(version!==this.generation)stream.getTracks().forEach(track=>track.stop());return stream})
   const stream=await deadline(acquisition,signal,45000,'麦克风仍未返回。请检查系统中的 Codex 或当前浏览器麦克风许可，再重新开启语音引导。')
   if(version!==this.generation){stream.getTracks().forEach(track=>track.stop());return}
   this.stream=stream
-  this.handlers?.onProgress?.('麦克风已连接，正在准备本地音频处理')
+  this.handlers?.onProgress?.(this.locale==='en'?'Microphone connected. Preparing local audio processing.':'麦克风已连接，正在准备本地音频处理')
   const context=new AudioContext();this.context=context
   await deadline(context.audioWorklet.addModule('/voice-pcm-worklet.js'),signal,12000,'浏览器未能载入本地音频处理模块。')
   if(version!==this.generation)return
   await deadline(context.resume(),signal,12000,'浏览器未激活音频，请重新操作开启语音引导。')
   if(version!==this.generation)return
   if(context.state!=='running')throw new Error('浏览器尚未激活声音，请通过系统语音控制操作“开启语音引导”。')
-  this.handlers?.onProgress?.('正在连接本地识别与唤醒服务')
+  this.handlers?.onProgress?.(this.locale==='en'?'Connecting to local speech recognition and wake phrase detection':'正在连接本地识别与唤醒服务')
   const ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/local-voice/stream');this.socket=ws
   await deadline(new Promise<void>((resolve,reject)=>{
    ws.onopen=()=>resolve()

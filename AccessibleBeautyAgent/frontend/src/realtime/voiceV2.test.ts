@@ -59,6 +59,18 @@ it('never claims wake listening while the browser is still withholding the micro
  late?.();expect(call.state).toBe('paused')
 })
 
+it.each([
+ ['zh-CN','请说“开始”，表达需求后说“结束”，再提交分析。'],
+ ['en','Say “kai shi”, make your request, then say “jie shu” to submit it.'],
+] as const)('keeps bounded readiness instructions in %s when starting and returning to listening',(locale,ready)=>{
+ const {input,call}=setup()
+ call.setLocale(locale);call.setBounded(true);call.start()
+ expect(call.snapshot.progress).toBe(ready)
+ input.handlers?.onProgress?.('Previous capture')
+ call.discardCapture()
+ expect(call.snapshot.progress).toBe(ready)
+})
+
 it('bounded mode is used only on listening and suppresses response audio echo',async()=>{
  const {input,call,send,utterances}=setup();call.setBounded(true);call.start();expect(input.mode).toBe('bounded')
  input.handlers?.onProgress?.('正在收集本段内容，说结束后提交。');expect(call.snapshot.progress).toContain('收集')

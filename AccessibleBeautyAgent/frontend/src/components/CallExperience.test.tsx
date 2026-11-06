@@ -4,17 +4,23 @@ import {createRoot, type Root} from 'react-dom/client'
 import {afterEach,beforeEach,expect,it,vi} from 'vitest'
 import App from '../App'
 import {LocaleProvider} from '../content/Locale'
+import type {RecognitionHandlers} from '../realtime/voice'
+let recognitionHandlers:RecognitionHandlers|undefined
+let waitForRecognitionReady=false
 vi.mock('../api/client',()=>({api:vi.fn(async(path:string)=>path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}}:{})}))
 vi.mock('../api/stream',()=>({streamChat:async(body:unknown)=>{const {api}=await import('../api/client');return api('/chat',body)}}))
 vi.mock('../realtime/localVoice',()=>({LocalRecognitionProvider:class {
  readonly local=true;readonly available=true;private recognition:any;private handlers:any;private locale='zh-CN'
  setLocale(value:string){this.locale=value;if(this.recognition)this.recognition.lang=value==='en'?'en-US':'zh-CN'}
  setMode(_value:string){}
- startCycle(handlers:any){this.handlers=handlers;if(!this.recognition){const C=(window as any).SpeechRecognition;if(!C){handlers.onError('Test input unavailable');return}this.recognition=new C();this.recognition.lang=this.locale==='en'?'en-US':'zh-CN';this.recognition.start()}this.recognition.onresult=(event:any)=>handlers.onText(event.results[0][0].transcript);handlers.onReady?.()}
+ startCycle(handlers:RecognitionHandlers){this.handlers=handlers;recognitionHandlers=handlers;if(!this.recognition){const C=(window as any).SpeechRecognition;if(!C){handlers.onError('Test input unavailable');return}this.recognition=new C();this.recognition.lang=this.locale==='en'?'en-US':'zh-CN';this.recognition.start()}this.recognition.onresult=(event:any)=>handlers.onText(event.results[0][0].transcript);if(!waitForRecognitionReady)handlers.onReady?.()}
+ beginCapture(){this.handlers?.onCapture?.(true)}
  abort(){this.recognition?.abort();if(this.recognition)this.recognition.onresult=null;this.handlers=null}
  stop(){this.abort();this.recognition?.stop();this.recognition=null}
 }}))
 beforeEach(()=>{
+ recognitionHandlers=undefined
+ waitForRecognitionReady=false
  Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel:vi.fn(),pause:vi.fn(),resume:vi.fn(),speak:(u:any)=>queueMicrotask(()=>u.onend?.())}})
  vi.stubGlobal('SpeechSynthesisUtterance',class {constructor(public text:string){}})
  Object.defineProperty(window,'matchMedia',{configurable:true,value:()=>({matches:false,addEventListener(){},removeEventListener(){}})})
@@ -26,6 +32,35 @@ function switchLanguage(mode:string){const select=host.querySelector<HTMLSelectE
 function button(text:string){return [...host.querySelectorAll('button')].find(b=>b.textContent?.includes(text))!}
 it('region previews change only the digital illustration and do not advance coaching',async()=>{await render('/explore');const {api}=await import('../api/client');vi.mocked(api).mockClear();await act(async()=>button('Blush').click());expect(button('Blush').getAttribute('aria-pressed')).toBe('true');expect(api).not.toHaveBeenCalled();await act(async()=>button('Lips').click());expect(button('Lips').getAttribute('aria-pressed')).toBe('true');expect(api).not.toHaveBeenCalled()})
 async function render(path='/',sid?:string){window.history.replaceState({},'',path);sessionStorage.clear();if(sid)sessionStorage.setItem('trace.session_id',sid);host=document.createElement('div');document.body.append(host);root=createRoot(host);await act(async()=>root.render(<LocaleProvider initialLocale="en"><App/></LocaleProvider>))}
+it('announces permission, recording and transcription in one persistent region and clears obsolete progress',async()=>{
+ waitForRecognitionReady=true
+ ;(window as any).SpeechRecognition=class {start(){}abort(){}stop(){}}
+ await render('/voice')
+ const voiceStatus=host.querySelector('.voice-access-bar [role="status"]')
+ expect(voiceStatus).not.toBeNull()
+ const announcing=(message:string)=>[...host.querySelectorAll('[role="status"], [aria-live="polite"], [aria-live="assertive"]')].filter(region=>region.textContent?.includes(message))
+
+ await act(async()=>button('Click to speak').click())
+ const permissionProgress='Waiting for microphone permission'
+ await act(async()=>recognitionHandlers?.onProgress?.(permissionProgress))
+ expect(announcing(permissionProgress)).toEqual([voiceStatus])
+ expect(host.querySelector('.voice-console')?.textContent).toContain(permissionProgress)
+
+ await act(async()=>recognitionHandlers?.onReady?.())
+ const recordingProgress='Submit when done'
+ await act(async()=>recognitionHandlers?.onProgress?.(recordingProgress))
+ expect(announcing('Recording this request')).toEqual([voiceStatus])
+ expect(announcing(recordingProgress)).toEqual([voiceStatus])
+ await act(async()=>button('Done speaking, submit').click())
+ const transcriptionProgress='Transcribing this request'
+ expect(announcing(transcriptionProgress)).toEqual([voiceStatus])
+ expect(voiceStatus?.textContent?.split(transcriptionProgress)).toHaveLength(2)
+ expect(host.querySelector('.voice-console')?.textContent).toContain(transcriptionProgress)
+
+ await act(async()=>button('Close microphone').click())
+ expect(announcing('Microphone closed')).toEqual([voiceStatus])
+ expect(host.textContent).not.toContain(transcriptionProgress)
+})
 it('voice text camera commands request permission but cannot grant local analysis after denial',async()=>{
  const getUserMedia=vi.fn(async()=>{throw new DOMException('Denied','NotAllowedError')})
  Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia}})

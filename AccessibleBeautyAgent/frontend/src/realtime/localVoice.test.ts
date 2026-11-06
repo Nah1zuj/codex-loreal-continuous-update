@@ -23,12 +23,25 @@ afterEach(()=>{vi.unstubAllGlobals();vi.useRealTimers()})
 it('reuses one capture across soft pause and wake, filters stale epoch callbacks, and closes on button end',async()=>{
  const provider=new LocalRecognitionProvider(),first=handlers();provider.startCycle(first);await settle()
  expect(first.onReady).toHaveBeenCalledTimes(1);expect(capture).toHaveBeenCalledTimes(1)
+ expect(first.onProgress).toHaveBeenNthCalledWith(2,'等待浏览器与系统提供麦克风。请完成首次许可。')
  const socket=sockets[0];const oldEpoch=JSON.parse(socket.sent.at(-1)).epoch
  provider.abort();provider.setMode('quiet');const quiet=handlers();provider.startCycle(quiet);await settle()
  expect(track.stop).not.toHaveBeenCalled();expect(capture).toHaveBeenCalledTimes(1)
  socket.onmessage({data:JSON.stringify({type:'transcript',text:'stale',epoch:oldEpoch})});expect(quiet.onText).not.toHaveBeenCalled()
  const epoch=JSON.parse(socket.sent.at(-1)).epoch;socket.onmessage({data:JSON.stringify({type:'transcript',text:'wake',epoch})});expect(quiet.onText).toHaveBeenCalledWith('wake')
  provider.stop();expect(track.stop).toHaveBeenCalledTimes(1);expect(socket.close).toHaveBeenCalledTimes(1)
+})
+it('reports every microphone setup stage in English when selected',async()=>{
+ const provider=new LocalRecognitionProvider(),input=handlers()
+ provider.setLocale('en');provider.startCycle(input);await settle()
+ expect(input.onProgress.mock.calls).toEqual([
+  ['Checking the local voice service'],
+  ['Waiting for microphone access. Allow it in your browser and system settings when prompted.'],
+  ['Microphone connected. Preparing local audio processing.'],
+  ['Connecting to local speech recognition and wake phrase detection'],
+ ])
+ expect(input.onReady).toHaveBeenCalledTimes(1)
+ provider.stop()
 })
 it('closes a microphone returned after cancellation, without announcing ready',async()=>{
  let grant!:(stream:any)=>void;capture.mockImplementation(()=>new Promise(resolve=>{grant=resolve}));const provider=new LocalRecognitionProvider(),input=handlers()

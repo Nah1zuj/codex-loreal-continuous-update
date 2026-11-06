@@ -24,6 +24,10 @@ export class RealtimeCallController {
  get available(){return this.recognition.available}
  get state(){return this.value.state}
  get snapshot():CallSnapshot{return {...this.value}}
+ private get readyProgress(){
+  if(!this.bounded)return ''
+  return this.locale==='en'?'Say “kai shi”, make your request, then say “jie shu” to submit it.':'请说“开始”，表达需求后说“结束”，再提交分析。'
+ }
  subscribe(listener:(snapshot:CallSnapshot)=>void){this.listeners.add(listener);listener(this.snapshot);return ()=>{this.listeners.delete(listener)}}
  private update(state:CallState,fields:Partial<CallSnapshot>={}){this.value={...this.value,...fields,state};for(const listener of this.listeners)listener(this.snapshot)}
  private cancel(){this.capturePending=false;this.value={...this.value,recording:false,transcribing:false};++this.generation;this.request?.abort();this.request=null;this.finishSpeech?.();this.finishSpeech=null;this.recognition.abort();this.tts.onState=null;this.tts.stop()}
@@ -93,7 +97,7 @@ export class RealtimeCallController {
    onCapture:recording=>{if(generation===this.generation&&this.state==='listening')this.update('listening',{recording,transcribing:false})},
    onTranscribing:()=>{if(generation===this.generation&&this.state==='listening')this.showTranscription()},
    onProgress:message=>{if(generation===this.generation&&['requesting_permission','listening'].includes(this.state))this.update(this.state,{progress:message})},
-   onReady:()=>{if(generation!==this.generation)return;this.inputReady=true;if(this.state==='requesting_permission')this.update('listening',{progress:this.bounded?'请说“开始”，表达需求后说“结束”，再提交分析。':''});if(this.capturePending&&this.state==='listening'){this.capturePending=false;this.readyAnnounced=true;this.recognition.beginCapture?.();return}if(!this.readyAnnounced&&this.state==='listening'){this.readyAnnounced=true;this.onReady?.()}},
+   onReady:()=>{if(generation!==this.generation)return;this.inputReady=true;if(this.state==='requesting_permission')this.update('listening',{progress:this.readyProgress});if(this.capturePending&&this.state==='listening'){this.capturePending=false;this.readyAnnounced=true;this.recognition.beginCapture?.();return}if(!this.readyAnnounced&&this.state==='listening'){this.readyAnnounced=true;this.onReady?.()}},
    onText:text=>{
     if(generation!==this.generation||this.state==='ended')return
     const wake=wakeInput(text)
@@ -118,7 +122,7 @@ export class RealtimeCallController {
  private listen(){
   ++this.generation
   if(!this.recognition.local)this.update('listening')
-  else if(this.state!=='requesting_permission')this.update('listening',{progress:this.bounded?'请说“开始”，表达需求后说“结束”，再提交分析。':''})
+  else if(this.state!=='requesting_permission')this.update('listening',{progress:this.readyProgress})
   const generation=this.generation
   if(generation===this.generation&&(this.state==='listening'||this.state==='requesting_permission'))this.bindInput('active')
  }
