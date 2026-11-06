@@ -18,6 +18,8 @@ Chromium 无头配置、注入网络故障与浏览器合成媒体用于软件�
 - PowerShell 7.6.8 的语言解析器在 Mac 上通过两个 Windows 入口脚本。语音修复通过非 UTF-8 默认编码下的本机实际模型加载。Windows 平台上的实际安装、启停和读屏仍需实机。[入口复核](../001-runtime-baseline/verification.md#windows-入口静态复核) · [语音验证](../004-voice-interaction/verification.md)
 - 自然日常五步课程的中英文审核包已逐项比对来源版本和 80 个教学字段。课程草稿仍待专业审核。真实试用按独立参与记录验收。[双语审核包](../003-dialogue-knowledge/curriculum-packet.md) · [试用记录](device-acceptance.md#目标用户试用)
 - 后端 243 项通过，2 项 Windows 专用检查跳过。前端 184 项、本机语音单元测试 10 项、合成音频 WebSocket 9 项、TypeScript、生产构建和知识库检查通过。构建仍有大分包警告。
+- 发布包 `TRACE-内部验证版-20261107-验收修订.zip` 来自 `87b41c5b7bf07ba5916c1b7aac57a89e5c3d0a30`（`trace-internal-20261107-review`）。清单中的 562 个文件通过大小、SHA-256 及 Windows 路径静态校验。包 SHA-256 为 `f9749b0a3e6d33bc3b57e458d0741e6b0f4db5b7e60ec69712666a929a8d43a8`。
+- 在含中文和空格的解压目录完成 Mac 净安装、无语音模型时的文字和恢复验证、重复启动、诊断及端口释放。解包副本的「故事」静默和首页主动朗读检查在独立 Chrome 配置通过，Windows 两份 PowerShell 入口文件再次通过 Mac 语法解析。
 
 ## 联调修订版
 
