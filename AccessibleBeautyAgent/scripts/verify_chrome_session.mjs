@@ -44,12 +44,13 @@ async function js(expression){
   if(result.exceptionDetails)throw Error(JSON.stringify(result.exceptionDetails))
   return result.result.value
 }
-async function submit(text){
-  await js(`(()=>{const input=document.querySelector('#message'); input.focus();
+async function submit(text,selector='#message'){
+  const field=JSON.stringify(selector)
+  await js(`(()=>{const input=document.querySelector(${field}); input.focus();
     Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,${JSON.stringify(text)});
     input.dispatchEvent(new InputEvent('input',{bubbles:true,inputType:'insertText',data:${JSON.stringify(text)}}));})()`)
-  await until(()=>js("!document.querySelector('#message').form.querySelector('button').disabled"),'enabled text submit')
-  await js("document.querySelector('#message').form.requestSubmit()")
+  await until(()=>js(`!document.querySelector(${field}).form.querySelector('button').disabled`),'enabled text submit')
+  await js(`document.querySelector(${field}).form.requestSubmit()`)
 }
 const session="(async()=>{const id=sessionStorage.getItem('trace.session_id');return id?await (await fetch('/api/session/'+id)).json():null})()"
 try{
@@ -161,6 +162,33 @@ try{
   await click('确认删除摘要')
   await until(async()=>await js(counts)===0,'deleted summary')
   console.log('PASS Chrome: course summary requires a reviewed version, saves the edited note, and can be deleted')
+
+  await call('Page.addScriptToEvaluateOnNewDocument',{source:`
+    sessionStorage.removeItem('trace.session_id')
+    localStorage.removeItem('trace.voice-enabled')
+    window.traceSpoken=[]
+    window.speechSynthesis.speak=utterance=>{
+      window.traceSpoken.push(utterance.text)
+      queueMicrotask(()=>{utterance.onstart?.();utterance.onend?.()})
+    }
+  `})
+  await call('Page.navigate',{url:origin+'/story'})
+  await until(()=>js("!!document.querySelector('.story-voice summary')"),'story dialogue disclosure')
+  await js("document.querySelector('.story-voice summary').click()")
+  assert.equal(await js("document.querySelector('.story-voice').open"),true)
+  const storyStatus=".story-voice .story-reply[aria-live='polite'], .story-voice .story-reply[role='status']"
+  assert.equal(await js(`!!document.querySelector(${JSON.stringify(storyStatus)})`),true)
+  await submit('今天我想聊一件虚构的小事。','#story-message')
+  await until(()=>js(`document.querySelector(${JSON.stringify(storyStatus)})?.textContent.trim()`),'accessible story reply')
+  assert.deepEqual(await js('window.traceSpoken'),[])
+  assert.deepEqual(await js('window.traceMediaRequests'),[])
+  console.log('PASS Chrome: Story text shows an accessible reply without speech or microphone use')
+
+  await call('Page.navigate',{url:origin+'/'})
+  await click('朗读欢迎与操作说明')
+  assert.equal(await js('window.traceSpoken.length'),1)
+  assert.deepEqual(await js('window.traceMediaRequests'),[])
+  console.log('PASS Chrome: explicit welcome reads aloud without microphone use')
 }finally{
   socket.close()
 }

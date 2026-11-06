@@ -73,6 +73,39 @@ it('voice text camera commands request permission but cannot grant local analysi
  await say('close camera');expect(host.textContent).toContain('Camera closed')
 })
 it('keeps the welcome available on demand without starting speech or microphone on page load',async()=>{let starts=0;const spoken:string[]=[];Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel(){},speak(u:any){spoken.push(u.text)},pause(){},resume(){}}});(globalThis as any).SpeechSynthesisUtterance=class {constructor(public text:string){}};(window as any).SpeechRecognition=class {start(){starts++}abort(){}stop(){}};await render();expect(starts).toBe(0);expect(spoken).toHaveLength(0);await act(async()=>button('Read welcome').click());expect(spoken.join(' ')).toContain('microphone setup');expect(document.activeElement).toBe(document.body);expect(host.querySelector('[data-primary-voice]')?.textContent).toContain('Enable voice');expect(host.textContent).toContain('Text input')})
+it('displays a typed Story reply without application speech or a microphone request',async()=>{
+ const speak=vi.fn((utterance:SpeechSynthesisUtterance)=>queueMicrotask(()=>utterance.onend?.({} as SpeechSynthesisEvent)))
+ Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel:vi.fn(),speak}})
+ const start=vi.fn()
+ ;(window as any).SpeechRecognition=class {start(){start()}abort(){}stop(){}}
+ vi.mocked(api).mockImplementation(async(path:string,body?:any)=>{
+  if(path==='/chat')return {session:{session_id:'story-text',stage:'INTENT',selected_products:[]},step:null,message:body?.message==='I saw a forest today'?'A response to your voice.':'A response to your text.'} as any
+  return {} as any
+ })
+ await render('/story')
+ await act(async()=>host.querySelector<HTMLElement>('.story-voice summary')!.click())
+ const liveReply=host.querySelector('.story-reply[aria-live="polite"]')
+ expect(liveReply?.textContent).toBe('')
+ const input=host.querySelector<HTMLInputElement>('#story-message')!
+ await act(async()=>{
+  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!.call(input,'I enjoyed the park today')
+  input.dispatchEvent(new Event('input',{bubbles:true}))
+ })
+ await act(async()=>input.form!.querySelector('button')!.click())
+ expect(host.querySelector('.story-reply[aria-live="polite"]')).toBe(liveReply)
+ expect(liveReply?.textContent).toBe('A response to your text.')
+ expect(speak).not.toHaveBeenCalled()
+ expect(start).not.toHaveBeenCalled()
+ expect(host.querySelector('.story-voice')?.textContent).toContain('Audio is processed on this computer')
+
+ await act(async()=>button('Start voice').click())
+ expect(start).toHaveBeenCalledTimes(1)
+ speak.mockClear()
+ await act(async()=>recognitionHandlers?.onText('I saw a forest today'))
+ expect(speak.mock.calls.map(([utterance])=>utterance.text)).toEqual(['A response to your voice.'])
+ expect(liveReply?.textContent).toBe('')
+ expect(host.querySelector('.story-reply:not([aria-live])')?.textContent).toBe('A response to your voice.')
+})
 it('starts a new session when the old server session expired',async()=>{vi.mocked(api).mockImplementation(async(path:string,body?:any)=>{if(path==='/health')return {} as any;if(path.startsWith('/session/'))return {session_id:'expired',stage:'GUIDE',selected_products:[]} as any;if(body?.message==='stop')throw Object.assign(new Error('expired'),{status:404});return {session:{session_id:'fresh',stage:'INIT',selected_products:[]},step:null,message:'Fresh greeting'} as any});await render('/thread','expired');await act(async()=>button('New session').click());expect(host.textContent).toContain('Fresh greeting')})
 it('exposes a start-steps action before guidance in the call shell',async()=>{vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock'} as any:{session_id:'ready',stage:'LOOK_SELECTED',selected_look:'clean_daily'} as any);await render('/voice','ready');expect(button('Start steps')).toBeTruthy()})
 it('step buttons still send a text action after call end without requesting microphone',async()=>{const getUserMedia=vi.fn();Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia}});vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock'} as any:path.startsWith('/session/')?{session_id:'ready',stage:'LOOK_SELECTED'} as any:{session:{session_id:'ready',stage:'GUIDE'},step:null,message:'First step'} as any);await render('/voice','ready');await act(async()=>window.dispatchEvent(new Event('pagehide')));vi.mocked(api).mockClear();await act(async()=>button('Start steps').click());expect(vi.mocked(api).mock.calls.filter(([path,body])=>path==='/chat'&&(body as any)?.message==='开始步骤')).toHaveLength(1);expect(getUserMedia).not.toHaveBeenCalled()})

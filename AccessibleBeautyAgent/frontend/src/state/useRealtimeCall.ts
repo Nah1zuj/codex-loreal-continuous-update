@@ -55,5 +55,6 @@ export function useRealtimeCall(locale:'zh-CN'|'en',bounded:boolean,send:Turn,on
   }
 
   return {current,snapshot,lastReply,manualInputRequested,start,beginCapture,
-    submit:(text:string)=>controller().submit(text)}
+    submit:(text:string)=>controller().submit(text),
+    submitText:(text:string)=>controller().submit(text,{speakReply:false})}
 }
