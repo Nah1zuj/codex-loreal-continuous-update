@@ -42,11 +42,14 @@ it('uses stage context and observed ASR homophones for deterministic navigation'
  expect(routeVoice('进入应照','home')).toEqual({command:'reflect'})
  expect(routeVoice('2','voice')).toBeNull();expect(wakeInput('不要重新开启语音功能')).toBeNull()
 })
-it('return greetings distinguish discussed looks from confirmed completed steps',()=>{
- const item={session_id:'old',name:'自然日常',date:'2026-10-17',occasion:'daily',style:'natural',completed_steps:[],all_steps_completed:false}
+it('offers only an explicitly selected style and never speaks a private record title',()=>{
+ const item={session_id:'old',name:'Private title',note:'Secret note',date:'2026-10-17',occasion:'daily',style:'natural',completed_steps:['底妆'],all_steps_completed:false}
  const view={enabled:true,latest:item,entries:[item],retention_days:30}
- expect(returnGreeting(view,'zh-CN')).toContain('聊到了');expect(returnGreeting({...view,latest:{...item,completed_steps:['底妆']}},'zh-CN')).toContain('一起尝试了')
- expect(returnGreeting({...view,enabled:false},'zh-CN')).not.toContain('上次')
+ expect(returnGreeting(view,'en')).not.toContain('previous style')
+ const spoken=returnGreeting({...view,latest:{...item,reusable:true}},'en')
+ expect(spoken).toContain('selected a previous style')
+ expect(spoken).not.toContain('Private title')
+ expect(spoken).not.toContain('Secret note')
 })
 
 it('never claims wake listening while the browser is still withholding the microphone',()=>{
@@ -54,6 +57,18 @@ it('never claims wake listening while the browser is still withholding the micro
  call.start();expect(call.state).toBe('requesting_permission');const late=input.handlers?.onReady
  call.pause();expect(call.state).toBe('paused');expect(input.stop).toHaveBeenCalledTimes(1)
  late?.();expect(call.state).toBe('paused')
+})
+
+it.each([
+ ['zh-CN','请说“开始”，表达需求后说“结束”，再提交分析。'],
+ ['en','Say “kai shi”, make your request, then say “jie shu” to submit it.'],
+] as const)('keeps bounded readiness instructions in %s when starting and returning to listening',(locale,ready)=>{
+ const {input,call}=setup()
+ call.setLocale(locale);call.setBounded(true);call.start()
+ expect(call.snapshot.progress).toBe(ready)
+ input.handlers?.onProgress?.('Previous capture')
+ call.discardCapture()
+ expect(call.snapshot.progress).toBe(ready)
 })
 
 it('bounded mode is used only on listening and suppresses response audio echo',async()=>{
@@ -74,11 +89,19 @@ it('resuming a bounded page discards unframed wake tails',()=>{
  expect(send).not.toHaveBeenCalled()
 })
 
-it('announces a speech service failure without blaming microphone permission',()=>{
- const {input,call,utterances}=setup();call.start()
+it.each([
+ ['zh-CN','本地语音服务连接失败','继续使用文字'],
+ ['en','The local speech connection failed','continue with text'],
+] as const)('announces actionable speech service recovery in %s',(locale,reason,fallback)=>{
+ const {input,call,utterances}=setup();call.setLocale(locale);call.start()
  input.handlers?.onError('本地语音服务未确认就绪。请重新开启语音引导。')
- expect(call.state).toBe('error');expect(utterances.at(-1).text).toContain('本地语音服务连接失败')
- expect(utterances.at(-1).text).not.toContain('麦克风暂时未能连接')
+ expect(call.state).toBe('error')
+ const message=utterances.at(-1).text
+ expect(message).toContain(reason)
+ expect(message).toContain(fallback)
+ expect(message).toContain('启动Demo_Mac.command')
+ expect(message).toContain('启动Demo_Windows.bat')
+ expect(message).not.toMatch(/麦克风暂时未能连接|microphone permission/i)
 })
 
 it('accepts common explicit Listen completion phrases without treating unfinished input as completion',()=>{

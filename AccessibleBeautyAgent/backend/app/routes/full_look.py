@@ -1,4 +1,5 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
+from app.full_look.service import LookVersionConflict
 from app.schemas.full_look import PlanRequest,RevisionRequest,ConfirmationRequest,PlanMemoryRequest,MaterialQuery
 
 def build_full_look_router(agent):
@@ -12,16 +13,24 @@ def build_full_look_router(agent):
     @router.get('/full-look/{session_id}')
     def get(session_id:str):
         with agent.sessions.lock:
-            s=agent.sessions.get(session_id);return {'plan':agent.full_look.get(s).model_dump(),'session':s.model_dump()}
+            s=agent.sessions.get(session_id);return {'plan':agent.full_look.get(s).model_dump(),'session':agent.session_snapshot(s)}
     @router.post('/full-look/revise')
     def revise(body:RevisionRequest):
         with agent.sessions.lock:
-            s=agent.sessions.get(body.session_id);r=agent.full_look.revise(s,body)
+            s=agent.sessions.get(body.session_id)
+            try:
+                r=agent.full_look.revise(s,body)
+            except LookVersionConflict as conflict:
+                raise HTTPException(409, {'code':'FULL_LOOK_CONFLICT','current_version':conflict.version,'plan_id':conflict.plan_id}) from conflict
             return reply(s,' '.join(r['reasons'])+' '+ ' '.join(s.todays_look.pending_coordination),**r)
     @router.post('/full-look/confirm')
     def confirm(body:ConfirmationRequest):
         with agent.sessions.lock:
-            s=agent.sessions.get(body.session_id);p=agent.full_look.confirm(s,body)
+            s=agent.sessions.get(body.session_id)
+            try:
+                p=agent.full_look.confirm(s,body)
+            except LookVersionConflict as conflict:
+                raise HTTPException(409, {'code':'FULL_LOOK_CONFLICT','current_version':conflict.version,'plan_id':conflict.plan_id}) from conflict
             return reply(s,'本次造型选择已更新；没有保存长期记忆。',plan=p.model_dump())
     @router.post('/full-look/memory-candidate')
     def candidate(body:PlanMemoryRequest):

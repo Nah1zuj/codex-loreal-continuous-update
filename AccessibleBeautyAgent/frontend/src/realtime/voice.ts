@@ -34,7 +34,7 @@ interface Recognition {
   start():void;stop():void;abort():void
 }
 type VoiceWindow=Window&{SpeechRecognition?:new()=>Recognition;webkitSpeechRecognition?:new()=>Recognition}
-export type RecognitionHandlers={onText:(text:string)=>void;onError:(message:string)=>void;onEnd:()=>void;onReady?:()=>void;onProgress?:(message:string)=>void;onCapture?:(recording:boolean)=>void}
+export type RecognitionHandlers={onText:(text:string)=>void;onError:(message:string)=>void;onEnd:()=>void;onReady?:()=>void;onProgress?:(message:string)=>void;onCapture?:(recording:boolean)=>void;onTranscribing?:()=>void}
 export class ContinuousRecognitionProvider {
   private locale:'zh-CN'|'en'='zh-CN'
   setLocale(locale:'zh-CN'|'en'){if(this.locale!==locale){this.abort();this.locale=locale}}

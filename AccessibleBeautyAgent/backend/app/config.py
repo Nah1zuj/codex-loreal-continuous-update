@@ -1,11 +1,18 @@
 from pathlib import Path
+import json
 import os
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field, model_validator
 from typing import Literal
 
 ROOT = Path(__file__).resolve().parents[2]
-load_dotenv(ROOT / '.env')
+load_dotenv(os.getenv('TRACE_ENV_FILE', str(ROOT / '.env')))
+DEFAULT_FRONTEND = json.loads((ROOT / 'runtime.json').read_text(encoding='utf-8'))['frontend']
+
+def local_origins():
+    configured = os.getenv('TRACE_FRONTEND_PORT')
+    ports = (int(configured),) if configured else (DEFAULT_FRONTEND, 5173, 5174)
+    return [f'http://{host}:{port}' for host in ('localhost', '127.0.0.1') for port in ports]
 
 class Settings(BaseModel):
     model_provider: Literal['mock', 'qwen','deepseek','openai_compatible'] = Field(default_factory=lambda: os.getenv('MODEL_PROVIDER', 'mock'))

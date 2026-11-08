@@ -94,10 +94,12 @@ def test_bad_scope_does_not_mutate_and_restore_keeps_step(client):
 def test_explicit_material_memory_consent_persists_candidate(client):
  sid=cafe(client)['session']['session_id']
  client.post('/api/full-look/revise',json={'session_id':sid,'user_request':'我确认今天穿的是棉质衬衫'})
- client.post('/api/full-look/memory-candidate',json={'session_id':sid,'feedback':'下次优先考虑我确认过的棉材质'})
+ candidate=client.post('/api/full-look/memory-candidate',json={
+  'session_id':sid,'feedback':'下次优先考虑我确认过的棉材质'}).json()['session']
  before=client.get('/api/profile/demo').json()
  assert before['episodes']==[]
- saved=client.post('/api/chat',json={'session_id':sid,'message':'','action':'memory_consent','consent':True})
+ saved=client.post('/api/chat',json={'session_id':sid,'message':'','action':'memory_consent','consent':True,
+  'memory_candidate_id':candidate['memory_candidate_id'],'memory_candidate_version':candidate['memory_candidate_version']})
  assert saved.status_code==200
  profile=client.get('/api/profile/demo').json()
  assert profile['profile']['material_preferences']==['cotton'] and len(profile['episodes'])==1

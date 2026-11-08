@@ -1,19 +1,32 @@
 """Anonymous browser isolation, not a production account login system."""
 import hashlib,json,secrets,time
+from email.message import Message
 from http.cookies import SimpleCookie
 from urllib.parse import parse_qs,urlencode
+from starlette.datastructures import Headers
 from starlette.responses import JSONResponse
+from app.config import local_origins
+
+def _is_json_body(content_type):
+    # Match FastAPI's request-body parser before applying ownership to the data.
+    if not content_type:
+        return True
+    message=Message()
+    message['content-type']=content_type
+    subtype=message.get_content_subtype()
+    return message.get_content_maintype()=='application' and (subtype=='json' or subtype.endswith('+json'))
 
 class BrowserIdentityMiddleware:
     def __init__(self,app,agent,settings):
         self.app=app;self.agent=agent;self.settings=settings
+        self.local_origins=set(local_origins())
         with agent.memory.connect() as db:db.execute('CREATE TABLE IF NOT EXISTS browser_identities (token_hash TEXT PRIMARY KEY, principal TEXT NOT NULL, expires REAL NOT NULL)')
     async def __call__(self,scope,receive,send):
-        if scope['type']!='http' or not scope['path'].startswith('/api'):return await self.app(scope,receive,send)
-        headers={k.decode().lower():v.decode() for k,v in scope['headers']}
+        if scope['type']!='http' or not scope['path'].startswith('/api') or scope['path']=='/api/health':return await self.app(scope,receive,send)
+        headers=Headers(scope=scope)
         async def error(status,message):await JSONResponse({'detail':message},status_code=status)(scope,receive,send)
         origin=headers.get('origin')
-        if origin and origin not in {'http://localhost:5173','http://127.0.0.1:5173','http://localhost:5174','http://127.0.0.1:5174','http://localhost:5180','http://127.0.0.1:5180'} and origin!=scope.get('scheme','http')+'://'+headers.get('host',''):
+        if origin and origin not in self.local_origins and origin!=scope.get('scheme','http')+'://'+headers.get('host',''):
             return await error(403,'Origin is not permitted')
         if scope['path'].startswith('/api/admin') and (not self.settings.developer_mode or (scope.get('client') or ('',))[0] not in {'127.0.0.1','::1','testclient'}):
             return await error(403,'Admin is restricted to local development; configure account authentication before production')
@@ -45,9 +58,10 @@ class BrowserIdentityMiddleware:
         path=scope['path']
         try:
             for base in ('/api/session/','/api/transcripts/','/api/full-look/','/api/vision/local/','/api/makeup/'):
-                if (scope['method']=='GET' and path.startswith(base)) or (scope['method']=='DELETE' and path.startswith(('/api/vision/local/','/api/makeup/'))):
-                    sid=path.rsplit('/',1)[1]
-                    if sid not in {'plan','revise','confirm','memory-candidate'}:own_session(sid)
+                method_matches = scope['method']=='GET' or (scope['method']=='DELETE' and base in ('/api/vision/local/','/api/makeup/'))
+                if method_matches and path.startswith(base):
+                    sid=path[len(base):]
+                    if '/' not in sid and sid not in {'plan','revise','confirm','memory-candidate'}:own_session(sid)
             if path.startswith('/api/profile/'):scope['path']='/api/profile/'+owner(path.rsplit('/',1)[1])
             query=parse_qs(scope.get('query_string',b'').decode())
             if 'user_id' in query:query['user_id']=[owner(query['user_id'][0])]
@@ -61,12 +75,12 @@ class BrowserIdentityMiddleware:
                     raw+=event.get('body',b'')
                     if len(raw)>26_000_000:return await error(413,'Request is too large')
                     if not event.get('more_body'):break
-                if raw and 'application/json' in headers.get('content-type',''):
+                if raw and _is_json_body(headers.get('content-type')):
                     value=json.loads(raw)
                     if isinstance(value,dict):
                         if value.get('session_id'):own_session(value['session_id'])
                         if 'user_id' in value:value['user_id']=owner(value['user_id'])
-                        elif path in {'/api/chat','/api/chat/stream','/api/journal','/api/feedback'}:value['user_id']=owner('demo')
+                        elif path in {'/api/chat','/api/chat/stream','/api/journal','/api/feedback'} or (path.startswith('/api/journal/') and path!='/api/journal/draft'):value['user_id']=owner('demo')
                     raw=json.dumps(value,ensure_ascii=False).encode()
                     scope['headers']=[(k,v) for k,v in scope['headers'] if k.lower()!=b'content-length']+[(b'content-length',str(len(raw)).encode())]
         except (PermissionError,KeyError):return await error(404,'Private resource not found')

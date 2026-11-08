@@ -26,6 +26,7 @@ class SessionStore:
         self.sessions = {}
         self.lock = RLock()
         self.touched={}
+        self.on_media_revoked = None
     def create(self, user_id='demo'):
         # No durable transcript without review; expire abandoned sessions in RAM.
         with self.lock:
@@ -54,9 +55,7 @@ class SessionStore:
                 import json
                 plan=MakeupPlan.model_validate(json.loads(row[2]))
                 self.sessions[sid]=Session(session_id=sid,user_id=row[0],locale=row[1],makeup_plan=plan,stage=Stage.INTENT)
-                restored=self.sessions[sid]
-                restored.stage=Stage.FEEDBACK if plan.status=='completed' else Stage.GUIDE if plan.status=='active' else Stage.LOOK_SELECTED
-                restored.routine_step=plan.active_index;restored.routine_total_steps=len(plan.steps);restored.routine_started=plan.status!='draft';restored.scene=plan.occasion
+                self.project_plan(self.sessions[sid])
             self.touched[sid]=time.monotonic()
             return self.sessions[sid]
     def transition(self, session, target):
@@ -64,6 +63,35 @@ class SessionStore:
             raise ValueError(f'Illegal transition {session.stage.value} -> {target.value}')
         session.stage = target
         session.stage_history.append(target.value)
+    def project_plan(self, session):
+        plan = session.makeup_plan
+        if plan.legacy_routine:
+            session.routine_id = plan.legacy_routine.routine_id
+            session.selected_look = plan.legacy_routine.look_id
+        if plan.session_ended:
+            stage = Stage.COMPLETE
+        elif plan.status == 'completed':
+            stage = Stage.FEEDBACK
+        elif plan.status == 'active':
+            stage = Stage.GUIDE
+        else:
+            stage = Stage.LOOK_SELECTED
+        if session.stage != stage:
+            session.stage = stage
+            session.stage_history.append(stage.value)
+        session.scene = plan.occasion
+
+    def revoke_media(self, session):
+        session.camera_consent = False
+        session.visual_state = None
+        session.confidence = 0
+        session.media_epoch += 1
+        if self.on_media_revoked:
+            self.on_media_revoked(session)
+        if session.stage in {Stage.CHECK_REQUESTED, Stage.CAMERA_CONSENT, Stage.VISION_GATE, Stage.VISION_CHECK, Stage.VERIFY}:
+            session.stage = Stage.GUIDE if session.routine_started else Stage.LOOK_SELECTED
+            session.stage_history.append(session.stage.value)
+
     def stop(self, session):
-        session.camera_consent=False
+        self.revoke_media(session)
         self.transition(session,Stage.COMPLETE)

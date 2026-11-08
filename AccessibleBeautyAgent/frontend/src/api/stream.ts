@@ -17,7 +17,7 @@ export async function streamChat(body:unknown,onDelta?:(text:string)=>void,signa
      if(event.type==='delta'&&typeof event.text==='string')onDelta?.(event.text)
      if(event.type==='session'&&event.session)onSession?.(event.session)
      if(event.type==='final')final=event.reply
-     if(event.type==='error')throw new Error(event.message)
+     if(event.type==='error')throw Object.assign(new Error(event.message),{code:event.code})
     }
    }
    if(buffer.length>100_000)throw new Error('Stream exceeded limit')

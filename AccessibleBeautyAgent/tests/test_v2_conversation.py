@@ -19,6 +19,7 @@ def test_stream_returns_explicit_demo_and_context(tmp_path):
         assert any(r['type']=='delta' for r in rows)
         final=next(r for r in rows if r['type']=='final')
         assert final['reply']['mode']=='mock'
+        assert final['diagnostics']=={'provider':'mock','remote_response_verified':False}
         sid=final['reply']['session']['session_id']
         assert app.state.conversation.history(sid)[0]['text']=='今天我想聊一聊'
         assert client.post('/api/chat/stream',json={'session_id':sid,'message':'开始步骤'}).status_code==200

@@ -66,11 +66,18 @@ def build_hardware_router(agent):
         gateway.revoke(owner(request),device_id);return {'disconnected':True}
     @router.get('/display')
     def display(request:Request):
-        d,_=device(request);s=owned_session(d.owner,d.session_id);plan=s.makeup_plan
-        step=plan.steps[plan.active_index] if plan and 0<=plan.active_index<len(plan.steps) else None
+        d,_=device(request);s=owned_session(d.owner,d.session_id);plan=agent.coaching.visible_plan(s)
+        if plan and plan.legacy_routine:
+            current = agent.current_step(s)
+            step = {'title':current['name'],'instruction':current['instruction'],'review_status':current['review_status']} if current else None
+        elif plan:
+            current = plan.steps[plan.active_index]
+            step = {'title':current.title,'instruction':' '.join(current.instructions),'review_status':current.review_status}
+        else:
+            step = None
         # No raw transcript, face frames, identity, private memory or model keys.
         return {'device':d.status(),'session_id':d.session_id,'workflow':plan.workflow if plan else s.stage.value,
-                'step':{'title':step.title,'instruction':' '.join(step.instructions),'review_status':step.review_status} if step else None,
+                'step':step,
                 'progress':{'completed':sum(x.status=='completed' for x in plan.steps),'total':len(plan.steps)} if plan else None,
                 'illustration_only':True}
     @router.post('/events')

@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import Any, Literal
-from pydantic import BaseModel, Field, StrictBool, model_validator
+from pydantic import BaseModel, Field, StrictBool, computed_field, model_validator
 
 from app.schemas.full_look import FullLook,ExperienceMode,SectionName
 from app.schemas.makeup import MakeupPlan
@@ -38,10 +38,10 @@ class Session(BaseModel):
     selected_look: str | None = None
     selected_products: list[dict] = Field(default_factory=list)
     routine_id: str | None = None
-    routine_step: int = 0
-    routine_total_steps: int = 0
-    routine_started: bool = False
+    proposed_routine_step_count: int = Field(default=0, exclude=True)
+    routine_unavailable: bool = Field(default=False, exclude=True)
     camera_consent: bool = False
+    media_epoch: int = Field(default=0, exclude=True)
     memory_consent: bool = False
     visual_state: dict | None = None
     confidence: float = 0
@@ -49,19 +49,51 @@ class Session(BaseModel):
     tool_calls: list[dict] = Field(default_factory=list)
     rag_documents: list[dict] = Field(default_factory=list)
     memory_candidate: dict | None = None
+    memory_candidate_id: str | None = None
+    memory_candidate_version: str | None = None
+    memory_context_generation: int = Field(default=0, exclude=True)
     last_response: str = ''
     story_context: list[str] = Field(default_factory=list,max_length=10)
     stage_history: list[str] = Field(default_factory=lambda: ['INIT'])
 
+    @computed_field
+    @property
+    def routine_step(self) -> int:
+        plan = self.makeup_plan
+        if plan is None or self.routine_unavailable:
+            return 0
+        if (plan.legacy_routine and plan.status == 'completed'
+                and plan.active_index == len(plan.steps) - 1
+                and plan.steps[-1].status in ('completed', 'skipped')):
+            return len(plan.steps)
+        return plan.active_index
+
+    @computed_field
+    @property
+    def routine_total_steps(self) -> int:
+        return len(self.makeup_plan.steps) if self.makeup_plan else self.proposed_routine_step_count
+
+    @computed_field
+    @property
+    def routine_started(self) -> bool:
+        plan = self.makeup_plan
+        return bool(plan and plan.status != 'draft' and not self.routine_unavailable
+                    and any(step.status != 'pending' for step in plan.steps))
+
+
 class ChatRequest(BaseModel):
     event_id: str | None = Field(default=None,min_length=1,max_length=80)
     expected_step_id: str | None = Field(default=None,max_length=120)
+    expected_plan_id: str | None = Field(default=None,min_length=1,max_length=80)
+    expected_revision: int | None = Field(default=None,ge=0)
     locale: Literal['zh-CN','en'] | None = None
     session_id: str | None = None
     user_id: str = Field(default='demo', min_length=1, max_length=80)
     message: str = Field(default='', max_length=4000)
     action: Literal['message', 'camera_consent', 'memory_consent'] = 'message'
     consent: StrictBool | None = None
+    memory_candidate_id: str | None = Field(default=None,min_length=1,max_length=80)
+    memory_candidate_version: str | None = Field(default=None,pattern=r'^[a-f0-9]{64}$')
     experience_mode: ExperienceMode | None = None
 
 class SearchRequest(BaseModel):
@@ -83,6 +115,10 @@ class ProductRequest(BaseModel):
 class RoutineRequest(BaseModel):
     session_id: str
     routine_id: str | None = None
+    event_id: str | None = Field(default=None,min_length=1,max_length=80)
+    expected_step_id: str | None = Field(default=None,max_length=120)
+    expected_plan_id: str | None = Field(default=None,min_length=1,max_length=80)
+    expected_revision: int | None = Field(default=None,ge=0)
 
 Task = Literal['blush_presence', 'lip_presence']
 BlushStatus = Literal['NO_BLUSH', 'LEFT_ONLY', 'RIGHT_ONLY', 'BOTH', 'UNCERTAIN']
@@ -136,10 +172,19 @@ class MemoryCandidate(BaseModel):
     material_preferences: list[str] = Field(default_factory=list,max_length=8)
     domain_preferences: dict[SectionName,list[str]] = Field(default_factory=dict,max_length=6)
 
+class MemoryPreview(BaseModel):
+    user_id: str = Field(min_length=1, max_length=80)
+    candidate: MemoryCandidate
+    memory_id: str | None = Field(default=None,max_length=80)
+    expected_version: str | None = Field(default=None,max_length=80)
+
 class MemoryRequest(BaseModel):
     user_id: str = Field(min_length=1, max_length=80)
     candidate: MemoryCandidate
     explicit_consent: StrictBool = False
+    candidate_id: str | None = Field(default=None,min_length=1,max_length=80)
+    candidate_version: str | None = Field(default=None,pattern=r'^[a-f0-9]{64}$')
+    expected_version: str | None = Field(default=None,max_length=80)
 
 class FeedbackRequest(BaseModel):
     user_id: str = 'demo'

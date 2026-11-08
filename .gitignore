@@ -1,15 +1,19 @@
 .DS_Store
-**/.DS_Store
-**/.env
-**/.env.*
-!**/.env.example
-
-# Local machine data and caches
+.env
+.env.*
+!.env.example
+*.sqlite*
+*.db
+**/.venv*/
+**/node_modules/
 **/__pycache__/
 **/.pytest_cache/
-**/.venv/
-**/node_modules/
-**/*.log
+**/dist/
+/AccessibleBeautyAgent/voice/models/
+/AccessibleBeautyAgent/voice/*.tar.bz2
+/项目资料/
+/验证与历史说明/
+/本次桌面备份说明/
 
-# Speech model exceeds GitHub's 100 MB single-file limit.
-AccessibleBeautyAgent/voice/models/asr/model.int8.onnx
+# Local runtime logs
+**/*.log

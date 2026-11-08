@@ -32,7 +32,7 @@ class TutorialImporter:
             item=TutorialSegment.model_validate(raw);source=self.registry.get(item.source_id)
             if not source or source.get('permission') not in {'original','cc-by','cc0','licensed'} or not source.get('evidence'):raise PermissionError('Source is not allowlisted with reusable text rights and evidence')
             if item.source_id not in sources:
-                staged['SOURCE'].append(SourceRecord(source_id=item.source_id,title=source.get('title',item.source_id),creator=source.get('publisher'),url=source.get('url'),local_file=source.get('local_file'),source_type='original' if source['permission']=='original' else 'licensed_text',notes=json.dumps({'permission':source['permission'],'evidence':source['evidence'],'attribution':source.get('attribution'),'accessed_at':datetime.now(timezone.utc).isoformat()},ensure_ascii=False)).model_dump(mode='json'));sources.add(item.source_id)
+                staged['SOURCE'].append(SourceRecord(source_id=item.source_id,title=source.get('title',item.source_id),creator=source.get('publisher'),url=source.get('url'),local_file=source.get('local_file'),source_type='original' if source['permission']=='original' else 'licensed_text',use_permission=source['permission'],use_basis=source['evidence'],notes=json.dumps({'permission':source['permission'],'evidence':source['evidence'],'attribution':source.get('attribution'),'accessed_at':datetime.now(timezone.utc).isoformat()},ensure_ascii=False)).model_dump(mode='json'));sources.add(item.source_id)
             digest=hashlib.sha256((item.source_id+'\n'+item.language+'\n'+' '.join(item.text.split())).encode()).hexdigest()[:24]
             gid='tutorial_'+digest
             if gid in ids:duplicates+=1;continue

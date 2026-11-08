@@ -42,7 +42,7 @@ class LocalFaceGate:
             raise ValueError('无法解码图片。')
         gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
         detected = self.faces.detectMultiScale(gray,1.1,5,minSize=(60,60))
-        result = {'face_detected':len(detected)>0,'face_size_ok':False,'pose_ok':False,'lighting_ok':False,'occlusion_warning':False,'lighting_score':0.,'pose_score':0.,'gate_pass':False,'failure_reason':None,'method':'opencv_haar_eye_proxy','simulated':False}
+        result = {'face_count':len(detected),'face_detected':len(detected)>0,'face_size_ok':False,'pose_ok':False,'lighting_ok':False,'occlusion_warning':False,'lighting_score':0.,'pose_score':0.,'gate_pass':False,'failure_reason':None,'method':'opencv_haar_eye_proxy','simulated':False}
         if len(detected) != 1:
             result['failure_reason'] = '没有检测到单张正面人脸，请朝向镜头，并让脸完整进入画面。' if len(detected)==0 else '检测到多张人脸，请只保留你自己在画面中。'
             return result

@@ -49,6 +49,12 @@ class KnowledgeRepository:
             data=self.all();incoming=deepcopy(record)
             if reviewed is True:
                 if not reviewer or not reviewer.strip():raise ValueError('请填写审核者姓名。')
+                if kind=='ACCESSIBILITY_GUIDANCE' and incoming.get('category')=='makeup_lesson':
+                    from app.knowledge.curriculum import lesson_sources
+                    sources={r['source_id']:r for r in data['SOURCE']}
+                    if (incoming.get('demo_data') or not incoming.get('teaching')
+                            or not incoming.get('principle','').strip() or not lesson_sources(incoming,sources)):
+                        raise ValueError('教学审核需填写有效来源和使用依据、标题与步骤，且不可标记为演示数据。')
                 incoming.update(verified=True,status='HUMAN_VERIFIED',verified_by=reviewer.strip(),verified_at=now())
                 if kind=='REFERENCE_CASE':incoming['human_verified']=True
             candidate=MODELS[kind].model_validate(incoming).model_dump(mode='json')

@@ -1,6 +1,10 @@
+import json
+
+import pytest
 from fastapi.testclient import TestClient
 from app.main import create_app
 from app.config import Settings
+from test_local_vision_permits import grant
 
 def test_browser_owners_cannot_read_each_others_sessions_journals_or_memory(tmp_path):
     app=create_app(Settings(memory_path=tmp_path/'private.sqlite'))
@@ -12,6 +16,42 @@ def test_browser_owners_cannot_read_each_others_sessions_journals_or_memory(tmp_
         assert len(a.get('/api/journal').json()['entries'])==1
         assert b.get('/api/journal').json()['entries']==[]
         assert b.get('/api/profile/'+session['user_id']).status_code==404
+
+@pytest.mark.parametrize('headers', [
+    pytest.param([], id='omitted'),
+    pytest.param([('Content-Type','')], id='empty'),
+    pytest.param([('Content-Type','Application/JSON; charset=utf-8')], id='case-insensitive'),
+    pytest.param([('Content-Type','application/vnd.trace+json')], id='vendor-json'),
+    pytest.param([('Content-Type','application/json'),('Content-Type','text/plain')], id='first-duplicate'),
+])
+def test_json_content_types_preserve_browser_ownership_for_sessions_and_journals(tmp_path, headers):
+    app=create_app(Settings(memory_path=tmp_path/'json-ownership.sqlite'))
+    with TestClient(app) as owner, TestClient(app) as other:
+        session=owner.post('/api/experience/reflect',json={'locale':'en'}).json()['session']
+        sid=session['session_id']
+        advance=json.dumps({'session_id':sid,'message':'next','locale':'en'})
+        assert other.post('/api/chat',content=advance,headers=headers).status_code==404
+        assert owner.get('/api/session/'+sid).json()['makeup_plan']['active_index']==0
+        advanced=owner.post('/api/chat',content=advance,headers=headers)
+        assert advanced.status_code==200
+        assert advanced.json()['session']['makeup_plan']['active_index']==1
+
+        entry=json.dumps({'date':'2026-10-12','look':'A private entry','explicit_consent':True})
+        saved=owner.post('/api/journal',content=entry,headers=headers)
+        assert saved.status_code==200
+        assert [entry['id'] for entry in owner.get('/api/journal').json()['entries']]==[saved.json()['id']]
+        path='/api/journal/'+saved.json()['id']
+        remove=json.dumps({'user_id':session['user_id'],'explicit_consent':True})
+        assert other.request('DELETE',path,content=remove,headers=headers).status_code==404
+        assert owner.request('DELETE',path,content=remove,headers=headers).status_code==200
+
+def test_invalid_json_is_rejected_and_non_json_keeps_its_existing_validation(tmp_path):
+    with TestClient(create_app(Settings(memory_path=tmp_path/'invalid-json.sqlite'))) as client:
+        assert client.post('/api/chat',content=b'\xff').status_code==400
+        assert client.post('/api/chat',content=b'{',headers={'Content-Type':'application/vnd.trace+json'}).status_code==400
+        for headers in ([('Content-Type','text/plain')],
+                        [('Content-Type','text/plain'),('Content-Type','application/json')]):
+            assert client.post('/api/chat',content=b'{',headers=headers).status_code==422
 
 def test_confirmed_transcript_has_retention_and_owner_deletion(tmp_path):
     app=create_app(Settings(memory_path=tmp_path/'retention.sqlite'))
@@ -45,6 +85,8 @@ def test_local_frames_need_consent_freshness_and_unique_ids(tmp_path):
         frame={'session_id':sid,'image':base64.b64encode(raw).decode(),'frame_id':'new-1','captured_at':time.time(),'explicit_consent':False}
         assert c.post('/api/vision/local',json=frame).status_code==403
         frame['explicit_consent']=True
+        assert c.post('/api/vision/local',json=frame).status_code==403
+        frame['permit_id']=grant(c,sid)['permit_id']
         result=c.post('/api/vision/local',json=frame)
         assert result.status_code==200 and result.json()['observation']['confidence'] is None
         assert result.json()['frame_saved'] is False

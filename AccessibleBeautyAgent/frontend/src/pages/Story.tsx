@@ -8,8 +8,8 @@ import {TraceDotGrid} from '../components/TraceDotGrid'
 import {AppleMark} from '../components/AppleMark'
 import type {CallSnapshot} from '../realtime/callController'
 
-interface Props {start:()=>void;navigate:(key:string)=>void;motion?:boolean;snapshot?:CallSnapshot;startVoice?:()=>void;pauseVoice?:()=>void;endVoice?:()=>void;submitVoice?:(text:string)=>void;audioReactive?:boolean;setAudioReactive?:(value:boolean)=>void}
-export function Story({start,navigate,motion=true,snapshot,startVoice,pauseVoice,endVoice,submitVoice,audioReactive=false,setAudioReactive}:Props){
+interface Props {start:()=>void;navigate:(key:string)=>void;motion?:boolean;snapshot?:CallSnapshot;startVoice?:()=>void;pauseVoice?:()=>void;endVoice?:()=>void;submitText?:(text:string)=>void;audioReactive?:boolean;setAudioReactive?:(value:boolean)=>void}
+export function Story({start,navigate,motion=true,snapshot,startVoice,pauseVoice,endVoice,submitText,audioReactive=false,setAudioReactive}:Props){
  const {locale,c,t}=useTrace(),scope=useRef<HTMLElement>(null),[text,setText]=useState('')
  useEffect(()=>{
   const media=gsap.matchMedia();media.add('(prefers-reduced-motion: no-preference)',()=>{
@@ -25,7 +25,7 @@ export function Story({start,navigate,motion=true,snapshot,startVoice,pauseVoice
   scope.current.querySelectorAll('[data-story-reveal]').forEach(node=>observer.observe(node))
   return()=>{observer.disconnect();tweens.forEach(tween=>tween.revert())}
  },[locale,motion])
- function submit(event:FormEvent){event.preventDefault();if(text.trim()){submitVoice?.(text.trim());setText('')}}
+ function submit(event:FormEvent){event.preventDefault();if(text.trim()){submitText?.(text.trim());setText('')}}
  const active=!!snapshot&&!['idle','ended','error','paused'].includes(snapshot.state)
  return <article ref={scope} className="trace-story story-editorial" lang={locale}>
   <section className="story-hero" data-story-depth="0"><SectionBackground showPortrait={false} variant="hero" enabled={motion} state={snapshot?.state} audioReactive={audioReactive} onAudioError={()=>setAudioReactive?.(false)}/>
@@ -33,13 +33,14 @@ export function Story({start,navigate,motion=true,snapshot,startVoice,pauseVoice
    <p className="story-opening">{t('声音、语言与记忆。让美，从你自己的感受开始。','Through voice, language and memory. Begin with how you feel.')}</p>
    <button className="story-enter" onClick={start}>{c.start}<span aria-hidden="true">↗</span></button>
    {snapshot?<details className="story-voice"><summary>{t('听见此刻 · 在这里聊一聊','Hear this moment · Talk here')}</summary>
-    <p>{t('开始后允许麦克风才会聆听。浏览器识别可能由其供应商处理；这里不录音。也可以直接写下来。','Listening starts after you allow the microphone. Browser recognition may use its provider; we do not record audio. You can also write instead.')}</p>
+    <p>{t('允许麦克风后才开始聆听。音频在本机处理。识别出的对话文字可能由当前配置的对话服务处理。也可以直接写下来。','Listening starts after you allow microphone access. Audio is processed on this computer. Recognized conversation text may be sent to the configured conversation service. You can also write instead.')}</p>
     <div className="story-voice-actions"><button disabled={active} onClick={startVoice}>{t('开始语音','Start voice')}</button><button disabled={!active} onClick={pauseVoice}>{t('暂停','Pause')}</button><button onClick={endVoice}>{t('结束','End')}</button></div>
     <label className="story-energy"><input type="checkbox" checked={audioReactive} onChange={event=>setAudioReactive?.(event.target.checked)}/>{t('聆听时本地测量音量，不录制或上传声音。朗读动效仅表示状态。','Measure listening volume locally, without recording or uploading audio. Playback motion indicates state only.')}</label>
     <form onSubmit={submit}><label htmlFor="story-message">{t('把此刻写下来','Write this moment')}</label><div className="story-input"><input id="story-message" value={text} onChange={event=>setText(event.target.value)} maxLength={2000}/><button disabled={!text.trim()}>{t('发送','Send')}</button></div></form>
     {snapshot.error?<p role="alert">{t('语音暂时不可用，可以用文字继续。','Voice is unavailable. Continue with text.')}</p>:null}
     {snapshot.transcript?<p className="story-transcript">{snapshot.transcript}</p>:null}
-    {snapshot.reply?<p className="story-reply" aria-live="polite">{snapshot.reply}</p>:null}
+    <p className="story-reply" aria-live="polite" aria-atomic="true">{snapshot.replyUsesSpeech?null:snapshot.reply}</p>
+    {snapshot.replyUsesSpeech&&snapshot.reply?<p className="story-reply">{snapshot.reply}</p>:null}
    </details>:null}
   </section>
   <section className="story-chapter" data-story-depth="1" data-story-reveal><span aria-hidden="true" className="story-number">01</span><SectionBackground showPortrait={false} variant="wireframe" enabled={motion}/><div className="story-chapter-copy"><BilingualHeading zh="美，从感知开始。" en="Beauty begins with perception." level={2}/><p>{c.storyVisualBody}</p></div></section>

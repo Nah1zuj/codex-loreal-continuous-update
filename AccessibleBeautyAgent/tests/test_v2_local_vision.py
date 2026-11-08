@@ -21,14 +21,15 @@ def test_local_signals_are_not_calibrated_makeup_decisions():
     assert result['confidence'] is None and result['calibrated'] is False
     assert result['regions']['left_cheek']['area']>0
     compared=analyzer.analyze(image(130),result['measurement'])
-    assert compared['comparison']['comparable'] is True
+    assert compared['comparison'] is None and compared['source']=='local_opencv_proxy'
     assert compared['status']=='UNCERTAIN'
 
 def test_bad_gate_produces_no_face_observation():
     class NoFace:
         def evaluate(self,data):return {'gate_pass':False,'failure_reason':'No face'}
     result=LocalRegionAnalyzer(NoFace()).analyze(image(),None)
-    assert result['regions']=={} and result['message']=='No face'
+    assert result['regions']=={} and 'No face' in result['message']
+    assert result['quality']['warnings']==['landmark_model_unavailable','quality_gate_failed']
 
 def test_left_right_are_the_users_sides_not_mirrored_preview():
     pixels=np.full((160,160,3),(110,120,120),dtype=np.uint8)

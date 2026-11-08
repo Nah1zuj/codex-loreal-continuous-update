@@ -210,6 +210,8 @@ class SourceRecord(Record):
     local_file: str | None = None
     accessed_at: str | None = None
     notes: str = ''
+    use_permission: Literal['original', 'cc-by', 'cc0', 'licensed'] | None = None
+    use_basis: str = ''
     @field_validator('url')
     @classmethod
     def valid_url(cls,value):

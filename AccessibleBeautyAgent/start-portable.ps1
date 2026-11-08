@@ -1,5 +1,7 @@
-﻿$ErrorActionPreference='Stop'
+$ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
-if((-not (Test-Path .venv-portable/Scripts/python.exe)) -or (-not (Test-Path work/install-root-windows.txt)) -or ((Get-Content work/install-root-windows.txt -Raw) -ne $PSScriptRoot) -or (-not (Test-Path frontend/node_modules/vite/bin/vite.js))){ & ./install-portable.ps1 }
-& ./.venv-portable/Scripts/python.exe launch-portable.py
+# Run the installer as a child so its exit code is available to this wrapper.
+& powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./install-portable.ps1
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+& ./.venv-portable/Scripts/python.exe launch-portable.py @args
 exit $LASTEXITCODE

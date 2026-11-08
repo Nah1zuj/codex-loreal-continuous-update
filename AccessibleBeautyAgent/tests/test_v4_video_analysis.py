@@ -63,3 +63,27 @@ def test_single_sample_low_confidence_stays_uncertain(client):
 def test_video_sample_cannot_enter_three_frame_demo_consensus(client):
     payload=body(client);payload['demo']=True
     assert client.post('/api/vision/check',json=payload).status_code==422
+
+
+@pytest.mark.parametrize('provider', ['qwen','deepseek'])
+@pytest.mark.parametrize('kind', ['photo','video_sample'])
+def test_legacy_remote_face_path_cannot_reach_provider(client, monkeypatch, provider, kind):
+    from app.routes import api
+
+    payload=body(client)
+    payload['capture_kind']=kind
+    payload['remote_frame_consent']=True
+    payload['images']=[sample()] * (3 if kind=='photo' else 1)
+    agent=client.app.state.agent
+    agent.settings.vision_provider=provider
+    agent.settings.allow_remote_ai=True
+
+    def never_called(*args, **kwargs):
+        pytest.fail('Unsupported remote face request reached image handling')
+
+    monkeypatch.setattr(api, 'decode_image', never_called)
+    monkeypatch.setattr(agent.vision.gate, 'evaluate', never_called)
+    monkeypatch.setattr(agent.vision.provider, 'evaluate', never_called)
+    response=client.post('/api/vision/check', json=payload)
+    assert response.status_code==403
+    assert 'local visual checks' in response.json()['detail']

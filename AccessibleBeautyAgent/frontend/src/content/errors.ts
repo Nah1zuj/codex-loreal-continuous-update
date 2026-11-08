@@ -6,7 +6,9 @@ export function humanError(detail:string,locale:'zh-CN'|'en') {
  if(/模型服务拒绝访问/.test(detail))return en?'Model access was denied. Check the API key and service permissions.':'模型服务拒绝访问，请核对API Key和服务权限。'
  if(/模型服务额度或请求频率受限/.test(detail))return en?'The model quota or request limit was reached. Check the account and retry.':'模型服务额度或请求频率受限，请检查账户后重试。'
  if(/模型服务调用失败|对话暂时不可用|Conversation unavailable/.test(detail))return en?'The text model request failed without an answer. Check the service connection and retry.':'文字模型调用失败，尚未生成回复。请检查服务连接后重试。'
- if(/本地语音服务未确认|本地语音连接超时|本地语音连接已断开|本地语音连接失败/.test(detail))return en?'The local speech connection failed. Restart the project with the restart launcher, refresh this page, and enable voice guidance again.':'本地语音服务连接失败。请使用“重启语音与项目.command”重启项目，刷新页面后再开启语音引导。'
+ if(/本地语音服务未确认|本地语音连接超时|本地语音连接已断开|本地语音连接失败/.test(detail))return en
+  ?'The local speech connection failed. You can continue with text. To retry voice, stop TRACE, then open 启动Demo_Mac.command on Mac or 启动Demo_Windows.bat on Windows. Refresh this page and enable voice guidance again.'
+  :'本地语音服务连接失败。你可以继续使用文字。如需重试语音，请先停止 TRACE，再打开 Mac 的「启动Demo_Mac.command」或 Windows 的「启动Demo_Windows.bat」。刷新页面后重新开启语音引导。'
  if(/麦克风仍未返回/.test(detail))return en?'The browser has not supplied a microphone. Check system and site microphone permission, then enable voice guidance again.':'浏览器尚未提供麦克风。请检查系统和站点的麦克风许可，再重新开启语音引导。'
  if(/本地语音连接|本地语音服务|本地中文语音模型/.test(detail))return en?'Local voice is not connected. Use the project launcher, then enable voice guidance again.':'本机语音尚未连接。请使用本项目启动入口，再重新开启语音引导。'
  if(/音频处理模块|缺少本地音频采集能力/.test(detail))return en?'This browser could not start local audio. Try a browser with microphone and AudioWorklet support.':'当前浏览器未能启动本地音频。请换用支持麦克风与 AudioWorklet 的浏览器。'

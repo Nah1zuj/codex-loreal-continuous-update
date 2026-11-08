@@ -1,5 +1,7 @@
 # 欧莱雅 Accessible Beauty Demo｜组员导入指南
 
+当前为 TRACE 内部验证版，已同步 2026 年 11 月 7 日读屏修订及净安装验证记录。Mac 和 Windows 现场复测结果待回填。当前验收状态见 [交付验证记录](specs/008-accessible-release/verification.md)，现场检查表见 [设备验收清单](specs/008-accessible-release/device-acceptance.md)。
+
 GitHub 仓库：<https://github.com/Nah1zuj/codex-loreal-continuous-update>
 
 ## 1. 下载项目
@@ -14,23 +16,23 @@ git clone https://github.com/Nah1zuj/codex-loreal-continuous-update.git
 
 ## 2. 安装并启动
 
-需要联网安装依赖和语音模型，并安装 Node.js 22.12+、Python 3.12（Mac 也支持 3.13）。
+安装 Python 3.12.x 和 Node.js 26.10.0。Windows 使用 x64 Python 并包含 Python Launcher。安装依赖和下载模型需要联网。
 
 - **Mac**：双击 `首次安装_Mac.command`，完成后双击 `启动Demo_Mac.command`。
 - **Windows**：双击 `首次安装_Windows.bat`，完成后双击 `启动Demo_Windows.bat`。安装 Python 时请包含 Python Launcher；推荐 Python 3.12。
 
-首次安装会下载依赖、构建前端，并从官方来源下载本地语音模型，可能需要一些时间。启动后按终端提示打开 <http://127.0.0.1:5180/>；停止时在启动终端按 `Control+C`。
+首次安装会下载依赖并构建前端。语音模型按下方命令单独下载并校验固定版本，缺少模型时可先使用文字功能。启动后按终端提示打开 <http://127.0.0.1:5180/>；停止时在启动终端按 `Control+C`。
 
 如果已安装依赖但想单独补齐语音模型，在 `AccessibleBeautyAgent` 目录运行：
 
 ```bash
-.venv-portable/bin/python voice/setup_local_voice_models.py
+.venv-portable/bin/python voice/setup_local_voice_models.py --download
 ```
 
 Windows PowerShell 对应命令：
 
 ```powershell
-.\.venv-portable\Scripts\python.exe voice\setup_local_voice_models.py
+.\.venv-portable\Scripts\python.exe voice\setup_local_voice_models.py --download
 ```
 
 ## 3. 配置自己的模型密钥（可选）
@@ -59,6 +61,6 @@ git push
 ## 仓库中没有的本机文件
 
 - `AccessibleBeautyAgent/.env`：每个人自行从 `.env.example` 复制并填写，不共享密钥。
-- `AccessibleBeautyAgent/voice/models/asr/model.int8.onnx`：约 228 MB，GitHub 普通文件上限为 100 MB，因此不放进仓库。安装脚本会下载官方模型到原目录；如果已有本地模型文件，保留在该目录即可，Git 更新不会提交它。
+- `AccessibleBeautyAgent/voice/models/asr/model.int8.onnx`：约 228 MB，GitHub 普通文件上限为 100 MB，因此不放进仓库。上方模型下载命令会从官方来源下载并校验文件，写入原目录；如果已有本地模型文件，保留在该目录即可，Git 更新不会提交它。
 
 其余运行说明、项目资料和验证记录见本目录的 `00_先读我_运行说明.txt` 及 `AccessibleBeautyAgent/README.md`。

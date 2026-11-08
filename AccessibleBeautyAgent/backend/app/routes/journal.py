@@ -1,9 +1,10 @@
 """Local text journal. Generated drafts are ephemeral; storage needs explicit consent."""
-from datetime import date,datetime,timezone
-import uuid,json,time
+from datetime import date
+import json,time
 from fastapi import APIRouter,Query,Request
 from pydantic import BaseModel,Field,StrictBool,ConfigDict,model_validator
 from typing import Literal
+from app.memory.journal import JournalStore
 
 class DraftMessage(BaseModel):
     model_config=ConfigDict(extra='forbid')
@@ -40,9 +41,19 @@ class JournalEntry(JournalOwner):
     session_id:str|None=None
     save_transcript:StrictBool=False
     occasion:str=Field(default='',max_length=100)
+    confirmation_id:str|None=Field(default=None,min_length=1,max_length=80)
+
+
+class JournalEdit(JournalOwner):
+    date:date
+    look:str=Field(min_length=1,max_length=80)
+    feeling:str=Field(default='',max_length=200)
+    reflection:str=Field(default='',max_length=2000)
+    traits:str=Field(default='',max_length=400)
+    expected_version:int=Field(ge=1)
 
 def build_journal_router(memory,agent,conversation=None):
-    with memory.connect() as db:db.execute('CREATE TABLE IF NOT EXISTS journal (id TEXT PRIMARY KEY, user_id TEXT NOT NULL, payload TEXT NOT NULL, timestamp TEXT NOT NULL)')
+    agent.journal=JournalStore(memory)
     router=APIRouter(prefix='/api/journal')
     @router.post('/draft')
     def draft(body:JournalDraftRequest):
@@ -50,39 +61,33 @@ def build_journal_router(memory,agent,conversation=None):
         return JournalDraft.model_validate(agent.language.journal_draft([m.model_dump() for m in body.messages],body.locale))
     @router.get('')
     def entries(user_id:str=Query(default='demo',min_length=1,max_length=80)):
-        with memory.connect() as db:rows=db.execute('SELECT id,payload,timestamp FROM journal WHERE user_id=? ORDER BY timestamp DESC,id',(user_id,)).fetchall()
-        return {'entries':[{'id':mid,**json.loads(raw),'timestamp':stamp} for mid,raw,stamp in rows]}
+        return {'entries':agent.journal.view(user_id)}
     @router.post('')
     def save(body:JournalEntry):
         if body.explicit_consent is not True:raise PermissionError('请确认保存这份私人文字记录。')
-        payload=body.model_dump(mode='json',exclude={'user_id','explicit_consent','save_transcript'})
+        payload=body.model_dump(mode='json',exclude={'user_id','explicit_consent','save_transcript','confirmation_id'})
         transcript=None
         if body.session_id:
             s=agent.sessions.get(body.session_id)
             if s.user_id!=body.user_id:raise PermissionError('Session owner mismatch')
-            payload['completed_step_count']=s.routine_step if s.routine_started else 0
+            payload['completed_step_count'] = sum(step.status == 'completed' for step in s.makeup_plan.steps) if s.makeup_plan else 0
         if body.save_transcript:
             if not body.session_id or not conversation:raise ValueError('Transcript requires a conversation')
             transcript=conversation.history(body.session_id)
-            if not transcript:raise ValueError('No transcript available')
-            payload['transcript_id']=str(uuid.uuid4())
-        mid=str(uuid.uuid4());stamp=datetime.now(timezone.utc).isoformat()
-        with memory.connect() as db:
-            db.execute('DELETE FROM transcript_records WHERE expires_at<?',(time.time(),))
-            if transcript:db.execute('INSERT INTO transcript_records VALUES (?,?,?,?,?)',(payload['transcript_id'],body.user_id,json.dumps(transcript,ensure_ascii=False),time.time(),time.time()+30*86400))
-            db.execute('INSERT INTO journal VALUES (?,?,?,?)',(mid,body.user_id,json.dumps(payload,ensure_ascii=False),stamp))
-        return {'id':mid,**payload,'timestamp':stamp}
+        return agent.journal.save(body.user_id,payload,transcript,body.confirmation_id,include_transcript=body.save_transcript)
+
+    @router.post('/{entry_id}/edit')
+    def edit(entry_id:str,body:JournalEdit):
+        if body.explicit_consent is not True:
+            raise PermissionError('请先审阅并明确确认保存修改。')
+        changes=body.model_dump(mode='json',exclude={'user_id','explicit_consent','expected_version'})
+        return agent.journal.edit(body.user_id,entry_id,body.expected_version,changes)
+
     @router.delete('/{entry_id}')
     def remove(entry_id:str,body:JournalOwner):
-        if body.explicit_consent is not True:raise PermissionError('请明确确认删除这份记录。')
-        with memory.connect() as db:
-            row=db.execute('SELECT payload FROM journal WHERE id=? AND user_id=?',(entry_id,body.user_id)).fetchone()
-            if row:
-                tid=json.loads(row[0]).get('transcript_id')
-                if tid:db.execute('DELETE FROM transcript_records WHERE id=? AND user_id=?',(tid,body.user_id))
-            result=db.execute('DELETE FROM journal WHERE id=? AND user_id=?',(entry_id,body.user_id))
-            if result.rowcount!=1:raise KeyError('Journal entry not found')
-        return {'deleted':True}
+        if body.explicit_consent is not True:
+            raise PermissionError('请明确确认删除这份记录。')
+        return agent.journal.delete(body.user_id,entry_id)
     return router
 
 def build_transcript_records_router(memory):

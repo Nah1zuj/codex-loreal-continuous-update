@@ -3,7 +3,7 @@ import {BrowserTTSProvider} from './voice'
 import type {RecognitionEngine,VoiceInputMode} from './localVoice'
 import {isSoftPause,isMicrophoneClosePhrase,wakeInput} from './voiceCommands'
 export type CallState='idle'|'requesting_permission'|'listening'|'thinking'|'speaking'|'paused'|'quiet_wake'|'ended'|'error'
-export interface CallSnapshot {state:CallState;transcript:string;reply:string;error:string;progress?:string;recording?:boolean}
+export interface CallSnapshot {state:CallState;transcript:string;reply:string;error:string;progress?:string;recording?:boolean;transcribing?:boolean;replyUsesSpeech?:boolean}
 /** The browser owns permission. Soft pause retains only the local wake listener. */
 export class RealtimeCallController {
  private value:CallSnapshot={state:'idle',transcript:'',reply:'',error:''}
@@ -24,9 +24,13 @@ export class RealtimeCallController {
  get available(){return this.recognition.available}
  get state(){return this.value.state}
  get snapshot():CallSnapshot{return {...this.value}}
+ private get readyProgress(){
+  if(!this.bounded)return ''
+  return this.locale==='en'?'Say “kai shi”, make your request, then say “jie shu” to submit it.':'请说“开始”，表达需求后说“结束”，再提交分析。'
+ }
  subscribe(listener:(snapshot:CallSnapshot)=>void){this.listeners.add(listener);listener(this.snapshot);return ()=>{this.listeners.delete(listener)}}
  private update(state:CallState,fields:Partial<CallSnapshot>={}){this.value={...this.value,...fields,state};for(const listener of this.listeners)listener(this.snapshot)}
- private cancel(){this.capturePending=false;this.value={...this.value,recording:false};++this.generation;this.request?.abort();this.request=null;this.finishSpeech?.();this.finishSpeech=null;this.recognition.abort();this.tts.onState=null;this.tts.stop()}
+ private cancel(){this.capturePending=false;this.value={...this.value,recording:false,transcribing:false};++this.generation;this.request?.abort();this.request=null;this.finishSpeech?.();this.finishSpeech=null;this.recognition.abort();this.tts.onState=null;this.tts.stop()}
  start(record=false){
   if(this.state==='ended'||!['idle','error','paused','quiet_wake'].includes(this.state))return
   this.cancel();this.capturePending=record;this.voiceActive=true;this.readyAnnounced=false;const generation=this.generation
@@ -34,13 +38,29 @@ export class RealtimeCallController {
   if(generation===this.generation&&this.state==='requesting_permission')this.listen()
  }
  beginCapture(){
-  if(!this.bounded||!this.recognition.beginCapture)return
+  if(!this.bounded||!this.recognition.beginCapture||this.value.transcribing)return
   if(['idle','error','paused','quiet_wake'].includes(this.state)){this.start(true);return}
   if(this.state==='requesting_permission'){this.capturePending=true;return}
   if(this.state==='speaking')this.interrupt()
   if(this.state==='listening'){this.update('listening',{error:'',progress:this.locale==='en'?'Preparing recording…':'正在准备录音…'});this.recognition.beginCapture()}
  }
- finishCapture(){if(this.state==='listening'&&this.value.recording){this.update('listening',{recording:false,progress:this.locale==='en'?'Transcribing this request…':'正在识别这一段…'});this.recognition.finishCapture?.()}}
+ discardCapture(){
+  if(this.state!=='listening'&&this.state!=='requesting_permission')return
+  this.cancel()
+  if(this.state==='requesting_permission'){
+   this.inputReady=false;this.voiceActive=false;this.recognition.stop()
+   this.update('paused',{transcript:'',progress:''})
+  }else this.listen()
+ }
+ private showTranscription(){
+  this.update('listening',{recording:false,transcribing:true,
+   progress:this.locale==='en'?'Transcribing this request…':'正在识别这一段…'})
+ }
+ finishCapture(){
+  if(this.state!=='listening'||!this.value.recording)return
+  this.showTranscription()
+  this.recognition.finishCapture?.()
+ }
  pause(){
   if(this.state==='ended'||this.state==='quiet_wake'||this.state==='paused')return
   const live=this.voiceActive&&this.inputReady&&this.recognition.local
@@ -52,11 +72,19 @@ export class RealtimeCallController {
  resume(){if(this.state==='quiet_wake'){this.voiceActive=true;this.cancel();this.listen();this.announce(this.locale==='en'?'I am here. Please continue.':'我在，请继续。')}else if(this.state==='paused')this.start()}
  interrupt(){if(this.state!=='speaking'&&this.state!=='thinking')return;this.cancel();if(this.voiceActive)this.listen();else this.update('paused')}
  end(){if(this.state==='ended')return;this.voiceActive=false;this.inputReady=false;this.cancel();this.recognition.stop();this.update('ended')}
- submit(text:string){if(this.state==='ended'||!text.trim())return;const resume=this.voiceActive;this.cancel();const generation=this.generation;this.update('thinking',{transcript:text,reply:'',error:'',progress:''});if(generation!==this.generation||this.state!=='thinking')return;if(this.recognition.local&&resume)this.bindInput('active');void this.respond(text,generation,resume)}
+ submit(text:string,{speakReply=true}:{speakReply?:boolean}={}){
+  if(this.state==='ended'||!text.trim())return
+  const resume=this.voiceActive
+  this.cancel();const generation=this.generation
+  this.update('thinking',{transcript:text,reply:'',error:'',progress:'',replyUsesSpeech:speakReply})
+  if(generation!==this.generation||this.state!=='thinking')return
+  if(this.recognition.local&&resume)this.bindInput('active')
+  void this.respond(text,generation,resume,speakReply)
+ }
  announce(text:string){
   if(this.state==='ended'||this.state==='quiet_wake'||!text.trim())return
   const resume=this.voiceActive&&this.state!=='paused';this.cancel();const generation=this.generation
-  this.update('speaking',{reply:text,error:'',progress:''});if(generation!==this.generation)return
+  this.update('speaking',{reply:text,error:'',progress:'',replyUsesSpeech:true});if(generation!==this.generation)return
   if(this.recognition.local&&resume)this.bindInput('speaking')
   this.tts.onState=()=>{if(generation===this.generation&&this.tts.state==='error')this.fail('语音播放失败，内容已保留为文字。')}
   const accepted=this.tts.speak(text,false,()=>{if(generation===this.generation){this.tts.onState=null;if(resume)this.listen();else this.update('paused')}})
@@ -74,9 +102,10 @@ export class RealtimeCallController {
   const generation=this.generation
   this.recognition.setMode?.(this.bounded?(mode==='active'&&['listening','requesting_permission'].includes(this.state)?'bounded':'quiet'):mode)
   this.recognition.startCycle({
-   onCapture:recording=>{if(generation===this.generation&&this.state==='listening')this.update('listening',{recording})},
+   onCapture:recording=>{if(generation===this.generation&&this.state==='listening')this.update('listening',{recording,transcribing:false})},
+   onTranscribing:()=>{if(generation===this.generation&&this.state==='listening')this.showTranscription()},
    onProgress:message=>{if(generation===this.generation&&['requesting_permission','listening'].includes(this.state))this.update(this.state,{progress:message})},
-   onReady:()=>{if(generation!==this.generation)return;this.inputReady=true;if(this.state==='requesting_permission')this.update('listening',{progress:this.bounded?'请说“开始”，表达需求后说“结束”，再提交分析。':''});if(this.capturePending&&this.state==='listening'){this.capturePending=false;this.readyAnnounced=true;this.recognition.beginCapture?.();return}if(!this.readyAnnounced&&this.state==='listening'){this.readyAnnounced=true;this.onReady?.()}},
+   onReady:()=>{if(generation!==this.generation)return;this.inputReady=true;if(this.state==='requesting_permission')this.update('listening',{progress:this.readyProgress});if(this.capturePending&&this.state==='listening'){this.capturePending=false;this.readyAnnounced=true;this.recognition.beginCapture?.();return}if(!this.readyAnnounced&&this.state==='listening'){this.readyAnnounced=true;this.onReady?.()}},
    onText:text=>{
     if(generation!==this.generation||this.state==='ended')return
     const wake=wakeInput(text)
@@ -89,6 +118,7 @@ export class RealtimeCallController {
     if(!this.recognition.local&&this.state!=='listening')return
     if(isSoftPause(text)){this.pause();return}
     if(isMicrophoneClosePhrase(text)){if(this.voiceActive)this.announce(this.locale==='en'?'Closing the microphone is available through its button. You can pause replies by voice.':'关闭麦克风使用按钮。需要安静时，可以说请终止对话。');return}
+    if(this.state!=='listening')return
     if(wake!==null){if(wake&&!this.bounded)this.submit(wake);else this.announce(this.locale==='en'?'I am here.':'我在，请继续。');return}
     if(!text.trim())return
     this.submit(text)
@@ -100,11 +130,11 @@ export class RealtimeCallController {
  private listen(){
   ++this.generation
   if(!this.recognition.local)this.update('listening')
-  else if(this.state!=='requesting_permission')this.update('listening',{progress:this.bounded?'请说“开始”，表达需求后说“结束”，再提交分析。':''})
+  else if(this.state!=='requesting_permission')this.update('listening',{progress:this.readyProgress})
   const generation=this.generation
   if(generation===this.generation&&(this.state==='listening'||this.state==='requesting_permission'))this.bindInput('active')
  }
- private async respond(text:string,generation:number,resume=true){
+ private async respond(text:string,generation:number,resume:boolean,speakReply:boolean){
   if(generation!==this.generation||this.state!=='thinking')return
   try{
    this.request=new AbortController()
@@ -120,13 +150,20 @@ export class RealtimeCallController {
      if(!this.tts.speak(sentence,false,()=>{this.finishSpeech=null;resolve()})){speechFallback();resolve()}
     }))
    }
-   const reply=await this.sendTranscript(text,part=>{
+   const onDelta=speakReply?(part:string)=>{
     if(generation!==this.generation)return
     streamed+=part;pending+=part;this.update(this.state,{reply:streamed})
     let match:RegExpMatchArray|null
     while((match=pending.match(/^([\s\S]*?[。！？.!?](?:\s|$))/))){enqueue(match[1]);pending=pending.slice(match[1].length)}
-   },this.request.signal)
+   }:undefined
+   const reply=await this.sendTranscript(text,onDelta,this.request.signal)
    if(generation!==this.generation)return
+   if(!speakReply){
+    this.request=null
+    this.update(resume?'thinking':'paused',{reply})
+    if(resume&&generation===this.generation)this.listen()
+    return
+   }
    if(streamed){
     const remainder=reply.startsWith(spoken)?reply.slice(spoken.length):pending
     if(remainder.trim())enqueue(remainder)

@@ -1,0 +1,7 @@
+{
+  "python": "3.12",
+  "node": "26.10.0",
+  "frontend": 5180,
+  "backend": 8012,
+  "voice": 8013
+}

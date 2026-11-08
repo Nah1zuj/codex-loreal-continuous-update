@@ -44,7 +44,9 @@ def test_memory_string_consent_rejected(client):
 
 
 def test_memory_roundtrip_and_owner(client):
-    r = client.post('/api/memory', json={'user_id': 'demo', 'candidate': {'feedback': '唇色稍强', 'context': 'dinner', 'preferred_saturation': 'low'}, 'explicit_consent': True})
+    draft=client.post('/api/memory/preview',json={'user_id':'demo','candidate':{
+        'feedback':'唇色稍强','context':'dinner','preferred_saturation':'low'}}).json()
+    r=client.post('/api/memory',json={'user_id':'demo',**draft,'explicit_consent':True})
     assert r.status_code == 200, r.text
     mid = r.json()['memory_id']
     assert client.get('/api/profile/demo').json()['profile']['preferred_saturation'] == 'low'
@@ -95,7 +97,9 @@ def test_full_mock_journey(client):
     r = chat(client, '唇色稍微太强，下次想淡一点', sid)
     assert r['session']['stage'] == 'MEMORY_CONSENT'
     assert client.get('/api/profile/demo').json()['episodes'] == []
-    r = chat(client, '', sid, action='memory_consent', consent=True)
+    r = chat(client, '', sid, action='memory_consent', consent=True,
+             memory_candidate_id=r['session']['memory_candidate_id'],
+             memory_candidate_version=r['session']['memory_candidate_version'])
     assert r['session']['stage'] == 'COMPLETE'
     assert len(client.get('/api/profile/demo').json()['episodes']) == 1
 

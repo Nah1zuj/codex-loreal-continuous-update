@@ -1,27 +1,53 @@
 """Loopback-only speech worker; no persistence, provider keys or network inference."""
-import asyncio,json
+import asyncio,json,logging,os
 from contextlib import asynccontextmanager
+from pathlib import Path
 from fastapi import FastAPI,WebSocket,WebSocketDisconnect
-from engine import Models,AudioSession
+from setup_local_voice_models import check
 
 models=None
 connections=0
+model_status='not_loaded'
+frontend_port=os.getenv('TRACE_FRONTEND_PORT')
+default_frontend=json.loads((Path(__file__).resolve().parents[1]/'runtime.json').read_text(encoding='utf-8'))['frontend']
+frontend_ports=[frontend_port] if frontend_port else [default_frontend,5174,5173]
+allowed_origins={f'http://{host}:{port}' for host in ('localhost','127.0.0.1') for port in frontend_ports}
 @asynccontextmanager
 async def lifespan(app):
-    global models
-    models=await asyncio.to_thread(Models)
-    yield
-    models=None
+    global models,model_status
+    try:
+        if await asyncio.to_thread(check):
+            model_status='assets_missing_or_invalid'
+        else:
+            from engine import Models
+            models=await asyncio.to_thread(Models)
+            model_status='loaded'
+    except (ImportError,OSError,RuntimeError,ValueError):
+        logging.getLogger(__name__).exception('Local speech model loading failed')
+        model_status='load_failed'
+    try:
+        yield
+    finally:
+        models=None
+        model_status='not_loaded'
 app=FastAPI(title='TRACE local voice',lifespan=lifespan)
 @app.get('/voice/health')
-def health():return {'ready':models is not None,'processing':'on_this_computer','engine':'sherpa-onnx','microphone_required':True,'audio_saved':False,'quiet_mode':'keyword_only','supported_languages':['zh-CN','en'],'connections':connections}
+def health():return {'ready':models is not None,'model_status':model_status,'device_verified':False,'processing':'on_this_computer','engine':'sherpa-onnx','microphone_required':True,'audio_saved':False,'quiet_mode':'keyword_only','supported_languages':['zh-CN','en'],'connections':connections}
 @app.websocket('/voice/stream')
 async def stream(ws:WebSocket):
     global connections
-    if ws.headers.get('origin') not in {'http://127.0.0.1:5180','http://localhost:5180','http://127.0.0.1:5174','http://localhost:5174','http://127.0.0.1:5173','http://localhost:5173'} or connections>=4 or models is None:
+    if ws.headers.get('origin') not in allowed_origins or connections>=4 or models is None:
         await ws.close(code=1008);return
     await ws.accept();connections+=1
-    session=AudioSession(models)
+    from engine import AudioSession
+    session=AudioSession(models,defer_transcription=True)
+
+    async def transcribe_capture(explicit=False):
+        if not session.capturing:return
+        await ws.send_json({'type':'transcribing','epoch':session.epoch})
+        event=await asyncio.to_thread(session.finish_capture,explicit)
+        if event:await ws.send_json(event)
+
     try:
         await ws.send_json({'type':'ready','processing':'on_this_computer'})
         while True:
@@ -35,13 +61,18 @@ async def stream(ws:WebSocket):
                     await ws.send_json({'type':'mode','mode':session.mode,'epoch':session.epoch})
                 elif command.get('type')=='capture':
                     if command.get('epoch')!=session.epoch or command.get('action') not in {'start','end'}:continue
-                    event=await asyncio.to_thread(session.begin_capture if command['action']=='start' else lambda:session.finish_capture(explicit=True))
-                    if event:await ws.send_json(event)
+                    if command['action']=='end':
+                        await transcribe_capture(explicit=True)
+                    elif event:=session.begin_capture():
+                        await ws.send_json(event)
                 elif command.get('type')=='metrics':await ws.send_json({'type':'metrics',**session.metrics})
                 else:raise ValueError('Unknown control message')
             elif message.get('bytes') is not None:
                 event=await asyncio.to_thread(session.feed,message['bytes'])
-                if event:await ws.send_json(event)
+                if event and event['type']=='transcribing':
+                    await transcribe_capture()
+                elif event:
+                    await ws.send_json(event)
     except WebSocketDisconnect:pass
     except (ValueError,KeyError,TypeError):
         await ws.close(code=1008)

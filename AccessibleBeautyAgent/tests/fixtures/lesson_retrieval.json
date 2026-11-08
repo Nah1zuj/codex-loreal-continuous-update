@@ -1,0 +1,6 @@
+[
+  {"query":"轻薄底妆 粉底","language":"zh-CN","area":"foundation","expected":"coaching_foundation_zh","task_evidence":"轻拍"},
+  {"query":"熟悉的腮红 色彩","language":"zh-CN","area":"blush","expected":"coaching_blush_zh","task_evidence":"腮红"},
+  {"query":"lip color apply","language":"en","area":"lips","expected":"coaching_lips_en","task_evidence":"lip"},
+  {"query":"familiar moisturizer prep","language":"en","area":"prep","expected":"coaching_prep_en","task_evidence":"moistur"}
+]

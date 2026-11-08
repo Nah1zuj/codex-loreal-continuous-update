@@ -15,7 +15,7 @@ class LocalLandmarks:
             if self.detector is None:
                 if not MODEL.is_file():self.status='model_missing';return None
                 try:
-                    manifest=json.loads(MODEL.with_suffix('.manifest.json').read_text(encoding='utf-8'))
+                    manifest=json.loads(Path(__file__).with_name('face-landmarker.json').read_text(encoding='utf-8'))
                     if hashlib.sha256(MODEL.read_bytes()).hexdigest()!=manifest['sha256']:self.status='model_integrity_failed';return None
                     import mediapipe as mp
                     self.mp=mp
@@ -25,7 +25,12 @@ class LocalLandmarks:
             pixels=cv2.imdecode(np.frombuffer(raw,np.uint8),cv2.IMREAD_COLOR)
             if pixels is None:raise ValueError('Invalid image')
             image=self.mp.Image(image_format=self.mp.ImageFormat.SRGB,data=cv2.cvtColor(pixels,cv2.COLOR_BGR2RGB))
-            result=self.detector.detect(image)
+            try:
+                result=self.detector.detect(image)
+            except (RuntimeError, ValueError):
+                self.close()
+                self.status='runtime_unavailable'
+                return None
             self.status='ready'
             if len(result.face_landmarks)!=1:return {'face_count':len(result.face_landmarks),'points':[]}
             return {'face_count':1,'points':[(p.x,p.y,p.z) for p in result.face_landmarks[0]]}

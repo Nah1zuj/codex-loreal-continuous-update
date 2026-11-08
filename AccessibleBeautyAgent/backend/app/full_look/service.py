@@ -6,6 +6,23 @@ from app.full_look.materials import MaterialService
 
 LABELS={'skincare':'护肤与妆前','makeup':'妆容','hair':'发型','outfit':'穿搭','accessories':'配饰','fragrance':'香氛'}
 
+UNKNOWNS = {
+    'skincare': '当前皮肤感受与手边用品未知。',
+    'makeup': '手边色号与实际妆效未知。',
+    'hair': '发长和手边工具未知。',
+    'outfit': '已有衣物、面料成分与天气未知。',
+    'accessories': '已有配饰及其材质未知。',
+    'fragrance': '手边香氛及实际气味未知。',
+}
+
+
+class LookVersionConflict(ValueError):
+    def __init__(self, plan):
+        self.version = plan.version
+        self.plan_id = plan.plan_id
+        super().__init__('方案版本已更新，请刷新后再修改。')
+
+
 class FullLookService:
     def __init__(self,agent):self.agent=agent;self.materials=MaterialService()
     def editable(self,s):
@@ -20,7 +37,10 @@ class FullLookService:
     def plan(self,s):
         self.editable(s)
         if s.todays_look is not None:return s.todays_look
-        if not s.selected_look and not s.makeup_plan:raise ValueError('请先表达场景并选择妆容方向。')
+        course = self.agent.coaching.visible_plan(s)
+        if not s.selected_look and course is None:
+            if s.makeup_plan:raise self.agent.coaching.unavailable_course()
+            raise ValueError('请先表达场景并选择妆容方向。')
         rows={
             'skincare':('保留你已知可耐受的基础妆前准备','可省略；不诊断皮肤，也不推断过敏安全。','Your familiar prep'),
             'makeup':('Soft Formal · 柔和正式','这是场景演示方向；你可以只做熟悉的步骤。','Soft Formal'),
@@ -29,24 +49,33 @@ class FullLookService:
             'accessories':('可选的简洁配件，也可以不佩戴','不假设你戴耳饰，也不承诺金属低敏。','Optional simple accessories'),
             'fragrance':('可选淡花香或花木调方向，也可以无香','属于主观风格方向；没有具体产品或气味观察。','Optional floral/woody direction'),
         }
-        sections={key:LookSection(suggestions=[self.suggestion(key,*row)]) for key,row in rows.items()}
+        sections={key:LookSection(suggestions=[self.suggestion(key,*row)], unknowns=[UNKNOWNS[key]])
+                  for key,row in rows.items()}
+        sections['hair'].suggestions.append(self.suggestion(
+            'hair_keep', '保留现有发型', '你可以把发型维持在自己习惯的状态。', 'Keep your current hairstyle',
+        ))
         sections['makeup'].look_id=s.selected_look;sections['makeup'].routine_id=s.routine_id
         # Do not relabel a different selected look as Soft Formal.
         if s.selected_look and s.selected_look!='soft_formal':sections['makeup'].suggestions=[self.suggestion('makeup',self.agent.store.look_map[s.selected_look]['name'],'沿用你当前选择的妆容方向。')]
         elif not s.selected_look:
             # Reuse the actual coaching plan. Do not select a legacy preset or
             # reset progress to satisfy the visual presentation.
-            sections['makeup'].suggestions=[self.suggestion('coaching_makeup','本次上妆计划','沿用当前步骤：'+'、'.join(step.title for step in s.makeup_plan.steps)+'。美没有统一的定义，按你喜欢的方式表达就好。','Your current makeup plan')]
+            sections['makeup'].suggestions=[self.suggestion('coaching_makeup','本次上妆计划','沿用当前步骤：'+'、'.join(step.title for step in course.steps)+'。美没有统一的定义，按你喜欢的方式表达就好。','Your current makeup plan')]
         s.todays_look=FullLook(plan_id='look_'+uuid.uuid4().hex,session_id=s.session_id,scene=s.scene or 'unspecified',desired_impression=s.desired_impression,sections=sections,uncertainties=['人工策划演示草稿，尚未作为真实商品推荐审核。','天气、衣橱、发长、皮肤与佩戴偏好未知；可以澄清或修改。'])
         self.agent.policies.validate_plan(s.todays_look)
         return s.todays_look
     def version(self,p,expected):
-        if expected is not None and expected!=p.version:raise ValueError('方案版本已更新，请刷新后再修改。')
+        if expected is not None and expected!=p.version:raise LookVersionConflict(p)
     def revise(self,s,request):
         self.editable(s);p=self.get(s);self.version(p,request.expected_version)
         text=request.user_request.strip();t=text.lower();changes={};reasons=[]
-        def put(key,name,reason,materials=None,skip=False):
-            changes[key]=LookSection(state='skipped' if skip else 'proposed',suggestions=[] if skip else [self.suggestion(key+'_'+str(p.version+1),name,reason,user=True)],materials=materials or [])
+        def put(key,name,reason,materials=None,skip=False,fact=None):
+            facts = [fact] if fact else []
+            changes[key] = LookSection(
+                state='skipped' if skip else 'proposed',
+                suggestions=[] if skip else [self.suggestion(key+'_'+str(p.version+1),name,reason,user=True)],
+                materials=materials or [], facts=facts, unknowns=[UNKNOWNS[key]],
+            )
             if materials:
                 changes[key].suggestions[0].source_refs=list(dict.fromkeys(url for mid in materials for url in self.materials.by_id[mid]['source_refs']))
             reasons.append(reason)
@@ -58,7 +87,7 @@ class FullLookService:
             elif any(x in t for x in ('发型','头发','hair')):put('hair',text,'记录你明确提出的发型方向，未推断发长或可行性。')
             if any(x in t for x in ('黑色连衣裙','black dress')):
                 put('outfit','你选择的黑色连衣裙','已固定你确认的衣物；其它领域不自动改变。')
-            elif any(x in t for x in ('棉质衬衫','棉衬衫','cotton shirt')) and not any(x in t for x in ('看着像','看起来像','照片','可能','不知道','不确定','不是','没有','不穿','不想','maybe','looks like','not ','no ','unsure','photo')):put('outfit','你确认已有的棉质衬衫','成分由你的明确陈述提供，不由照片推断。',['cotton'])
+            elif any(x in t for x in ('棉质衬衫','棉衬衫','cotton shirt')) and not any(x in t for x in ('看着像','看起来像','照片','可能','不知道','不确定','不是','没有','不穿','不想','maybe','looks like','not ','no ','unsure','photo')):put('outfit','你确认已有的棉质衬衫','成分由你的明确陈述提供，不由照片推断。',['cotton'],fact='你明确提供了棉质衬衫这一信息。')
             elif any(x in t for x in ('透气','breathable','不那么有光泽','比缎面更日常')):
                 put('outfit','比较棉与亚麻的具体织物，再由你选择','透气和光泽受结构、厚度及后整理影响；天气未知，不编造温度。',['cotton','linen'])
             elif any(x in t for x in ('衣服','穿搭','outfit','衬衫','裙')):put('outfit',text,'记录你选择的穿搭；缺少的成分信息保持未知。')
@@ -78,26 +107,43 @@ class FullLookService:
                 section.look_id=s.selected_look;section.routine_id=s.routine_id
                 if section.suggestions:section.suggestions[0].reason+=' 妆容意愿已记录；现有步骤保持原方案，具体步骤调整需要另行确认。'
             p.sections[key]=section
-            if key in p.user_confirmed_sections:p.user_confirmed_sections.remove(key)
         if changes:
             p.version+=1
             p.pending_coordination=['你愿意再讨论配饰或唇色与黑裙的协调吗？未获同意前不会修改其它项。'] if '黑色连衣裙' in t or 'black dress' in t else []
         return {'plan':p.model_dump(),'changed_sections':list(changes),'unchanged_sections':[k for k in DOMAINS if k not in changes],'reasons':reasons or ['没有识别到要修改的领域，请说明发型、穿搭、配饰或香氛。'],'version':p.version}
     def confirm(self,s,request):
-        self.editable(s);p=self.get(s);self.version(p,request.expected_version)
+        self.editable(s)
+        p = self.get(s)
+        self.version(p, request.expected_version)
+        updates = {}
         for key in dict.fromkeys(request.sections):
-            p.sections[key].state='confirmed' if request.decision=='confirm' else 'skipped'
-            if request.decision=='confirm' and key not in p.user_confirmed_sections:p.user_confirmed_sections.append(key)
-            if request.decision=='skip' and key in p.user_confirmed_sections:p.user_confirmed_sections.remove(key)
-        p.version+=1;return p
+            section = p.sections[key]
+            if request.decision == 'select':
+                if not any(item.id == request.suggestion_id for item in section.suggestions):
+                    raise ValueError('所选建议不属于这个领域，请刷新。')
+                if section.selected_suggestion_id != request.suggestion_id or section.state == 'skipped':
+                    updates[key] = section.model_copy(update={'selected_suggestion_id':request.suggestion_id,'state':'proposed'})
+            elif request.decision == 'confirm':
+                selected = section.selected_suggestion_id
+                if selected is None and len(section.suggestions) == 1:
+                    selected = section.suggestions[0].id
+                if selected is None:
+                    raise ValueError('请选择要确认的建议；也可以跳过这个领域。')
+                updates[key] = section.model_copy(update={'selected_suggestion_id':selected,'state':'confirmed'})
+            else:
+                updates[key] = section.model_copy(update={'state':'skipped'})
+        if any(p.sections[key] != value for key,value in updates.items()):
+            p.sections.update(updates)
+            p.version += 1
+        return p
     def summary(self,s,section=None):
         p=self.get(s);keys=[section] if section else DOMAINS
-        return '\n'.join([f'今日造型 v{p.version}：场景演示草稿，由你决定。']+[LABELS[k]+'：'+('按你的选择跳过。' if p.sections[k].state=='skipped' else '；'.join(x.display_name_zh for x in p.sections[k].suggestions)) for k in keys])
+        return '\n'.join([f'今日造型 v{p.version}：场景演示草稿，由你决定。']+[LABELS[k]+'：'+('按你的选择跳过。' if p.sections[k].state=='skipped' else '；'.join(x.display_name_zh for x in p.sections[k].suggestions if p.sections[k].selected_suggestion_id in (None, x.id))) for k in keys])
     def memory_candidate(self,s,feedback):
         self.editable(s);p=self.get(s)
         candidate=self.agent.propose_memory_update(feedback);candidate['context']=s.scene or 'unspecified'
         candidate['material_preferences']=list(dict.fromkeys(p.sections['outfit'].materials))
         candidate['domain_preferences']={k:[x.display_name_zh for x in sec.suggestions if x.user_override] for k,sec in p.sections.items() if any(x.user_override for x in sec.suggestions)}
-        s.memory_candidate=candidate;self.agent.sessions.transition(s,Stage.MEMORY_CONSENT)
+        self.agent.prepare_session_preference(s,candidate);self.agent.sessions.transition(s,Stage.MEMORY_CONSENT)
         return candidate
 
