@@ -1,0 +1,63 @@
+import {BilingualHeading} from '../visual/BilingualHeading'
+import {useEffect,useRef,useState} from 'react'
+import {api} from '../api/client'
+import {useTrace} from '../content/Locale'
+import {CalendarApple} from '../components/CalendarApple'
+export interface JournalDraft {look:string;feeling:string;reflection:string;traits:string;transcript_id?:string}
+interface Entry {id:string;version?:number;date:string;look:string;feeling:string;reflection:string;traits:string;transcript_id?:string}
+function localDate(d=new Date()){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+export function Journal({seed='',draft,sessionId}:{seed?:string;draft?:JournalDraft|null;sessionId?:string}){
+ const {t,locale}=useTrace();const [entries,setEntries]=useState<Entry[]>([]),[date,setDate]=useState(localDate()),[month,setMonth]=useState(localDate().slice(0,7)),[look,setLook]=useState(''),[feeling,setFeeling]=useState(''),[reflection,setReflection]=useState(''),[traits,setTraits]=useState(''),[consent,setConsent]=useState(false),[status,setStatus]=useState(''),[busy,setBusy]=useState(false),[pendingDelete,setPendingDelete]=useState(''),[sharing,setSharing]=useState('')
+ const [dirty,setDirty]=useState(false)
+ const [editing,setEditing]=useState<Entry|null>(null)
+ const confirmation=useRef<{value:string;id:string}|null>(null)
+ const [saveTranscript,setSaveTranscript]=useState(false),[transcripts,setTranscripts]=useState<Record<string,string>>({})
+ async function readTranscript(id:string){try{const result=await api<{messages:{role:string;text:string}[]}>('/transcript-records/'+encodeURIComponent(id));setTranscripts(rows=>({...rows,[id]:result.messages.map(m=>m.text).join('\n\n')}))}catch{setStatus(t('原文已过期或暂时无法读取。','Transcript expired or unavailable.'))}}
+ function useDraft(){if(!draft)return;setLook(draft.look);setFeeling(draft.feeling);setReflection(draft.reflection);setTraits(draft.traits);setConsent(false);setDirty(false)}
+ useEffect(()=>{if(draft&&!dirty)useDraft()},[draft])
+ useEffect(()=>{let active=true;api<{entries:Entry[]}>('/journal').then(r=>{if(active)setEntries(r.entries)}).catch(()=>{if(active)setStatus(t('私人记录暂时无法读取，请重试。','Could not load private entries. Please retry.'))});return()=>{active=false}},[])
+ const [year,m]=month.split('-').map(Number),offset=(new Date(year,m-1,1).getDay()+6)%7,days=new Date(year,m,0).getDate()
+ const selected=entries.filter(e=>e.date===date)
+ const confirmedTraits=[...new Set(entries.map(e=>e.traits.trim()).filter(Boolean))]
+ function loadRecord(entry:Entry,edit:boolean){
+  setEditing(edit?entry:null);setLook(entry.look);setFeeling(entry.feeling)
+  setReflection(entry.reflection);setTraits(entry.traits);setDate(edit?entry.date:localDate())
+  setSaveTranscript(false);setConsent(false);setDirty(true);confirmation.current=null
+  document.getElementById('journal-entry-look')?.focus()
+ }
+ async function save(){
+  if(!consent||!look.trim()||busy)return
+  setBusy(true);setStatus('')
+  const fields={date,look:look.trim(),feeling,reflection,traits,explicit_consent:true}
+  try{
+   let row:Entry
+   if(editing){
+    row=await api<Entry>('/journal/'+encodeURIComponent(editing.id)+'/edit',{
+     ...fields,expected_version:editing.version??1,
+    })
+   }else{
+    const data={...fields,session_id:sessionId,save_transcript:saveTranscript}
+    const value=JSON.stringify(data)
+    if(confirmation.current?.value!==value)confirmation.current={value,id:crypto.randomUUID()}
+    row=await api<Entry>('/journal',{...data,confirmation_id:confirmation.current.id})
+   }
+   setEntries(previous=>[row,...previous.filter(entry=>entry.id!==row.id)])
+   setMonth(date.slice(0,7));setConsent(false);setEditing(null);confirmation.current=null
+   setStatus(t('私人文字记录已保存。','Private text entry saved.'))
+  }catch(error){setStatus(error instanceof Error?error.message:t('未能保存，请重试。','Could not save. Please retry.'))}
+  finally{setBusy(false)}
+ }
+ async function remove(id:string){
+  if(pendingDelete!==id){setPendingDelete(id);return}
+  setBusy(true)
+  try{
+   await api('/journal/'+encodeURIComponent(id),{explicit_consent:true},'DELETE')
+   setEntries(rows=>rows.filter(row=>row.id!==id));setPendingDelete('')
+   if(editing?.id===id){setEditing(null);setLook('');setFeeling('');setReflection('');setTraits('');setConsent(false)}
+   setStatus(t('记录已删除。','Entry deleted.'))
+  }catch{setStatus(t('删除失败，请重试。','Could not delete. Please retry.'))}
+  finally{setBusy(false)}
+ }
+ function shift(amount:number){setMonth(localDate(new Date(year,m-1+amount,1)).slice(0,7))}
+ return <section className="journal" aria-labelledby="journal-title"><BilingualHeading id="journal-title" zh="拾光 · 美的记忆" en="Trace · Beauty Memory"/><p>{t('把今天的妆容、感受和你认同的特质留给自己。先审阅，再决定是否保存。','Keep your look, feelings and the traits you recognize in yourself. Review before saving.')}</p>{confirmedTraits.length?<section aria-label={t("我确认的特质摘要","My confirmed traits")}><h2>{t("Remember My Choice · 我认同的自己","Remember My Choice · My confirmed traits")}</h2><p>{confirmedTraits.join(" · ")}</p><p className="muted">{t("只汇总你确认保存的描述，不从声音或外貌推断人格。","A summary of descriptions you saved, with no personality inference from voice or appearance.")}</p></section>:null}<div className="journal-grid"><div className="calendar-panel"><BilingualHeading level={2} zh="妆容与感受日历" en="Makeup calendar"/><div className="calendar-heading"><button onClick={()=>shift(-1)} aria-label={t('上个月','Previous month')}>←</button><h2>{new Date(year,m-1,1).toLocaleDateString(locale==='en'?'en':'zh-CN',{year:'numeric',month:'long'})}</h2><button onClick={()=>shift(1)} aria-label={t('下个月','Next month')}>→</button></div><div className="apple-theme-strip" aria-label={t('苹果妆意标签','Apple look labels')}>{[t('日常','Daily'),t('林间','Forest'),t('盛装','Occasion')].map((label,i)=><button key={i} type="button" onClick={()=>{setLook(label);setDirty(true)}}><CalendarApple variant={i}/><span>{label}</span></button>)}</div><div className="calendar-days" role="group" aria-label={t('妆容日历日期','Makeup calendar dates')}>{t('一 二 三 四 五 六 日','M T W T F S S').split(' ').map((label,i)=><span className="weekday" key={i}>{label}</span>)}{Array.from({length:offset},(_,i)=><span aria-hidden="true" key={'blank'+i}/>)}{Array.from({length:days},(_,i)=>{const value=month+'-'+String(i+1).padStart(2,'0'),rows=entries.filter(e=>e.date===value);return <button key={value} className={value===date?'selected-day':''} aria-pressed={value===date} aria-label={value+' '+(rows.length?t('有记录','has entries'):t('无记录','no entry'))} onClick={()=>{setDate(value);setConsent(false)}}><span>{i+1}</span>{rows.length?<><CalendarApple variant={i}/><small>{rows[0].look}</small></>:null}</button>})}</div><p className="muted">{t('只有你确认保存的日期才显示妆容，不会补造记录。','Only dates you saved show a look. Empty days remain empty.')}</p><h3>{date}</h3>{selected.length?selected.map(e=><article className="journal-entry" key={e.id}><h3>{e.look}</h3><p>{e.feeling}</p><p>{e.reflection}</p>{e.transcript_id?<details><summary>{t('确认保存的聊天原文','Confirmed conversation transcript')}</summary><button onClick={()=>void readTranscript(e.transcript_id!)}>{t('读取原文','Read transcript')}</button><p className="transcript-text">{transcripts[e.transcript_id]}</p></details>:null}{e.traits?<p>{t('我认同的特质：','Traits I recognize: ')}{e.traits}</p>:null}<button disabled={busy} onClick={()=>loadRecord(e,true)}>{t('编辑记录','Edit entry')}</button><button disabled={busy} onClick={()=>loadRecord(e,false)}>{t('复制为新日志草稿','Copy to a new journal draft')}</button><button disabled={busy} onClick={()=>void remove(e.id)}>{pendingDelete===e.id?t('确认删除这份记录','Confirm delete entry'):t('删除记录','Delete entry')}</button>{pendingDelete===e.id?<button onClick={()=>setPendingDelete('')}>{t('取消','Cancel')}</button>:null}</article>):<p>{t('这一天还没有记录。','No entry for this day.')}</p>}</div><form className="journal-form" onChange={e=>{if((e.target as HTMLElement).id!=='journal-confirm'){setDirty(true);setConsent(false)}}} onSubmit={e=>{e.preventDefault();void save()}}><h2>{editing?t('编辑私人记录','Edit a private entry'):t('此刻，写给自己','A page for myself')}</h2>{draft?<><p className="draft-note">{t('本次对话已自动整理为待审阅草稿；请纠正不准确的内容。尚未保存。','This conversation has an automatic draft. Correct anything inaccurate. It has not been saved.')}</p>{dirty?<button type="button" onClick={useDraft}>{t('使用最新对话草稿（替换当前编辑）','Use latest draft (replace edits)')}</button>:null}</>:null}<label>{t('日期','Date')}<input type="date" required value={date} onChange={e=>setDate(e.target.value)}/></label><label>{t('今日妆意','Today’s look')}<input id="journal-entry-look" required maxLength={80} value={look} onChange={e=>setLook(e.target.value)}/></label><label>{t('此刻心境','A feeling to keep')}<input maxLength={200} value={feeling} onChange={e=>setFeeling(e.target.value)}/></label><label>{t('今天的片刻','Today’s moments')}<textarea maxLength={2000} rows={5} value={reflection} onChange={e=>setReflection(e.target.value)}/></label>{seed?<button type="button" onClick={()=>{setReflection(seed.slice(0,2000));setConsent(false)}}>{t('把本次回复放入待审阅草稿','Use this reply as a draft')}</button>:null}<label>{t('我想记住的自己（可留白）','What I recognize in myself (optional)')}<input maxLength={400} value={traits} onChange={e=>setTraits(e.target.value)}/></label><p className="muted">{t('这些特质由你填写，不是 AI 的人格测评。日志不自动进入推荐记忆。','You provide these traits. This is not an AI personality assessment. Journal entries do not automatically become recommendation memory.')}</p>{sessionId&&!editing?<label><input type="checkbox" checked={saveTranscript} onChange={e=>setSaveTranscript(e.target.checked)}/>{t('另外同意保存本次聊天原文30天（删除日志会一并删除）','Also save this conversation transcript for 30 days (deleted with this entry)')}</label>:null}<label className="journal-consent"><input id="journal-confirm" type="checkbox" checked={consent} onChange={e=>setConsent(e.target.checked)}/>{t('我已审阅，同意保存这份私人文字记录','I reviewed this entry and consent to private text storage')}</label><button className="primary" disabled={!consent||!look.trim()||busy}>{t('保存私人记录','Save private entry')}</button><button type="button" disabled={!look.trim()} onClick={()=>setSharing([look,feeling,reflection].filter(Boolean).join('\n\n'))}>{t('生成分享草稿','Create sharing draft')}</button>{sharing?<div className="sharing-draft"><label>{t('分享草稿（可以修改，不含完整聊天或照片）','Sharing draft (editable, excludes full chat and photos)')}<textarea rows={6} value={sharing} onChange={e=>setSharing(e.target.value)}/></label><button type="button" onClick={()=>{if(!navigator.clipboard?.writeText){setStatus(t("复制不可用，可以选中文字手动复制。","Copy is unavailable. Select the text to copy manually."));return}navigator.clipboard.writeText(sharing).then(()=>setStatus(t('草稿已复制。由你选择是否发布。','Draft copied. You decide whether to publish.'))).catch(()=>setStatus(t('复制不可用，可以选中文字手动复制。','Copy is unavailable. Select the text to copy manually.')))}}>{t('复制分享草稿','Copy sharing draft')}</button></div>:null}<p role="status">{status}</p></form></div></section>
+}

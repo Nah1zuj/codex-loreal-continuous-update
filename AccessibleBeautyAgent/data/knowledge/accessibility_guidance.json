@@ -1,0 +1,2485 @@
+{
+  "records": [
+    {
+      "source": "demo_team",
+      "source_type": "sample",
+      "source_ids": [],
+      "verified": false,
+      "demo_data": true,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "voice",
+        "blush",
+        "accessibility"
+      ],
+      "guidance_id": "guidance_one_step",
+      "category": "voice_instruction",
+      "principle": "",
+      "description": "一次给一个可执行指令。说明左右时以用户自己的左右为准。不确定就重拍，不做美丑评分。",
+      "content": "一次给一个可执行指令。说明左右时以用户自己的左右为准。不确定就重拍，不做美丑评分。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": [
+        "daily",
+        "dinner",
+        "presentation",
+        "social"
+      ]
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"开始前的空间\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_dffad2c5d2b0a338e4c58144",
+      "category": "tutorial_segment",
+      "principle": "开始前的空间",
+      "description": "把常用物品放在你熟悉的位置。先确认桌面稳定，想停下来时随时告诉我。",
+      "content": "把常用物品放在你熟悉的位置。先确认桌面稳定，想停下来时随时告诉我。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Before we begin\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_f92392891baa16a3468003e1",
+      "category": "tutorial_segment",
+      "principle": "Before we begin",
+      "description": "Keep familiar items in their usual places. Check that the surface is stable; tell me whenever you want to pause.",
+      "content": "Keep familiar items in their usual places. Check that the surface is stable; tell me whenever you want to pause.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"一步一个动作\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_358cb0fa5959b9db83afbaaf",
+      "category": "tutorial_segment",
+      "principle": "一步一个动作",
+      "description": "先说明今天要做的事情。每次只给一个动作，等你确认后再继续。",
+      "content": "先说明今天要做的事情。每次只给一个动作，等你确认后再继续。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"One action at a time\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_8dfa2d7681070814cb22e3ca",
+      "category": "tutorial_segment",
+      "principle": "One action at a time",
+      "description": "First describe today’s goal. Give one action and wait for confirmation before continuing.",
+      "content": "First describe today’s goal. Give one action and wait for confirmation before continuing.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"听懂再开始\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_6fdaef7aec992af74a6846cb",
+      "category": "tutorial_segment",
+      "principle": "听懂再开始",
+      "description": "如果方位不清楚，先重复说明，再由你选择是否继续。不要仅凭颜色区分用品。",
+      "content": "如果方位不清楚，先重复说明，再由你选择是否继续。不要仅凭颜色区分用品。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Understand before acting\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_a1c18ef760edcc5fc90b64ad",
+      "category": "tutorial_segment",
+      "principle": "Understand before acting",
+      "description": "If a direction is unclear, repeat it before continuing. Do not identify products by color alone.",
+      "content": "If a direction is unclear, repeat it before continuing. Do not identify products by color alone.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"沿用熟悉工具\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_f20e006e03beb1a88997d6f6",
+      "category": "tutorial_segment",
+      "principle": "沿用熟悉工具",
+      "description": "先说说你已有并熟悉的工具。不必为了开始练习购买新品。",
+      "content": "先说说你已有并熟悉的工具。不必为了开始练习购买新品。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Familiar tools\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_3320202984e3e6cbd5439647",
+      "category": "tutorial_segment",
+      "principle": "Familiar tools",
+      "description": "Start with tools you already know. New purchases are not required to begin.",
+      "content": "Start with tools you already know. New purchases are not required to begin.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"准备护肤\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_5e4695879c81f07be7f9f357",
+      "category": "tutorial_segment",
+      "principle": "准备护肤",
+      "description": "先询问用户已经习惯的护肤流程，依照手边产品的说明，不替未知成分作安全保证。",
+      "content": "先询问用户已经习惯的护肤流程，依照手边产品的说明，不替未知成分作安全保证。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Skin preparation\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_a1a3aa39ecdf1392ff8d8242",
+      "category": "tutorial_segment",
+      "principle": "Skin preparation",
+      "description": "Ask about the user’s familiar skincare routine. Follow the supplied product label; do not guarantee unknown ingredient safety.",
+      "content": "Ask about the user’s familiar skincare routine. Follow the supplied product label; do not guarantee unknown ingredient safety.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"底妆目标\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_0a23be9d63d05ffe10eed3bd",
+      "category": "tutorial_segment",
+      "principle": "底妆目标",
+      "description": "先问希望轻薄还是更有覆盖感，记录的是用户选择，不是对脸部缺点的推断。",
+      "content": "先问希望轻薄还是更有覆盖感，记录的是用户选择，不是对脸部缺点的推断。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Base intention\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_6767214525f8b3b172eb0d9b",
+      "category": "tutorial_segment",
+      "principle": "Base intention",
+      "description": "Ask whether the user wants lighter coverage or more coverage. Record their choice without inferring flaws.",
+      "content": "Ask whether the user wants lighter coverage or more coverage. Record their choice without inferring flaws.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"减少一次的信息\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_0a814935c02b91885e603622",
+      "category": "tutorial_segment",
+      "principle": "减少一次的信息",
+      "description": "把较长的底妆说明拆成准备、一个区域、确认三个片段，不同时要求多个动作。",
+      "content": "把较长的底妆说明拆成准备、一个区域、确认三个片段，不同时要求多个动作。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Shorter guidance\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_30435a10123d4eb5823b52fa",
+      "category": "tutorial_segment",
+      "principle": "Shorter guidance",
+      "description": "Break a long base instruction into preparation, one region and confirmation. Avoid simultaneous actions.",
+      "content": "Break a long base instruction into preparation, one region and confirmation. Avoid simultaneous actions.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"腮红方向\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_e945b576c9da71737a83b842",
+      "category": "tutorial_segment",
+      "principle": "腮红方向",
+      "description": "先询问熟悉的腮红工具与想要的感觉。未经检查不要声称左右浓淡。",
+      "content": "先询问熟悉的腮红工具与想要的感觉。未经检查不要声称左右浓淡。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Blush direction\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_d2b9995659e50568a537de93",
+      "category": "tutorial_segment",
+      "principle": "Blush direction",
+      "description": "Ask about familiar blush tools and the intended feeling. Do not claim left-right intensity without a valid check.",
+      "content": "Ask about familiar blush tools and the intended feeling. Do not claim left-right intensity without a valid check.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"画面不确定\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_ff736c9e0e44937659076e3b",
+      "category": "tutorial_segment",
+      "principle": "画面不确定",
+      "description": "光线或姿态变化时，先说明无法可靠比较，避免让用户根据不确定结论追加颜色。",
+      "content": "光线或姿态变化时，先说明无法可靠比较，避免让用户根据不确定结论追加颜色。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Uncertain image\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_b88d4d68b616d52652eb0651",
+      "category": "tutorial_segment",
+      "principle": "Uncertain image",
+      "description": "When lighting or pose changes, say comparison is unreliable. Do not ask the user to add color based on uncertainty.",
+      "content": "When lighting or pose changes, say comparison is unreliable. Do not ask the user to add color based on uncertainty.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"唇部选择\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_5815cef8cd96f667d0b95da5",
+      "category": "tutorial_segment",
+      "principle": "唇部选择",
+      "description": "询问用户习惯的唇部产品与使用方法；标签未知时不推断适用部位或成分。",
+      "content": "询问用户习惯的唇部产品与使用方法；标签未知时不推断适用部位或成分。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Lip choices\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_0c8aeca62ab6e57a7ab29564",
+      "category": "tutorial_segment",
+      "principle": "Lip choices",
+      "description": "Ask about familiar lip products and their usual method. Unknown labels do not establish ingredients or appropriate use.",
+      "content": "Ask about familiar lip products and their usual method. Unknown labels do not establish ingredients or appropriate use.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"眼妆边界\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_bbc87bb82353ed10f3ad3fa3",
+      "category": "tutorial_segment",
+      "principle": "眼妆边界",
+      "description": "不为未知工具编造靠近眼睛的精确距离或动作；不舒服时停止，优先使用熟悉方案。",
+      "content": "不为未知工具编造靠近眼睛的精确距离或动作；不舒服时停止，优先使用熟悉方案。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Eye-area boundaries\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_ce0959c80646fb55e7d168ea",
+      "category": "tutorial_segment",
+      "principle": "Eye-area boundaries",
+      "description": "Do not invent precise eye-area movements for unknown tools. Stop when uncomfortable and prefer familiar methods.",
+      "content": "Do not invent precise eye-area movements for unknown tools. Stop when uncomfortable and prefer familiar methods.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"树林灵感\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_4ce067af1d6eeae86479d004",
+      "category": "tutorial_segment",
+      "principle": "树林灵感",
+      "description": "苔绿、暖棕与柔光可作为可选创意意象。先询问用户已有的色彩，不把意象当成必须购买的清单。",
+      "content": "苔绿、暖棕与柔光可作为可选创意意象。先询问用户已有的色彩，不把意象当成必须购买的清单。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Forest inspiration\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_f00291015610a18edfb1c7c9",
+      "category": "tutorial_segment",
+      "principle": "Forest inspiration",
+      "description": "Muted moss, warm brown and soft light can be optional creative references. Ask about existing colors rather than making a shopping requirement.",
+      "content": "Muted moss, warm brown and soft light can be optional creative references. Ask about existing colors rather than making a shopping requirement.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"日常心境\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_1a2001c04360a38ceaa9a70a",
+      "category": "tutorial_segment",
+      "principle": "日常心境",
+      "description": "让用户先讲今天的故事，再问希望保留怎样的感觉。不要强迫每一段聊天进入化妆流程。",
+      "content": "让用户先讲今天的故事，再问希望保留怎样的感觉。不要强迫每一段聊天进入化妆流程。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Daily feelings\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_805e2fa0a82f6aa8e78cb150",
+      "category": "tutorial_segment",
+      "principle": "Daily feelings",
+      "description": "Let the user tell their story before asking what feeling to keep. Every conversation need not become makeup guidance.",
+      "content": "Let the user tell their story before asking what feeling to keep. Every conversation need not become makeup guidance.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"场合与选择\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_7e158a79b17d53af39b710d4",
+      "category": "tutorial_segment",
+      "principle": "场合与选择",
+      "description": "用户可以自己描述场合和正式程度；不要从年龄、残障或性别推断应当使用什么造型。",
+      "content": "用户可以自己描述场合和正式程度；不要从年龄、残障或性别推断应当使用什么造型。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Occasion and choice\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_214eaf0d90716fa2f8f9dca9",
+      "category": "tutorial_segment",
+      "principle": "Occasion and choice",
+      "description": "Let users describe the occasion and formality. Do not infer suitable looks from age, disability or gender.",
+      "content": "Let users describe the occasion and formality. Do not infer suitable looks from age, disability or gender.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"已有用品优先\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_3c5e01f2f70bc3347a42b31f",
+      "category": "tutorial_segment",
+      "principle": "已有用品优先",
+      "description": "推荐前先问是否想用已有物品或设预算。没有实时库存时明确说明，不编造购买链接和价格。",
+      "content": "推荐前先问是否想用已有物品或设预算。没有实时库存时明确说明，不编造购买链接和价格。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Use what is available\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_dcef0165f6c64271c1cbedf5",
+      "category": "tutorial_segment",
+      "principle": "Use what is available",
+      "description": "Before recommendations, ask whether to use existing items or a budget. Without live stock, do not invent prices or purchase links.",
+      "content": "Before recommendations, ask whether to use existing items or a budget. Without live stock, do not invent prices or purchase links.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"香氛可选\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_867bffbd169b9f238fb5fbb0",
+      "category": "tutorial_segment",
+      "principle": "香氛可选",
+      "description": "香氛是可选步骤。先询问个人偏好和场合限制，不把香气与人格或医疗作用绑定。",
+      "content": "香氛是可选步骤。先询问个人偏好和场合限制，不把香气与人格或医疗作用绑定。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Optional fragrance\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_a986adb0a8741a2791829bcc",
+      "category": "tutorial_segment",
+      "principle": "Optional fragrance",
+      "description": "Fragrance is optional. Ask about preferences and setting restrictions; do not equate scent with personality or medical effects.",
+      "content": "Fragrance is optional. Ask about preferences and setting restrictions; do not equate scent with personality or medical effects.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"发型可选\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_1eb85c39e8d618659756d4d6",
+      "category": "tutorial_segment",
+      "principle": "发型可选",
+      "description": "用户可以只做妆容。发型建议先考虑用户习惯和工具，不要求难以操作的步骤。",
+      "content": "用户可以只做妆容。发型建议先考虑用户习惯和工具，不要求难以操作的步骤。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Optional hair styling\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_46db326e002cd6f64972de00",
+      "category": "tutorial_segment",
+      "principle": "Optional hair styling",
+      "description": "Users can choose makeup only. Consider familiar tools and methods rather than requiring difficult steps.",
+      "content": "Users can choose makeup only. Consider familiar tools and methods rather than requiring difficult steps.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"面料与感受\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_46484110843ea7d0e6dfae46",
+      "category": "tutorial_segment",
+      "principle": "面料与感受",
+      "description": "棉麻、丝绸或针织可以作为触感和视觉创意的讨论，具体成分需要看标签，不从照片断言。",
+      "content": "棉麻、丝绸或针织可以作为触感和视觉创意的讨论，具体成分需要看标签，不从照片断言。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Materials and feeling\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_159b2de5aa28ed4e2df05c00",
+      "category": "tutorial_segment",
+      "principle": "Materials and feeling",
+      "description": "Discuss cotton, linen, silk or knit as tactile and creative ideas. Verify actual composition from labels rather than photographs.",
+      "content": "Discuss cotton, linen, silk or knit as tactile and creative ideas. Verify actual composition from labels rather than photographs.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"暂停与替代\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_00fabfcd0dad84410334fcef",
+      "category": "tutorial_segment",
+      "principle": "暂停与替代",
+      "description": "听到暂停先停止当前动作说明。需要替代时先问限制，不把跳过某一步描述为失败。",
+      "content": "听到暂停先停止当前动作说明。需要替代时先问限制，不把跳过某一步描述为失败。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Pause and alternatives\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_b769710e5b9f6cf7f6f2a6a4",
+      "category": "tutorial_segment",
+      "principle": "Pause and alternatives",
+      "description": "Pause the instruction when requested. Ask about constraints before alternatives; skipping a step is not failure.",
+      "content": "Pause the instruction when requested. Ask about constraints before alternatives; skipping a step is not failure.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"视觉授权\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_e5be4645c7d172e5c1259a7b",
+      "category": "tutorial_segment",
+      "principle": "视觉授权",
+      "description": "本地预览与远程分析分别取得同意。告诉用户谁收到图片，不保存整段录像。",
+      "content": "本地预览与远程分析分别取得同意。告诉用户谁收到图片，不保存整段录像。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Image permission\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_56f1c8edf7708a6a359f77fc",
+      "category": "tutorial_segment",
+      "principle": "Image permission",
+      "description": "Obtain distinct permission for local preview and remote analysis. Explain the recipient and never save a full recording.",
+      "content": "Obtain distinct permission for local preview and remote analysis. Explain the recipient and never save a full recording.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"新画面复查\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_e2ab547060fb5b13224c43e4",
+      "category": "tutorial_segment",
+      "principle": "新画面复查",
+      "description": "用户说现在呢时重新取帧，不复用旧结果。比较只在画面条件可比时进行，缺少校准就保持不确定。",
+      "content": "用户说现在呢时重新取帧，不复用旧结果。比较只在画面条件可比时进行，缺少校准就保持不确定。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Fresh recheck\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_d27f4b84f678aa565a146695",
+      "category": "tutorial_segment",
+      "principle": "Fresh recheck",
+      "description": "Capture a fresh frame for a recheck rather than reuse old output. Compare only compatible conditions; remain uncertain without calibration.",
+      "content": "Capture a fresh frame for a recheck rather than reuse old output. Compare only compatible conditions; remain uncertain without calibration.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"确认私人记录\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_342b800634191ae8780a1e62",
+      "category": "tutorial_segment",
+      "principle": "确认私人记录",
+      "description": "先呈现可编辑摘要，把建议与用户实际经历分开。只有用户确认后保存文字。",
+      "content": "先呈现可编辑摘要，把建议与用户实际经历分开。只有用户确认后保存文字。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Confirm a private record\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_9691fd7954eabf2413a26cf6",
+      "category": "tutorial_segment",
+      "principle": "Confirm a private record",
+      "description": "Present an editable summary and distinguish suggestions from lived experiences. Save text only after confirmation.",
+      "content": "Present an editable summary and distinguish suggestions from lived experiences. Save text only after confirmation.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"长期偏好\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_a6c6a83a47fc15453bd9f194",
+      "category": "tutorial_segment",
+      "principle": "长期偏好",
+      "description": "仅把用户认同的明确偏好作为待保存候选。日志不自动成为人格画像或长期偏好。",
+      "content": "仅把用户认同的明确偏好作为待保存候选。日志不自动成为人格画像或长期偏好。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Long-term preferences\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_f9dc08ca31fbd694dcf6efb0",
+      "category": "tutorial_segment",
+      "principle": "Long-term preferences",
+      "description": "Propose only explicitly acknowledged preferences for storage. A journal is not automatically a personality profile or preference memory.",
+      "content": "Propose only explicitly acknowledged preferences for storage. A journal is not automatically a personality profile or preference memory.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"语言与退出\", \"language\": \"zh-CN\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "zh-CN",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_ab0d411e7229a00b64893df9",
+      "category": "tutorial_segment",
+      "principle": "语言与退出",
+      "description": "用用户当前选择的语言说明操作与错误。始终保留文字输入和清晰的退出方式。",
+      "content": "用用户当前选择的语言说明操作与错误。始终保留文字输入和清晰的退出方式。",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "source": "trace_original_v2",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_v2"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "version": 1,
+      "updated_at": null,
+      "review_notes": "{\"title\": \"Language and exit\", \"language\": \"en\", \"start_seconds\": null, \"end_seconds\": null, \"processing_version\": 1, \"permissions\": \"original\"}",
+      "verified_by": null,
+      "verified_at": null,
+      "tags": [
+        "en",
+        "accessibility",
+        "original_draft"
+      ],
+      "guidance_id": "tutorial_bfe6385b581c4cf1cfd8411d",
+      "category": "tutorial_segment",
+      "principle": "Language and exit",
+      "description": "Explain actions and errors in the selected language. Keep text input and a clear exit available.",
+      "content": "Explain actions and errors in the selected language. Keep text input and a clear exit available.",
+      "preferred_pattern": "",
+      "avoid_pattern": "",
+      "example_good": "",
+      "example_bad": "",
+      "scene": []
+    },
+    {
+      "guidance_id": "coaching_prep_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "准备与补水",
+      "description": "按产品标签取少量你已用过的保湿品，用指腹从脸颊向外轻轻铺开，避开眼睛；等待表面不再明显湿滑，不适就停止。",
+      "tags": [
+        "zh-CN",
+        "prep",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "建立稳定、舒适的准备环境。",
+        "requiredProducts": [
+          "你熟悉的保湿产品和干净双手"
+        ],
+        "preparation": [
+          "洗手，把常用物品按固定顺序放在稳定桌面。"
+        ],
+        "instructions": [
+          "按产品标签取少量你已用过的保湿品，用指腹从脸颊向外轻轻铺开，避开眼睛；等待表面不再明显湿滑，不适就停止。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_prep_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Prepare and hydrate",
+      "description": "Use a small label-directed amount of familiar moisturizer. Gently spread outward from the cheeks with finger pads, avoiding the eyes. Wait until the surface is no longer slippery; stop if uncomfortable.",
+      "tags": [
+        "en",
+        "prep",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Prepare a stable, comfortable setup.",
+        "requiredProducts": [
+          "Familiar moisturizer and clean hands"
+        ],
+        "preparation": [
+          "Wash your hands and arrange familiar products on a stable surface."
+        ],
+        "instructions": [
+          "Use a small label-directed amount of familiar moisturizer. Gently spread outward from the cheeks with finger pads, avoiding the eyes. Wait until the surface is no longer slippery; stop if uncomfortable."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_hydration_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "补水",
+      "description": "从一侧脸颊开始，用少量熟悉的保湿品轻轻铺开，再处理另一侧；感觉舒适且不湿滑后再继续。",
+      "tags": [
+        "zh-CN",
+        "hydration",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "避免在不适时继续叠加产品。",
+        "requiredProducts": [
+          "你已耐受的保湿品"
+        ],
+        "preparation": [
+          "先确认标签用法，不为这次妆容临时尝试刺激性产品。"
+        ],
+        "instructions": [
+          "从一侧脸颊开始，用少量熟悉的保湿品轻轻铺开，再处理另一侧；感觉舒适且不湿滑后再继续。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_hydration_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Hydration",
+      "description": "Start on one cheek, gently spread a small amount of familiar moisturizer, then treat the other side. Continue when comfortable and no longer slippery.",
+      "tags": [
+        "en",
+        "hydration",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Avoid layering products when uncomfortable.",
+        "requiredProducts": [
+          "A moisturizer you already tolerate"
+        ],
+        "preparation": [
+          "Check label directions; do not try irritating new products for this session."
+        ],
+        "instructions": [
+          "Start on one cheek, gently spread a small amount of familiar moisturizer, then treat the other side. Continue when comfortable and no longer slippery."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_primer_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "可选妆前",
+      "description": "仅在你通常使用的部位薄薄铺少量妆前品，避开眼睛，等触感不粘再继续；不必为了完成流程购买。",
+      "tags": [
+        "zh-CN",
+        "primer",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "按已有产品需要选择可选妆前步骤。",
+        "requiredProducts": [
+          "已有且适用的妆前产品；没有可以跳过"
+        ],
+        "preparation": [
+          "核对产品标签和熟悉的使用方式。"
+        ],
+        "instructions": [
+          "仅在你通常使用的部位薄薄铺少量妆前品，避开眼睛，等触感不粘再继续；不必为了完成流程购买。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_primer_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Optional primer",
+      "description": "Spread a small thin amount only over areas where you usually use primer, avoiding the eyes. Continue when no longer tacky; no purchase is required.",
+      "tags": [
+        "en",
+        "primer",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Choose optional primer according to familiar product directions.",
+        "requiredProducts": [
+          "A suitable primer you own; skip if unavailable"
+        ],
+        "preparation": [
+          "Check the label and your familiar application method."
+        ],
+        "instructions": [
+          "Spread a small thin amount only over areas where you usually use primer, avoiding the eyes. Continue when no longer tacky; no purchase is required."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_foundation_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "轻薄底妆",
+      "description": "按标签取少量底妆，先点在一侧脸颊，用熟悉工具轻拍向外铺薄，避开眼睛；再处理另一侧，不要一次厚涂。触感均匀、没有明显积聚后告诉我。",
+      "tags": [
+        "zh-CN",
+        "foundation",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "少量分区，保留舒适触感。",
+        "requiredProducts": [
+          "已有底妆和熟悉的海绵、刷子或干净指腹"
+        ],
+        "preparation": [
+          "按标签准备工具，先确认你已用过这个产品。"
+        ],
+        "instructions": [
+          "按标签取少量底妆，先点在一侧脸颊，用熟悉工具轻拍向外铺薄，避开眼睛；再处理另一侧，不要一次厚涂。触感均匀、没有明显积聚后告诉我。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_foundation_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Light base",
+      "description": "Use a small label-directed amount of base on one cheek. Gently tap outward with a familiar tool, keeping the layer thin and away from the eyes. Then do the other side. Tell me when it feels evenly spread without buildup.",
+      "tags": [
+        "en",
+        "foundation",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Work in small areas while keeping a comfortable feel.",
+        "requiredProducts": [
+          "Your base product and familiar sponge, brush or clean finger pads"
+        ],
+        "preparation": [
+          "Prepare the tool as directed and confirm this is a familiar product."
+        ],
+        "instructions": [
+          "Use a small label-directed amount of base on one cheek. Gently tap outward with a familiar tool, keeping the layer thin and away from the eyes. Then do the other side. Tell me when it feels evenly spread without buildup."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_concealer_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "局部遮瑕",
+      "description": "在所选部位点极少量遮瑕，用指腹或熟悉工具轻拍边缘，勿用尖锐工具靠近眼球；先一处，触感铺匀后再继续。",
+      "tags": [
+        "zh-CN",
+        "concealer",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "只处理你想调整的已知部位。",
+        "requiredProducts": [
+          "已有遮瑕与熟悉工具"
+        ],
+        "preparation": [
+          "选择你已熟悉的部位；没有需要可以跳过。"
+        ],
+        "instructions": [
+          "在所选部位点极少量遮瑕，用指腹或熟悉工具轻拍边缘，勿用尖锐工具靠近眼球；先一处，触感铺匀后再继续。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_concealer_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Optional concealer",
+      "description": "Dot a very small amount on the chosen area and gently tap the edges with a finger pad or familiar tool. Keep sharp tools away from the eye. Do one area first and continue when it feels spread out.",
+      "tags": [
+        "en",
+        "concealer",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Treat only a familiar area you want to adjust.",
+        "requiredProducts": [
+          "Your concealer and familiar tool"
+        ],
+        "preparation": [
+          "Choose a familiar area; skip if unnecessary."
+        ],
+        "instructions": [
+          "Dot a very small amount on the chosen area and gently tap the edges with a finger pad or familiar tool. Keep sharp tools away from the eye. Do one area first and continue when it feels spread out."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_brows_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "眉部整理",
+      "description": "用柔软眉刷顺着眉毛生长方向轻梳，一侧完成再换侧；若不熟悉填色，今天只梳理即可，舒适无拉扯后继续。",
+      "tags": [
+        "zh-CN",
+        "brows",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "先整理熟悉的眉形，不要求精细描边。",
+        "requiredProducts": [
+          "熟悉的柔软眉刷，可选已有眉部产品"
+        ],
+        "preparation": [
+          "坐稳，先用手确认眉毛位置，不把尖头工具朝向眼睛。"
+        ],
+        "instructions": [
+          "用柔软眉刷顺着眉毛生长方向轻梳，一侧完成再换侧；若不熟悉填色，今天只梳理即可，舒适无拉扯后继续。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_brows_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Brow grooming",
+      "description": "Gently brush in the direction of brow growth with a soft brush, one side at a time. If filling is unfamiliar, grooming alone is enough today. Continue when comfortable without pulling.",
+      "tags": [
+        "en",
+        "brows",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Groom your familiar brow shape without requiring precise outlines.",
+        "requiredProducts": [
+          "A familiar soft brow brush; optional brow product you own"
+        ],
+        "preparation": [
+          "Sit steadily and locate the brow by touch; do not point sharp tools toward the eyes."
+        ],
+        "instructions": [
+          "Gently brush in the direction of brow growth with a soft brush, one side at a time. If filling is unfamiliar, grooming alone is enough today. Continue when comfortable without pulling."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_eyes_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "可选柔和眼妆",
+      "description": "按标签取极少量眼部适用产品，闭眼后仅在熟悉的外侧眼皮轻扫，远离眼球和睫毛内缘；不做内眼线，不适立即停。完成一侧、感觉舒适再继续。",
+      "tags": [
+        "zh-CN",
+        "eyes",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "以熟悉和安全为先，可完全跳过。",
+        "requiredProducts": [
+          "熟悉的软刷和眼部适用产品"
+        ],
+        "preparation": [
+          "仅做你已能安全完成的方式；看不清或拿不稳时跳过。"
+        ],
+        "instructions": [
+          "按标签取极少量眼部适用产品，闭眼后仅在熟悉的外侧眼皮轻扫，远离眼球和睫毛内缘；不做内眼线，不适立即停。完成一侧、感觉舒适再继续。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_eyes_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Optional soft eye makeup",
+      "description": "Use a very small label-directed amount of an eye-safe product. With the eye closed, softly sweep only a familiar outer lid area, away from the eye and inner lash line. Do not tightline; stop if uncomfortable. Finish one side comfortably before continuing.",
+      "tags": [
+        "en",
+        "eyes",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Prioritize familiarity and safety; skipping is valid.",
+        "requiredProducts": [
+          "A familiar soft brush and eye-safe product"
+        ],
+        "preparation": [
+          "Use only a technique you can safely perform; skip if visibility or handling is difficult."
+        ],
+        "instructions": [
+          "Use a very small label-directed amount of an eye-safe product. With the eye closed, softly sweep only a familiar outer lid area, away from the eye and inner lash line. Do not tightline; stop if uncomfortable. Finish one side comfortably before continuing."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_blush_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "柔和腮红",
+      "description": "用手指辅助找到你熟悉的颧骨附近位置，先在一侧脸颊轻拍或轻扫少量，远离眼睛，向外柔和晕开；再换另一侧。完成后告诉我，不凭触感断言两侧颜色一致。",
+      "tags": [
+        "zh-CN",
+        "blush",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "少量上色，逐侧完成。",
+        "requiredProducts": [
+          "已有腮红和对应的熟悉刷子或干净指腹"
+        ],
+        "preparation": [
+          "按标签选择适合粉状或膏状的工具，先轻沾少量。"
+        ],
+        "instructions": [
+          "用手指辅助找到你熟悉的颧骨附近位置，先在一侧脸颊轻拍或轻扫少量，远离眼睛，向外柔和晕开；再换另一侧。完成后告诉我，不凭触感断言两侧颜色一致。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": "blush_presence"
+      }
+    },
+    {
+      "guidance_id": "coaching_blush_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Soft blush",
+      "description": "Use a finger to locate your familiar cheekbone area. Lightly tap or sweep a small amount onto one cheek, away from the eyes, and softly blend outward. Then do the other side. Tell me when finished; touch cannot confirm matching color.",
+      "tags": [
+        "en",
+        "blush",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Add a small amount, one cheek at a time.",
+        "requiredProducts": [
+          "Your blush and a suitable familiar brush or clean finger pads"
+        ],
+        "preparation": [
+          "Choose a label-appropriate tool for powder or cream and pick up a little product."
+        ],
+        "instructions": [
+          "Use a finger to locate your familiar cheekbone area. Lightly tap or sweep a small amount onto one cheek, away from the eyes, and softly blend outward. Then do the other side. Tell me when finished; touch cannot confirm matching color."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": "blush_presence"
+      }
+    },
+    {
+      "guidance_id": "coaching_lips_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "柔和唇色",
+      "description": "从下唇中部开始，轻点少量熟悉唇品，沿你熟悉的唇面向两侧铺开，再处理上唇；不追求精细外扩。触感舒适、没有厚重积聚后继续。",
+      "tags": [
+        "zh-CN",
+        "lips",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "先少量覆盖熟悉的唇部范围。",
+        "requiredProducts": [
+          "已有唇部适用产品"
+        ],
+        "preparation": [
+          "确认唇部舒适，按标签使用，不共用唇部工具。"
+        ],
+        "instructions": [
+          "从下唇中部开始，轻点少量熟悉唇品，沿你熟悉的唇面向两侧铺开，再处理上唇；不追求精细外扩。触感舒适、没有厚重积聚后继续。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": "lip_presence"
+      }
+    },
+    {
+      "guidance_id": "coaching_lips_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Soft lip color",
+      "description": "Start at the middle of the lower lip. Lightly dot a small amount of familiar lip product and spread along the familiar lip surface toward each side, then treat the upper lip. Avoid extending the outline. Continue when comfortable without thick buildup.",
+      "tags": [
+        "en",
+        "lips",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Apply a small amount within your familiar lip area.",
+        "requiredProducts": [
+          "A lip-safe product you own"
+        ],
+        "preparation": [
+          "Check your lips feel comfortable, follow the label and do not share lip tools."
+        ],
+        "instructions": [
+          "Start at the middle of the lower lip. Lightly dot a small amount of familiar lip product and spread along the familiar lip surface toward each side, then treat the upper lip. Avoid extending the outline. Continue when comfortable without thick buildup."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": "lip_presence"
+      }
+    },
+    {
+      "guidance_id": "coaching_finish_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "收尾",
+      "description": "先检查有没有不舒服或过厚的触感；如有，用干净纸巾轻按，不来回摩擦。若通常用定妆品，按标签少量使用。收好工具，告诉我今天是否完成；没有画面检查就不能确认妆效。",
+      "tags": [
+        "zh-CN",
+        "finish",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "确认自己的舒适程度并整理工具。",
+        "requiredProducts": [
+          "干净纸巾，可选已有定妆品"
+        ],
+        "preparation": [
+          "不必增加新的产品步骤。"
+        ],
+        "instructions": [
+          "先检查有没有不舒服或过厚的触感；如有，用干净纸巾轻按，不来回摩擦。若通常用定妆品，按标签少量使用。收好工具，告诉我今天是否完成；没有画面检查就不能确认妆效。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_finish_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Finish",
+      "description": "Check for discomfort or heavy buildup. If needed, gently press with clean tissue without rubbing. If you normally use setting product, follow its label with a small amount. Put tools away and tell me whether you are done; makeup quality is not visually verified.",
+      "tags": [
+        "en",
+        "finish",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Check comfort and put tools away.",
+        "requiredProducts": [
+          "Clean tissue; optional familiar setting product"
+        ],
+        "preparation": [
+          "No extra product step is required."
+        ],
+        "instructions": [
+          "Check for discomfort or heavy buildup. If needed, gently press with clean tissue without rubbing. If you normally use setting product, follow its label with a small amount. Put tools away and tell me whether you are done; makeup quality is not visually verified."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_removal_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "卸妆",
+      "description": "按标签取适量卸妆品，先从脸颊轻柔处理，不来回用力擦；眼唇仅用适用产品按熟悉方式卸除，不适停止。冲洗或擦除按标签要求，感觉舒适后结束。",
+      "tags": [
+        "zh-CN",
+        "removal",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "按标签温和卸除，避免拉扯。",
+        "requiredProducts": [
+          "熟悉的卸妆品和柔软清洁工具"
+        ],
+        "preparation": [
+          "核对产品是否适用于眼唇，不适用的不能用于那里。"
+        ],
+        "instructions": [
+          "按标签取适量卸妆品，先从脸颊轻柔处理，不来回用力擦；眼唇仅用适用产品按熟悉方式卸除，不适停止。冲洗或擦除按标签要求，感觉舒适后结束。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_removal_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Makeup removal",
+      "description": "Use the label-directed amount of remover. Start gently on the cheeks without vigorous rubbing. Use only suitable products and familiar methods around eyes and lips; stop if uncomfortable. Rinse or wipe as directed and finish when comfortable.",
+      "tags": [
+        "en",
+        "removal",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Remove gently following the label without pulling.",
+        "requiredProducts": [
+          "Familiar remover and soft cleaning tool"
+        ],
+        "preparation": [
+          "Check whether the remover is suitable for eyes and lips; do not use it there if unsuitable."
+        ],
+        "instructions": [
+          "Use the label-directed amount of remover. Start gently on the cheeks without vigorous rubbing. Use only suitable products and familiar methods around eyes and lips; stop if uncomfortable. Rinse or wipe as directed and finish when comfortable."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_troubleshooting_zh",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "停下来调整",
+      "description": "若只是厚重积聚，可用干净纸巾轻按多余部分；若刺痛或明显不适，停止使用并按标签卸除，不靠追加产品解决。告诉我你想停下还是换更简单的步骤。",
+      "tags": [
+        "zh-CN",
+        "troubleshooting",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "遇到不适先停，避免继续堆叠。",
+        "requiredProducts": [
+          "干净纸巾或适用卸妆品"
+        ],
+        "preparation": [
+          "先放下工具，描述具体困扰，不推断皮肤问题。"
+        ],
+        "instructions": [
+          "若只是厚重积聚，可用干净纸巾轻按多余部分；若刺痛或明显不适，停止使用并按标签卸除，不靠追加产品解决。告诉我你想停下还是换更简单的步骤。"
+        ],
+        "accessibilityInstructions": [
+          "以你自己的左右为准，使用熟悉触觉定位；不确定就停。"
+        ],
+        "commonMistakes": [
+          "一次用量太大、在不适时继续或使用不熟悉工具。"
+        ],
+        "completionCriteria": [
+          "自己确认此操作已完成且感觉舒适；这不是视觉验收。"
+        ],
+        "optionalVisualCheck": null
+      }
+    },
+    {
+      "guidance_id": "coaching_troubleshooting_en",
+      "source": "trace_original_phase4",
+      "source_type": "original",
+      "source_ids": [
+        "trace_original_phase4"
+      ],
+      "verified": false,
+      "demo_data": false,
+      "status": "DRAFT",
+      "review_notes": "Original engineering draft; pending qualified makeup/accessibility review.",
+      "category": "makeup_lesson",
+      "principle": "Pause and troubleshoot",
+      "description": "For simple buildup, gently press away excess with clean tissue. If stinging or clearly uncomfortable, stop using the product and remove it as directed; do not add more products. Tell me whether to stop or use a simpler step.",
+      "tags": [
+        "en",
+        "troubleshooting",
+        "original_draft"
+      ],
+      "teaching": {
+        "purpose": "Pause at discomfort rather than adding more layers.",
+        "requiredProducts": [
+          "Clean tissue or suitable familiar remover"
+        ],
+        "preparation": [
+          "Put down tools and describe the concern; do not infer a skin condition."
+        ],
+        "instructions": [
+          "For simple buildup, gently press away excess with clean tissue. If stinging or clearly uncomfortable, stop using the product and remove it as directed; do not add more products. Tell me whether to stop or use a simpler step."
+        ],
+        "accessibilityInstructions": [
+          "Use your own left and right and familiar tactile landmarks. Pause when uncertain."
+        ],
+        "commonMistakes": [
+          "Using too much, continuing at discomfort or using unfamiliar tools."
+        ],
+        "completionCriteria": [
+          "You report finishing comfortably; this is not visual verification."
+        ],
+        "optionalVisualCheck": null
+      }
+    }
+  ]
+}

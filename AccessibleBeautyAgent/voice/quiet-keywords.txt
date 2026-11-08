@@ -1,0 +1,3 @@
+ch óng x īn q ǐ d òng y ǔ y īn j iāo l iú g ōng n éng :2.0 #0.25 @重新启动语音交流功能
+ch óng x īn k āi q ǐ y ǔ y īn g ōng n éng :2.0 #0.25 @重新开启语音功能
+R IH0 Z UW1 M V OY1 S :2.0 #0.25 @resume_voice

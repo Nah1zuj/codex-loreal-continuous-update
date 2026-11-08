@@ -1,0 +1,400 @@
+// @vitest-environment jsdom
+import {act} from 'react'
+import {createRoot, type Root} from 'react-dom/client'
+import {afterEach,beforeEach,expect,it,vi} from 'vitest'
+import App from '../App'
+import {LocaleProvider} from '../content/Locale'
+import type {RecognitionHandlers} from '../realtime/voice'
+let recognitionHandlers:RecognitionHandlers|undefined
+let waitForRecognitionReady=false
+vi.mock('../api/client',()=>({api:vi.fn(async(path:string)=>path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}}:{})}))
+vi.mock('../api/stream',()=>({streamChat:async(body:unknown)=>{const {api}=await import('../api/client');return api('/chat',body)}}))
+vi.mock('../realtime/localVoice',()=>({LocalRecognitionProvider:class {
+ readonly local=true;readonly available=true;private recognition:any;private handlers:any;private locale='zh-CN'
+ setLocale(value:string){this.locale=value;if(this.recognition)this.recognition.lang=value==='en'?'en-US':'zh-CN'}
+ setMode(_value:string){}
+ startCycle(handlers:RecognitionHandlers){this.handlers=handlers;recognitionHandlers=handlers;if(!this.recognition){const C=(window as any).SpeechRecognition;if(!C){handlers.onError('Test input unavailable');return}this.recognition=new C();this.recognition.lang=this.locale==='en'?'en-US':'zh-CN';this.recognition.start()}this.recognition.onresult=(event:any)=>handlers.onText(event.results[0][0].transcript);if(!waitForRecognitionReady)handlers.onReady?.()}
+ beginCapture(){this.handlers?.onCapture?.(true)}
+ abort(){this.recognition?.abort();if(this.recognition)this.recognition.onresult=null;this.handlers=null}
+ stop(){this.abort();this.recognition?.stop();this.recognition=null}
+}}))
+beforeEach(()=>{
+ recognitionHandlers=undefined
+ waitForRecognitionReady=false
+ Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel:vi.fn(),pause:vi.fn(),resume:vi.fn(),speak:(u:any)=>queueMicrotask(()=>u.onend?.())}})
+ vi.stubGlobal('SpeechSynthesisUtterance',class {constructor(public text:string){}})
+ Object.defineProperty(window,'matchMedia',{configurable:true,value:()=>({matches:false,addEventListener(){},removeEventListener(){}})})
+ localStorage.removeItem('trace.voice-enabled')
+})
+let root:Root;let host:HTMLDivElement
+;(globalThis as any).IS_REACT_ACT_ENVIRONMENT=true
+function syntheticCamera(){
+ let trackState:MediaStreamTrackState='live'
+ const track=Object.assign(new EventTarget(),{stop:vi.fn(()=>{trackState='ended'})})
+ Object.defineProperty(track,'readyState',{get:()=>trackState})
+ const media={getTracks:()=>[track],getVideoTracks:()=>[track]}
+ return {media,stop:track.stop,end:()=>{trackState='ended';track.dispatchEvent(new Event('ended'))}}
+}
+function switchLanguage(mode:string){const select=host.querySelector<HTMLSelectElement>('.language-display select')!;select.value=mode;select.dispatchEvent(new Event('change',{bubbles:true}))}
+function button(text:string){return [...host.querySelectorAll('button')].find(b=>b.textContent?.includes(text))!}
+it('region previews change only the digital illustration and do not advance coaching',async()=>{await render('/explore');const {api}=await import('../api/client');vi.mocked(api).mockClear();await act(async()=>button('Blush').click());expect(button('Blush').getAttribute('aria-pressed')).toBe('true');expect(api).not.toHaveBeenCalled();await act(async()=>button('Lips').click());expect(button('Lips').getAttribute('aria-pressed')).toBe('true');expect(api).not.toHaveBeenCalled()})
+async function render(path='/',sid?:string){window.history.replaceState({},'',path);sessionStorage.clear();if(sid)sessionStorage.setItem('trace.session_id',sid);host=document.createElement('div');document.body.append(host);root=createRoot(host);await act(async()=>root.render(<LocaleProvider initialLocale="en"><App/></LocaleProvider>))}
+it('announces permission, recording and transcription in one persistent region and clears obsolete progress',async()=>{
+ waitForRecognitionReady=true
+ ;(window as any).SpeechRecognition=class {start(){}abort(){}stop(){}}
+ await render('/voice')
+ const voiceStatus=host.querySelector('.voice-access-bar [role="status"]')
+ expect(voiceStatus).not.toBeNull()
+ const announcing=(message:string)=>[...host.querySelectorAll('[role="status"], [aria-live="polite"], [aria-live="assertive"]')].filter(region=>region.textContent?.includes(message))
+
+ await act(async()=>button('Click to speak').click())
+ const permissionProgress='Waiting for microphone permission'
+ await act(async()=>recognitionHandlers?.onProgress?.(permissionProgress))
+ expect(announcing(permissionProgress)).toEqual([voiceStatus])
+ expect(host.querySelector('.voice-console')?.textContent).toContain(permissionProgress)
+
+ await act(async()=>recognitionHandlers?.onReady?.())
+ const recordingProgress='Submit when done'
+ await act(async()=>recognitionHandlers?.onProgress?.(recordingProgress))
+ expect(announcing('Recording this request')).toEqual([voiceStatus])
+ expect(announcing(recordingProgress)).toEqual([voiceStatus])
+ await act(async()=>button('Done speaking, submit').click())
+ const transcriptionProgress='Transcribing this request'
+ expect(announcing(transcriptionProgress)).toEqual([voiceStatus])
+ expect(voiceStatus?.textContent?.split(transcriptionProgress)).toHaveLength(2)
+ expect(host.querySelector('.voice-console')?.textContent).toContain(transcriptionProgress)
+
+ await act(async()=>button('Close microphone').click())
+ expect(announcing('Microphone closed')).toEqual([voiceStatus])
+ expect(host.textContent).not.toContain(transcriptionProgress)
+})
+it('voice text camera commands request permission but cannot grant local analysis after denial',async()=>{
+ const getUserMedia=vi.fn(async()=>{throw new DOMException('Denied','NotAllowedError')})
+ Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia}})
+ vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:path==='/session'?{session_id:'visual-entry',stage:'INTENT',camera_consent:false,selected_products:[]} as any:{} as any)
+ await render('/voice')
+ async function say(value:string){const input=host.querySelector<HTMLInputElement>('#message')!;await act(async()=>{Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!.call(input,value);input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}))});await act(async()=>input.form!.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})))}
+ await say('open camera');expect(getUserMedia).toHaveBeenCalledTimes(1);expect(host.textContent).toContain('Local camera preview requested');expect(window.location.pathname).toBe('/voice');expect(host.querySelector('.contextual-camera')).toBeTruthy()
+ await say('allow local checks');expect(host.textContent).toContain('Camera is not ready')
+ expect(vi.mocked(api).mock.calls.some(([path])=>path==='/vision/local'||path==='/vision/check')).toBe(false)
+ await say('close camera');expect(host.textContent).toContain('Camera closed')
+})
+it('keeps the welcome available on demand without starting speech or microphone on page load',async()=>{let starts=0;const spoken:string[]=[];Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel(){},speak(u:any){spoken.push(u.text)},pause(){},resume(){}}});(globalThis as any).SpeechSynthesisUtterance=class {constructor(public text:string){}};(window as any).SpeechRecognition=class {start(){starts++}abort(){}stop(){}};await render();expect(starts).toBe(0);expect(spoken).toHaveLength(0);await act(async()=>button('Read welcome').click());expect(spoken.join(' ')).toContain('microphone setup');expect(document.activeElement).toBe(document.body);expect(host.querySelector('[data-primary-voice]')?.textContent).toContain('Enable voice');expect(host.textContent).toContain('Text input')})
+it('announces a typed reply after pausing application voice',async()=>{
+ const speak=vi.fn<(utterance:SpeechSynthesisUtterance)=>void>()
+ Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel:vi.fn(),speak}})
+ ;(window as any).SpeechRecognition=class {start(){}abort(){}stop(){}}
+ vi.mocked(api).mockImplementation(async path=>path==='/chat'
+  ?{session:{session_id:'quiet-text',stage:'INTENT',selected_products:[]},step:null,message:'A response to your typed message.'} as any
+  :{} as any)
+ await render('/thread')
+ const announcement=host.querySelector('.conversation [role="status"]')!
+ expect(speak).not.toHaveBeenCalled()
+ await act(async()=>button('Enable voice guidance').click())
+ expect(speak).toHaveBeenCalledTimes(1)
+ expect(announcement.getAttribute('aria-live')).toBe('off')
+ await act(async()=>speak.mock.calls[0][0].onend?.({} as SpeechSynthesisEvent))
+ await act(async()=>button('Pause voice replies').click())
+ expect(host.querySelector('.voice-access-bar [data-call-state]')?.getAttribute('data-call-state')).toBe('quiet_wake')
+ speak.mockClear()
+
+ const input=host.querySelector<HTMLInputElement>('#message')!
+ await act(async()=>{
+  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!.call(input,'I enjoyed the park today')
+  input.dispatchEvent(new Event('input',{bubbles:true}))
+ })
+ await act(async()=>input.form!.querySelector('button')!.click())
+ expect(announcement.textContent).toBe('A response to your typed message.')
+ expect(announcement.getAttribute('aria-live')).toBe('polite')
+ expect(speak).not.toHaveBeenCalled()
+})
+it('displays a typed Story reply without application speech or a microphone request',async()=>{
+ const speak=vi.fn((utterance:SpeechSynthesisUtterance)=>queueMicrotask(()=>utterance.onend?.({} as SpeechSynthesisEvent)))
+ Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel:vi.fn(),speak}})
+ const start=vi.fn()
+ ;(window as any).SpeechRecognition=class {start(){start()}abort(){}stop(){}}
+ vi.mocked(api).mockImplementation(async(path:string,body?:any)=>{
+  if(path==='/chat')return {session:{session_id:'story-text',stage:'INTENT',selected_products:[]},step:null,message:body?.message==='I saw a forest today'?'A response to your voice.':'A response to your text.'} as any
+  return {} as any
+ })
+ await render('/story')
+ await act(async()=>host.querySelector<HTMLElement>('.story-voice summary')!.click())
+ const liveReply=host.querySelector('.story-reply[aria-live="polite"]')
+ expect(liveReply?.textContent).toBe('')
+ const input=host.querySelector<HTMLInputElement>('#story-message')!
+ await act(async()=>{
+  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!.call(input,'I enjoyed the park today')
+  input.dispatchEvent(new Event('input',{bubbles:true}))
+ })
+ await act(async()=>input.form!.querySelector('button')!.click())
+ expect(host.querySelector('.story-reply[aria-live="polite"]')).toBe(liveReply)
+ expect(liveReply?.textContent).toBe('A response to your text.')
+ expect(speak).not.toHaveBeenCalled()
+ expect(start).not.toHaveBeenCalled()
+ expect(host.querySelector('.story-voice')?.textContent).toContain('Audio is processed on this computer')
+
+ await act(async()=>button('Start voice').click())
+ expect(start).toHaveBeenCalledTimes(1)
+ speak.mockClear()
+ await act(async()=>recognitionHandlers?.onText('I saw a forest today'))
+ expect(speak.mock.calls.map(([utterance])=>utterance.text)).toEqual(['A response to your voice.'])
+ expect(liveReply?.textContent).toBe('')
+ expect(host.querySelector('.story-reply:not([aria-live])')?.textContent).toBe('A response to your voice.')
+})
+it('starts a new session when the old server session expired',async()=>{vi.mocked(api).mockImplementation(async(path:string,body?:any)=>{if(path==='/health')return {} as any;if(path.startsWith('/session/'))return {session_id:'expired',stage:'GUIDE',selected_products:[]} as any;if(body?.message==='stop')throw Object.assign(new Error('expired'),{status:404});return {session:{session_id:'fresh',stage:'INIT',selected_products:[]},step:null,message:'Fresh greeting'} as any});await render('/thread','expired');await act(async()=>button('New session').click());expect(host.textContent).toContain('Fresh greeting')})
+it.each([
+ ['/thread','Next action','Stop session'],
+ ['/voice','Next','End this session'],
+])('explains an unavailable course and can close its restored session from %s',async(path,nextLabel,stopLabel)=>{
+ const snapshot={session_id:'old-course',stage:'GUIDE',course_unavailable:true,makeup_plan:null,selected_products:[]}
+ const getUserMedia=vi.fn()
+ Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia}})
+ vi.mocked(api).mockClear()
+ vi.mocked(api).mockImplementation(async route=>{
+  if(route.startsWith('/session/'))return snapshot as never
+  if(route==='/chat')return {session:{...snapshot,stage:'COMPLETE'},step:null,message:'Session ended'} as never
+  return {} as never
+ })
+ await render(path,'old-course')
+ expect(host.querySelector('.notice [role="status"]')?.textContent).toContain('The previous course is unavailable')
+ expect(button(nextLabel).disabled).toBe(true)
+ await act(async()=>button(stopLabel).click())
+ expect(vi.mocked(api).mock.calls.find(([route])=>route==='/chat')?.[1]).toMatchObject({session_id:'old-course',message:'stop'})
+ expect(host.textContent).not.toContain('The previous course is unavailable')
+ expect(getUserMedia).not.toHaveBeenCalled()
+})
+it('exposes a start-steps action before guidance in the call shell',async()=>{vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock'} as any:{session_id:'ready',stage:'LOOK_SELECTED',selected_look:'clean_daily'} as any);await render('/voice','ready');expect(button('Start steps')).toBeTruthy()})
+it('step buttons still send a text action after call end without requesting microphone',async()=>{const getUserMedia=vi.fn();Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia}});vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock'} as any:path.startsWith('/session/')?{session_id:'ready',stage:'LOOK_SELECTED'} as any:{session:{session_id:'ready',stage:'GUIDE'},step:null,message:'First step'} as any);await render('/voice','ready');await act(async()=>window.dispatchEvent(new Event('pagehide')));vi.mocked(api).mockClear();await act(async()=>button('Start steps').click());expect(vi.mocked(api).mock.calls.filter(([path,body])=>path==='/chat'&&(body as any)?.message==='开始步骤')).toHaveLength(1);expect(getUserMedia).not.toHaveBeenCalled()})
+it('recovers an expired pre-stream text session without retrying consent actions',async()=>{
+ vi.mocked(api).mockImplementation(async(path:string,body?:any)=>{
+  if(path==='/health')return {provider_mode:'mock'} as any
+  if(path.startsWith('/session/'))return {session_id:'expired',stage:'GUIDE',selected_products:[]} as any
+  if(body?.session_id==='expired')throw Object.assign(new Error('expired'),{status:404})
+  return {session:{session_id:'fresh',stage:'INTENT',selected_products:[]},step:null,message:'Fresh text reply'} as any
+ })
+ await render('/thread','expired');const input=host.querySelector<HTMLInputElement>('#message')!
+ await act(async()=>{Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!.call(input,'A fictional story');input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}))})
+ await act(async()=>{input.form!.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}))})
+ expect(host.textContent).toContain('Fresh text reply')
+ const calls=vi.mocked(api).mock.calls.filter(([path,body])=>path==='/chat'&&(body as any)?.message==='A fictional story')
+ expect(calls).toHaveLength(2);expect((calls[1][1] as any).session_id).toBeUndefined()
+})
+it('refuses a spoken journal save before reading and reviewing its draft',async()=>{
+ vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock'} as any:{entries:[]} as any)
+ await render('/voice')
+ const input=host.querySelector<HTMLInputElement>('#message')!
+ await act(async()=>{const setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!;setter.call(input,'confirm save private journal');input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}))})
+ await act(async()=>{input.form!.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}))})
+ expect(vi.mocked(api).mock.calls.some(([path,body])=>path==='/journal'&&body!==undefined)).toBe(false)
+ expect(host.textContent).toContain('review it before confirming')
+})
+afterEach(async()=>{await act(async()=>root?.unmount());host?.remove();vi.restoreAllMocks();vi.unstubAllGlobals()})
+it('starts the local input adapter from one entry click and exposes call controls',async()=>{let starts=0;(window as any).SpeechRecognition=class {start(){starts++}abort(){}stop(){}};await render();await act(async()=>button('Voice Companion').click());expect(starts).toBe(1);expect(button('Pause replies')).toBeTruthy();expect(button('Close microphone')).toBeTruthy();expect(host.querySelector('input#message')).toBeTruthy();await act(async()=>button('Pause replies').click());expect(host.textContent).toContain('Replies paused');await act(async()=>button('Resume voice').click());expect(starts).toBe(1)})
+it('direct video route keeps camera and remote frames off until distinct gestures',async()=>{vi.mocked(api).mockImplementation(async(path:string)=>path==='/session'?{session_id:'entry',stage:'INTENT',camera_consent:false,selected_products:[]} as any:path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:{} as any);const getUserMedia=vi.fn().mockRejectedValue({name:'NotAllowedError'});Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia}});await render('/explore');expect(getUserMedia).not.toHaveBeenCalled();expect(host.querySelector('video')).toBeTruthy();expect(button('Enable camera')).toBeTruthy();expect(host.textContent).toContain('Face checks stay on this computer.');await act(async()=>button('Enable camera').click());expect(getUserMedia).toHaveBeenCalledTimes(1);expect(host.textContent).toContain('text');expect(host.querySelector('input#message')).toBeTruthy()})
+
+import {api} from '../api/client'
+it('retains the session, step and plan while switching shells and after microphone failure',async()=>{const session={session_id:'same',stage:'GUIDE',camera_consent:false,memory_consent:false,scene:'Cafe',todays_look:{scene:'Cafe',sections:{},version:1}};vi.mocked(api).mockImplementation(async(path:string,body?:any)=>path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:{session,step:{instruction:'Apply blush',visual_task:'blush_presence'},message:'Your plan'} as any);(window as any).SpeechRecognition=class {start(){this.onerror?.({error:'not-allowed'})}onerror:any;abort(){}stop(){}};await render();await act(async()=>button('Voice Companion').click());const input=host.querySelector<HTMLInputElement>('#message')!;await act(async()=>{const setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!;setter.call(input,'Cafe today');input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}))});await act(async()=>{input.form!.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}))});expect(host.textContent).toContain('Apply blush');await act(async()=>button('Visual').click());expect(host.textContent).toContain('Apply blush');expect(host.textContent).toContain('Cafe');expect(host.textContent).toContain('Face checks stay on this computer.');expect(host.querySelector('#message')).toBeTruthy();const chats=vi.mocked(api).mock.calls.filter(([path])=>path==='/chat');expect(chats.at(-1)?.[1]).toMatchObject({session_id:'same'})})
+it('ignores a late reply after ending the call while preserving text fallback',async()=>{let resolve:any;vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:new Promise(r=>{resolve=r}));let recognition:any;(window as any).SpeechRecognition=class {onresult:any;start(){recognition=this}abort(){}stop(){}};await render();await act(async()=>button('Voice Companion').click());await act(async()=>recognition.onresult({results:[{isFinal:true,0:{transcript:'Cafe'}}]}));await act(async()=>button('Close microphone').click());await act(async()=>resolve({session:{session_id:'late',stage:'GUIDE'},step:null,message:'Late forbidden reply'}));expect(host.textContent).not.toContain('Late forbidden reply');expect(host.querySelector('#message')).toBeTruthy();expect(host.textContent).toContain('Microphone closed')})
+it('stops camera tracks and revokes a local permit when the call ends',async()=>{
+ const {media,stop}=syntheticCamera()
+ const session={session_id:'camera-session',stage:'GUIDE',camera_consent:false,memory_consent:false,selected_products:[]}
+ Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:vi.fn().mockResolvedValue(media)}})
+ vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue()
+ vi.mocked(api).mockImplementation(async(path:string)=>{
+  if(path==='/health')return {provider_mode:'mock',providers:{vision:'mock'}} as any
+  if(path.startsWith('/session/'))return session as any
+  if(path==='/vision/local/permits')return {permit_id:'local-camera',expires_at:Date.now()/1000+900,baseline_version:1} as any
+  return {} as any
+ })
+ await render('/explore','camera-session')
+ await act(async()=>button('Enable camera').click())
+ await act(async()=>button('Allow local single-frame checks').click())
+ await act(async()=>button('Close microphone').click())
+ expect(stop).toHaveBeenCalledOnce()
+ expect(api).toHaveBeenCalledWith('/vision/local/camera-session',{permit_id:'local-camera'},'DELETE',undefined,true)
+ expect(host.textContent).toContain('Camera: off')
+ expect(host.textContent).toContain('Face checks stay on this computer.')
+})
+it('revokes checks and discards a pending observation when the active camera track ends',async()=>{
+ const {media,stop,end}=syntheticCamera()
+ const session={session_id:'camera-loss',stage:'GUIDE',camera_consent:false,selected_products:[]}
+ let finish!:(reply:unknown)=>void
+ let frameSignal:AbortSignal|undefined
+ vi.mocked(api).mockImplementation(async(path,_body,_method,signal)=>{
+  if(path.startsWith('/session/'))return session as any
+  if(path==='/vision/local/permits')return {permit_id:'active-camera',expires_at:Date.now()/1000+900,baseline_version:1} as any
+  if(path==='/vision/local'){frameSignal=signal;return new Promise(resolve=>{finish=resolve})}
+  return {} as any
+ })
+ const getUserMedia=vi.fn().mockResolvedValue(media)
+ Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia}})
+ vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue()
+ vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockReturnValue({drawImage:vi.fn(),getImageData:()=>({data:new Uint8ClampedArray(4096)})} as any)
+ vi.spyOn(HTMLCanvasElement.prototype,'toDataURL').mockReturnValue('data:image/jpeg;base64,c3ludGhldGlj')
+ await render('/explore','camera-loss')
+ const video=host.querySelector('video')!
+ Object.defineProperties(video,{readyState:{value:2},videoWidth:{value:320},videoHeight:{value:240}})
+ await act(async()=>button('Enable camera').click())
+ await act(async()=>button('Allow local single-frame checks').click())
+ await act(async()=>button('Check fresh frame').click())
+ expect(frameSignal?.aborted).toBe(false)
+
+ await act(async()=>end())
+ expect(frameSignal?.aborted).toBe(true)
+ expect(api).toHaveBeenCalledWith('/vision/local/camera-loss',{permit_id:'active-camera'},'DELETE',undefined,true)
+ expect(video.srcObject).toBeNull()
+ expect(stop).toHaveBeenCalledOnce()
+ expect(getUserMedia).toHaveBeenCalledOnce()
+ expect(button('Allow local single-frame checks').disabled).toBe(true)
+ expect(host.querySelector('.video-stage [role="alert"]')?.textContent).toContain('enable the camera')
+ await act(async()=>finish({session,step:null,message:'Late observation',observation:{}}))
+ expect(host.textContent).not.toContain('Late observation')
+})
+import {VideoCall} from '../pages/VideoCall'
+it('offers only local face checks even with a legacy remote provider configured',async()=>{
+ const configured={provider_mode:'mock',providers:{vision:'qwen'}}
+ const session={session_id:'local-face',stage:'GUIDE',camera_consent:false,selected_products:[]}
+ const {media,stop}=syntheticCamera()
+ vi.mocked(api).mockImplementation(async(path:string,body?:any)=>path==='/health'?configured as any:path==='/session'?session as any:{session:{...session,camera_consent:body?.consent===true},step:null,message:'Ready'} as any)
+ Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:vi.fn().mockResolvedValue(media)}})
+ vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue()
+ await render('/explore')
+ await act(async()=>button('Enable camera').click())
+ expect(button('Allow local single-frame checks')).toBeTruthy()
+ expect(button('Allow remote frames')).toBeUndefined()
+ expect(vi.mocked(api).mock.calls.some(([path,body])=>path==='/vision/check'||(body as any)?.consent===true)).toBe(false)
+ Object.defineProperty(document,'hidden',{configurable:true,value:true})
+ await act(async()=>document.dispatchEvent(new Event('visibilitychange')))
+ expect(stop).toHaveBeenCalledOnce()
+ expect(host.textContent).toContain('Camera: off')
+ Object.defineProperty(document,'hidden',{configurable:true,value:false})
+})
+it('mirrors the front camera preview and leaves the environment camera unmirrored',async()=>{vi.mocked(api).mockImplementation(async(path:string)=>path==='/session'?{session_id:'entry',stage:'INTENT',camera_consent:false,selected_products:[]} as any:path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:{} as any);Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:vi.fn().mockResolvedValueOnce(syntheticCamera().media).mockResolvedValueOnce(syntheticCamera().media)}});vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue();await render('/explore');await act(async()=>button('Enable camera').click());expect(host.querySelector('video')?.style.transform).toBe('scaleX(-1)');await act(async()=>button('Switch camera').click());expect(host.querySelector('video')?.style.transform).toBe('none')})
+it('uses only the call controller microphone and speech controls on legacy speak route',async()=>{let starts=0;(window as any).SpeechRecognition=class {start(){starts++}abort(){}stop(){}};await render('/speak');expect(host.querySelector('.voice-controls')).toBeNull();await act(async()=>button('Enable voice').click());expect(starts).toBe(1)})
+it('applies a fresh text session reply after the new-session action ends the previous call',async()=>{let resolveStart:any;vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:new Promise(r=>{resolveStart=r}));await render('/thread');await act(async()=>button('New session').click());await act(async()=>resolveStart({session:{session_id:'fresh',stage:'GUIDE',camera_consent:false,selected_products:[],routine_step:0,routine_total_steps:1},step:{instruction:'Fresh instruction'},message:'Fresh session reply'}));expect(host.textContent).toContain('Fresh session reply');expect(host.textContent).toContain('Fresh instruction')})
+
+it('switches populated canonical guidance and controls without duplicate locales',async()=>{const canonical={session:{session_id:'locales',stage:'GUIDE',camera_consent:false,selected_products:[],routine_step:0,routine_total_steps:4,current_step:{name:'准备与底妆',instruction:'先把常用底妆薄薄涂在脸中央，再向外轻轻推开。'},last_response:'先把常用底妆薄薄涂在脸中央，再向外轻轻推开。'},step:{name:'准备与底妆',instruction:'先把常用底妆薄薄涂在脸中央，再向外轻轻推开。'},message:'先把常用底妆薄薄涂在脸中央，再向外轻轻推开。'};vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{} as any:path.startsWith('/session/')?canonical.session as any:{...canonical,canonical} as any);await render('/thread','locales');expect(host.textContent).toContain('gently blend outward');expect(host.textContent).not.toMatch(/[\u3400-\u9fff]/);await act(async()=>switchLanguage('chinese'));expect(host.textContent).toContain('先把常用底妆');expect(host.textContent).not.toContain('gently blend outward');expect(host.querySelector('.mode-switch')?.textContent).not.toContain('Voice');await act(async()=>switchLanguage('english'));expect(host.textContent).not.toMatch(/[\u3400-\u9fff]/)})
+
+it('keeps Reader decline status in the current locale after toggling',async()=>{vi.mocked(api).mockImplementation(async()=>({provider_mode:'mock',providers:{vision:'mock'}} as any));await render('/dot');await act(async()=>button('Not now').click());expect(host.textContent).toContain('Not now');await act(async()=>switchLanguage('chinese'));expect(host.textContent).not.toContain('Not now');expect(host.textContent).toContain('暂时不用')})
+it('keeps wake listening and pauses replies when changing locale',async()=>{const instances:any[]=[];class Recognition {lang='';onresult:any;onerror:any;onend:any;abort=vi.fn();start(){}stop(){}constructor(){instances.push(this)}};(window as any).SpeechRecognition=Recognition;await render();await act(async()=>button('Voice Companion').click());expect(instances[0].lang).toBe('en-US');await act(async()=>switchLanguage('chinese'));expect(instances[0].abort).toHaveBeenCalled();expect(host.textContent).toContain('暂停回应');await act(async()=>button('恢复语音交流').click());expect(instances.at(-1).lang).toBe('zh-CN')})
+it('does not restart an ended call when switching from voice to visual',async()=>{let starts=0;(window as any).SpeechRecognition=class {start(){starts++}abort(){}stop(){}};await render();await act(async()=>button('Voice Companion').click());await act(async()=>button('Close microphone').click());expect(starts).toBe(1);await act(async()=>button('Visual').click());expect(host.textContent).toContain('Microphone closed');expect(starts).toBe(1)})
+it('groups video preview and consent controls into a stage beside call guidance',async()=>{await render('/explore');const stage=host.querySelector('.video-stage');expect(stage?.querySelector('video')).toBeTruthy();expect(stage?.textContent).not.toContain('Allow remote frames');expect(host.textContent).toContain('Allow local single-frame checks');expect(host.querySelector('.makeup-workspace > .call-experience')).toBeTruthy()})
+it('preserves active speech across voice to visual and resumes recognition when it completes',async()=>{let starts=0,recognition:any,utterance:any;const cancel=vi.fn();Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel,speak:(u:any)=>{utterance=u;u.onstart?.()},pause(){},resume(){}}});(globalThis as any).SpeechSynthesisUtterance=class {constructor(public text:string){}};(window as any).SpeechRecognition=class {onresult:any;start(){starts++;recognition=this}abort(){}stop(){}};vi.mocked(api).mockImplementation(async(path:string)=>path==='/health'?{provider_mode:'mock',providers:{vision:'mock'}} as any:{session:{session_id:'speech',stage:'GUIDE',camera_consent:false},step:null,message:'Ready'} as any);await render();await act(async()=>button('Voice Companion').click());await act(async()=>utterance.onend?.());await act(async()=>recognition.onresult({results:[{isFinal:true,0:{transcript:'Cafe'}}]}));expect(host.textContent).toContain('Speaking');const cancels=cancel.mock.calls.length;await act(async()=>button('Visual').click());expect(cancel.mock.calls.length).toBe(cancels);await act(async()=>utterance.onend?.());expect(starts).toBe(1);expect(host.textContent).toContain('Listening')})
+
+it('routes the three-step voice flow, offers a selected style once without reading its private title, keeps wake input after finishing, and releases it outside the voice workspace',async()=>{
+ let recognition:any,starts=0,stops=0;const spoken:string[]=[]
+ Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel:vi.fn(),speak:(u:any)=>{spoken.push(u.text);queueMicrotask(()=>u.onend?.())}}})
+ ;(window as any).SpeechRecognition=class{onresult:any;start(){starts++;recognition=this}abort(){}stop(){stops++}}
+ const previous={session_id:'past',name:'DemoRecall',reusable:true,date:'2026-10-16',occasion:'daily',style:'natural',completed_steps:['Base'],all_steps_completed:true}
+ const record={enabled:true,latest:previous,entries:[previous],retention_days:30}
+ const ready={session_id:'flow',stage:'INTENT',selected_products:[]}
+ const guiding={...ready,stage:'GUIDE',current_step:{name:'Base',instruction:'Take one step at a time.'},makeup_plan:{status:'in_progress',workflow:'GUIDING',active_index:0,steps:[{id:'base',title:'Base',status:'in_progress'}]}}
+ vi.mocked(api).mockImplementation(async(path:string)=>{
+  if(path==='/health')return {provider_mode:'mock',providers:{vision:'mock'}} as any
+  if(path==='/recollection')return record as any
+  if(path==='/session')return ready as any
+  if(path==='/experience/reflect')return {session:guiding,step:guiding.current_step,message:'Step three, Reflect.'} as any
+  if(path==='/recollection/finish')return {session:{...guiding,makeup_plan:{...guiding.makeup_plan,status:'completed'}},step:null,message:'Your look is complete. You can continue using voice.'} as any
+  return {} as any
+ })
+ await render('/');await act(async()=>button('Enable voice guidance').click())
+ const say=async(value:string)=>act(async()=>recognition.onresult({results:[{isFinal:true,0:{transcript:value}}]}))
+ expect(spoken.filter(s=>s.includes('selected a previous style'))).toHaveLength(1);expect(spoken.join(' ')).not.toContain('DemoRecall')
+ await say("let's begin");expect(window.location.pathname).toBe('/voice')
+ await say('done');expect(window.location.pathname).toBe('/explore')
+ await say('finish this look');expect(stops).toBe(0)
+ await say('pause replies');const requests=vi.mocked(api).mock.calls.length;await say('ordinary private chatter');expect(vi.mocked(api).mock.calls.length).toBe(requests)
+ await say('resume voice, open story');expect(window.location.pathname).toBe('/explore')
+ await say('open story');expect(window.location.pathname).toBe('/story')
+ expect(starts).toBe(1);expect(stops).toBe(1);expect(spoken.filter(s=>s.includes('selected a previous style'))).toHaveLength(1);expect(spoken.join(' ')).not.toContain('DemoRecall')
+ expect(vi.mocked(api).mock.calls.filter(([path])=>path==='/experience/reflect')).toHaveLength(1)
+ expect(vi.mocked(api).mock.calls.filter(([path])=>path==='/recollection/finish')).toHaveLength(1)
+ expect(vi.mocked(api).mock.calls.some(([path,body])=>path==='/chat'&&(body as any)?.action==='memory_consent')).toBe(false)
+})
+
+it.each(['button','navigation'])('initializes Reflect from Listen through %s without requiring microphone',async entry=>{
+ const ready={session_id:'listen-next',stage:'INTENT',selected_products:[]}
+ const guiding={...ready,stage:'GUIDE',current_step:{name:'Base',instruction:'Apply a thin layer.'},makeup_plan:{status:'in_progress',workflow:'GUIDING',active_index:0,steps:[{id:'base',title:'Base',status:'in_progress'}]}}
+ vi.mocked(api).mockImplementation(async(path:string)=>{
+  if(path==='/health')return {provider_mode:'mock',providers:{vision:'mock'}} as any
+  if(path==='/session')return ready as any
+  if(path==='/experience/reflect')return {session:guiding,step:guiding.current_step,message:'Step three, Reflect.'} as any
+  return {} as any
+ })
+ await render('/voice')
+ await act(async()=>entry==='button'?button('Finish Listen, enter Reflect').click():host.querySelector<HTMLButtonElement>('button[aria-label="3 Reflect · Makeup Guidance"]')!.click())
+ expect(window.location.pathname).toBe('/explore')
+ expect(vi.mocked(api).mock.calls.some(([path,body])=>path==='/experience/reflect'&&(body as any).session_id==='listen-next')).toBe(true)
+ expect(host.textContent).toContain('Apply a thin layer.')
+})
+
+it('looks up the original coaching event after reconnect without submitting again',async()=>{
+ const session={session_id:'reconnect',stage:'GUIDE',selected_products:[],camera_consent:false,
+  current_step:{step_id:'prep',instruction:'Prepare your skin.'},
+  makeup_plan:{id:'plan-1',revision:1,status:'active',workflow:'WAITING_FOR_USER',active_index:0,
+   steps:[{id:'prep',title:'Prepare',status:'active'},{id:'base',title:'Base',status:'pending'}]}}
+ const advanced={...session,current_step:{step_id:'base',instruction:'Apply a thin base.'},
+  makeup_plan:{...session.makeup_plan,revision:2,active_index:1}}
+ let disconnected=true
+ let eventId=''
+ vi.mocked(api).mockImplementation(async(path:string,body?:any)=>{
+  if(path==='/health')return {provider_mode:'mock',providers:{vision:'mock'}} as any
+  if(path==='/session/reconnect/restore')return session as any
+  if(path==='/chat'&&body?.message==='下一步'){
+   eventId=body.event_id
+   throw new Error('Connection lost')
+  }
+  if(path.startsWith('/makeup/events/')){
+   if(disconnected)throw new Error('Still offline')
+   return {event:{event_id:eventId,status:'committed'},session:advanced} as any
+  }
+  return {} as any
+ })
+ await render('/explore','reconnect')
+ const input=host.querySelector<HTMLInputElement>('#message')!
+ await act(async()=>{
+  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!.call(input,'next')
+  input.dispatchEvent(new Event('input',{bubbles:true}))
+  input.dispatchEvent(new Event('change',{bubbles:true}))
+ })
+ await act(async()=>input.form!.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})))
+ expect(eventId).toBeTruthy()
+ disconnected=false
+ await act(async()=>window.dispatchEvent(new Event('online')))
+ expect(host.textContent).toContain('Current progress was restored.')
+ expect(host.textContent).toContain('Apply a thin base.')
+ expect(vi.mocked(api).mock.calls.filter(([path,body])=>path==='/chat'&&(body as any)?.message==='下一步')).toHaveLength(1)
+ expect(vi.mocked(api).mock.calls.some(([path])=>path==='/makeup/events/reconnect/'+eventId)).toBe(true)
+})
+
+it('requires a fresh microphone gesture after reload even when the browser remembers permission',async()=>{
+ const starts=vi.fn(),query=vi.fn().mockResolvedValue({state:'granted'})
+ Object.defineProperty(navigator,'permissions',{configurable:true,value:{query}})
+ ;(window as any).SpeechRecognition=class {start(){starts()}abort(){}stop(){}}
+ localStorage.setItem('trace.voice-enabled','on')
+ vi.mocked(api).mockImplementation(async(path:string)=>path==='/session/saved/restore'
+  ? {session_id:'saved',stage:'GUIDE',camera_consent:false,selected_products:[]} as any
+  : {} as any)
+ await render('/voice','saved')
+ expect(starts).not.toHaveBeenCalled()
+ expect(query).not.toHaveBeenCalled()
+ await act(async()=>button('Enable voice guidance').click())
+ expect(starts).toHaveBeenCalledTimes(1)
+ localStorage.removeItem('trace.voice-enabled')
+})
+
+it('keeps a late Reflect reply from changing the page after a newer navigation',async()=>{
+ let answer:(value:any)=>void=()=>{}
+ vi.mocked(api).mockImplementation(async(path:string)=>{
+  if(path==='/experience/reflect')return new Promise(resolve=>{answer=resolve})
+  if(path==='/session')return {session_id:'late-reflect',stage:'INTENT',selected_products:[]} as any
+  return {} as any
+ })
+ await render('/voice')
+ await act(async()=>button('Finish Listen, enter Reflect').click())
+ expect(vi.mocked(api).mock.calls.some(([path])=>path==='/experience/reflect')).toBe(true)
+ await act(async()=>host.querySelector<HTMLAnchorElement>('a.brand')!.click())
+ await act(async()=>answer({session:{session_id:'late-reflect',stage:'GUIDE',selected_products:[]},step:null,message:'Stale Reflect reply'}))
+ expect(window.location.pathname).toBe('/')
+ expect(host.textContent).not.toContain('Stale Reflect reply')
+})

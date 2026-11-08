@@ -1,0 +1,28 @@
+import type {Session,Step} from '../types'
+import type {CallSnapshot} from '../realtime/callController'
+import {useTrace} from '../content/Locale'
+import {BilingualHeading,BilingualLabel} from './BilingualHeading'
+import {SectionBackground} from './SectionBackground'
+import {useEffect,useState} from 'react'
+import {api} from '../api/client'
+import type {Profile} from '../types'
+import {BeautyIllustration} from './BeautyIllustration'
+export function VoiceOrb({state}:{state:CallSnapshot['state']}){return <span className="voice-orb" data-state={state} aria-hidden="true"><i/><i/><i/><svg viewBox="0 0 32 48" focusable="false" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><rect x="10" y="3" width="12" height="25" rx="6"/><path d="M4 20V23A12 12 0 0 0 28 23V20M16 35V43M10 43H22"/></svg></span>}
+export function BeautyProfile({session}:{session:Session|null}){const {t,d}=useTrace();const [profile,setProfile]=useState<Profile|null>(null);useEffect(()=>{let active=true;setProfile(null);if(session?.user_id)api<Profile>('/profile/'+encodeURIComponent(session.user_id)).then(p=>{if(active)setProfile(p)}).catch(()=>{});return()=>{active=false}},[session?.user_id,session?.memory_consent]);const tags=profile?.profile?.preferred_finish??[];return <div className="editorial-profile"><BilingualHeading zh="今日美学画像" en="Today's Beauty Profile" level={2}/>{tags.length?<ul className="confirmed-preferences">{tags.map(tag=><li key={tag}>{d(tag)}<small>{t('已确认的偏好','Confirmed preference')}</small></li>)}</ul>:<p className="empty-state">{t('尚无已保存的偏好，由你确认后记住。','No saved preferences yet. They are remembered after your confirmation.')}</p>}{session?.desired_impression?.length?<p>{t('本次想要的感觉：','Today’s requested feeling: ')}{session.desired_impression.map(d).join(' / ')}</p>:null}</div>}
+export function MakeupDigitalTwin({step,session,enabled,state,audioReactive,onAudioError,regionOverride}:{step:Step|null;session:Session|null;enabled:boolean;state:CallSnapshot['state'];audioReactive?:boolean;onAudioError?:()=>void;regionOverride?:string}){const region=regionOverride||(step?.visual_task==='blush_presence'?'blush':step?.visual_task==='lip_presence'?'lips':/眼|eye/i.test(step?.name??'')?'eyes':'base');return <SectionBackground variant="makeup" enabled={enabled} state={state} region={region} audioReactive={audioReactive} onAudioError={onAudioError} settled={session?.stage==='COMPLETE'}/>}
+export function FullLookAnnotations({session,onEdit}:{session:Session|null;onEdit?:(domain:import('../types').LookDomain)=>void}){const {t,d,locale}=useTrace();const domains=[['makeup','妆容','Makeup'],['hair','发型','Hair'],['accessories','配饰','Accessories'],['outfit','穿搭','Outfit'],['fragrance','香氛','Fragrance'],['skincare','护肤与妆前','Skincare & prep']] as const;return <div className="full-look-annotations">{domains.map(([key,zh,en])=>{const section=session?.todays_look?.sections[key],suggestion=section?.suggestions[0];return <article key={key} className={'annotation annotation-'+key}><BeautyIllustration kind={key}/><div><BilingualLabel zh={zh} en={en}/><p>{section?.state==='skipped'?t('已跳过','Skipped'):suggestion?locale==='en'?suggestion.display_name_en||d(suggestion.display_name_zh):d(suggestion.display_name_zh):t('等待你的选择','Awaiting your choice')}</p>{section?<button onClick={()=>onEdit?.(key)}>{t('查看与修改','Review & edit')}</button>:null}</div></article>})}</div>}
+export function AccessibilityControls({largeText,onTextSize}:{largeText:boolean;onTextSize:(large:boolean)=>void}){
+ const {display,setDisplay,t}=useTrace()
+ return <div className="display-preferences">
+  <label className="language-display">
+   <span>{t('语言显示','Language')}</span>
+   <select aria-label={t('语言显示','Language')} value={display} onChange={event=>setDisplay(event.target.value as typeof display)}>
+    <option value="chinese">{t('中文优先','Chinese first')}</option>
+    <option value="bilingual">{t('中英双语','Bilingual')}</option>
+    <option value="english">{t('英语优先','English first')}</option>
+   </select>
+  </label>
+  <button type="button" aria-pressed={largeText} onClick={()=>onTextSize(!largeText)}>{t('放大正文','Larger text')}</button>
+ </div>
+}
+export function ParticleBackground(){return <div className="particle-background" aria-hidden="true">{Array.from({length:24},(_,i)=><i key={i} style={{left:((i*37)%100)+'%',top:((i*19)%100)+'%',animationDelay:-(i%8)+'s'}}/>)}</div>}

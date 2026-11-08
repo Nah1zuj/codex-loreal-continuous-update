@@ -1,0 +1,162 @@
+{
+  "label": "SAMPLE DATA — fictional hackathon content, not product claims",
+  "records": [
+    {
+      "routine_id": "clean_daily_routine",
+      "look_id": "clean_daily",
+      "scene": [
+        "daily"
+      ],
+      "steps": [
+        {
+          "step_id": "base",
+          "name": "准备与底妆",
+          "instruction": "先把常用底妆薄薄涂在脸中央，再向外轻轻推开。",
+          "instruction_slow": "先取少量底妆。放在脸中央。用指腹慢慢向外推开。",
+          "instruction_repeat": "重复：少量底妆从脸中央向外推开。",
+          "explanation_why": "薄涂方便逐步控制用量。",
+          "visual_check_required": false,
+          "visual_task": null
+        },
+        {
+          "step_id": "blush",
+          "name": "腮红",
+          "instruction": "先把少量腮红轻拍在你左侧面颊，再在右侧重复。",
+          "instruction_slow": "先找到你左侧面颊。轻拍少量腮红。再在右側重复，暂时不要加量。",
+          "instruction_repeat": "重复：左右面颊各轻拍少量腮红。",
+          "explanation_why": "先少量试涂，方便按你的偏好调整。",
+          "visual_check_required": true,
+          "visual_task": "blush_presence"
+        },
+        {
+          "step_id": "lip",
+          "name": "唇妆",
+          "instruction": "将常用唇色轻涂在唇中央，再向两侧铺开。",
+          "instruction_slow": "先轻涂唇中央。再慢慢向左和右铺开。暂时不要叠加。",
+          "instruction_repeat": "重复：从唇中央向两侧轻涂。",
+          "explanation_why": "少量起步能帮助控制颜色存在感。",
+          "visual_check_required": true,
+          "visual_task": "lip_presence"
+        },
+        {
+          "step_id": "final",
+          "name": "可选最终检查",
+          "instruction": "如果你愿意，可以检查腮红是否在两侧可见；也可以直接跳过。",
+          "instruction_slow": "这一步可选。可以检查腮红。也可以选择跳过，完成今天的步骤。",
+          "instruction_repeat": "重复：可选检查腮红，或者跳过。",
+          "explanation_why": "检查只报告明显可见状态，不评价美丑。",
+          "visual_check_required": false,
+          "visual_task": "blush_presence"
+        }
+      ],
+      "source": "demo_team",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "routine_id": "soft_formal_routine",
+      "look_id": "soft_formal",
+      "scene": [
+        "dinner",
+        "presentation"
+      ],
+      "steps": [
+        {
+          "step_id": "base",
+          "name": "准备与底妆",
+          "instruction": "先把常用底妆薄薄涂在脸中央，再向外轻轻推开。",
+          "instruction_slow": "先取少量底妆。放在脸中央。用指腹慢慢向外推开。",
+          "instruction_repeat": "重复：少量底妆从脸中央向外推开。",
+          "explanation_why": "薄涂方便逐步控制用量。",
+          "visual_check_required": false,
+          "visual_task": null
+        },
+        {
+          "step_id": "blush",
+          "name": "腮红",
+          "instruction": "先把少量腮红轻拍在你左侧面颊，再在右侧重复。",
+          "instruction_slow": "先找到你左侧面颊。轻拍少量腮红。再在右側重复，暂时不要加量。",
+          "instruction_repeat": "重复：左右面颊各轻拍少量腮红。",
+          "explanation_why": "先少量试涂，方便按你的偏好调整。",
+          "visual_check_required": true,
+          "visual_task": "blush_presence"
+        },
+        {
+          "step_id": "lip",
+          "name": "唇妆",
+          "instruction": "将常用唇色轻涂在唇中央，再向两侧铺开。",
+          "instruction_slow": "先轻涂唇中央。再慢慢向左和右铺开。暂时不要叠加。",
+          "instruction_repeat": "重复：从唇中央向两侧轻涂。",
+          "explanation_why": "少量起步能帮助控制颜色存在感。",
+          "visual_check_required": true,
+          "visual_task": "lip_presence"
+        },
+        {
+          "step_id": "final",
+          "name": "可选最终检查",
+          "instruction": "如果你愿意，可以检查腮红是否在两侧可见；也可以直接跳过。",
+          "instruction_slow": "这一步可选。可以检查腮红。也可以选择跳过，完成今天的步骤。",
+          "instruction_repeat": "重复：可选检查腮红，或者跳过。",
+          "explanation_why": "检查只报告明显可见状态，不评价美丑。",
+          "visual_check_required": false,
+          "visual_task": "blush_presence"
+        }
+      ],
+      "source": "demo_team",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "routine_id": "warm_social_routine",
+      "look_id": "warm_social",
+      "scene": [
+        "social"
+      ],
+      "steps": [
+        {
+          "step_id": "base",
+          "name": "准备与底妆",
+          "instruction": "先把常用底妆薄薄涂在脸中央，再向外轻轻推开。",
+          "instruction_slow": "先取少量底妆。放在脸中央。用指腹慢慢向外推开。",
+          "instruction_repeat": "重复：少量底妆从脸中央向外推开。",
+          "explanation_why": "薄涂方便逐步控制用量。",
+          "visual_check_required": false,
+          "visual_task": null
+        },
+        {
+          "step_id": "blush",
+          "name": "腮红",
+          "instruction": "先把少量腮红轻拍在你左侧面颊，再在右侧重复。",
+          "instruction_slow": "先找到你左侧面颊。轻拍少量腮红。再在右側重复，暂时不要加量。",
+          "instruction_repeat": "重复：左右面颊各轻拍少量腮红。",
+          "explanation_why": "先少量试涂，方便按你的偏好调整。",
+          "visual_check_required": true,
+          "visual_task": "blush_presence"
+        },
+        {
+          "step_id": "lip",
+          "name": "唇妆",
+          "instruction": "将常用唇色轻涂在唇中央，再向两侧铺开。",
+          "instruction_slow": "先轻涂唇中央。再慢慢向左和右铺开。暂时不要叠加。",
+          "instruction_repeat": "重复：从唇中央向两侧轻涂。",
+          "explanation_why": "少量起步能帮助控制颜色存在感。",
+          "visual_check_required": true,
+          "visual_task": "lip_presence"
+        },
+        {
+          "step_id": "final",
+          "name": "可选最终检查",
+          "instruction": "如果你愿意，可以检查腮红是否在两侧可见；也可以直接跳过。",
+          "instruction_slow": "这一步可选。可以检查腮红。也可以选择跳过，完成今天的步骤。",
+          "instruction_repeat": "重复：可选检查腮红，或者跳过。",
+          "explanation_why": "检查只报告明显可见状态，不评价美丑。",
+          "visual_check_required": false,
+          "visual_task": "blush_presence"
+        }
+      ],
+      "source": "demo_team",
+      "source_type": "sample",
+      "verified": false
+    }
+  ]
+}

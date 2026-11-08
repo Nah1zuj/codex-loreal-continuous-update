@@ -1,0 +1,12 @@
+{
+  "values": [
+    "voice_instruction",
+    "spatial_instruction",
+    "confirmation",
+    "camera_consent",
+    "memory_consent",
+    "error_recovery",
+    "progressive_disclosure",
+    "user_control"
+  ]
+}

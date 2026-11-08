@@ -1,0 +1,42 @@
+{
+  "ported_files": 398,
+  "unchanged_files": 392,
+  "modified_files": [
+    "AccessibleBeautyAgent/runtime.json",
+    "AccessibleBeautyAgent/backend/app/main.py",
+    "AccessibleBeautyAgent/tests/test_v2_privacy.py",
+    "AccessibleBeautyAgent/frontend/public/release.json",
+    "00_先读我_运行说明.txt",
+    "AccessibleBeautyAgent/README.md"
+  ],
+  "additional_files": [
+    "AccessibleBeautyAgent/backend/app/composition.py",
+    "AccessibleBeautyAgent/backend/app/extensions.py",
+    "AccessibleBeautyAgent/backend/app/factory.py",
+    "AccessibleBeautyAgent/tests/test_application_factory.py",
+    "README.md",
+    "SPEC.md",
+    "docs/ARCHITECTURE.md",
+    "docs/VERIFICATION.md",
+    "migration/compatibility.py",
+    "migration/evidence/baseline-pytest.log",
+    "migration/evidence/compatibility-report.json",
+    "migration/evidence/compatibility-run.log",
+    "migration/evidence/compatibility-samples.json",
+    "migration/evidence/frontend-build.log",
+    "migration/evidence/frontend-test-summary.json",
+    "migration/evidence/installation.log",
+    "migration/evidence/knowledge-validation.log",
+    "migration/evidence/module-checks.json",
+    "migration/evidence/new-compatibility.json",
+    "migration/evidence/new-pytest.log",
+    "migration/evidence/new-pytest.xml",
+    "migration/evidence/old-compatibility.json",
+    "migration/evidence/old-source-unchanged.json",
+    "migration/evidence/runtime-smoke.log",
+    "migration/evidence/voice-tests.log",
+    "migration/port-manifest.json",
+    "migration/port_from_baseline.py"
+  ],
+  "omitted": "Historical specifications, old docs/archives, project submissions and tooling metadata; not runtime functionality. Private files and downloaded weights were never included."
+}

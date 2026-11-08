@@ -1,0 +1,1 @@
+{"passed": true, "request_pairs": 52, "scenario_groups": 4, "openapi_equal": true, "sqlite_schema_equal": true, "differences": [], "controls": "synthetic identities, fixed UUID/random/time, isolated SQLite, mock; only SQLite applied_at and filesystem roots normalized"}

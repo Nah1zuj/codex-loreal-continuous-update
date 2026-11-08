@@ -1,0 +1,8 @@
+.....................................................ss................. [ 26%]
+..............................................s......................... [ 53%]
+........................................................................ [ 79%]
+.......................................................                  [100%]
+=========================== short test summary info ============================
+SKIPPED [2] tests/regression/test_windows_setup.py:8: PowerShell-specific startup guard
+SKIPPED [1] tests/test_phase4_landmarks.py:6: Official local model not installed
+268 passed, 3 skipped in 15.63s

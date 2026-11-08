@@ -1,0 +1,34 @@
+{
+  "A": {
+    "knowledge": "PASS",
+    "memory": [
+      "explicit_consent",
+      "signed_preview",
+      "duplicate_save",
+      "ownership",
+      "delete_replay",
+      "repeat_migrations"
+    ]
+  },
+  "B": {
+    "passed": 131
+  },
+  "C": {
+    "voice": 10,
+    "hardware": 9
+  },
+  "D": {
+    "numTotalTests": 191,
+    "numPassedTests": 191,
+    "numFailedTests": 0,
+    "success": true
+  },
+  "E": {
+    "install": "PASS",
+    "runtime_smoke": "PASS"
+  },
+  "full_backend": {
+    "passed": 277,
+    "skipped": 3
+  }
+}

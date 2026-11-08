@@ -1,0 +1,2788 @@
+[
+  {
+    "path": "AccessibleBeautyAgent/.env.example",
+    "group": "A",
+    "baseline_sha256": "a03f806b67f1469a1965664f7948a9362ab570bf6a0cacad3570adf431eb05aa",
+    "current_sha256": "a03f806b67f1469a1965664f7948a9362ab570bf6a0cacad3570adf431eb05aa",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/.gitignore",
+    "group": "A",
+    "baseline_sha256": "660be401540206b65010de915744c82829956e64aec1d0af408316254b1d8aec",
+    "current_sha256": "660be401540206b65010de915744c82829956e64aec1d0af408316254b1d8aec",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/__init__.py",
+    "group": "A",
+    "baseline_sha256": "52b7dfe93c2e75c0e32b7306381dea59753d5c21a76a24600af99289e916294f",
+    "current_sha256": "52b7dfe93c2e75c0e32b7306381dea59753d5c21a76a24600af99289e916294f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/config.py",
+    "group": "A",
+    "baseline_sha256": "4791ca064b049a3df4d746ab7b1f4d84662cd745378e6a18641376bd922368b8",
+    "current_sha256": "4791ca064b049a3df4d746ab7b1f4d84662cd745378e6a18641376bd922368b8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/content/__init__.py",
+    "group": "A",
+    "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/content/beauty_companion.py",
+    "group": "A",
+    "baseline_sha256": "22e1c6804c7056219045374fe4892075355f33167c978f77ebd001cce0c850bc",
+    "current_sha256": "22e1c6804c7056219045374fe4892075355f33167c978f77ebd001cce0c850bc",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/content/locale.py",
+    "group": "A",
+    "baseline_sha256": "bc3b3b9891d955603007f0dc78d610a961fd82b7f4d2d0ce23bbe98985f3bb1a",
+    "current_sha256": "bc3b3b9891d955603007f0dc78d610a961fd82b7f4d2d0ce23bbe98985f3bb1a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/knowledge/admin_service.py",
+    "group": "A",
+    "baseline_sha256": "db380bf8f2075e8711b3b95cdb313280996c7b93a810636c5a1e9c1909259664",
+    "current_sha256": "db380bf8f2075e8711b3b95cdb313280996c7b93a810636c5a1e9c1909259664",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/knowledge/curriculum.py",
+    "group": "A",
+    "baseline_sha256": "09df18919de21efd3644b3d937f8f8d081e61779efc94a0e45645aa0bd167c54",
+    "current_sha256": "09df18919de21efd3644b3d937f8f8d081e61779efc94a0e45645aa0bd167c54",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/knowledge/importer.py",
+    "group": "A",
+    "baseline_sha256": "5f595c04ad0b99d70b76f45278a204ae8053aa9f8bd462476cfcda99109faf21",
+    "current_sha256": "5f595c04ad0b99d70b76f45278a204ae8053aa9f8bd462476cfcda99109faf21",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/knowledge/policy.py",
+    "group": "A",
+    "baseline_sha256": "f793f915b3689e39e75ba01b7df500d5966377745ad8d6a70d51e7fe5a3ca6b0",
+    "current_sha256": "f793f915b3689e39e75ba01b7df500d5966377745ad8d6a70d51e7fe5a3ca6b0",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/knowledge/repository.py",
+    "group": "A",
+    "baseline_sha256": "01a3ad12e2cac724c9fb24d5767747a1a36eff53f76a6e2392ae5875f5a597ad",
+    "current_sha256": "01a3ad12e2cac724c9fb24d5767747a1a36eff53f76a6e2392ae5875f5a597ad",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/knowledge/tutorial_ingestion.py",
+    "group": "A",
+    "baseline_sha256": "c39150cff5e94208c95a28c997e61051d2af7de76cc307f41052e900bccc3fe2",
+    "current_sha256": "c39150cff5e94208c95a28c997e61051d2af7de76cc307f41052e900bccc3fe2",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/knowledge/validation.py",
+    "group": "A",
+    "baseline_sha256": "fef4ede764c498e1f77d61523fcbac2fafaa283c2e2cba98dbc2af421d058c52",
+    "current_sha256": "fef4ede764c498e1f77d61523fcbac2fafaa283c2e2cba98dbc2af421d058c52",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/knowledge/vocabulary.py",
+    "group": "A",
+    "baseline_sha256": "d10daf91a9472683e201f0f9052ad95b7e64e71be02581d638bd7cbd41ae6bf3",
+    "current_sha256": "d10daf91a9472683e201f0f9052ad95b7e64e71be02581d638bd7cbd41ae6bf3",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/looks/service.py",
+    "group": "A",
+    "baseline_sha256": "84aaaebb99c2f988580fa03801661fa52dc325d62294b0dfb53319e121926aaa",
+    "current_sha256": "84aaaebb99c2f988580fa03801661fa52dc325d62294b0dfb53319e121926aaa",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/memory/journal.py",
+    "group": "A",
+    "baseline_sha256": "67a921e7e06f9629a2217700eee849273b0ecb68a9f1842f102ff4584128e479",
+    "current_sha256": "67a921e7e06f9629a2217700eee849273b0ecb68a9f1842f102ff4584128e479",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/memory/migrations.py",
+    "group": "A",
+    "baseline_sha256": "51a093fff63d8e433ab4ac10340c69b3c2dc6657c5f395cb36ab8e9d448e36b2",
+    "current_sha256": "51a093fff63d8e433ab4ac10340c69b3c2dc6657c5f395cb36ab8e9d448e36b2",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/memory/recollection.py",
+    "group": "A",
+    "baseline_sha256": "50648ec02b5f97730a9609d67fe0324e1e0f32014db56a0a64b5c1407b1a4322",
+    "current_sha256": "50648ec02b5f97730a9609d67fe0324e1e0f32014db56a0a64b5c1407b1a4322",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/memory/store.py",
+    "group": "A",
+    "baseline_sha256": "44baddd1199f94bc3cc9863942b47ee32dffed10ef2d8ce63eeebeda917727e7",
+    "current_sha256": "44baddd1199f94bc3cc9863942b47ee32dffed10ef2d8ce63eeebeda917727e7",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/policies/registry.py",
+    "group": "A",
+    "baseline_sha256": "944f73fb852b7c5d5041a5a0f79b0ddcb0b1d7a8208159ef6d3a7cd7d2509adc",
+    "current_sha256": "944f73fb852b7c5d5041a5a0f79b0ddcb0b1d7a8208159ef6d3a7cd7d2509adc",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/products/service.py",
+    "group": "A",
+    "baseline_sha256": "aa02fd8cdd1456be6d8186a49c342067186c288635cfa5477f88386510b875a8",
+    "current_sha256": "aa02fd8cdd1456be6d8186a49c342067186c288635cfa5477f88386510b875a8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/rag/document_builder.py",
+    "group": "A",
+    "baseline_sha256": "8e9416071745364ab5c8e7eee36a49fc10fb27e230eebec6434c891f228c7c84",
+    "current_sha256": "8e9416071745364ab5c8e7eee36a49fc10fb27e230eebec6434c891f228c7c84",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/rag/embeddings.py",
+    "group": "A",
+    "baseline_sha256": "ccf094102f979cd857ea4275faf4fee77f0f8269de771f1ffb8f654cdd8046ba",
+    "current_sha256": "ccf094102f979cd857ea4275faf4fee77f0f8269de771f1ffb8f654cdd8046ba",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/rag/knowledge.py",
+    "group": "A",
+    "baseline_sha256": "4f5f67ca2a2e81ed72573438ca386e337757ed12d58bf96db245d7a1c304c62b",
+    "current_sha256": "4f5f67ca2a2e81ed72573438ca386e337757ed12d58bf96db245d7a1c304c62b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/rag/reranker.py",
+    "group": "A",
+    "baseline_sha256": "21da5448e7590869463c4718405ccd0b28eeaeaa024d8671c91fa9f177f819a8",
+    "current_sha256": "21da5448e7590869463c4718405ccd0b28eeaeaa024d8671c91fa9f177f819a8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/rag/retriever.py",
+    "group": "A",
+    "baseline_sha256": "274b0e3b4f3c4539eedefb3c7813249af43604310fdf40872d6074ee252c6146",
+    "current_sha256": "274b0e3b4f3c4539eedefb3c7813249af43604310fdf40872d6074ee252c6146",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/schemas/full_look.py",
+    "group": "A",
+    "baseline_sha256": "7ace74a13d47bcbbdd6319bc93d0c755b3c8bb6fc0a7098d9440c280b8229819",
+    "current_sha256": "7ace74a13d47bcbbdd6319bc93d0c755b3c8bb6fc0a7098d9440c280b8229819",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/schemas/knowledge.py",
+    "group": "A",
+    "baseline_sha256": "39243e28e08f47ce4b4ddf29c6c695f94d667cd75ee62cb77279579b37bf0ecd",
+    "current_sha256": "39243e28e08f47ce4b4ddf29c6c695f94d667cd75ee62cb77279579b37bf0ecd",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/schemas/makeup.py",
+    "group": "A",
+    "baseline_sha256": "cca731dd2bd33febba564d8b6d78bfa5e5c8ee95e411dc81bc214e2b2f50ca63",
+    "current_sha256": "cca731dd2bd33febba564d8b6d78bfa5e5c8ee95e411dc81bc214e2b2f50ca63",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/schemas/models.py",
+    "group": "A",
+    "baseline_sha256": "1cbba3ce571321945ede40ec5dc01f79d5a542723edc6cab65fd3d873ef6984d",
+    "current_sha256": "1cbba3ce571321945ede40ec5dc01f79d5a542723edc6cab65fd3d873ef6984d",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/services/model_client.py",
+    "group": "A",
+    "baseline_sha256": "0ef421cd00b95f853f5547d5292f9e88a9e41872380a98c0a702961a71c459ab",
+    "current_sha256": "0ef421cd00b95f853f5547d5292f9e88a9e41872380a98c0a702961a71c459ab",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/services/qwen.py",
+    "group": "A",
+    "baseline_sha256": "d6591db1c3c91d829b72fc900e678bb36523986b928a538f8f1d7350a8c3a29a",
+    "current_sha256": "d6591db1c3c91d829b72fc900e678bb36523986b928a538f8f1d7350a8c3a29a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/services/voice.py",
+    "group": "A",
+    "baseline_sha256": "d6a329a58c9840cc56d9520856c0a1aebb40fb7247a513464dc08484226d23fe",
+    "current_sha256": "d6a329a58c9840cc56d9520856c0a1aebb40fb7247a513464dc08484226d23fe",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/requirements-evaluation.txt",
+    "group": "A",
+    "baseline_sha256": "75232ddc5f7e4f28ca3c5dc7ce2459eed8dd6cda705f8d7e1267790f2ed9948c",
+    "current_sha256": "75232ddc5f7e4f28ca3c5dc7ce2459eed8dd6cda705f8d7e1267790f2ed9948c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/requirements-landmarks.txt",
+    "group": "A",
+    "baseline_sha256": "75aa4a116ffa385110bce77485f1e8023630f7b26bd01b20cb8dfe8ec26ee41e",
+    "current_sha256": "75aa4a116ffa385110bce77485f1e8023630f7b26bd01b20cb8dfe8ec26ee41e",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/requirements-lock.txt",
+    "group": "A",
+    "baseline_sha256": "82972c8194e4743351a9c5747e17e1e61326b224e27a2ebd80104e1086de3072",
+    "current_sha256": "82972c8194e4743351a9c5747e17e1e61326b224e27a2ebd80104e1086de3072",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/requirements-mac-20261017.txt",
+    "group": "A",
+    "baseline_sha256": "1ac09a2dee464bc2546949094c4ad0c06e6e601ba6d73359a039c6c3cd7f4427",
+    "current_sha256": "1ac09a2dee464bc2546949094c4ad0c06e6e601ba6d73359a039c6c3cd7f4427",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/requirements-runtime.txt",
+    "group": "A",
+    "baseline_sha256": "484cf2afccb6d43c9f0a006b0e265b1d34ca6a99a2d92d37d058f663afae9236",
+    "current_sha256": "484cf2afccb6d43c9f0a006b0e265b1d34ca6a99a2d92d37d058f663afae9236",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/requirements-windows.txt",
+    "group": "A",
+    "baseline_sha256": "505e461b591b12c85d0ea80b4af039fd0b64ffc9e04fed3fb6d367191b9c3c1e",
+    "current_sha256": "505e461b591b12c85d0ea80b4af039fd0b64ffc9e04fed3fb6d367191b9c3c1e",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/requirements.txt",
+    "group": "A",
+    "baseline_sha256": "aad5b05b9749b00fcec7897a69c05e624b6f1bdf42df127056c5e9f31a4eb46b",
+    "current_sha256": "aad5b05b9749b00fcec7897a69c05e624b6f1bdf42df127056c5e9f31a4eb46b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/config/accessibility_categories.json",
+    "group": "A",
+    "baseline_sha256": "899efa765dbc3612fd4b8d443230b779e56c2ca54ea4d6bf6c7093cbdfbef06a",
+    "current_sha256": "899efa765dbc3612fd4b8d443230b779e56c2ca54ea4d6bf6c7093cbdfbef06a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/config/finishes.json",
+    "group": "A",
+    "baseline_sha256": "6605b96c5b94b3ad588315832cc70896149c1ff4958194e0ec01d9b875659d4f",
+    "current_sha256": "6605b96c5b94b3ad588315832cc70896149c1ff4958194e0ec01d9b875659d4f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/config/impressions.json",
+    "group": "A",
+    "baseline_sha256": "d60c3eb24e7c3edec5fdd287aac266dfca15fd414d0d1aa0602faac77b8fee4e",
+    "current_sha256": "d60c3eb24e7c3edec5fdd287aac266dfca15fd414d0d1aa0602faac77b8fee4e",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/config/intensity_levels.json",
+    "group": "A",
+    "baseline_sha256": "818375844c15a1bc05af52533f79f366bf498d9ffccb13c0b69297117fe1ba0e",
+    "current_sha256": "818375844c15a1bc05af52533f79f366bf498d9ffccb13c0b69297117fe1ba0e",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/config/knowledge_sources.json",
+    "group": "A",
+    "baseline_sha256": "6cb13f8e66c159d894849d40a7793e906385387edd1972b6a281a7d41fa68f22",
+    "current_sha256": "6cb13f8e66c159d894849d40a7793e906385387edd1972b6a281a7d41fa68f22",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/config/makeup_areas.json",
+    "group": "A",
+    "baseline_sha256": "8ad9a6c10166f44da152ed4e06c5073da7ff08f7141f7f446465c8c6ab7f6e94",
+    "current_sha256": "8ad9a6c10166f44da152ed4e06c5073da7ff08f7141f7f446465c8c6ab7f6e94",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/config/placements.json",
+    "group": "A",
+    "baseline_sha256": "89d75a1936ca24ddaa6664429d7cc164e55c4d18f898b070eb5ca178ff4f65f4",
+    "current_sha256": "89d75a1936ca24ddaa6664429d7cc164e55c4d18f898b070eb5ca178ff4f65f4",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/config/reference_status.json",
+    "group": "A",
+    "baseline_sha256": "42c73f9f8a5b2e75a87e067f93fdbc9fdb238fd43c57c5417a9fd538db568f22",
+    "current_sha256": "42c73f9f8a5b2e75a87e067f93fdbc9fdb238fd43c57c5417a9fd538db568f22",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/config/saturation_levels.json",
+    "group": "A",
+    "baseline_sha256": "7e33e126b4b212be575f0e1664a6cd2b3dc26a9dddd4e7dc0f0ddf280ec036de",
+    "current_sha256": "7e33e126b4b212be575f0e1664a6cd2b3dc26a9dddd4e7dc0f0ddf280ec036de",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/config/scenes.json",
+    "group": "A",
+    "baseline_sha256": "75cb6bd374c7ba9939905476cdf0f994ec129af17dccf6fe138514e114a64ff3",
+    "current_sha256": "75cb6bd374c7ba9939905476cdf0f994ec129af17dccf6fe138514e114a64ff3",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/demo/knowledge/accessibility_guidance.json",
+    "group": "A",
+    "baseline_sha256": "f67dcd73954324432ea4a9c2c1252ab79b9686d7e577883c02345dd46d50e5e5",
+    "current_sha256": "f67dcd73954324432ea4a9c2c1252ab79b9686d7e577883c02345dd46d50e5e5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/demo/knowledge/looks.json",
+    "group": "A",
+    "baseline_sha256": "cbe937f1e7ecfca0707eadbfdb3d885e0c1fb8012b5fc949f6a494292cc54cff",
+    "current_sha256": "cbe937f1e7ecfca0707eadbfdb3d885e0c1fb8012b5fc949f6a494292cc54cff",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/demo/knowledge/products.json",
+    "group": "A",
+    "baseline_sha256": "fe7f60e094164b2bfb8a5d4a7bb4d16631fce214f212ab3696682e083117f90c",
+    "current_sha256": "fe7f60e094164b2bfb8a5d4a7bb4d16631fce214f212ab3696682e083117f90c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/demo/knowledge/reference_cases.json",
+    "group": "A",
+    "baseline_sha256": "1a223021cbeb2ac3d4d8c2cc7d9f58013e6c46a08ca1061fd759540c7f29df90",
+    "current_sha256": "1a223021cbeb2ac3d4d8c2cc7d9f58013e6c46a08ca1061fd759540c7f29df90",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/demo/knowledge/routines.json",
+    "group": "A",
+    "baseline_sha256": "a2b06acfc59ece81a25bf1e636b0024146e060f07dc7aeabd74cd4381fe45ae2",
+    "current_sha256": "a2b06acfc59ece81a25bf1e636b0024146e060f07dc7aeabd74cd4381fe45ae2",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/demo/scenarios.json",
+    "group": "A",
+    "baseline_sha256": "f8e1d6c9705bf7b5945386742ea3a66faf144a3ddf0c7c3124f9a3f2dbfa3dce",
+    "current_sha256": "f8e1d6c9705bf7b5945386742ea3a66faf144a3ddf0c7c3124f9a3f2dbfa3dce",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/knowledge/accessibility_guidance.json",
+    "group": "A",
+    "baseline_sha256": "8665900f28981affafcdc2d863603728fed2defe6159affce010be46910ad416",
+    "current_sha256": "8665900f28981affafcdc2d863603728fed2defe6159affce010be46910ad416",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/knowledge/looks.json",
+    "group": "A",
+    "baseline_sha256": "c4ecc7087a57a91b8e1a6ed03db9967a23ccebf321f1cfffed538a9a175b0730",
+    "current_sha256": "c4ecc7087a57a91b8e1a6ed03db9967a23ccebf321f1cfffed538a9a175b0730",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/knowledge/products.json",
+    "group": "A",
+    "baseline_sha256": "4edf213db77ece0103684cf3649d5b6c7db24eb9cb6e6d4ff2395df9fc1e36cf",
+    "current_sha256": "4edf213db77ece0103684cf3649d5b6c7db24eb9cb6e6d4ff2395df9fc1e36cf",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/knowledge/reference_cases.json",
+    "group": "A",
+    "baseline_sha256": "f09f268e5e1f24a5a500898ed54d31cc4eda376ab8916e52033251f749773a1b",
+    "current_sha256": "f09f268e5e1f24a5a500898ed54d31cc4eda376ab8916e52033251f749773a1b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/knowledge/routines.json",
+    "group": "A",
+    "baseline_sha256": "5acf94f891ff9709ee539a27ee54c818a3a38a1202852a8f6b9412a388d161ed",
+    "current_sha256": "5acf94f891ff9709ee539a27ee54c818a3a38a1202852a8f6b9412a388d161ed",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/knowledge/sources.json",
+    "group": "A",
+    "baseline_sha256": "c96a0a9ed5f04818e965ccb717f86054386b22ed41ee147017d6080d6903f6b0",
+    "current_sha256": "c96a0a9ed5f04818e965ccb717f86054386b22ed41ee147017d6080d6903f6b0",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/locales/guidance.en.json",
+    "group": "A",
+    "baseline_sha256": "13ddb4ff938575a293c63e409fa2837da4b63a0f0938f83ee0572e7cbd9cf1aa",
+    "current_sha256": "13ddb4ff938575a293c63e409fa2837da4b63a0f0938f83ee0572e7cbd9cf1aa",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/materials/materials.json",
+    "group": "A",
+    "baseline_sha256": "a279489d1ef5593aedc8d86b11129090989eba2b3416e1d19906594f4f092522",
+    "current_sha256": "a279489d1ef5593aedc8d86b11129090989eba2b3416e1d19906594f4f092522",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/research/v4/assets_hash_review.json",
+    "group": "A",
+    "baseline_sha256": "4eada78826595ab0f764cfbfea3b5cac6d07821893b9f96e47b86e35335d748f",
+    "current_sha256": "4eada78826595ab0f764cfbfea3b5cac6d07821893b9f96e47b86e35335d748f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/research/v4/build_review.py",
+    "group": "A",
+    "baseline_sha256": "17d4b1b4d5da9fd8a341810980b1d7b41ff79341262f523ea5bd46244c3f054a",
+    "current_sha256": "17d4b1b4d5da9fd8a341810980b1d7b41ff79341262f523ea5bd46244c3f054a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/research/v4/evidence_rules.json",
+    "group": "A",
+    "baseline_sha256": "5daab7e6c8ed9900bff4aee2e82b0ad0d6f0e63b53a76097a946385066ddd6a7",
+    "current_sha256": "5daab7e6c8ed9900bff4aee2e82b0ad0d6f0e63b53a76097a946385066ddd6a7",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/research/v4/excel_inventory.json",
+    "group": "A",
+    "baseline_sha256": "cbdcc520c48f7eaf623ba2454fbb7e6c6c76a861abe30e5ba3fff3c74b9fd6dc",
+    "current_sha256": "cbdcc520c48f7eaf623ba2454fbb7e6c6c76a861abe30e5ba3fff3c74b9fd6dc",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/research/v4/hash_duplicates.json",
+    "group": "A",
+    "baseline_sha256": "74cb0a421b741f1570d9da20861197e2af154a49189939561b7742e702fcaae5",
+    "current_sha256": "74cb0a421b741f1570d9da20861197e2af154a49189939561b7742e702fcaae5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/research/v4/material_candidates.json",
+    "group": "A",
+    "baseline_sha256": "59bcd9727d49c933cf187a6ed02e993696fe1eb33e5f1ef195bdb2813773991f",
+    "current_sha256": "59bcd9727d49c933cf187a6ed02e993696fe1eb33e5f1ef195bdb2813773991f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/research/v4/products_candidates.csv",
+    "group": "A",
+    "baseline_sha256": "b9aee12963366f1c2eba1552f8eff096c66f00f9d9efbc5cef7107277e81216a",
+    "current_sha256": "b9aee12963366f1c2eba1552f8eff096c66f00f9d9efbc5cef7107277e81216a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/research/v4/products_candidates.json",
+    "group": "A",
+    "baseline_sha256": "42bca22a194db4ccc4792b01c87d07a1857629e1921b38d62dfe87bc5c8b7217",
+    "current_sha256": "42bca22a194db4ccc4792b01c87d07a1857629e1921b38d62dfe87bc5c8b7217",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/data/research/v4/sources.json",
+    "group": "A",
+    "baseline_sha256": "935d9d30421bb0ac3848984740a34861307c675beb8ec5f9f2826068518b91ef",
+    "current_sha256": "935d9d30421bb0ac3848984740a34861307c675beb8ec5f9f2826068518b91ef",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/accessibility_policy.md",
+    "group": "A",
+    "baseline_sha256": "df4e934945719de971d04a0e929e2dbaaafe8e7347f18e5e2a938309097e250d",
+    "current_sha256": "df4e934945719de971d04a0e929e2dbaaafe8e7347f18e5e2a938309097e250d",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/agent_system.md",
+    "group": "A",
+    "baseline_sha256": "ac24510ffd66770c9e01f907f35fdab996b59357ec8aae5eec0fac147cdeec1f",
+    "current_sha256": "ac24510ffd66770c9e01f907f35fdab996b59357ec8aae5eec0fac147cdeec1f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v4/accessibility_policy.md",
+    "group": "A",
+    "baseline_sha256": "04b8f827d6f4e11afa40fac2ef6bae05b05f3c78947b11a7fa32dfa7500d7c90",
+    "current_sha256": "04b8f827d6f4e11afa40fac2ef6bae05b05f3c78947b11a7fa32dfa7500d7c90",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v4/brand_copy_policy.md",
+    "group": "A",
+    "baseline_sha256": "a633e9b106b9accf5f6f7c4a4a10454d552367de57c5b50879327b7c68d45a8a",
+    "current_sha256": "a633e9b106b9accf5f6f7c4a4a10454d552367de57c5b50879327b7c68d45a8a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v4/full_look_planner_policy.md",
+    "group": "A",
+    "baseline_sha256": "13f57b69546ec99b3da755351e7829d1e04652a17d4921a64ef6a0406d5e842f",
+    "current_sha256": "13f57b69546ec99b3da755351e7829d1e04652a17d4921a64ef6a0406d5e842f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v4/guidance_policy.md",
+    "group": "A",
+    "baseline_sha256": "22d7ae0b6fbc8c499a860ee5ba9b55f07317b1d8b046b11e314a14e3e15779d9",
+    "current_sha256": "22d7ae0b6fbc8c499a860ee5ba9b55f07317b1d8b046b11e314a14e3e15779d9",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v4/material_description_policy.md",
+    "group": "A",
+    "baseline_sha256": "92776b4f3172c7450ff985f8e3bc3536cb5e0b6f825c56b73c67747ea70c9fc5",
+    "current_sha256": "92776b4f3172c7450ff985f8e3bc3536cb5e0b6f825c56b73c67747ea70c9fc5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v4/visual_feedback_policy.md",
+    "group": "A",
+    "baseline_sha256": "f0d50b07cdd36d6acef1634368f62bd8dcc469e70cf6945a20f65910c33926b6",
+    "current_sha256": "f0d50b07cdd36d6acef1634368f62bd8dcc469e70cf6945a20f65910c33926b6",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v5/accessibility_policy.md",
+    "group": "A",
+    "baseline_sha256": "c46f00eaba5423f686161eef6dad4b0836e3b63000349eb83767c229e1a5f02c",
+    "current_sha256": "c46f00eaba5423f686161eef6dad4b0836e3b63000349eb83767c229e1a5f02c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v5/brand_copy_policy.md",
+    "group": "A",
+    "baseline_sha256": "1617c18b6eb9c3c27cd2901ba5a2aab1aed21d1c9ddce4a770b0d5b8f37932b1",
+    "current_sha256": "1617c18b6eb9c3c27cd2901ba5a2aab1aed21d1c9ddce4a770b0d5b8f37932b1",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v5/full_look_planner_policy.md",
+    "group": "A",
+    "baseline_sha256": "13f57b69546ec99b3da755351e7829d1e04652a17d4921a64ef6a0406d5e842f",
+    "current_sha256": "13f57b69546ec99b3da755351e7829d1e04652a17d4921a64ef6a0406d5e842f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v5/guidance_policy.md",
+    "group": "A",
+    "baseline_sha256": "22d7ae0b6fbc8c499a860ee5ba9b55f07317b1d8b046b11e314a14e3e15779d9",
+    "current_sha256": "22d7ae0b6fbc8c499a860ee5ba9b55f07317b1d8b046b11e314a14e3e15779d9",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v5/material_description_policy.md",
+    "group": "A",
+    "baseline_sha256": "92776b4f3172c7450ff985f8e3bc3536cb5e0b6f825c56b73c67747ea70c9fc5",
+    "current_sha256": "92776b4f3172c7450ff985f8e3bc3536cb5e0b6f825c56b73c67747ea70c9fc5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/policies/v5/visual_feedback_policy.md",
+    "group": "A",
+    "baseline_sha256": "f0d50b07cdd36d6acef1634368f62bd8dcc469e70cf6945a20f65910c33926b6",
+    "current_sha256": "f0d50b07cdd36d6acef1634368f62bd8dcc469e70cf6945a20f65910c33926b6",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/reference_analysis.md",
+    "group": "A",
+    "baseline_sha256": "8917fd28ca24f15c26c8ecde40a3b45c2196e9415978f4f9f5cac6f405bd88fb",
+    "current_sha256": "8917fd28ca24f15c26c8ecde40a3b45c2196e9415978f4f9f5cac6f405bd88fb",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/vision_blush.md",
+    "group": "A",
+    "baseline_sha256": "50bdc46b44b1b6b5e0eeb43c65db3fe7b50f6b49ac94166e2d88442acdc1ebc0",
+    "current_sha256": "50bdc46b44b1b6b5e0eeb43c65db3fe7b50f6b49ac94166e2d88442acdc1ebc0",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/prompts/vision_lip.md",
+    "group": "A",
+    "baseline_sha256": "83b4815a4779e45c57a1d6a86179bd4bc5eb932d78c1b49a3e713b13dee54eef",
+    "current_sha256": "83b4815a4779e45c57a1d6a86179bd4bc5eb932d78c1b49a3e713b13dee54eef",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/runtime.json",
+    "group": "A",
+    "baseline_sha256": "cc5bc786ba12c4b4aeb75edd744f51454b80185ddc0dacccdf3e33f0b5408ec0",
+    "current_sha256": "22799d47b7872b0ee44239fdab513c367d05396af8590b0fedec89c47795eb88",
+    "treatment": "modified"
+  },
+  {
+    "path": "AccessibleBeautyAgent/runtime.py",
+    "group": "A",
+    "baseline_sha256": "b9a2eb088cacee304d4b72fc074078bfcec00f161a03903307bbde4120841206",
+    "current_sha256": "b9a2eb088cacee304d4b72fc074078bfcec00f161a03903307bbde4120841206",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/validate_kb.py",
+    "group": "A",
+    "baseline_sha256": "cb3687fcf88d71998b07d79be0a642e250473ea7ce53cee7bee3b579268872ae",
+    "current_sha256": "cb3687fcf88d71998b07d79be0a642e250473ea7ce53cee7bee3b579268872ae",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/templates/accessibility_guidance_template.csv",
+    "group": "A",
+    "baseline_sha256": "df72a7430c58967d1e9a50bfb4dfe841b63078e2b86804919e8300d3d722544f",
+    "current_sha256": "df72a7430c58967d1e9a50bfb4dfe841b63078e2b86804919e8300d3d722544f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/templates/beauty_kb_template.xlsx",
+    "group": "A",
+    "baseline_sha256": "ccede24789204cbeca0c968e7132e9963f0f5e45d8fdfb264fc93925d85745a3",
+    "current_sha256": "ccede24789204cbeca0c968e7132e9963f0f5e45d8fdfb264fc93925d85745a3",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/templates/beauty_looks_template.csv",
+    "group": "A",
+    "baseline_sha256": "197c97a19e43e5e346f21fef3faa9dc8f5ac3c3b6de98fc1fcc3f8cbe32c09a8",
+    "current_sha256": "197c97a19e43e5e346f21fef3faa9dc8f5ac3c3b6de98fc1fcc3f8cbe32c09a8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/templates/products_template.csv",
+    "group": "A",
+    "baseline_sha256": "5dfb294be50ffc1426011841379076bdc909315a2d83957f30b206e1de19b64e",
+    "current_sha256": "5dfb294be50ffc1426011841379076bdc909315a2d83957f30b206e1de19b64e",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/templates/reference_cases_template.csv",
+    "group": "A",
+    "baseline_sha256": "9f0d04a6fbd64088cea83e5de9e5bcc3f2540ee47afbbaa1884e88637a02d554",
+    "current_sha256": "9f0d04a6fbd64088cea83e5de9e5bcc3f2540ee47afbbaa1884e88637a02d554",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/templates/routine_steps_template.csv",
+    "group": "A",
+    "baseline_sha256": "0a809bbfaafa2bb621993a82f5fec6132ded2456fe4f5b79c31b120e302b4e81",
+    "current_sha256": "0a809bbfaafa2bb621993a82f5fec6132ded2456fe4f5b79c31b120e302b4e81",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/templates/routines_template.csv",
+    "group": "A",
+    "baseline_sha256": "af4f69ef2fa0b4b5ff1092bb7201497fcd3647fc1d56e2662be3cdd907b8698c",
+    "current_sha256": "af4f69ef2fa0b4b5ff1092bb7201497fcd3647fc1d56e2662be3cdd907b8698c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/templates/sources_template.csv",
+    "group": "A",
+    "baseline_sha256": "e8e2cb000902f4c0c21b9001119bdae4123b0481f8fe42fc76cc021ab0770faa",
+    "current_sha256": "e8e2cb000902f4c0c21b9001119bdae4123b0481f8fe42fc76cc021ab0770faa",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/agent/coaching.py",
+    "group": "B",
+    "baseline_sha256": "0928e7a4172f3474b94cf7c3e8c930a10bbbbcd1be90f64cf7da0429d6d34dfc",
+    "current_sha256": "0928e7a4172f3474b94cf7c3e8c930a10bbbbcd1be90f64cf7da0429d6d34dfc",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/agent/coaching_intents.py",
+    "group": "B",
+    "baseline_sha256": "eb48caca258e66c94469dc94a754c70467f72b054f05273cf6312717238e0f2a",
+    "current_sha256": "eb48caca258e66c94469dc94a754c70467f72b054f05273cf6312717238e0f2a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/agent/coaching_needs.py",
+    "group": "B",
+    "baseline_sha256": "ca04ea72f7e4474d05cbd48670d1f7be833703370dbdd27b9f2f2d11c29f465c",
+    "current_sha256": "ca04ea72f7e4474d05cbd48670d1f7be833703370dbdd27b9f2f2d11c29f465c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/agent/conversation.py",
+    "group": "B",
+    "baseline_sha256": "90609edbaff89e88beada596acc3eb37f495a4dd1e358ee32b9a812006d11dd7",
+    "current_sha256": "90609edbaff89e88beada596acc3eb37f495a4dd1e358ee32b9a812006d11dd7",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/agent/harness.py",
+    "group": "B",
+    "baseline_sha256": "e3aed250a32eeae4133034af389711e5d8127c5f0fbd0e7c6e741c3073c691df",
+    "current_sha256": "e3aed250a32eeae4133034af389711e5d8127c5f0fbd0e7c6e741c3073c691df",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/agent/providers.py",
+    "group": "B",
+    "baseline_sha256": "37829c985a289d1e4558a3d54784d83a14f2a94aaf88c17486135733ff005aa5",
+    "current_sha256": "37829c985a289d1e4558a3d54784d83a14f2a94aaf88c17486135733ff005aa5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/agent/state.py",
+    "group": "B",
+    "baseline_sha256": "f8a174a9b110a2c5620aaf9fb06db0aa881baa183003017762da53ee4f158ada",
+    "current_sha256": "f8a174a9b110a2c5620aaf9fb06db0aa881baa183003017762da53ee4f158ada",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/agent/tools.py",
+    "group": "B",
+    "baseline_sha256": "55aed4052149c2ccb84f3aef85031cb7f6554e499aa6c1be20590ab3c62d2d47",
+    "current_sha256": "55aed4052149c2ccb84f3aef85031cb7f6554e499aa6c1be20590ab3c62d2d47",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/full_look/materials.py",
+    "group": "B",
+    "baseline_sha256": "6aa65525fa43903fd4b4009084ae5b03d9533a3cf3a24e6d7592a04217c9c705",
+    "current_sha256": "6aa65525fa43903fd4b4009084ae5b03d9533a3cf3a24e6d7592a04217c9c705",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/full_look/service.py",
+    "group": "B",
+    "baseline_sha256": "5dc18fa43bffc079e341e2d1a3fd9ae600abefa29d2d500e2548c82b2edb5217",
+    "current_sha256": "5dc18fa43bffc079e341e2d1a3fd9ae600abefa29d2d500e2548c82b2edb5217",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/main.py",
+    "group": "B",
+    "baseline_sha256": "ac5546beaae3ddd295686d8f21abc2ef1136a7b8962396a58836faac7440e575",
+    "current_sha256": "846021c88e621f76b0d16a26460c3e9719390add63fed0d4713bf2939f8f6ac3",
+    "treatment": "modified"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/privacy.py",
+    "group": "B",
+    "baseline_sha256": "0cf91d42fb7ed3aa57b07d364fbcaf2771e4d97c720f86d11dee973eff360e2f",
+    "current_sha256": "0cf91d42fb7ed3aa57b07d364fbcaf2771e4d97c720f86d11dee973eff360e2f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/reading/service.py",
+    "group": "B",
+    "baseline_sha256": "294461804bac69c02265d70691f14f04afb6a245fd67de8bbb82e83b2c7743fc",
+    "current_sha256": "294461804bac69c02265d70691f14f04afb6a245fd67de8bbb82e83b2c7743fc",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/routes/admin.py",
+    "group": "B",
+    "baseline_sha256": "267aaa1c3eafd889f147f19114a004b78fad8228328b13896f8e6a0ef25fb166",
+    "current_sha256": "267aaa1c3eafd889f147f19114a004b78fad8228328b13896f8e6a0ef25fb166",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/routes/api.py",
+    "group": "B",
+    "baseline_sha256": "95a905ac45b7504fb04140d043b40961954631d6b7fdf21ec5d69fa4cf46e8c8",
+    "current_sha256": "95a905ac45b7504fb04140d043b40961954631d6b7fdf21ec5d69fa4cf46e8c8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/routes/conversation.py",
+    "group": "B",
+    "baseline_sha256": "d8c5afae1b0d147e15b14df56e35d17b013d4daa8787f1267cbc17227aa6a2c5",
+    "current_sha256": "d8c5afae1b0d147e15b14df56e35d17b013d4daa8787f1267cbc17227aa6a2c5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/routes/full_look.py",
+    "group": "B",
+    "baseline_sha256": "f5136dabe6b480cb0681c8b3dfebfe157da368224fcfa54b4d7f1f70701b12c0",
+    "current_sha256": "f5136dabe6b480cb0681c8b3dfebfe157da368224fcfa54b4d7f1f70701b12c0",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/routes/hardware.py",
+    "group": "B",
+    "baseline_sha256": "e6be070326547e67007abe7e356013bc395698f46a048ade5ee25488be753e94",
+    "current_sha256": "e6be070326547e67007abe7e356013bc395698f46a048ade5ee25488be753e94",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/routes/journal.py",
+    "group": "B",
+    "baseline_sha256": "a0854062b9382189fcabcccaeb03928cbd4069d21915d9813968397138653103",
+    "current_sha256": "a0854062b9382189fcabcccaeb03928cbd4069d21915d9813968397138653103",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/routes/local_vision.py",
+    "group": "B",
+    "baseline_sha256": "1f04e319df2c32424be10ad98edcd26452f3453d797b436d9c89006e30686d5d",
+    "current_sha256": "1f04e319df2c32424be10ad98edcd26452f3453d797b436d9c89006e30686d5d",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/routes/makeup.py",
+    "group": "B",
+    "baseline_sha256": "5af34c2fa426dc1783e1a01e063e625d2b89724dafa2812b9bb3f15d36547620",
+    "current_sha256": "5af34c2fa426dc1783e1a01e063e625d2b89724dafa2812b9bb3f15d36547620",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/routes/reading.py",
+    "group": "B",
+    "baseline_sha256": "4be76a6845e8a6b97ad29ee0e6d19d3dc6a7dc99816fe7d54e08f2d88bcd1dc1",
+    "current_sha256": "4be76a6845e8a6b97ad29ee0e6d19d3dc6a7dc99816fe7d54e08f2d88bcd1dc1",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/routes/recollection.py",
+    "group": "B",
+    "baseline_sha256": "dc9f31eded34f4ad546c465c1773ae5439ef747187a51cf8683672d9b85b19b9",
+    "current_sha256": "dc9f31eded34f4ad546c465c1773ae5439ef747187a51cf8683672d9b85b19b9",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/consensus.py",
+    "group": "B",
+    "baseline_sha256": "40805f3c1d082298cf702e7501508f1244866078f2d7365121f695d4a8ba44c7",
+    "current_sha256": "40805f3c1d082298cf702e7501508f1244866078f2d7365121f695d4a8ba44c7",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/evidence.py",
+    "group": "B",
+    "baseline_sha256": "c7d7a7cf0762a35eaa0c7264d346935b483c838813917325f5c2c4768d204945",
+    "current_sha256": "c7d7a7cf0762a35eaa0c7264d346935b483c838813917325f5c2c4768d204945",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/face-landmarker.json",
+    "group": "B",
+    "baseline_sha256": "7fc69db28ed2a7b1c8d5f94eb00baa78e9f8a888235b0382450530059059c3ea",
+    "current_sha256": "7fc69db28ed2a7b1c8d5f94eb00baa78e9f8a888235b0382450530059059c3ea",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/gate.py",
+    "group": "B",
+    "baseline_sha256": "3972e15308d1fbf20444e793f2b7851a397dad3b64c99a193b7c9902ef89fdf3",
+    "current_sha256": "3972e15308d1fbf20444e793f2b7851a397dad3b64c99a193b7c9902ef89fdf3",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/language.py",
+    "group": "B",
+    "baseline_sha256": "dfb5859e981fe8c035fc1f6a9e69d5cec5545501068c436917c99a847fd49d91",
+    "current_sha256": "dfb5859e981fe8c035fc1f6a9e69d5cec5545501068c436917c99a847fd49d91",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/local_landmarks.py",
+    "group": "B",
+    "baseline_sha256": "5be832e3153a1367b4f6ae39db5f05281b72d9f1885d29077dc3c8cf96f2b3d2",
+    "current_sha256": "5be832e3153a1367b4f6ae39db5f05281b72d9f1885d29077dc3c8cf96f2b3d2",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/local_regions.py",
+    "group": "B",
+    "baseline_sha256": "505cddadc767a5cb45373a2fc183db22ccc18970f0c2d6762f6a81cd96d268c9",
+    "current_sha256": "505cddadc767a5cb45373a2fc183db22ccc18970f0c2d6762f6a81cd96d268c9",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/local_session.py",
+    "group": "B",
+    "baseline_sha256": "3b63f3d6ccb66eda64cb67c9b305a931658ad2fc73aa5cb437451ccb550b5eac",
+    "current_sha256": "3b63f3d6ccb66eda64cb67c9b305a931658ad2fc73aa5cb437451ccb550b5eac",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/makeup_observation.py",
+    "group": "B",
+    "baseline_sha256": "65d04752e7862a527e73656d82e72a9435934f790f56aff1923ea74c21517738",
+    "current_sha256": "65d04752e7862a527e73656d82e72a9435934f790f56aff1923ea74c21517738",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/providers.py",
+    "group": "B",
+    "baseline_sha256": "1be142079415419ca082f8e2c220c393fcb09edc1cfa85c7d56f759606ef9df4",
+    "current_sha256": "1be142079415419ca082f8e2c220c393fcb09edc1cfa85c7d56f759606ef9df4",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/reference.py",
+    "group": "B",
+    "baseline_sha256": "59275ab2c600e442b43e9c92803ddf22f3a9c29d159de28c51ee09971bb21148",
+    "current_sha256": "59275ab2c600e442b43e9c92803ddf22f3a9c29d159de28c51ee09971bb21148",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/backend/app/vision/service.py",
+    "group": "B",
+    "baseline_sha256": "154c0d9802e0810c610374f0c274a5a759c38c086744df729237e6335de30003",
+    "current_sha256": "154c0d9802e0810c610374f0c274a5a759c38c086744df729237e6335de30003",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/pytest.ini",
+    "group": "B",
+    "baseline_sha256": "f2cadebe0bfc330aee9e57b7243b7a9e2cf1dac6b45a821ba7e16fcced7b9981",
+    "current_sha256": "f2cadebe0bfc330aee9e57b7243b7a9e2cf1dac6b45a821ba7e16fcced7b9981",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/conftest.py",
+    "group": "B",
+    "baseline_sha256": "1ac4c756adbbd62469cda5f50e14ea54b18a3f72b4b5eb91abb6ad7dd8de1128",
+    "current_sha256": "1ac4c756adbbd62469cda5f50e14ea54b18a3f72b4b5eb91abb6ad7dd8de1128",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/fixtures/lesson_retrieval.json",
+    "group": "B",
+    "baseline_sha256": "d923dc092e7d84be4bad6ecab721e2c5cc0a39479e44204ffd39b8b9d5a72995",
+    "current_sha256": "d923dc092e7d84be4bad6ecab721e2c5cc0a39479e44204ffd39b8b9d5a72995",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/rag/test_phase2.py",
+    "group": "B",
+    "baseline_sha256": "b04002bd96c609432d3f4f167bafb8556463b7b0e524c7d1840fbbae66a8af10",
+    "current_sha256": "b04002bd96c609432d3f4f167bafb8556463b7b0e524c7d1840fbbae66a8af10",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/rag/test_phase2_edges.py",
+    "group": "B",
+    "baseline_sha256": "18bc4a63f2b117db7064a40d327cf94d346125a8b80490e6883f6813c9faa7a5",
+    "current_sha256": "18bc4a63f2b117db7064a40d327cf94d346125a8b80490e6883f6813c9faa7a5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/regression/test_acceptance.py",
+    "group": "B",
+    "baseline_sha256": "53876528451fa0a02361b4840b60dc2a34564be085d190298fb07aa8e683320f",
+    "current_sha256": "53876528451fa0a02361b4840b60dc2a34564be085d190298fb07aa8e683320f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/regression/test_edge_cases.py",
+    "group": "B",
+    "baseline_sha256": "cd6287c86094001307cf678416b1b5ce92924d22326fddd1885de5d10c49814b",
+    "current_sha256": "cd6287c86094001307cf678416b1b5ce92924d22326fddd1885de5d10c49814b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/regression/test_review.py",
+    "group": "B",
+    "baseline_sha256": "5ba3a4b5f2d7dad26fe1a140eb98fc2c8ccb2650c725cd3ce47d9f1125c7c916",
+    "current_sha256": "5ba3a4b5f2d7dad26fe1a140eb98fc2c8ccb2650c725cd3ce47d9f1125c7c916",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/regression/test_windows_setup.py",
+    "group": "B",
+    "baseline_sha256": "d7abc7e3a5e8801f7f3a8dc000850694a0fac593cad7944d028336a43ab06045",
+    "current_sha256": "d7abc7e3a5e8801f7f3a8dc000850694a0fac593cad7944d028336a43ab06045",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_confirmed_memory.py",
+    "group": "B",
+    "baseline_sha256": "265e28f5d7ff2e2e8cff31b8518cc85a1cd16b8f80ae7753afb3d703a27359ce",
+    "current_sha256": "265e28f5d7ff2e2e8cff31b8518cc85a1cd16b8f80ae7753afb3d703a27359ce",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_conversation_lifetime.py",
+    "group": "B",
+    "baseline_sha256": "7c36dacdda68f3e1e30cdd15849e60b45c4dabf9f79bd2452a0d203b47162ff0",
+    "current_sha256": "7c36dacdda68f3e1e30cdd15849e60b45c4dabf9f79bd2452a0d203b47162ff0",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_dialogue_knowledge.py",
+    "group": "B",
+    "baseline_sha256": "7a361966562bfdb2cf012176074ec3e0eba91758f6a2f92fa10140388c4ebb5f",
+    "current_sha256": "7a361966562bfdb2cf012176074ec3e0eba91758f6a2f92fa10140388c4ebb5f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_hardware.py",
+    "group": "B",
+    "baseline_sha256": "c2f0fda6cc39abe39f89e2b386329bde40c40d6375e97468fc2af1c2d158eeca",
+    "current_sha256": "c2f0fda6cc39abe39f89e2b386329bde40c40d6375e97468fc2af1c2d158eeca",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_local_vision_permits.py",
+    "group": "B",
+    "baseline_sha256": "735a9a8f6ba4babe5743aa6611c56d6d95d035d25534f859974c0d931c78527d",
+    "current_sha256": "735a9a8f6ba4babe5743aa6611c56d6d95d035d25534f859974c0d931c78527d",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_phase4_controller.py",
+    "group": "B",
+    "baseline_sha256": "c1c85b32099bf52dba6fc43170ecc95c8784321a4caea30f5e24544e43f6fdb6",
+    "current_sha256": "c1c85b32099bf52dba6fc43170ecc95c8784321a4caea30f5e24544e43f6fdb6",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_phase4_flow.py",
+    "group": "B",
+    "baseline_sha256": "5a891589934fe1e36aa3e2695864ea1d30f98c8bd4722b561578b91da63ae903",
+    "current_sha256": "5a891589934fe1e36aa3e2695864ea1d30f98c8bd4722b561578b91da63ae903",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_phase4_intents.py",
+    "group": "B",
+    "baseline_sha256": "553883a8b3fa748c8af8a06ca168fce414eca2fd753c0f7ba29393d26e33f9a3",
+    "current_sha256": "553883a8b3fa748c8af8a06ca168fce414eca2fd753c0f7ba29393d26e33f9a3",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_phase4_landmarks.py",
+    "group": "B",
+    "baseline_sha256": "9ee0af98aa0505b6a2f7b0bf284d149daf911bcf7af903a3e5a7bc9feb5fcf90",
+    "current_sha256": "9ee0af98aa0505b6a2f7b0bf284d149daf911bcf7af903a3e5a7bc9feb5fcf90",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_private_journal.py",
+    "group": "B",
+    "baseline_sha256": "a539e20424dec68fce33a80a012b7259682386c9e075eb6b09084a4ea50f5e25",
+    "current_sha256": "a539e20424dec68fce33a80a012b7259682386c9e075eb6b09084a4ea50f5e25",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_realtime_companion_language.py",
+    "group": "B",
+    "baseline_sha256": "3c2dfc3ef38541fb758bc90e69f5d7933d98616ec4f8d4cc5b9a9e4f300b14eb",
+    "current_sha256": "3c2dfc3ef38541fb758bc90e69f5d7933d98616ec4f8d4cc5b9a9e4f300b14eb",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_recollection_v2.py",
+    "group": "B",
+    "baseline_sha256": "4fb9ec07bc59ae55fd0979881f58ea6632e3b966a5a78cebbe5fa2914fb367d3",
+    "current_sha256": "4fb9ec07bc59ae55fd0979881f58ea6632e3b966a5a78cebbe5fa2914fb367d3",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_reference_full_look.py",
+    "group": "B",
+    "baseline_sha256": "e01ad93668e3b0905d604f3445f218a2df508764e4d74cb36c9c50d58b6391ae",
+    "current_sha256": "e01ad93668e3b0905d604f3445f218a2df508764e4d74cb36c9c50d58b6391ae",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_remote_verifier.py",
+    "group": "B",
+    "baseline_sha256": "14dd90af10bd90ddb9b60f5316c53532405d5538293f221b0949dfcf9176cc46",
+    "current_sha256": "14dd90af10bd90ddb9b60f5316c53532405d5538293f221b0949dfcf9176cc46",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_runtime_health.py",
+    "group": "B",
+    "baseline_sha256": "cd9736b9498a74530db69e34c8b4473f984ab52bcc1ebc6754f5f2e4fcf883f4",
+    "current_sha256": "cd9736b9498a74530db69e34c8b4473f984ab52bcc1ebc6754f5f2e4fcf883f4",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_session_commands.py",
+    "group": "B",
+    "baseline_sha256": "ff994c857f15b942b691c7db8e17e5dd3677e321a875a3fce5db7694f8a25dc1",
+    "current_sha256": "ff994c857f15b942b691c7db8e17e5dd3677e321a875a3fce5db7694f8a25dc1",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_story_companion.py",
+    "group": "B",
+    "baseline_sha256": "2c1d39bc7d83b3486e40d7cc86f2c0d5ff4617b40e560e1dda2c77fec6cf1fa5",
+    "current_sha256": "2c1d39bc7d83b3486e40d7cc86f2c0d5ff4617b40e560e1dda2c77fec6cf1fa5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_styling_reading.py",
+    "group": "B",
+    "baseline_sha256": "e01cb4002a71bacc4661808f86284ae945d2dea96624609ae0d3c73824a9aee5",
+    "current_sha256": "e01cb4002a71bacc4661808f86284ae945d2dea96624609ae0d3c73824a9aee5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_trace_phase3.py",
+    "group": "B",
+    "baseline_sha256": "b6ded53579e19642673b4bcaf26c9e0e5c82d6db2ca623cd1883d91ffa5fe389",
+    "current_sha256": "b6ded53579e19642673b4bcaf26c9e0e5c82d6db2ca623cd1883d91ffa5fe389",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_v2_conversation.py",
+    "group": "B",
+    "baseline_sha256": "1033bc9cdf8475da64addbab334be478615a1a01eebcccd02b233a7e5dd237f4",
+    "current_sha256": "1033bc9cdf8475da64addbab334be478615a1a01eebcccd02b233a7e5dd237f4",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_v2_ingestion.py",
+    "group": "B",
+    "baseline_sha256": "dce5912d8a37601b34beb73c8d96d822721a6a77e997e4cc780e4ee1d080e443",
+    "current_sha256": "dce5912d8a37601b34beb73c8d96d822721a6a77e997e4cc780e4ee1d080e443",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_v2_local_vision.py",
+    "group": "B",
+    "baseline_sha256": "c5aac9cb22131d25f6eed85b2c0e29f058280e0136f6e7afd736ea2d41efc14c",
+    "current_sha256": "c5aac9cb22131d25f6eed85b2c0e29f058280e0136f6e7afd736ea2d41efc14c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_v2_privacy.py",
+    "group": "B",
+    "baseline_sha256": "1a27254a225ec2ae32f7616c9729c6f96df5027718edcc3f82783f665da6a932",
+    "current_sha256": "7db268e0de2d392b3537473cb536c85690ed5bb3ca3e4bfa626e2a33791dec59",
+    "treatment": "modified"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_v4_full_look.py",
+    "group": "B",
+    "baseline_sha256": "6b01777c05b0a86a644935139632cd0676e4aa160bbe5b5a985b1ec8c51f5c05",
+    "current_sha256": "6b01777c05b0a86a644935139632cd0676e4aa160bbe5b5a985b1ec8c51f5c05",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_v4_policies.py",
+    "group": "B",
+    "baseline_sha256": "22b5664079a32958681fcacfdcedafc528defc642e9d719cd634e6bd615b76a9",
+    "current_sha256": "22b5664079a32958681fcacfdcedafc528defc642e9d719cd634e6bd615b76a9",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_v4_video_analysis.py",
+    "group": "B",
+    "baseline_sha256": "9b8b69569891aba9e5fac84cf04140fc8359536e2c9eefa09cea43f30c919824",
+    "current_sha256": "9b8b69569891aba9e5fac84cf04140fc8359536e2c9eefa09cea43f30c919824",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_vision_evaluation.py",
+    "group": "B",
+    "baseline_sha256": "3ab27953c2915c53c0657d0fb67a6589b902cf8855c8492ce9fc9c3c7aa8fd13",
+    "current_sha256": "3ab27953c2915c53c0657d0fb67a6589b902cf8855c8492ce9fc9c3c7aa8fd13",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_vision_mvp.py",
+    "group": "B",
+    "baseline_sha256": "15d6666e321bd8aad42d52b5eaa6bdb6b181e0642ae6f9054e431b4a08e8646c",
+    "current_sha256": "15d6666e321bd8aad42d52b5eaa6bdb6b181e0642ae6f9054e431b4a08e8646c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_vision_session.py",
+    "group": "B",
+    "baseline_sha256": "f7c5c268646d1d48470c52ae9ef0e26e96fa2f7afdb90fe5a22ba6609f8c4850",
+    "current_sha256": "f7c5c268646d1d48470c52ae9ef0e26e96fa2f7afdb90fe5a22ba6609f8c4850",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_visual_entry.py",
+    "group": "B",
+    "baseline_sha256": "fac53c7de70fd228bd09aaaa61e225780ca31e0a91cd339ac30099f5eb796aa8",
+    "current_sha256": "fac53c7de70fd228bd09aaaa61e225780ca31e0a91cd339ac30099f5eb796aa8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/test_voice_first_guidance.py",
+    "group": "B",
+    "baseline_sha256": "5ad36ebc88e21a0848d2c139ffa8bb18ad8b86a72290381ba28ff4ffecd49215",
+    "current_sha256": "5ad36ebc88e21a0848d2c139ffa8bb18ad8b86a72290381ba28ff4ffecd49215",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/tests/vision/test_consensus.py",
+    "group": "B",
+    "baseline_sha256": "9d53273a51d8b6d86079a1fb3ad99c86f46298825321e42d689b589f4c7f0d4e",
+    "current_sha256": "9d53273a51d8b6d86079a1fb3ad99c86f46298825321e42d689b589f4c7f0d4e",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/extract_video_frames.py",
+    "group": "B",
+    "baseline_sha256": "bdab5bf3729bb5a8b343120083bc8b002a525295aea69f7bcf49c39b5ee55c67",
+    "current_sha256": "bdab5bf3729bb5a8b343120083bc8b002a525295aea69f7bcf49c39b5ee55c67",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/hardware/.gitignore",
+    "group": "C",
+    "baseline_sha256": "58562d64be91c10079f459b975d5f53e8bcf1a5629e6d5731e8ba6fff719275f",
+    "current_sha256": "58562d64be91c10079f459b975d5f53e8bcf1a5629e6d5731e8ba6fff719275f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/hardware/README.md",
+    "group": "C",
+    "baseline_sha256": "4528b675c2233696347527890e0e7f1c324d7c9f6da2ee811140254661111c5f",
+    "current_sha256": "4528b675c2233696347527890e0e7f1c324d7c9f6da2ee811140254661111c5f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/hardware/examples/simulator.py",
+    "group": "C",
+    "baseline_sha256": "f43c82b393396080554b59cfd97a2243c9b4e8498a2e89b9f149319a754fac25",
+    "current_sha256": "f43c82b393396080554b59cfd97a2243c9b4e8498a2e89b9f149319a754fac25",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/hardware/pyproject.toml",
+    "group": "C",
+    "baseline_sha256": "24e992841462b3759784509baa4df9b0f7e06486e937a01ce8f34839e89edf48",
+    "current_sha256": "24e992841462b3759784509baa4df9b0f7e06486e937a01ce8f34839e89edf48",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/hardware/src/trace_hardware/__init__.py",
+    "group": "C",
+    "baseline_sha256": "39da957d4d32cbe92a01c4084ff10716df3efba33947d671a2af974f188b454d",
+    "current_sha256": "39da957d4d32cbe92a01c4084ff10716df3efba33947d671a2af974f188b454d",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/hardware/src/trace_hardware/core.py",
+    "group": "C",
+    "baseline_sha256": "c90ffc3ecfc480ee0907555afec1c899a4fb118540d2f69b511d7c597cdaeea9",
+    "current_sha256": "c90ffc3ecfc480ee0907555afec1c899a4fb118540d2f69b511d7c597cdaeea9",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/MODEL-SOURCES.json",
+    "group": "C",
+    "baseline_sha256": "093127e680a29bcd7521c56b6d7883c9f747afd39ad215b4f118dd97732984fd",
+    "current_sha256": "093127e680a29bcd7521c56b6d7883c9f747afd39ad215b4f118dd97732984fd",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/THIRD_PARTY_NOTICES.txt",
+    "group": "C",
+    "baseline_sha256": "c7e98e3e77ef37057fedd426f61d1b6347a9bcc15d2baaea7c226b74a56a62a6",
+    "current_sha256": "c7e98e3e77ef37057fedd426f61d1b6347a9bcc15d2baaea7c226b74a56a62a6",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/active-keywords.txt",
+    "group": "C",
+    "baseline_sha256": "324bd4f27aa589263669345fbb96fa303789768c1cb427d392737c2ac5a82c98",
+    "current_sha256": "324bd4f27aa589263669345fbb96fa303789768c1cb427d392737c2ac5a82c98",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/engine.py",
+    "group": "C",
+    "baseline_sha256": "c2a068d88f43b6fcab480657fbbe76394571a1ff8c1e5f088e7b2437e9f8aec8",
+    "current_sha256": "c2a068d88f43b6fcab480657fbbe76394571a1ff8c1e5f088e7b2437e9f8aec8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/fixtures/00_合成音频说明.txt",
+    "group": "C",
+    "baseline_sha256": "ebd52f01573c29f7d0a7b2f9bcb63b5bfb1176c20908e11d76d4969c2c5769bb",
+    "current_sha256": "ebd52f01573c29f7d0a7b2f9bcb63b5bfb1176c20908e11d76d4969c2c5769bb",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/fixtures/chat.wav",
+    "group": "C",
+    "baseline_sha256": "ec91576ddf8bca77eba9108163dcf2d4ecb276e63cf2f36a4da29e944216e716",
+    "current_sha256": "ec91576ddf8bca77eba9108163dcf2d4ecb276e63cf2f36a4da29e944216e716",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/fixtures/english.wav",
+    "group": "C",
+    "baseline_sha256": "a5105a8b887c01c39924afc500ae72a1bdd0123b39ff6a9986d068a8765b1336",
+    "current_sha256": "a5105a8b887c01c39924afc500ae72a1bdd0123b39ff6a9986d068a8765b1336",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/fixtures/negative.wav",
+    "group": "C",
+    "baseline_sha256": "c0fc950743ef86a963a363d0b3d3de1bcfb41d1291ea7d80b2df2b82ba032180",
+    "current_sha256": "c0fc950743ef86a963a363d0b3d3de1bcfb41d1291ea7d80b2df2b82ba032180",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/fixtures/pause.wav",
+    "group": "C",
+    "baseline_sha256": "032214cecdc732001ac50eb228d94f1d6be52c140e9ce9c9af5f9de225474df5",
+    "current_sha256": "032214cecdc732001ac50eb228d94f1d6be52c140e9ce9c9af5f9de225474df5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/fixtures/wake.wav",
+    "group": "C",
+    "baseline_sha256": "55d0bd9c78cc7fb729a80e6552956ceb2ae62a68fd7889c7fe488e4d9a5e4caf",
+    "current_sha256": "55d0bd9c78cc7fb729a80e6552956ceb2ae62a68fd7889c7fe488e4d9a5e4caf",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/fixtures/wake2.wav",
+    "group": "C",
+    "baseline_sha256": "175e0045144f5fc4c7189a9a4deb78b1d1f9bd48dbe6c5e7b37b88e330a2e9b8",
+    "current_sha256": "175e0045144f5fc4c7189a9a4deb78b1d1f9bd48dbe6c5e7b37b88e330a2e9b8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/quiet-keywords.txt",
+    "group": "C",
+    "baseline_sha256": "2624aa01b4a22989415a02edcd3a227c959fa2a91c63564537a8ba41c969cd8d",
+    "current_sha256": "2624aa01b4a22989415a02edcd3a227c959fa2a91c63564537a8ba41c969cd8d",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/requirements-tested-mac.txt",
+    "group": "C",
+    "baseline_sha256": "a357887bea4d2de0f848e93f07bd53aa8a9652223ce3bf690dce654477ac0365",
+    "current_sha256": "a357887bea4d2de0f848e93f07bd53aa8a9652223ce3bf690dce654477ac0365",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/requirements.txt",
+    "group": "C",
+    "baseline_sha256": "ab9f8a01338be691723cad4abb7c90cbc9004c3571c1df6f1a0181d7633d42d9",
+    "current_sha256": "ab9f8a01338be691723cad4abb7c90cbc9004c3571c1df6f1a0181d7633d42d9",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/server.py",
+    "group": "C",
+    "baseline_sha256": "bdc39df75b0fdc963aead4a53efbaae1c4707c118bd40d55ce9a9e340f1a5ad5",
+    "current_sha256": "bdc39df75b0fdc963aead4a53efbaae1c4707c118bd40d55ce9a9e340f1a5ad5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/setup_local_voice_models.py",
+    "group": "C",
+    "baseline_sha256": "54c8e7dc8f4e167b7e625ffb0ccf3def55fd5e2199c8f41bcaae64f8a18d0ada",
+    "current_sha256": "54c8e7dc8f4e167b7e625ffb0ccf3def55fd5e2199c8f41bcaae64f8a18d0ada",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/test_bounded.py",
+    "group": "C",
+    "baseline_sha256": "dbc8282db513990e76af220903a25dfc8fffc333d228be3fec6182bb065cc341",
+    "current_sha256": "dbc8282db513990e76af220903a25dfc8fffc333d228be3fec6182bb065cc341",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/voice/verify_stream.py",
+    "group": "C",
+    "baseline_sha256": "e2dfd9f24dc068a2c9841cf19076f10f8ede826a4171ebb651d6ba6cdb8c993e",
+    "current_sha256": "e2dfd9f24dc068a2c9841cf19076f10f8ede826a4171ebb651d6ba6cdb8c993e",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/index.html",
+    "group": "D",
+    "baseline_sha256": "04cd5c04ba31aaa0d65fe69d25ea118187448bd9219940e09e4a491b7533e60a",
+    "current_sha256": "04cd5c04ba31aaa0d65fe69d25ea118187448bd9219940e09e4a491b7533e60a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/package-lock.json",
+    "group": "D",
+    "baseline_sha256": "4fcca93baccb7f72aacd9f309444410a19bf546041c8dec33f64cb1be085f2e4",
+    "current_sha256": "4fcca93baccb7f72aacd9f309444410a19bf546041c8dec33f64cb1be085f2e4",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/package.json",
+    "group": "D",
+    "baseline_sha256": "9de1ea6df3461248a28aa2295642e9da8ebdcbcd8ed6c71da90eb1672fae64c5",
+    "current_sha256": "9de1ea6df3461248a28aa2295642e9da8ebdcbcd8ed6c71da90eb1672fae64c5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/art/README.md",
+    "group": "D",
+    "baseline_sha256": "e9aa73d32464782e9fdca66bd109433ab6ea66791d7b5848d90c8775ad293aef",
+    "current_sha256": "e9aa73d32464782e9fdca66bd109433ab6ea66791d7b5848d90c8775ad293aef",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/art/apple-study.jpg",
+    "group": "D",
+    "baseline_sha256": "b142072953d10910f1d1f722a31994dcae6d8940f0c257a9686771ceb79012e7",
+    "current_sha256": "b142072953d10910f1d1f722a31994dcae6d8940f0c257a9686771ceb79012e7",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/fonts/NotoSerifSC-OFL.txt",
+    "group": "D",
+    "baseline_sha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
+    "current_sha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/fonts/NotoSerifSC-Story-0.ttf",
+    "group": "D",
+    "baseline_sha256": "b42c68e9a7b7e3ad8152afedca61215a735bef9a4da34642429d05dd1836dd05",
+    "current_sha256": "b42c68e9a7b7e3ad8152afedca61215a735bef9a4da34642429d05dd1836dd05",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/fonts/NotoSerifSC-Story-1.ttf",
+    "group": "D",
+    "baseline_sha256": "7d2dc2d5a47e48f43aaf4c4ac67f94c2ef4d2e35963b3263d19590b3ad0ea7d1",
+    "current_sha256": "7d2dc2d5a47e48f43aaf4c4ac67f94c2ef4d2e35963b3263d19590b3ad0ea7d1",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/fonts/Prata-OFL.txt",
+    "group": "D",
+    "baseline_sha256": "26b0aca81c38c07e0bfeb45638a48ff0498f7f83ce252ebaa885137831679a46",
+    "current_sha256": "26b0aca81c38c07e0bfeb45638a48ff0498f7f83ce252ebaa885137831679a46",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/fonts/Prata-Regular.ttf",
+    "group": "D",
+    "baseline_sha256": "3b2b880737be3bda5f03554297b758516876157c88f9e3b3bae8fa1fc96a2c2c",
+    "current_sha256": "3b2b880737be3bda5f03554297b758516876157c88f9e3b3bae8fa1fc96a2c2c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/fonts/README.md",
+    "group": "D",
+    "baseline_sha256": "4247d8749847cd2329f9486f33dbf64241a50c6cf5727cc4197ea26c5aed5bbe",
+    "current_sha256": "4247d8749847cd2329f9486f33dbf64241a50c6cf5727cc4197ea26c5aed5bbe",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/models/LeePerrySmith_License.txt",
+    "group": "D",
+    "baseline_sha256": "7cf4da43a6ae6d32f7f7d063fe129a19468af6f4fe7c53b937f83959709fcb50",
+    "current_sha256": "7cf4da43a6ae6d32f7f7d063fe129a19468af6f4fe7c53b937f83959709fcb50",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/models/README.md",
+    "group": "D",
+    "baseline_sha256": "bbcb662afd14459cdf656950ed3540e424122b8f785df29a70275bb780533c5b",
+    "current_sha256": "bbcb662afd14459cdf656950ed3540e424122b8f785df29a70275bb780533c5b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/models/human.glb",
+    "group": "D",
+    "baseline_sha256": "402b8a8ac9f03232e6d64b5962929703a069daf99d3c49ac8eb0e48bedc9c576",
+    "current_sha256": "402b8a8ac9f03232e6d64b5962929703a069daf99d3c49ac8eb0e48bedc9c576",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/release.json",
+    "group": "D",
+    "baseline_sha256": "afe34b6d3f86e471741f14a66adf1c10d8cf8fd8253d42c7981bae5e216ce150",
+    "current_sha256": "ef8b2bc393d08ed4c47d68b85793a347443410e03fa97ac3e43eab234f823fad",
+    "treatment": "modified"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/visuals/APPLE-SOURCE.txt",
+    "group": "D",
+    "baseline_sha256": "3df9631020de0ce1343a00b8284584a60f6407dc345ff7b9bb0392b033703e42",
+    "current_sha256": "3df9631020de0ce1343a00b8284584a60f6407dc345ff7b9bb0392b033703e42",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/visuals/CHARACTER-SOURCE.txt",
+    "group": "D",
+    "baseline_sha256": "10d06116cad49a2cd3b24b81ca244393b0f3c2f721670cf79051cb52ce1fa54b",
+    "current_sha256": "10d06116cad49a2cd3b24b81ca244393b0f3c2f721670cf79051cb52ce1fa54b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/visuals/apple-reference.png",
+    "group": "D",
+    "baseline_sha256": "c7b2239ee310b067bd45b794bc44c29c0f842f7505ca19efe97b671994bb6f87",
+    "current_sha256": "c7b2239ee310b067bd45b794bc44c29c0f842f7505ca19efe97b671994bb6f87",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/visuals/mesh-portrait-preview.png",
+    "group": "D",
+    "baseline_sha256": "9d0050d3fd15f8ba764bf3d8b275ab2612b9ba5d016b294cebb041e78c882104",
+    "current_sha256": "9d0050d3fd15f8ba764bf3d8b275ab2612b9ba5d016b294cebb041e78c882104",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/visuals/porcelain-brown-shirt.png",
+    "group": "D",
+    "baseline_sha256": "752ca33e0e56a0a7302d1815e7eb4502fb91bfcfadd5955682ddaa23aad013e2",
+    "current_sha256": "752ca33e0e56a0a7302d1815e7eb4502fb91bfcfadd5955682ddaa23aad013e2",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/visuals/porcelain-character.png",
+    "group": "D",
+    "baseline_sha256": "2223951d8b44845deda2d530aad50cf5dfc0d659db4433bfd8d2adde742fe00b",
+    "current_sha256": "2223951d8b44845deda2d530aad50cf5dfc0d659db4433bfd8d2adde742fe00b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/public/voice-pcm-worklet.js",
+    "group": "D",
+    "baseline_sha256": "53fb8449d2afd838425a5c8ef7d6869a2292ce4af632b4039b4295300464f884",
+    "current_sha256": "53fb8449d2afd838425a5c8ef7d6869a2292ce4af632b4039b4295300464f884",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/App.tsx",
+    "group": "D",
+    "baseline_sha256": "94c3bf8d0f9e6c01f015f4b6f330d1e1b4874f605b52c64cd998ad1912796ac6",
+    "current_sha256": "94c3bf8d0f9e6c01f015f4b6f330d1e1b4874f605b52c64cd998ad1912796ac6",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/accessibility/useArtMotion.ts",
+    "group": "D",
+    "baseline_sha256": "bbe3c6a0cd42d48081eb81c06a910ecbe22308220d9fa8749425a6667a09d0a3",
+    "current_sha256": "bbe3c6a0cd42d48081eb81c06a910ecbe22308220d9fa8749425a6667a09d0a3",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/accessibility/useSpeech.ts",
+    "group": "D",
+    "baseline_sha256": "41ada8a4577828bab9053c29783d2a07e77fd4c62681de8238eee35a4fead8ae",
+    "current_sha256": "41ada8a4577828bab9053c29783d2a07e77fd4c62681de8238eee35a4fead8ae",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/admin/AdminApp.tsx",
+    "group": "D",
+    "baseline_sha256": "57f08472ceaf89597f7313aed2d709542e51266fd183fd95d78467ad918affdc",
+    "current_sha256": "57f08472ceaf89597f7313aed2d709542e51266fd183fd95d78467ad918affdc",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/admin/KnowledgePage.tsx",
+    "group": "D",
+    "baseline_sha256": "acf4b3fef2d0463eed1b16989af89dcf6a07dba2de99e0403801fe2c09a6ae07",
+    "current_sha256": "acf4b3fef2d0463eed1b16989af89dcf6a07dba2de99e0403801fe2c09a6ae07",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/admin/RagPage.tsx",
+    "group": "D",
+    "baseline_sha256": "46841f9fb6faa816339ce492a74ad6f6116c344b1a35bbdc823b688ef7143d85",
+    "current_sha256": "46841f9fb6faa816339ce492a74ad6f6116c344b1a35bbdc823b688ef7143d85",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/admin/RecordEditor.tsx",
+    "group": "D",
+    "baseline_sha256": "1994b169d43a206e9e3d7c3546ea9c9ddb7a0eb99975726840862efed96adcfd",
+    "current_sha256": "1994b169d43a206e9e3d7c3546ea9c9ddb7a0eb99975726840862efed96adcfd",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/admin/ReferencePage.tsx",
+    "group": "D",
+    "baseline_sha256": "077ff899413d8382b6074c043ddc748a53d02f439a2bd4ade202b4c47d10b841",
+    "current_sha256": "077ff899413d8382b6074c043ddc748a53d02f439a2bd4ade202b4c47d10b841",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/admin/admin.css",
+    "group": "D",
+    "baseline_sha256": "25149219cae8b016ffd9dec9a5dedd1f1266adbbf35546f74bfa3d1795e693ff",
+    "current_sha256": "25149219cae8b016ffd9dec9a5dedd1f1266adbbf35546f74bfa3d1795e693ff",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/admin/fields.test.ts",
+    "group": "D",
+    "baseline_sha256": "da34d8ab2318059165c860a0f2df7b4cc4de94e6eb1def79d9089bf507a57271",
+    "current_sha256": "da34d8ab2318059165c860a0f2df7b4cc4de94e6eb1def79d9089bf507a57271",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/admin/fields.ts",
+    "group": "D",
+    "baseline_sha256": "d55387637be16cdef5f2bb333bfa60d5253add83a512a4162bd8a78ecbde9229",
+    "current_sha256": "d55387637be16cdef5f2bb333bfa60d5253add83a512a4162bd8a78ecbde9229",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/admin/file.ts",
+    "group": "D",
+    "baseline_sha256": "45c711eb3e1d9d0fb4e3a9b6a51fbe175d00b0a4055372ebe36b0610544e0d30",
+    "current_sha256": "45c711eb3e1d9d0fb4e3a9b6a51fbe175d00b0a4055372ebe36b0610544e0d30",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/admin/types.ts",
+    "group": "D",
+    "baseline_sha256": "7176248dab2eca5fa21272c14590808a8a56d6ab787b977384178ae12a2547b2",
+    "current_sha256": "7176248dab2eca5fa21272c14590808a8a56d6ab787b977384178ae12a2547b2",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/api/client.test.ts",
+    "group": "D",
+    "baseline_sha256": "df2aaae1aa848efe162bd0b2727fb3600087c138ecbbba3231a1830616dd8583",
+    "current_sha256": "df2aaae1aa848efe162bd0b2727fb3600087c138ecbbba3231a1830616dd8583",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/api/client.ts",
+    "group": "D",
+    "baseline_sha256": "79b281fb23282c263a558d58bbc65e86564cba5d9e4ef109a240592ca44ba66d",
+    "current_sha256": "79b281fb23282c263a558d58bbc65e86564cba5d9e4ef109a240592ca44ba66d",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/api/sessionCommands.ts",
+    "group": "D",
+    "baseline_sha256": "65a59d9d6386d258440bbb3b9ef3bc696c4a7e8cfeb6ff62820cd7e51e9163fa",
+    "current_sha256": "65a59d9d6386d258440bbb3b9ef3bc696c4a7e8cfeb6ff62820cd7e51e9163fa",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/api/stream.test.ts",
+    "group": "D",
+    "baseline_sha256": "08f9e4071a82fe7753d2e0baa549c0b4b349582ac84a585e2d8608899262f684",
+    "current_sha256": "08f9e4071a82fe7753d2e0baa549c0b4b349582ac84a585e2d8608899262f684",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/api/stream.ts",
+    "group": "D",
+    "baseline_sha256": "ce17414c86db97af3473d4b8dff954977f54fae8f12675a7145febd72f2b523f",
+    "current_sha256": "ce17414c86db97af3473d4b8dff954977f54fae8f12675a7145febd72f2b523f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/AmbientParticles.test.tsx",
+    "group": "D",
+    "baseline_sha256": "6ba4800b87059bdeba6f348ae89071484012f0da9e4f9fe4946a401eeb754566",
+    "current_sha256": "6ba4800b87059bdeba6f348ae89071484012f0da9e4f9fe4946a401eeb754566",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/AmbientParticles.tsx",
+    "group": "D",
+    "baseline_sha256": "57e4bfb26566bb8ac14639deecdb2d0396b245334e038c3e9a180d2225fbc744",
+    "current_sha256": "57e4bfb26566bb8ac14639deecdb2d0396b245334e038c3e9a180d2225fbc744",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/AppleMark.tsx",
+    "group": "D",
+    "baseline_sha256": "553e694998222ade4afce173805a20a2ee61c8fc4f55099ff1d30faffa516d6c",
+    "current_sha256": "553e694998222ade4afce173805a20a2ee61c8fc4f55099ff1d30faffa516d6c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/BeautyPalette.tsx",
+    "group": "D",
+    "baseline_sha256": "b7abbfc8977e69aaa80408e73774ceb7a0b2d98c398ff748a31e7e4fb616fd0a",
+    "current_sha256": "b7abbfc8977e69aaa80408e73774ceb7a0b2d98c398ff748a31e7e4fb616fd0a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/BilingualText.tsx",
+    "group": "D",
+    "baseline_sha256": "ae58b7a5232514a157bf6181711b855ecd8e86446d0b3306d734e00992a6f3b1",
+    "current_sha256": "ae58b7a5232514a157bf6181711b855ecd8e86446d0b3306d734e00992a6f3b1",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/CalendarApple.tsx",
+    "group": "D",
+    "baseline_sha256": "7e875e2c008223c798a4a701091869752145ac040c7ef8d6591a8a24c169d8a3",
+    "current_sha256": "7e875e2c008223c798a4a701091869752145ac040c7ef8d6591a8a24c169d8a3",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/CallControls.tsx",
+    "group": "D",
+    "baseline_sha256": "973dbd8b6d856f411afcf6c62bae12e29e33f4e5d1fd6c00a4b52254ab3a9c6a",
+    "current_sha256": "973dbd8b6d856f411afcf6c62bae12e29e33f4e5d1fd6c00a4b52254ab3a9c6a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/CallExperience.test.tsx",
+    "group": "D",
+    "baseline_sha256": "78880cadfdba1d0602151df2d42f414a619baebd6eea1af9072c1b0478d20d54",
+    "current_sha256": "78880cadfdba1d0602151df2d42f414a619baebd6eea1af9072c1b0478d20d54",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/CallStatus.tsx",
+    "group": "D",
+    "baseline_sha256": "3b2938026ae15f5e64ef3ecc1962f4ce576a00d8bd790f09783f000de41f3af8",
+    "current_sha256": "3b2938026ae15f5e64ef3ecc1962f4ce576a00d8bd790f09783f000de41f3af8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/DebugPanel.tsx",
+    "group": "D",
+    "baseline_sha256": "7743a44462eb1d2b4d405d6c07fc02ff3b49480f5308b071eea65dc8cf4c3fe4",
+    "current_sha256": "7743a44462eb1d2b4d405d6c07fc02ff3b49480f5308b071eea65dc8cf4c3fe4",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/LocalCameraCheck.test.tsx",
+    "group": "D",
+    "baseline_sha256": "ac71ffe802a0b906b3579502fb1614d9035edf871593b438039ef701ca833e78",
+    "current_sha256": "ac71ffe802a0b906b3579502fb1614d9035edf871593b438039ef701ca833e78",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/LocalCameraCheck.tsx",
+    "group": "D",
+    "baseline_sha256": "709def324a303d040b40009fbae88f01a213be58c12b1e96439d05e755fc5f84",
+    "current_sha256": "709def324a303d040b40009fbae88f01a213be58c12b1e96439d05e755fc5f84",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/LocalFrameOverlay.test.tsx",
+    "group": "D",
+    "baseline_sha256": "4574f71de5743b21761c28fd5659b1b79230b491e787cb27d6089baa7fd6ca0f",
+    "current_sha256": "4574f71de5743b21761c28fd5659b1b79230b491e787cb27d6089baa7fd6ca0f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/LocalFrameOverlay.tsx",
+    "group": "D",
+    "baseline_sha256": "bbcc7f3dc25839751056445ccc9143290daca840a86adab2adbc43b4c065d567",
+    "current_sha256": "bbcc7f3dc25839751056445ccc9143290daca840a86adab2adbc43b4c065d567",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/LocalPhotoCheck.test.tsx",
+    "group": "D",
+    "baseline_sha256": "f402e6a9665e69acf4b74a91829f635c8be41922fb7e5e9f0d8ae50553e310c8",
+    "current_sha256": "f402e6a9665e69acf4b74a91829f635c8be41922fb7e5e9f0d8ae50553e310c8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/LocalPhotoCheck.tsx",
+    "group": "D",
+    "baseline_sha256": "179caa51c5d8c929aa4ceafbb099760b626927f8724994eb1dbc92acb8f40f55",
+    "current_sha256": "179caa51c5d8c929aa4ceafbb099760b626927f8724994eb1dbc92acb8f40f55",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/MemoryFacts.tsx",
+    "group": "D",
+    "baseline_sha256": "e27c171241694099e640a2b506bb89e00e0b1df1d60049e3b83e27ba53c944ed",
+    "current_sha256": "e27c171241694099e640a2b506bb89e00e0b1df1d60049e3b83e27ba53c944ed",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/ModuleHeader.tsx",
+    "group": "D",
+    "baseline_sha256": "b9cffaef4b162e4811fbf8ebf1f7798cf3728947dd4883b5948884a5d6b6b7dd",
+    "current_sha256": "b9cffaef4b162e4811fbf8ebf1f7798cf3728947dd4883b5948884a5d6b6b7dd",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/ParticleApple.test.tsx",
+    "group": "D",
+    "baseline_sha256": "badad673206638fa38dda048c63d3013c9eb27520ca01ee7f163f373dcbccc26",
+    "current_sha256": "badad673206638fa38dda048c63d3013c9eb27520ca01ee7f163f373dcbccc26",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/ParticleApple.tsx",
+    "group": "D",
+    "baseline_sha256": "a3fd5ace2f0d406b2156390a98480b52c447788b333844beeb61750263c692ea",
+    "current_sha256": "a3fd5ace2f0d406b2156390a98480b52c447788b333844beeb61750263c692ea",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/ReadingControls.tsx",
+    "group": "D",
+    "baseline_sha256": "262ab4ee4a55a8d28dfc97a14d05cc2644a3aa6df5ed4108962034fc0aec00d4",
+    "current_sha256": "262ab4ee4a55a8d28dfc97a14d05cc2644a3aa6df5ed4108962034fc0aec00d4",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/SaveLookRecord.test.tsx",
+    "group": "D",
+    "baseline_sha256": "5969d61a0d60d317041dfd0cd7019aaad838debe3cdf09460c09256c0cca9394",
+    "current_sha256": "5969d61a0d60d317041dfd0cd7019aaad838debe3cdf09460c09256c0cca9394",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/SaveLookRecord.tsx",
+    "group": "D",
+    "baseline_sha256": "48c82b8f8e49fe2efbfaa564d96130895e25329738f97fefe8600fdba3fc1720",
+    "current_sha256": "48c82b8f8e49fe2efbfaa564d96130895e25329738f97fefe8600fdba3fc1720",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/StoryParticles.tsx",
+    "group": "D",
+    "baseline_sha256": "0b04813a799d7063cdc1fa69c78bcdca22ab1a04ad533be2338ca5c69c0658bb",
+    "current_sha256": "0b04813a799d7063cdc1fa69c78bcdca22ab1a04ad533be2338ca5c69c0658bb",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/ThreadProgress.tsx",
+    "group": "D",
+    "baseline_sha256": "b24723be67eefa5f27d3482feeab3f9c90d4d31a77cf63183a2566472133c99f",
+    "current_sha256": "b24723be67eefa5f27d3482feeab3f9c90d4d31a77cf63183a2566472133c99f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/TraceDotGrid.tsx",
+    "group": "D",
+    "baseline_sha256": "1b2fdd68ea086f5ca533637a3125c1080844116590a44d7b82269803dec1e615",
+    "current_sha256": "1b2fdd68ea086f5ca533637a3125c1080844116590a44d7b82269803dec1e615",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/TraceMark.tsx",
+    "group": "D",
+    "baseline_sha256": "4cd4e527bb1b1bacd1cd947e6d596e599eb475e3c46123a5b1149d590a00e9d8",
+    "current_sha256": "4cd4e527bb1b1bacd1cd947e6d596e599eb475e3c46123a5b1149d590a00e9d8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/VoiceAccessBar.tsx",
+    "group": "D",
+    "baseline_sha256": "34eb8a51bf6155596dc956f1823d3c3558eb3f1dfe2d3aff76742c952e86964d",
+    "current_sha256": "34eb8a51bf6155596dc956f1823d3c3558eb3f1dfe2d3aff76742c952e86964d",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/trace.test.tsx",
+    "group": "D",
+    "baseline_sha256": "b0dbaf2f7a8e38b5b8bd4b961af61ee1b54950d32daa9300ffae5a242559ea44",
+    "current_sha256": "b0dbaf2f7a8e38b5b8bd4b961af61ee1b54950d32daa9300ffae5a242559ea44",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/components/v4.test.tsx",
+    "group": "D",
+    "baseline_sha256": "228b2a371ef0d7062f11c78dc37f82c49276a5b4050d004ef52745e6908c6a90",
+    "current_sha256": "228b2a371ef0d7062f11c78dc37f82c49276a5b4050d004ef52745e6908c6a90",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/content/Locale.tsx",
+    "group": "D",
+    "baseline_sha256": "ee094070f7913e80ba80e7b0df1151054cc2bc0d5e4b0514b53e6b2d3cf42d8c",
+    "current_sha256": "ee094070f7913e80ba80e7b0df1151054cc2bc0d5e4b0514b53e6b2d3cf42d8c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/content/errors.ts",
+    "group": "D",
+    "baseline_sha256": "9638c3328b3c9c8a384328dcf3a9a7ae030743a99d7db1bfded2b2ff0e6885ac",
+    "current_sha256": "9638c3328b3c9c8a384328dcf3a9a7ae030743a99d7db1bfded2b2ff0e6885ac",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/content/guidance.ts",
+    "group": "D",
+    "baseline_sha256": "790072a5bb5201a4f98db7b838af383d86fcfb92d66908a0d4244a6006d3b5b7",
+    "current_sha256": "790072a5bb5201a4f98db7b838af383d86fcfb92d66908a0d4244a6006d3b5b7",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/content/locale.test.tsx",
+    "group": "D",
+    "baseline_sha256": "fa769680e0d2ee5ee096edc2b8f679d72a08940994848d4b7c897a82b9597643",
+    "current_sha256": "fa769680e0d2ee5ee096edc2b8f679d72a08940994848d4b7c897a82b9597643",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/content/traceBrand.ts",
+    "group": "D",
+    "baseline_sha256": "0c0ee0ef6b319d44b9eacf239bb5823fc98770b7b4917058a1a06238373034d5",
+    "current_sha256": "0c0ee0ef6b319d44b9eacf239bb5823fc98770b7b4917058a1a06238373034d5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/hardware/Mirror.test.tsx",
+    "group": "D",
+    "baseline_sha256": "8fa904da6e31a4a0391cd66fa632aca12c3337cc6b2100ca8444f00c271298e1",
+    "current_sha256": "8fa904da6e31a4a0391cd66fa632aca12c3337cc6b2100ca8444f00c271298e1",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/hardware/gateway.test.ts",
+    "group": "D",
+    "baseline_sha256": "874fe7db6d0dc7f79ec69589257d08a49ae785462bba9ade17729f5c94e27180",
+    "current_sha256": "874fe7db6d0dc7f79ec69589257d08a49ae785462bba9ade17729f5c94e27180",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/hardware/gateway.ts",
+    "group": "D",
+    "baseline_sha256": "fff7328a0a31f0067979b82a8e7080244b60d8d90abf82746e0b885ef464a681",
+    "current_sha256": "fff7328a0a31f0067979b82a8e7080244b60d8d90abf82746e0b885ef464a681",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/main.tsx",
+    "group": "D",
+    "baseline_sha256": "ae1dc5433b6ecddb4ae1210d02d29c95433c529cb33143b0af9ad1b55d261dd9",
+    "current_sha256": "ae1dc5433b6ecddb4ae1210d02d29c95433c529cb33143b0af9ad1b55d261dd9",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/BeautyMemory.tsx",
+    "group": "D",
+    "baseline_sha256": "8a4856f4f9c5f1e5a0edc71a024fe0171bd141d4d833d41b7ee5c2830bd88ee4",
+    "current_sha256": "8a4856f4f9c5f1e5a0edc71a024fe0171bd141d4d833d41b7ee5c2830bd88ee4",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/CameraCheck.tsx",
+    "group": "D",
+    "baseline_sha256": "2793fa8f5a150d5cea50b8906981cac4fe321b31019f6febd6bcff13d12e06c3",
+    "current_sha256": "2793fa8f5a150d5cea50b8906981cac4fe321b31019f6febd6bcff13d12e06c3",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/Demo.tsx",
+    "group": "D",
+    "baseline_sha256": "612f7ecec3074702cc7caba91d1aa60b5c5734374d6621124139cfb920d02294",
+    "current_sha256": "612f7ecec3074702cc7caba91d1aa60b5c5734374d6621124139cfb920d02294",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/Entry.tsx",
+    "group": "D",
+    "baseline_sha256": "c9098553e16cd6f01153ade2a319fc151e7db8a1523725249b03458b63875d16",
+    "current_sha256": "c9098553e16cd6f01153ade2a319fc151e7db8a1523725249b03458b63875d16",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/FullLook.tsx",
+    "group": "D",
+    "baseline_sha256": "24726eee670303ce3d6d6b5d578b4e686428a1b50b22d58fe76b8b7b79de57c3",
+    "current_sha256": "24726eee670303ce3d6d6b5d578b4e686428a1b50b22d58fe76b8b7b79de57c3",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/Hardware.tsx",
+    "group": "D",
+    "baseline_sha256": "ebc3f3eefc38107dac6536019480469d96e8320c41277166d53d0550943dd315",
+    "current_sha256": "ebc3f3eefc38107dac6536019480469d96e8320c41277166d53d0550943dd315",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/Home.tsx",
+    "group": "D",
+    "baseline_sha256": "fda96c8ff6b1b4de8bd6b9f01e371d8b2538d07e5c7f874ea67ef2ab8097bfc7",
+    "current_sha256": "fda96c8ff6b1b4de8bd6b9f01e371d8b2538d07e5c7f874ea67ef2ab8097bfc7",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/Journal.test.tsx",
+    "group": "D",
+    "baseline_sha256": "989aa8d45c03ece0e8cf56f7bbab9e2cc232f8629532f4680c575c425f0a172e",
+    "current_sha256": "989aa8d45c03ece0e8cf56f7bbab9e2cc232f8629532f4680c575c425f0a172e",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/Journal.tsx",
+    "group": "D",
+    "baseline_sha256": "9e3d0016cbf97bcccdc4dc39bc39d6890d8c38cebdb7f7ce8f0190ccc0b68f81",
+    "current_sha256": "9e3d0016cbf97bcccdc4dc39bc39d6890d8c38cebdb7f7ce8f0190ccc0b68f81",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/LookRecollection.test.tsx",
+    "group": "D",
+    "baseline_sha256": "5ddebe1b8689594c0247e29dc257268b6868af6a3b157cab04364d722e45d44f",
+    "current_sha256": "5ddebe1b8689594c0247e29dc257268b6868af6a3b157cab04364d722e45d44f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/LookRecollection.tsx",
+    "group": "D",
+    "baseline_sha256": "9ace151ea2a8fae98c2e877ca92e36fc0e7f4586600f3132ca6b09afe08d095a",
+    "current_sha256": "9ace151ea2a8fae98c2e877ca92e36fc0e7f4586600f3132ca6b09afe08d095a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/Pair.tsx",
+    "group": "D",
+    "baseline_sha256": "e8ec9c8d1875d4ddfd12e483d61ed71d4cc9e9ffbf6e0bd688a998a1e8869b99",
+    "current_sha256": "e8ec9c8d1875d4ddfd12e483d61ed71d4cc9e9ffbf6e0bd688a998a1e8869b99",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/Reading.test.tsx",
+    "group": "D",
+    "baseline_sha256": "9f6eee91719d0df75852a416a105f1e4a99f1c57daef37ae49845cdb09e9a7ad",
+    "current_sha256": "9f6eee91719d0df75852a416a105f1e4a99f1c57daef37ae49845cdb09e9a7ad",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/Reading.tsx",
+    "group": "D",
+    "baseline_sha256": "48ac31446a61425660bb5f17ee8f51c5e01bedf5a558e590631ff43a894d1d63",
+    "current_sha256": "48ac31446a61425660bb5f17ee8f51c5e01bedf5a558e590631ff43a894d1d63",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/Session.tsx",
+    "group": "D",
+    "baseline_sha256": "60c02a4283cdc9240287f91b246138c0976b7eb054579d44a0bcfa1e4776e4da",
+    "current_sha256": "60c02a4283cdc9240287f91b246138c0976b7eb054579d44a0bcfa1e4776e4da",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/Story.tsx",
+    "group": "D",
+    "baseline_sha256": "fd74a894ee397775dc7d0e6df62456e994f5395e7ff1d5563720656f3278a4cc",
+    "current_sha256": "fd74a894ee397775dc7d0e6df62456e994f5395e7ff1d5563720656f3278a4cc",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/VideoCall.tsx",
+    "group": "D",
+    "baseline_sha256": "8b86c88b635fefc5a4d9ba9ec56122c49427cf0711db465c0a0f358c598d2f9e",
+    "current_sha256": "8b86c88b635fefc5a4d9ba9ec56122c49427cf0711db465c0a0f358c598d2f9e",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/VoiceCall.test.tsx",
+    "group": "D",
+    "baseline_sha256": "016cb1573f34575b81d0a9db5c21c6ab1fb7462990ff36a78e632137c51e1db2",
+    "current_sha256": "016cb1573f34575b81d0a9db5c21c6ab1fb7462990ff36a78e632137c51e1db2",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/VoiceCall.tsx",
+    "group": "D",
+    "baseline_sha256": "6ef7aec9a0ddd517114b9f05005437d4a1fd902234e0cb27d49d10900c33ca80",
+    "current_sha256": "6ef7aec9a0ddd517114b9f05005437d4a1fd902234e0cb27d49d10900c33ca80",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/pages/editorial.test.tsx",
+    "group": "D",
+    "baseline_sha256": "273fa8d55dfc4dcac33f91ad4118141d035293b13d63a0a8bf7265f8d003c4a0",
+    "current_sha256": "273fa8d55dfc4dcac33f91ad4118141d035293b13d63a0a8bf7265f8d003c4a0",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/appleField.test.ts",
+    "group": "D",
+    "baseline_sha256": "c6c11ad328219898062b89d9aaf87274f759644956319cb59cc8bd92335cd737",
+    "current_sha256": "c6c11ad328219898062b89d9aaf87274f759644956319cb59cc8bd92335cd737",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/appleField.ts",
+    "group": "D",
+    "baseline_sha256": "619a27997a9e5068cd530098b599f16c66f6d67897aa2da3c80a6919fb2d873f",
+    "current_sha256": "619a27997a9e5068cd530098b599f16c66f6d67897aa2da3c80a6919fb2d873f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/callController.test.ts",
+    "group": "D",
+    "baseline_sha256": "2023e5947efbf7c8b0268730c573771e2bb27b66f1836bf7e47e0fc703bfaa36",
+    "current_sha256": "2023e5947efbf7c8b0268730c573771e2bb27b66f1836bf7e47e0fc703bfaa36",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/callController.ts",
+    "group": "D",
+    "baseline_sha256": "47285cf8c0aa9c8dff2beaed0f6fbf3a6a1bcbe68771a9e56ac64ffa5caab7ff",
+    "current_sha256": "47285cf8c0aa9c8dff2beaed0f6fbf3a6a1bcbe68771a9e56ac64ffa5caab7ff",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/cameraStream.test.ts",
+    "group": "D",
+    "baseline_sha256": "9cecc17636932a03dbb2a32d9da9a00d0c1dbaf202c833f4dc1ebfb7b3b1dc3b",
+    "current_sha256": "9cecc17636932a03dbb2a32d9da9a00d0c1dbaf202c833f4dc1ebfb7b3b1dc3b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/cameraStream.ts",
+    "group": "D",
+    "baseline_sha256": "91c09e3d705cf9452290497d25f0325f79e891c0728ed4d36e8d261f81117263",
+    "current_sha256": "91c09e3d705cf9452290497d25f0325f79e891c0728ed4d36e8d261f81117263",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/frameAnalysis.ts",
+    "group": "D",
+    "baseline_sha256": "9461ffe6f0a55d55c9cecb761fc9927c95fadaceb11a900b5356710a675b1b63",
+    "current_sha256": "9461ffe6f0a55d55c9cecb761fc9927c95fadaceb11a900b5356710a675b1b63",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/localAudioEnergy.test.ts",
+    "group": "D",
+    "baseline_sha256": "767574bce0fbb5a60179b58dd2274533ba568554798c725078501dd37a8a7769",
+    "current_sha256": "767574bce0fbb5a60179b58dd2274533ba568554798c725078501dd37a8a7769",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/localAudioEnergy.ts",
+    "group": "D",
+    "baseline_sha256": "77ccdf75eaf19e45399af109434a899363dd26c55d64eab0f108c754975ed349",
+    "current_sha256": "77ccdf75eaf19e45399af109434a899363dd26c55d64eab0f108c754975ed349",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/localVoice.test.ts",
+    "group": "D",
+    "baseline_sha256": "2b69a3a99973a7196f2eb0d9773b6875286ddb5d44bdac2dfc167c6803c15c1f",
+    "current_sha256": "2b69a3a99973a7196f2eb0d9773b6875286ddb5d44bdac2dfc167c6803c15c1f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/localVoice.ts",
+    "group": "D",
+    "baseline_sha256": "414ae3c44f0bc001357a4d2c007336b95f7ad99efe3af997efe5c888cb7c87bd",
+    "current_sha256": "414ae3c44f0bc001357a4d2c007336b95f7ad99efe3af997efe5c888cb7c87bd",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/photo.test.ts",
+    "group": "D",
+    "baseline_sha256": "b5b47992215b7ad9359d5ba30a113815c9b5738a89c67182e48617a9563d2290",
+    "current_sha256": "b5b47992215b7ad9359d5ba30a113815c9b5738a89c67182e48617a9563d2290",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/photo.ts",
+    "group": "D",
+    "baseline_sha256": "7b76b7efbc0a75a2c10dd204f205020009ce7894f1bab02f3ba62774f58983b7",
+    "current_sha256": "7b76b7efbc0a75a2c10dd204f205020009ce7894f1bab02f3ba62774f58983b7",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/recollection.ts",
+    "group": "D",
+    "baseline_sha256": "85b559ea04498ca21f1ef1b34bb4e0625da2af4c54346a0dcd024261e259ab48",
+    "current_sha256": "85b559ea04498ca21f1ef1b34bb4e0625da2af4c54346a0dcd024261e259ab48",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/storyField.test.ts",
+    "group": "D",
+    "baseline_sha256": "bc4695b3728849a6a7841afdea40f05ffac7d7ad74c3a1d6ec8f5acdeaa01daf",
+    "current_sha256": "bc4695b3728849a6a7841afdea40f05ffac7d7ad74c3a1d6ec8f5acdeaa01daf",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/storyField.ts",
+    "group": "D",
+    "baseline_sha256": "4a2e4348cb290db6d8f3c92667eb4fb6648da3e82f7abd4ed425d8cf6a7da17b",
+    "current_sha256": "4a2e4348cb290db6d8f3c92667eb4fb6648da3e82f7abd4ed425d8cf6a7da17b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/visualCommand.ts",
+    "group": "D",
+    "baseline_sha256": "dece75144ef209fa862df3c607d2b92b7404e7f2f64388b1d80eacb945836d19",
+    "current_sha256": "dece75144ef209fa862df3c607d2b92b7404e7f2f64388b1d80eacb945836d19",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/voice.test.ts",
+    "group": "D",
+    "baseline_sha256": "47ccb6a11abf212a884f3535e4c650483967be1ae8dd5e40d08057be76bc23c0",
+    "current_sha256": "47ccb6a11abf212a884f3535e4c650483967be1ae8dd5e40d08057be76bc23c0",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/voice.ts",
+    "group": "D",
+    "baseline_sha256": "43ad6ef47f351563fda842cf7b9c62a7b0df4bf0ff239ac7d4cc4034761fb652",
+    "current_sha256": "43ad6ef47f351563fda842cf7b9c62a7b0df4bf0ff239ac7d4cc4034761fb652",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/voiceCommands.ts",
+    "group": "D",
+    "baseline_sha256": "e8105bb97ebddc7315bcee61fe7e0ca414d28015f718b27156541723e250959d",
+    "current_sha256": "e8105bb97ebddc7315bcee61fe7e0ca414d28015f718b27156541723e250959d",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/realtime/voiceV2.test.ts",
+    "group": "D",
+    "baseline_sha256": "f763bd9e8f6caa8ea8b7d1b29b2012a949a76ca11455e2b2c45c6cd47a79c0c4",
+    "current_sha256": "f763bd9e8f6caa8ea8b7d1b29b2012a949a76ca11455e2b2c45c6cd47a79c0c4",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/state/routes.ts",
+    "group": "D",
+    "baseline_sha256": "bc42f8bd378ca9321d46eddbcd6319f1da017740a96675f0923a0b7c846d4c49",
+    "current_sha256": "bc42f8bd378ca9321d46eddbcd6319f1da017740a96675f0923a0b7c846d4c49",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/state/session.ts",
+    "group": "D",
+    "baseline_sha256": "cc7dacfbd3e844a64efc3136131d2f199e0703c46c3d7156a57ddf260baec52f",
+    "current_sha256": "cc7dacfbd3e844a64efc3136131d2f199e0703c46c3d7156a57ddf260baec52f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/state/useCameraCoordination.ts",
+    "group": "D",
+    "baseline_sha256": "77d9048ae79cb270c01475e06235aa19356a335e8b89d80d83ca1241ddf6a560",
+    "current_sha256": "77d9048ae79cb270c01475e06235aa19356a335e8b89d80d83ca1241ddf6a560",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/state/useRealtimeCall.ts",
+    "group": "D",
+    "baseline_sha256": "bd4e169d39ee73ecb8eb79455d6f3409f24d7cdae47e050d6a5a70e227f5ac1c",
+    "current_sha256": "bd4e169d39ee73ecb8eb79455d6f3409f24d7cdae47e050d6a5a70e227f5ac1c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/state/useSessionSnapshot.ts",
+    "group": "D",
+    "baseline_sha256": "1d127076a1cc8f2d2b91ee246ee902e6ec0adec2a4c95f92dda45617d59d1df5",
+    "current_sha256": "1d127076a1cc8f2d2b91ee246ee902e6ec0adec2a4c95f92dda45617d59d1df5",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/state/useTurnRequest.ts",
+    "group": "D",
+    "baseline_sha256": "464625796642c0016b443101c1778f3719502220f22ea69b05643def13fa289f",
+    "current_sha256": "464625796642c0016b443101c1778f3719502220f22ea69b05643def13fa289f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/style.css",
+    "group": "D",
+    "baseline_sha256": "fc1475e9506ff8298169867eacb70d4fa2bcd6b8b95892f36a19f57aceb8612c",
+    "current_sha256": "fc1475e9506ff8298169867eacb70d4fa2bcd6b8b95892f36a19f57aceb8612c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/accessibility.css",
+    "group": "D",
+    "baseline_sha256": "e9c937c4be027dddc0725bd2ea44224ab12709f22b80a1decb7df581765d0383",
+    "current_sha256": "e9c937c4be027dddc0725bd2ea44224ab12709f22b80a1decb7df581765d0383",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/appleAtmosphere.css",
+    "group": "D",
+    "baseline_sha256": "a836041796a49c83d0686164f21e15a5802b9cd7e10794a10e5487947708a8e7",
+    "current_sha256": "a836041796a49c83d0686164f21e15a5802b9cd7e10794a10e5487947708a8e7",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/companion.css",
+    "group": "D",
+    "baseline_sha256": "9c69bd17e5eecedbca31c84b10e552a506be3bfce38a55686abd31dd463968bc",
+    "current_sha256": "9c69bd17e5eecedbca31c84b10e552a506be3bfce38a55686abd31dd463968bc",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/fidelity.css",
+    "group": "D",
+    "baseline_sha256": "045edb4c99c14d1155453a370e98ceb1303b1413775c96b915ee6a1d3ca95007",
+    "current_sha256": "045edb4c99c14d1155453a370e98ceb1303b1413775c96b915ee6a1d3ca95007",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/homeComposition.css",
+    "group": "D",
+    "baseline_sha256": "c2733345fce7dc1b16996f093c4d2ef2259ecd5751a9d26b08e22c04c126a494",
+    "current_sha256": "c2733345fce7dc1b16996f093c4d2ef2259ecd5751a9d26b08e22c04c126a494",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/iterationV2.css",
+    "group": "D",
+    "baseline_sha256": "b13829585ab7a695ee207405c53eeb1bd97ecfa7c0bd39d321ae220330fba77e",
+    "current_sha256": "b13829585ab7a695ee207405c53eeb1bd97ecfa7c0bd39d321ae220330fba77e",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/reference.css",
+    "group": "D",
+    "baseline_sha256": "5eb80f5be43d1ba3e4ac1f892b71b0a41da473bdedfce285baa31d906f8e2599",
+    "current_sha256": "5eb80f5be43d1ba3e4ac1f892b71b0a41da473bdedfce285baa31d906f8e2599",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/referenceCharacter.css",
+    "group": "D",
+    "baseline_sha256": "320e9799898f4d66fb31268dd838e22f513965309806f009407dc9775fc36180",
+    "current_sha256": "320e9799898f4d66fb31268dd838e22f513965309806f009407dc9775fc36180",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/sculpture.css",
+    "group": "D",
+    "baseline_sha256": "8f0cf91c47e7967590606639279422de9ccd1472174913b660969dc196b5ca3d",
+    "current_sha256": "8f0cf91c47e7967590606639279422de9ccd1472174913b660969dc196b5ca3d",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/story.css",
+    "group": "D",
+    "baseline_sha256": "b1d652087092230a4892902e5a5a943b68d12f02205ee70549a32474af592748",
+    "current_sha256": "b1d652087092230a4892902e5a5a943b68d12f02205ee70549a32474af592748",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/storyLayout.css",
+    "group": "D",
+    "baseline_sha256": "44d0758299a46007161beaa4eaa5f83e4b16ad3d346d9329677ab5a2eb2d892b",
+    "current_sha256": "44d0758299a46007161beaa4eaa5f83e4b16ad3d346d9329677ab5a2eb2d892b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/trace.css",
+    "group": "D",
+    "baseline_sha256": "a56275611815771f109fc4583ed31633267d2f45528b1f3232a53e40eee441aa",
+    "current_sha256": "a56275611815771f109fc4583ed31633267d2f45528b1f3232a53e40eee441aa",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/styles/traceTokens.css",
+    "group": "D",
+    "baseline_sha256": "a03bc3fedda8d324aee4b948dcafd1042b23a148d9530937d4f9ec558a25115b",
+    "current_sha256": "a03bc3fedda8d324aee4b948dcafd1042b23a148d9530937d4f9ec558a25115b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/types/index.ts",
+    "group": "D",
+    "baseline_sha256": "8faaa8d9cba68e13fef0eb96fc5e004d68571c3890ab815546f94d911f4f184a",
+    "current_sha256": "8faaa8d9cba68e13fef0eb96fc5e004d68571c3890ab815546f94d911f4f184a",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/vision/camera.test.ts",
+    "group": "D",
+    "baseline_sha256": "10b639565340d65f24567b551e3c16784c96b3efdf4e24184750cf6d6aaf3047",
+    "current_sha256": "10b639565340d65f24567b551e3c16784c96b3efdf4e24184750cf6d6aaf3047",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/vision/camera.ts",
+    "group": "D",
+    "baseline_sha256": "e32a29685dd0822c32f85006cecb7af0da73bae750cd2ef248529e1dfde16da6",
+    "current_sha256": "e32a29685dd0822c32f85006cecb7af0da73bae750cd2ef248529e1dfde16da6",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/vision/localConsent.ts",
+    "group": "D",
+    "baseline_sha256": "843d1a2de096df3441784b93a1830309a6b8301fdafe2d038ca69646be7f290f",
+    "current_sha256": "843d1a2de096df3441784b93a1830309a6b8301fdafe2d038ca69646be7f290f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/BeautyIllustration.tsx",
+    "group": "D",
+    "baseline_sha256": "bf618686735bbdf5c638b08210bd3051653e0148e5ecf47d7f673ade47c24280",
+    "current_sha256": "bf618686735bbdf5c638b08210bd3051653e0148e5ecf47d7f673ade47c24280",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/BeautyVisuals.tsx",
+    "group": "D",
+    "baseline_sha256": "13969f80682633f760104033850fb4f7c62d94124a419bb4a3b944a67a508b79",
+    "current_sha256": "13969f80682633f760104033850fb4f7c62d94124a419bb4a3b944a67a508b79",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/BilingualHeading.tsx",
+    "group": "D",
+    "baseline_sha256": "7b1402b8e64f95bd7f9abbddcabab94194bfbb732d69f714b7998bfe373e8a12",
+    "current_sha256": "7b1402b8e64f95bd7f9abbddcabab94194bfbb732d69f714b7998bfe373e8a12",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/GlassAppleMaterial.ts",
+    "group": "D",
+    "baseline_sha256": "874fb39d913faf9e172d81710bc3d87e579b376b4ea1faaec0a7aaf482da6d7d",
+    "current_sha256": "874fb39d913faf9e172d81710bc3d87e579b376b4ea1faaec0a7aaf482da6d7d",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/MagneticCTA.tsx",
+    "group": "D",
+    "baseline_sha256": "e8efb216d41d7a56409eb6b3be8219c72aef4507caac9c8ba13cf1f989aa59ba",
+    "current_sha256": "e8efb216d41d7a56409eb6b3be8219c72aef4507caac9c8ba13cf1f989aa59ba",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/SculptureScene.tsx",
+    "group": "D",
+    "baseline_sha256": "56198a9efef99d4c93df32c3c90e7c197ce3b8d2925a78a58bf9fb6a4ff9670c",
+    "current_sha256": "56198a9efef99d4c93df32c3c90e7c197ce3b8d2925a78a58bf9fb6a4ff9670c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/SectionBackground.tsx",
+    "group": "D",
+    "baseline_sha256": "dac925ecfe1d7957bfa6cac68dcf6c5b4578a386f01b1354a72296161628e6a7",
+    "current_sha256": "dac925ecfe1d7957bfa6cac68dcf6c5b4578a386f01b1354a72296161628e6a7",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/appleBites.test.ts",
+    "group": "D",
+    "baseline_sha256": "9a41037ffcaea0effeb2215c3afd27a91d86ba974eb29936f7b81e41b7dc9145",
+    "current_sha256": "9a41037ffcaea0effeb2215c3afd27a91d86ba974eb29936f7b81e41b7dc9145",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/appleBites.ts",
+    "group": "D",
+    "baseline_sha256": "48455c11299713edd125bd4308b9d6ae5712382d7e33970184ef7215e7115ab0",
+    "current_sha256": "48455c11299713edd125bd4308b9d6ae5712382d7e33970184ef7215e7115ab0",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/appleLayers.test.ts",
+    "group": "D",
+    "baseline_sha256": "76eb6ec7988ca8d6df565e4e3b35fa85d9d13b7b1b87a7f663129fa4c294ae02",
+    "current_sha256": "76eb6ec7988ca8d6df565e4e3b35fa85d9d13b7b1b87a7f663129fa4c294ae02",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/fineTopology.ts",
+    "group": "D",
+    "baseline_sha256": "f9a061ba9edd3000a2d557c1a89b907b36b942b2efdd4713a9bccc432aad36b4",
+    "current_sha256": "f9a061ba9edd3000a2d557c1a89b907b36b942b2efdd4713a9bccc432aad36b4",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/geometry.test.tsx",
+    "group": "D",
+    "baseline_sha256": "fd23dca9ebfaccc9237890ee0064bed9b062fbc5b973ca4741cfd76b02a59e97",
+    "current_sha256": "fd23dca9ebfaccc9237890ee0064bed9b062fbc5b973ca4741cfd76b02a59e97",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/geometry.ts",
+    "group": "D",
+    "baseline_sha256": "1bd4fb100ce9394aeba2e2a9bbf3c103ffe7bf7098d3f148e0f53f0ed48ea972",
+    "current_sha256": "1bd4fb100ce9394aeba2e2a9bbf3c103ffe7bf7098d3f148e0f53f0ed48ea972",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/refinePortrait.test.ts",
+    "group": "D",
+    "baseline_sha256": "847652bf5c9b62f93113760709df74a76837007ff165a859bc75f2a5d51d483f",
+    "current_sha256": "847652bf5c9b62f93113760709df74a76837007ff165a859bc75f2a5d51d483f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/refinePortrait.ts",
+    "group": "D",
+    "baseline_sha256": "7adc207ddf4ecf6d9adbd69d52db9df783c7a9d518f87f8d17d9eac2510f4a64",
+    "current_sha256": "7adc207ddf4ecf6d9adbd69d52db9df783c7a9d518f87f8d17d9eac2510f4a64",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/sculptureField.test.ts",
+    "group": "D",
+    "baseline_sha256": "f54d4f28aa98812e47d69727605cafcd408b599be3d1ed865c26bccb2e26eed9",
+    "current_sha256": "f54d4f28aa98812e47d69727605cafcd408b599be3d1ed865c26bccb2e26eed9",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/sculptureField.ts",
+    "group": "D",
+    "baseline_sha256": "e36a45b2f60aaaa2046af171ad78d2ea0741e351273074b70be69aefc274bf2c",
+    "current_sha256": "e36a45b2f60aaaa2046af171ad78d2ea0741e351273074b70be69aefc274bf2c",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/surfaceBudget.test.ts",
+    "group": "D",
+    "baseline_sha256": "76d47e2402f11247b38478c8f75798b46fb48eecd0ca9180752be36f13d68b13",
+    "current_sha256": "76d47e2402f11247b38478c8f75798b46fb48eecd0ca9180752be36f13d68b13",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/src/visual/surfaceBudget.ts",
+    "group": "D",
+    "baseline_sha256": "a7b21ea51e0935bba6d092b2472f04ad0748c3fa25b1556f4b6117b6304e5d90",
+    "current_sha256": "a7b21ea51e0935bba6d092b2472f04ad0748c3fa25b1556f4b6117b6304e5d90",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/tsconfig.json",
+    "group": "D",
+    "baseline_sha256": "3fdc176619f7940cc5705f593084bc3bb4be2ea7d473dc84053fe0a3bbeaa2d0",
+    "current_sha256": "3fdc176619f7940cc5705f593084bc3bb4be2ea7d473dc84053fe0a3bbeaa2d0",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/frontend/vite.config.ts",
+    "group": "D",
+    "baseline_sha256": "87077f772bcaee0726136838cc96906a4b03a00327beafa88f8453f4da8500ea",
+    "current_sha256": "87077f772bcaee0726136838cc96906a4b03a00327beafa88f8453f4da8500ea",
+    "treatment": "reused"
+  },
+  {
+    "path": ".gitignore",
+    "group": "E",
+    "baseline_sha256": "43b5620a0385d8fd8b3dabbf121e17a7470bb2035487f0b96569dcc30d2cefca",
+    "current_sha256": "43b5620a0385d8fd8b3dabbf121e17a7470bb2035487f0b96569dcc30d2cefca",
+    "treatment": "reused"
+  },
+  {
+    "path": "00_先读我_运行说明.txt",
+    "group": "E",
+    "baseline_sha256": "5d70945b8b3d1ad662ab553b9a1d344a4fd5dbc75857fa5052e082a178119f95",
+    "current_sha256": "d27817ee0ec5686b66e95875aa39ea62fe7035859850d98458caa768d9106453",
+    "treatment": "modified"
+  },
+  {
+    "path": "AccessibleBeautyAgent/README.md",
+    "group": "E",
+    "baseline_sha256": "6447ef1bad14a5c921565bd4854476dffec2be357b69a1f50791cdbc99583909",
+    "current_sha256": "e9f25dc3e2d487843daad36041a1eee6514d62067bc28668ac30228fdd82f9d1",
+    "treatment": "modified"
+  },
+  {
+    "path": "AccessibleBeautyAgent/install-portable.ps1",
+    "group": "E",
+    "baseline_sha256": "1e3353430462861ed3ccd6ba85e2a6c43570926c45497b956bcb5c7e6845e6dd",
+    "current_sha256": "1e3353430462861ed3ccd6ba85e2a6c43570926c45497b956bcb5c7e6845e6dd",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/install-portable.py",
+    "group": "E",
+    "baseline_sha256": "0ff81e479a471f4c9bc6205b795b193182a50bf50780677952c03e5552d10631",
+    "current_sha256": "0ff81e479a471f4c9bc6205b795b193182a50bf50780677952c03e5552d10631",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/install-portable.sh",
+    "group": "E",
+    "baseline_sha256": "13eb514d0f4ee3aa8d5b26f70fb505c903f32c6be528920b808500a1273b23d0",
+    "current_sha256": "13eb514d0f4ee3aa8d5b26f70fb505c903f32c6be528920b808500a1273b23d0",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/launch-portable.py",
+    "group": "E",
+    "baseline_sha256": "7aa61bf5a6909333f0da51d2b6240e7dd7bf3b7caa6657413c660f7aac1f44b8",
+    "current_sha256": "7aa61bf5a6909333f0da51d2b6240e7dd7bf3b7caa6657413c660f7aac1f44b8",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/analyze_reference_media.py",
+    "group": "E",
+    "baseline_sha256": "c68d2006dfbf9bdbf9a91174771f6a22bff27ba2e905e68a248cd4d7149f76ab",
+    "current_sha256": "c68d2006dfbf9bdbf9a91174771f6a22bff27ba2e905e68a248cd4d7149f76ab",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/calibrate_makeup_thresholds.py",
+    "group": "E",
+    "baseline_sha256": "2d1da8644751184576d69ff46455ca5a3be7ca935a33a559b8d58630c84a1127",
+    "current_sha256": "2d1da8644751184576d69ff46455ca5a3be7ca935a33a559b8d58630c84a1127",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/create_demo_data.py",
+    "group": "E",
+    "baseline_sha256": "09e2ae3140194b5dfcc1cbd1048d572fa99707bb53c818a53838d81837115e25",
+    "current_sha256": "09e2ae3140194b5dfcc1cbd1048d572fa99707bb53c818a53838d81837115e25",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/create_kb_templates.py",
+    "group": "E",
+    "baseline_sha256": "a5c92e5324cc3acf39d3a72b2caf028905ca51ddca9108dcbb965b90e7ea255b",
+    "current_sha256": "a5c92e5324cc3acf39d3a72b2caf028905ca51ddca9108dcbb965b90e7ea255b",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/evaluate_makeup_vision.py",
+    "group": "E",
+    "baseline_sha256": "e337951d7eca95f76728ce072b9991ee63fc3505d19d8035118532da05dfc9fc",
+    "current_sha256": "e337951d7eca95f76728ce072b9991ee63fc3505d19d8035118532da05dfc9fc",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/import_kb.py",
+    "group": "E",
+    "baseline_sha256": "8421e7a79dd8f5c20724abaf728b3a35aec302a266ca4e10ac5577b6398b1d1f",
+    "current_sha256": "8421e7a79dd8f5c20724abaf728b3a35aec302a266ca4e10ac5577b6398b1d1f",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/import_tutorials.py",
+    "group": "E",
+    "baseline_sha256": "50a1736922602c7ffb37218db914526066dc9c26e6ad787556ca2a76c047ea35",
+    "current_sha256": "50a1736922602c7ffb37218db914526066dc9c26e6ad787556ca2a76c047ea35",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/ingest_kb.py",
+    "group": "E",
+    "baseline_sha256": "4777ae19d38dccbddf65acf0ec5cca1a9d48483c91e3fecb85bb16b6bb1348ae",
+    "current_sha256": "4777ae19d38dccbddf65acf0ec5cca1a9d48483c91e3fecb85bb16b6bb1348ae",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/live_smoke.py",
+    "group": "E",
+    "baseline_sha256": "2cf0dadb924a6313f3e0285645faf3b146c389cca5c0ab86638468be031e4714",
+    "current_sha256": "2cf0dadb924a6313f3e0285645faf3b146c389cca5c0ab86638468be031e4714",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/pack_source.py",
+    "group": "E",
+    "baseline_sha256": "880407c690abdfa9b8802e7f85ccb8c4ba6cab85a041313960ff1f72711418f7",
+    "current_sha256": "880407c690abdfa9b8802e7f85ccb8c4ba6cab85a041313960ff1f72711418f7",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/rebuild_index.py",
+    "group": "E",
+    "baseline_sha256": "854d8b69a63a09dbaf8f441af07dbb85115bf7e2bd2540bd81c25563c1f84a47",
+    "current_sha256": "854d8b69a63a09dbaf8f441af07dbb85115bf7e2bd2540bd81c25563c1f84a47",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/run_realtime_text.py",
+    "group": "E",
+    "baseline_sha256": "3b63d4e41ac893b066d8042fc80c7b7a0bd5c4a63ccc133f453eb2c8ebc1647e",
+    "current_sha256": "3b63d4e41ac893b066d8042fc80c7b7a0bd5c4a63ccc133f453eb2c8ebc1647e",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/setup_local_landmarks.py",
+    "group": "E",
+    "baseline_sha256": "caff5f20425d80bfc41010b23509a66dcd4e13a242d43081511f87fd84096938",
+    "current_sha256": "caff5f20425d80bfc41010b23509a66dcd4e13a242d43081511f87fd84096938",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/verify_chrome_session.mjs",
+    "group": "E",
+    "baseline_sha256": "b47c800780bf4de81a6faaab1f727b9f1debf06d26a7001094b051b050910470",
+    "current_sha256": "b47c800780bf4de81a6faaab1f727b9f1debf06d26a7001094b051b050910470",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/verify_local_vision_browser.mjs",
+    "group": "E",
+    "baseline_sha256": "922d14d365cdc1f438bc154775e698aff1fe3e0bc868fa7f6e6b724e72b6eb97",
+    "current_sha256": "922d14d365cdc1f438bc154775e698aff1fe3e0bc868fa7f6e6b724e72b6eb97",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/verify_recovery.py",
+    "group": "E",
+    "baseline_sha256": "da65ed95b0f0b9e098a9cca72eebce1bf59aeb03b42883237d8f0a8b57c14a57",
+    "current_sha256": "da65ed95b0f0b9e098a9cca72eebce1bf59aeb03b42883237d8f0a8b57c14a57",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/verify_remote_services.py",
+    "group": "E",
+    "baseline_sha256": "7043c866642b71aaf24ca9e2d3b56c5e7722eb144912b43249081da76913a606",
+    "current_sha256": "7043c866642b71aaf24ca9e2d3b56c5e7722eb144912b43249081da76913a606",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/scripts/verify_runtime.py",
+    "group": "E",
+    "baseline_sha256": "60774db2268121f445a2d5b4e79acf53fcd7076e2e1b6e704c5abec8fdc965a2",
+    "current_sha256": "60774db2268121f445a2d5b4e79acf53fcd7076e2e1b6e704c5abec8fdc965a2",
+    "treatment": "reused"
+  },
+  {
+    "path": "AccessibleBeautyAgent/start-portable.ps1",
+    "group": "E",
+    "baseline_sha256": "163d09ed858657971159e09e8932cd100d245b565f436817dcffc2225020890d",
+    "current_sha256": "163d09ed858657971159e09e8932cd100d245b565f436817dcffc2225020890d",
+    "treatment": "reused"
+  },
+  {
+    "path": "启动Demo_Mac.command",
+    "group": "E",
+    "baseline_sha256": "a1563665184951c6fbf898ad070aa882fc1ba648891032cba09dd50a535dd2eb",
+    "current_sha256": "a1563665184951c6fbf898ad070aa882fc1ba648891032cba09dd50a535dd2eb",
+    "treatment": "reused"
+  },
+  {
+    "path": "启动Demo_Windows.bat",
+    "group": "E",
+    "baseline_sha256": "6d52941eaf5f11f0f08468d0be40da6b30a83fad40b8757d960f02b20dae1538",
+    "current_sha256": "6d52941eaf5f11f0f08468d0be40da6b30a83fad40b8757d960f02b20dae1538",
+    "treatment": "reused"
+  },
+  {
+    "path": "首次安装_Mac.command",
+    "group": "E",
+    "baseline_sha256": "fb2f20cd1016c8982d5ef06dd3d1a72ceea58331102719dfbeb4d7c19720d901",
+    "current_sha256": "fb2f20cd1016c8982d5ef06dd3d1a72ceea58331102719dfbeb4d7c19720d901",
+    "treatment": "reused"
+  },
+  {
+    "path": "首次安装_Windows.bat",
+    "group": "E",
+    "baseline_sha256": "86f5e7aa07a8a7c0b6ff52f8fc040be7628d5275f4d129d1a0b11968b28d1ae6",
+    "current_sha256": "86f5e7aa07a8a7c0b6ff52f8fc040be7628d5275f4d129d1a0b11968b28d1ae6",
+    "treatment": "reused"
+  }
+]

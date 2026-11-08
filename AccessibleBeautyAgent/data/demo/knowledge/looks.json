@@ -1,0 +1,92 @@
+{
+  "label": "SAMPLE DATA — fictional hackathon content, not product claims",
+  "records": [
+    {
+      "look_id": "clean_daily",
+      "name": "Clean Daily · 清爽日常",
+      "scene": [
+        "daily"
+      ],
+      "desired_impression": [
+        "natural",
+        "fresh"
+      ],
+      "avoid": [
+        "heavy_makeup",
+        "high_saturation"
+      ],
+      "base": "light_natural",
+      "blush": {
+        "intensity": "light",
+        "placement": "upper_cheek"
+      },
+      "lip": {
+        "saturation": "low",
+        "finish": "natural"
+      },
+      "routine_id": "clean_daily_routine",
+      "source": "demo_team",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "look_id": "soft_formal",
+      "name": "Soft Formal · 柔和正式",
+      "scene": [
+        "dinner",
+        "presentation"
+      ],
+      "desired_impression": [
+        "polished",
+        "slightly_present",
+        "controlled"
+      ],
+      "avoid": [
+        "too_mature",
+        "high_saturation",
+        "heavy_makeup"
+      ],
+      "base": "natural_polished",
+      "blush": {
+        "intensity": "light_medium",
+        "placement": "upper_cheek"
+      },
+      "lip": {
+        "saturation": "medium_low",
+        "finish": "soft_satin"
+      },
+      "routine_id": "soft_formal_routine",
+      "source": "demo_team",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "look_id": "warm_social",
+      "name": "Warm Social · 温暖社交",
+      "scene": [
+        "social"
+      ],
+      "desired_impression": [
+        "warm",
+        "approachable"
+      ],
+      "avoid": [
+        "sharp_contrast",
+        "heavy_makeup"
+      ],
+      "base": "natural",
+      "blush": {
+        "intensity": "medium",
+        "placement": "cheek"
+      },
+      "lip": {
+        "saturation": "medium",
+        "finish": "soft_satin"
+      },
+      "routine_id": "warm_social_routine",
+      "source": "demo_team",
+      "source_type": "sample",
+      "verified": false
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+"""Local text journal. Generated drafts are ephemeral; storage needs explicit consent."""
+from datetime import date
+import json,time
+from fastapi import APIRouter,Query,Request
+from pydantic import BaseModel,Field,StrictBool,ConfigDict,model_validator
+from typing import Literal
+from app.memory.journal import JournalStore
+
+class DraftMessage(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    role:Literal['user','agent']
+    text:str=Field(min_length=1,max_length=2000)
+
+class JournalDraftRequest(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    messages:list[DraftMessage]=Field(min_length=1,max_length=30)
+    locale:Literal['zh-CN','en']='zh-CN'
+    @model_validator(mode='after')
+    def bounded(self):
+        if sum(len(m.text) for m in self.messages)>12000:raise ValueError('Draft transcript is too long')
+        return self
+
+class JournalDraft(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    look:str=Field(max_length=80)
+    feeling:str=Field(max_length=200)
+    reflection:str=Field(max_length=2000)
+    traits:str=Field(max_length=400)
+
+class JournalOwner(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    user_id:str=Field(default='demo',min_length=1,max_length=80)
+    explicit_consent:StrictBool
+
+class JournalEntry(JournalOwner):
+    date:date
+    look:str=Field(min_length=1,max_length=80)
+    feeling:str=Field(default='',max_length=200)
+    reflection:str=Field(default='',max_length=2000)
+    traits:str=Field(default='',max_length=400)
+    session_id:str|None=None
+    save_transcript:StrictBool=False
+    occasion:str=Field(default='',max_length=100)
+    confirmation_id:str|None=Field(default=None,min_length=1,max_length=80)
+
+
+class JournalEdit(JournalOwner):
+    date:date
+    look:str=Field(min_length=1,max_length=80)
+    feeling:str=Field(default='',max_length=200)
+    reflection:str=Field(default='',max_length=2000)
+    traits:str=Field(default='',max_length=400)
+    expected_version:int=Field(ge=1)
+
+def build_journal_router(memory,agent,conversation=None):
+    agent.journal=JournalStore(memory)
+    router=APIRouter(prefix='/api/journal')
+    @router.post('/draft')
+    def draft(body:JournalDraftRequest):
+        # Ephemeral output only. No journal write and no preference consent inference.
+        return JournalDraft.model_validate(agent.language.journal_draft([m.model_dump() for m in body.messages],body.locale))
+    @router.get('')
+    def entries(user_id:str=Query(default='demo',min_length=1,max_length=80)):
+        return {'entries':agent.journal.view(user_id)}
+    @router.post('')
+    def save(body:JournalEntry):
+        if body.explicit_consent is not True:raise PermissionError('请确认保存这份私人文字记录。')
+        payload=body.model_dump(mode='json',exclude={'user_id','explicit_consent','save_transcript','confirmation_id'})
+        transcript=None
+        if body.session_id:
+            s=agent.sessions.get(body.session_id)
+            if s.user_id!=body.user_id:raise PermissionError('Session owner mismatch')
+            payload['completed_step_count'] = sum(step.status == 'completed' for step in s.makeup_plan.steps) if s.makeup_plan else 0
+        if body.save_transcript:
+            if not body.session_id or not conversation:raise ValueError('Transcript requires a conversation')
+            transcript=conversation.history(body.session_id)
+        return agent.journal.save(body.user_id,payload,transcript,body.confirmation_id,include_transcript=body.save_transcript)
+
+    @router.post('/{entry_id}/edit')
+    def edit(entry_id:str,body:JournalEdit):
+        if body.explicit_consent is not True:
+            raise PermissionError('请先审阅并明确确认保存修改。')
+        changes=body.model_dump(mode='json',exclude={'user_id','explicit_consent','expected_version'})
+        return agent.journal.edit(body.user_id,entry_id,body.expected_version,changes)
+
+    @router.delete('/{entry_id}')
+    def remove(entry_id:str,body:JournalOwner):
+        if body.explicit_consent is not True:
+            raise PermissionError('请明确确认删除这份记录。')
+        return agent.journal.delete(body.user_id,entry_id)
+    return router
+
+def build_transcript_records_router(memory):
+    router=APIRouter(prefix='/api/transcript-records')
+    @router.get('/{record_id}')
+    def get(record_id:str,request:Request):
+        with memory.connect() as db:
+            db.execute('DELETE FROM transcript_records WHERE expires_at<?',(time.time(),))
+            row=db.execute('SELECT user_id,payload,expires_at FROM transcript_records WHERE id=?',(record_id,)).fetchone()
+        if not row or not row[0].startswith(request.state.principal_prefix):raise KeyError('Transcript not found')
+        return {'messages':json.loads(row[1]),'expires_at':row[2]}
+    return router

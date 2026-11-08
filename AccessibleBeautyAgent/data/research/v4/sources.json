@@ -1,0 +1,122 @@
+[
+  {
+    "source_id": "SRC-PAPER-P001",
+    "title": "More than One Step at a Time: Designing Procedural Feedback for Non-visual Makeup Routines",
+    "url": "https://arxiv.org/abs/2507.03942",
+    "checked_scope": "ABSTRACT_CHECKED",
+    "summary": "15 VI makeup users + 5 artists; contextual inquiry; tactile-first strategies and goal-aligned feedback",
+    "local_fulltext_status": "MISSING_IN_SEARCHED_PATHS",
+    "limitation": "No TRACE performance validation; no full-paper claim beyond checked sections",
+    "reviewer_status": "DRAFT",
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "source_id": "SRC-PAPER-P002",
+    "title": "“It Feels Like Taking a Gamble”: Exploring Perceptions, Practices, and Challenges of Using Makeup and Cosmetics for People with Visual Impairments",
+    "url": "https://arxiv.org/abs/2203.08864",
+    "checked_scope": "ABSTRACT_CHECKED",
+    "summary": "145 YouTube videos + interviews with 12 VI people; varied practices and feedback barriers",
+    "local_fulltext_status": "MISSING_IN_SEARCHED_PATHS",
+    "limitation": "No TRACE performance validation; no full-paper claim beyond checked sections",
+    "reviewer_status": "DRAFT",
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "source_id": "SRC-PAPER-P003",
+    "title": "Blind and partially sighted women’s makeup: A narrative of practice, perseverance and empowerment",
+    "url": "https://ualresearchonline.arts.ac.uk/id/eprint/23071/",
+    "checked_scope": "REPOSITORY_ABSTRACT_CHECKED",
+    "summary": "Qualitative thematic analysis of BPS makeup vloggers; familiarization and iterative learning",
+    "local_fulltext_status": "MISSING_IN_SEARCHED_PATHS",
+    "limitation": "No TRACE performance validation; no full-paper claim beyond checked sections",
+    "reviewer_status": "DRAFT",
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "source_id": "SRC-PAPER-P004",
+    "title": "Inclusive beauty: how buying and using cosmetics can be made more accessible for the visually impaired (VI) and blind consumer",
+    "url": "https://ualresearchonline.arts.ac.uk/id/eprint/16706/",
+    "checked_scope": "REPOSITORY_ABSTRACT_CHECKED",
+    "summary": "Review and consumer survey; product information accessibility and familiarity",
+    "local_fulltext_status": "MISSING_IN_SEARCHED_PATHS",
+    "limitation": "No TRACE performance validation; no full-paper claim beyond checked sections",
+    "reviewer_status": "DRAFT",
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "source_id": "SRC-PAPER-P005",
+    "title": "Guidelines for Human-AI Interaction",
+    "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2019/01/Guidelines-for-Human-AI-Interaction-camera-ready.pdf",
+    "checked_scope": "ORIGINAL_ABSTRACT_CHECKED",
+    "summary": "18 general HAI guidelines evaluated through multiple rounds; not BLV makeup",
+    "local_fulltext_status": "MISSING_IN_SEARCHED_PATHS",
+    "limitation": "No TRACE performance validation; no full-paper claim beyond checked sections",
+    "reviewer_status": "DRAFT",
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "source_id": "SRC-PAPER-P006",
+    "title": "“I’m Not Sure, But...”: Examining the Impact of Large Language Models’ Uncertainty Expression on User Reliance and Trust",
+    "url": "https://arxiv.org/abs/2405.00623",
+    "checked_scope": "ABSTRACT_CHECKED",
+    "summary": "N=404 medical question experiment; first-person uncertainty reduced overreliance, not eliminated",
+    "local_fulltext_status": "MISSING_IN_SEARCHED_PATHS",
+    "limitation": "No TRACE performance validation; no full-paper claim beyond checked sections",
+    "reviewer_status": "DRAFT",
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "source_id": "SRC-PAPER-P007",
+    "title": "Should I Say “Disabled People” or “People with Disabilities”? Language Preferences of Disabled People Between Identity- and Person-First Language",
+    "url": "https://doi.org/10.1145/3517428.3544813",
+    "checked_scope": "NOT_VERIFIED_THIS_RUN",
+    "summary": null,
+    "local_fulltext_status": "MISSING_IN_SEARCHED_PATHS",
+    "limitation": "No TRACE performance validation; no full-paper claim beyond checked sections",
+    "reviewer_status": "DRAFT",
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "source_id": "SRC-PAPER-P008",
+    "title": "Comparing Tactile to Auditory Guidance for Blind Individuals",
+    "url": "https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2019.00443/full",
+    "checked_scope": "FULLTEXT_SECTION_CHECKED",
+    "summary": "14 recruited blind adults; 12 included; tactile versus auditory navigation with simulated street noise",
+    "local_fulltext_status": "MISSING_IN_SEARCHED_PATHS",
+    "limitation": "No TRACE performance validation; no full-paper claim beyond checked sections",
+    "reviewer_status": "DRAFT",
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "source_id": "SRC-PAPER-P009",
+    "title": "VizWiz Grand Challenge: Answering Visual Questions from Blind People",
+    "url": "https://arxiv.org/abs/1802.08218",
+    "checked_scope": "ABSTRACT_CHECKED",
+    "summary": "Blind-user images/questions; poor-quality and unanswerable inputs occur",
+    "local_fulltext_status": "MISSING_IN_SEARCHED_PATHS",
+    "limitation": "No TRACE performance validation; no full-paper claim beyond checked sections",
+    "reviewer_status": "DRAFT",
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "source_id": "SRC-PAPER-P010",
+    "title": "Edge-Based Color Constancy",
+    "url": "",
+    "checked_scope": "NOT_VERIFIED_THIS_RUN",
+    "summary": null,
+    "local_fulltext_status": "MISSING_IN_SEARCHED_PATHS",
+    "limitation": "No TRACE performance validation; no full-paper claim beyond checked sections",
+    "reviewer_status": "DRAFT",
+    "accessed_at": "2026-10-11"
+  },
+  {
+    "source_id": "SRC-PAPER-PSGAN",
+    "title": "PSGAN: Pose and Expression Robust Spatial-Aware GAN for Customizable Makeup Transfer",
+    "url": "https://arxiv.org/abs/1909.06956",
+    "checked_scope": "ABSTRACT_CHECKED",
+    "summary": "Image-to-image makeup synthesis, not blush recognition or efficacy validation",
+    "local_fulltext_status": "MISSING_IN_SEARCHED_PATHS",
+    "reviewer_status": "DRAFT",
+    "accessed_at": "2026-10-11"
+  }
+]

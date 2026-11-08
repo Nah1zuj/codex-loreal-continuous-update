@@ -1,0 +1,5 @@
+PASS occupied port preserved
+PASS frontend, isolated SQLite, text turn, session restore; speech=assets_missing_or_invalid
+PASS duplicate preserves owner
+PASS runtime diagnostics
+PASS owned ports released

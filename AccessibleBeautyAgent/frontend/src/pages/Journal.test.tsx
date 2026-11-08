@@ -1,0 +1,10 @@
+// @vitest-environment jsdom
+import {act} from 'react'
+import {createRoot} from 'react-dom/client'
+import {expect,it,vi} from 'vitest'
+import {Journal} from './Journal'
+import {LocaleProvider} from '../content/Locale'
+import {api} from '../api/client'
+vi.mock('../api/client',()=>({api:vi.fn(async()=>({entries:[]}))}))
+it('automatically shows the generated draft but never stores it',async()=>{(globalThis as any).IS_REACT_ACT_ENVIRONMENT=true;const host=document.createElement('div');const root=createRoot(host);await act(async()=>root.render(<LocaleProvider initialLocale="en"><Journal draft={{look:'Forest day',feeling:'Calm',reflection:'I wanted a quiet forest feeling.',traits:''}}/></LocaleProvider>));expect(host.querySelector('textarea')?.value).toContain('forest');expect([...host.querySelectorAll('input')].some(i=>i.value==='Forest day')).toBe(true);expect([...host.querySelectorAll('button')].find(b=>b.textContent==='Save private entry')?.disabled).toBe(true);await act(async()=>root.unmount())})
+it('does not save a draft until explicit consent and exposes a real empty calendar',async()=>{(globalThis as any).IS_REACT_ACT_ENVIRONMENT=true;const host=document.createElement('div');document.body.append(host);const root=createRoot(host);await act(async()=>root.render(<LocaleProvider initialLocale="en"><Journal seed="Test-only reflection"/></LocaleProvider>));expect(vi.mocked(api).mock.calls.every(([path,body])=>path==='/journal'&&body===undefined)).toBe(true);expect(host.textContent).toContain('Makeup calendar');const save=[...host.querySelectorAll('button')].find(b=>b.textContent==='Save private entry')!;expect(save.disabled).toBe(true);expect(host.querySelector('textarea')?.value).toBe('');await act(async()=>root.unmount());host.remove();vi.restoreAllMocks()})

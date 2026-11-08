@@ -1,0 +1,81 @@
+/* Story sections own their art. Text never inherits a decorative grid column. */
+.trace-app.trace-sculpture.story-page .trace-story {
+  width: 100%;
+  min-width: 0;
+}
+.trace-app.trace-sculpture.story-page :is(.story-hero,.story-chapter,.story-agency) {
+  display: block;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: 260px;
+  padding: clamp(28px,3vw,44px) clamp(20px,3vw,48px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.trace-app.trace-sculpture.story-page .story-hero { min-height: 480px; }
+.trace-app.trace-sculpture.story-page .story-hero .reference-apple-art { left:auto; right:3%; top:20px; width:34%; height:90%; }
+.trace-app.trace-sculpture.story-page :is(.story-signature,.story-modules,.story-ending) { padding:32px clamp(20px,3vw,48px); }
+.trace-app.trace-sculpture.story-page .story-modules button { padding:18px 0; }
+.trace-app.trace-sculpture.story-page :is(.story-hero,.story-chapter,.story-agency) > .section-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  z-index: 0;
+  pointer-events: none;
+}
+.trace-app.trace-sculpture.story-page .story-chapter-copy,
+.trace-app.trace-sculpture.story-page .story-hero > :is(h1,p,button,details),
+.trace-app.trace-sculpture.story-page .story-agency > :is(h2,p) {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  max-width: 68%;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+.trace-app.trace-sculpture.story-page .story-chapter-copy > :is(h2,p) {
+  max-width: 100%;
+}
+.trace-app.trace-sculpture.story-page .story-hero h1 {
+  font-size: clamp(32px,4.2vw,62px);
+  line-height: 1.45;
+  white-space: pre-line;
+}
+.trace-app.trace-sculpture.story-page .heading-translation {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  font-size: .48em;
+  line-height: 1.5;
+  margin-top: .6rem;
+}
+.trace-app.trace-sculpture.story-page :is(.story-chapter,.story-agency) .sculpture-canvas {
+  inset: 0 0 0 auto;
+  width: 57%;
+  height: 100%;
+  min-height: 0;
+}
+.trace-app.trace-sculpture.story-page .story-chapter > :is(.story-number,.trace-dots) { display: none; }
+.trace-app.trace-sculpture.story-page .story-input input { min-width: 0; }
+@media(max-width:767px) {
+  .trace-app.trace-sculpture.story-page :is(.story-hero,.story-chapter,.story-agency) {
+    min-height: 0;
+    padding: 28px 16px;
+  }
+  .trace-app.trace-sculpture.story-page .story-hero { padding-bottom:190px; }
+  .trace-app.trace-sculpture.story-page .story-hero .reference-apple-art { top:auto; bottom:16px; right:20px; width:160px; height:160px; }
+  .trace-app.trace-sculpture.story-page :is(.story-signature,.story-modules,.story-ending) { padding:24px 16px; }
+  .trace-app.trace-sculpture.story-page .story-chapter-copy,
+  .trace-app.trace-sculpture.story-page .story-hero > :is(h1,p,button,details),
+  .trace-app.trace-sculpture.story-page .story-agency > :is(h2,p) { max-width: 100%; }
+  .trace-app.trace-sculpture.story-page :is(.story-hero,.story-chapter,.story-agency) .sculpture-canvas {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .trace-app.trace-sculpture.story-page .story-hero h1 { font-size: clamp(28px,8vw,40px); }
+}

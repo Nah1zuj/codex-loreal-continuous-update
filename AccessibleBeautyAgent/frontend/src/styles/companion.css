@@ -1,0 +1,148 @@
+/* Task 6: editorial ivory, apricot fog and a quiet copper accent. */
+:root {--trace-bg:#fbf7f0;--trace-surface:#fffaf4;--trace-ink:#49382f;--trace-muted:#736057;--trace-line:#dfcdbd;--trace-accent:#885037;--trace-focus:#7c422e;--trace-radius:1.4rem}
+body {background:#fbf7f0;color:#49382f;font-family:"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif}
+.trace-app {position:relative;isolation:isolate;background:radial-gradient(ellipse at 82% 7%,#f0d8c7 0,transparent 36%),radial-gradient(ellipse at 4% 55%,#e8dadd 0,transparent 33%),#fbf7f0;min-height:100dvh}
+.trace-header {background:transparent;border-bottom:1px solid #ddcbbb;padding:1.2rem clamp(1rem,4vw,4rem);gap:1.4rem}
+.trace-header nav {gap:.2rem;flex-wrap:wrap}.trace-header nav button {background:transparent;border:0;border-radius:.4rem;padding:.6rem .8rem}
+.trace-header nav button[aria-current=page] {color:#783e28;box-shadow:inset 0 -2px #a66746}
+.layout {max-width:1220px;margin:auto;padding:clamp(1rem,3vw,2.8rem)}
+h1,h2 {font-family:Georgia,"Songti SC","SimSun",serif;font-weight:400;letter-spacing:-.025em;line-height:1.25}h1 {font-size:clamp(2rem,4vw,3.8rem)}h2 {font-size:clamp(1.35rem,2.3vw,2rem)}
+p {line-height:1.75}button,input,select {font:inherit}button {min-height:44px;color:#49382f;background:#fff8ef;border:1px solid #cfb4a0;border-radius:1rem;transition:background 240ms cubic-bezier(.32,.72,0,1),transform 240ms cubic-bezier(.32,.72,0,1)}button:hover:enabled {background:#f4dfcf}button:active:enabled {transform:scale(.985)}button.primary {background:#895438;color:#fffaf4;border-color:#895438}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible {outline:3px solid #864b30;outline-offset:4px}
+.entry {padding:clamp(1rem,4vw,3rem) 0}.entry>h1 {max-width:850px}.entry>p {max-width:760px}.entry-options {display:grid;grid-template-columns:1.05fr 1.25fr 1fr;gap:1rem;margin:2.4rem 0}.entry-options button {text-align:left;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;padding:1.8rem;border:0;border-radius:1.5rem;background:linear-gradient(135deg,#f3e6d6,#edceba);box-shadow:0 14px 40px #ae765715}.entry-options button:nth-child(2) {background:linear-gradient(135deg,#e8dbdb,#edcabc)}.entry-options button:nth-child(3) {background:#eee6da}.entry-options strong {font-size:1.4rem;font-weight:500}.entry-options span {line-height:1.6}
+.video-call {display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);gap:1.2rem 2rem;align-items:start}.video-call>h1 {grid-column:1/-1}.video-call>.video-stage {grid-column:1;grid-row:2;min-width:0}.video-stage>video {width:100%;aspect-ratio:4/3;max-height:510px;object-fit:cover;background:radial-gradient(ellipse at 65% 35%,#f1d2be,transparent 55%),linear-gradient(135deg,#e8ded2,#c8b8ac);border-radius:2rem;box-shadow:0 20px 65px #8c604321}.video-call>.call-experience {grid-column:2;grid-row:2;min-width:0;padding-top:0}.video-call>.call-experience h1 {font-size:1.8rem}.call-experience .instruction {padding:1.8rem 0;font-size:1.5rem;background:transparent;border:0}.call-experience aside {border-left:2px solid #c39575;padding:1rem 1.6rem;background:transparent}
+.conversation {border-top:1px solid #d8c4b4;background:transparent;margin-top:2.2rem}.messages {background:transparent}.messages p {border-radius:1rem;padding:1rem 1.3rem}.messages .agent {background:#f3e7db}.messages .user {background:#eadbd6}.look-sections,.material-grid {gap:1.5rem}.look-sections article,.material-grid article {border:0;border-top:1px solid #cfb59f;border-radius:0;background:transparent;padding:1.2rem 0;box-shadow:none}.look-sections article>div {background:transparent;border:0;padding:0}
+.ambient-particles {position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:-1}.ambient-particle {position:absolute;width:6px;height:6px;border-radius:50%;background:#ad7350;opacity:.06;animation:none}.ambient-particles[data-motion=gentle] .ambient-particle {opacity:.10;animation:ambient-float 20s cubic-bezier(.32,.72,0,1) infinite alternate;animation-delay:var(--delay)}.ambient-particles[data-call-state=thinking][data-motion=gentle] .ambient-particle {opacity:.08;animation-duration:26s}.ambient-particles[data-call-state=speaking][data-motion=gentle] .ambient-particle {opacity:.12;animation-duration:18s}.ambient-particles[data-motion=static] .ambient-particle {animation:none}@keyframes ambient-float {from {transform:translate3d(0,0,0)}to {transform:translate3d(10px,-16px,0)}}
+@media(max-width:760px){.entry-options,.video-call {grid-template-columns:1fr}.entry-options button {min-height:140px}.video-call>.video-stage,.video-call>.call-experience,.video-call>h1 {grid-column:1;grid-row:auto}.trace-header {padding:1rem;flex-wrap:wrap}.layout {padding:1rem}.call-experience aside {padding:1rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after {animation:none!important;transition:none!important;scroll-behavior:auto!important}.ambient-particle {animation:none}}
+
+@media(prefers-reduced-motion:reduce){button:active:enabled {transform:none}.ambient-particle {transform:none}}
+
+/* Match the existing TRACE selector scope so this final layer is effective. */
+.trace-app {--trace-text:#49382f;--trace-border:#ddc5b3;--trace-body:"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;--trace-display:Georgia,"Songti SC","SimSun",serif;color:#49382f;font:18px/1.65 var(--trace-body)}
+.trace-app .layout {max-width:1220px;padding:clamp(1rem,3vw,2.8rem);min-width:0;grid-template-columns:minmax(0,1fr)}
+.trace-app h1 {font-family:var(--trace-display);font-weight:400;font-size:clamp(2rem,4vw,3.8rem)}.trace-app h2 {font-family:var(--trace-display);font-weight:400;font-size:clamp(1.35rem,2.3vw,2rem)}
+.trace-app button {color:#49382f;background:#fff8ef;border-color:#cfb4a0;min-height:48px}.trace-app button.primary {background:#895438;color:#fffaf4}.trace-app .entry-options button {background:linear-gradient(135deg,#f3e6d6,#edceba)}.trace-app .entry-options button:nth-child(2) {background:linear-gradient(135deg,#e8dbdb,#edcabc)}.trace-app .entry-options button:nth-child(3) {background:#eee6da}
+.trace-app main,.trace-app section,.trace-app article,.trace-app form,.trace-app .input-row,.trace-app .controls,.trace-app .trace-header nav,.trace-app .conversation {min-width:0;max-width:100%;box-sizing:border-box}.trace-app input,.trace-app select {min-width:0;max-width:100%;box-sizing:border-box}.trace-app .input-row input {width:100%;flex:1}.trace-app button {overflow-wrap:anywhere;max-width:100%}.trace-app .video-call>.call-experience h1 {font-size:1.8rem}
+@media(max-width:760px){.trace-app .layout {padding:1rem}.trace-app .input-row {flex-wrap:wrap}.trace-app .input-row button {flex:none}.trace-app .trace-header {padding:1rem;max-width:100%;box-sizing:border-box}.trace-app .trace-header nav {width:100%;justify-content:flex-start}.trace-app .entry-options {grid-template-columns:minmax(0,1fr)}.trace-app .video-call {grid-template-columns:minmax(0,1fr)}.trace-app .full-look .look-sections,.trace-app .material-grid {grid-template-columns:minmax(0,1fr)}}
+
+/* Apple study: user-supplied local artwork, quiet halftone and open contours. */
+.trace-app .apple-entry {padding:1.5rem 0 1rem}
+.apple-intro {display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:clamp(1.5rem,4vw,4rem)}
+.apple-copy {position:relative;z-index:1}.apple-eyebrow {font-size:.85rem;letter-spacing:.1em;color:#794c3b;margin:0 0 1.4rem}
+.trace-app .apple-copy h1 {white-space:pre-line;font-size:clamp(2.5rem,4.3vw,4.1rem);line-height:1.2;margin:0 0 1.4rem;text-wrap:balance}
+.apple-reflection {font-size:1rem;max-width:32rem;line-height:1.9;color:#6a5144}.apple-start {font-weight:600;margin:1.6rem 0 0;font-size:1.1rem}
+.apple-art {position:relative;height:365px;min-width:0;isolation:isolate;pointer-events:none;background:radial-gradient(ellipse at 55% 48%,#cf6e46aa,transparent 70%);border-radius:43% 29% 41% 20%}
+.apple-art-image {position:absolute;inset:0;overflow:hidden;mask-image:radial-gradient(ellipse at center,#000 38%,transparent 73%)}
+.apple-art-image img {position:absolute;width:120%;max-width:none;height:auto;left:-10%;top:-110px;filter:saturate(.8) contrast(.96);mix-blend-mode:multiply}
+.apple-art-grid {position:absolute;inset:8% 2%;background-image:linear-gradient(#fff8e936 1px,transparent 1px),linear-gradient(90deg,#fff8e936 1px,transparent 1px);background-size:38px 38px;mask-image:radial-gradient(ellipse,#000,transparent 72%)}
+.apple-coordinate {position:absolute;border:1px solid #fff8e98a;width:40%;height:44%;box-shadow:0 0 0 1px #81402912}.coordinate-a {left:11%;top:7%;transform:rotate(-6deg)}.coordinate-b {right:4%;bottom:5%;width:49%;height:48%;transform:rotate(6deg)}
+.apple-coordinate::before,.apple-coordinate::after {content:'';position:absolute;width:4px;height:4px;border-radius:50%;background:#fff4df}.apple-coordinate::before {top:-2px;left:-2px}.apple-coordinate::after {right:-2px;bottom:-2px}
+.apple-grain {position:absolute;inset:-6%;opacity:.22;background-image:radial-gradient(#934523 1px,transparent 1.2px);background-size:4px 4px;mask-image:radial-gradient(ellipse at 60% 65%,transparent 23%,#000 40%,transparent 67%)}
+.trace-app .apple-entry .entry-options {margin:2rem 0 1rem;gap:0;grid-template-columns:1fr 1.2fr 1fr;border-top:1px solid #c7a38d;border-bottom:1px solid #c7a38d}
+.trace-app .apple-entry .entry-options button {background:transparent;border-radius:0;box-shadow:none;min-height:154px;padding:1rem 1.4rem;gap:.5rem;border:0;border-right:1px solid #c7a38d;justify-content:flex-start}
+.trace-app .apple-entry .entry-options button:last-child {border-right:0}.trace-app .apple-entry .entry-options button:hover:enabled {background:#efd6c3}
+.apple-entry .entry-index {display:flex;justify-content:space-between;width:100%;font-size:.75rem;letter-spacing:.1em;color:#7d5542;margin-bottom:.3rem}.apple-entry .entry-options strong {font-size:1.25rem}.apple-entry .entry-options button>span:last-child {font-size:.95rem}.apple-entry-note {font-size:.8rem;color:#6a5144;margin:1rem 0}
+@media(max-width:760px){.apple-intro {grid-template-columns:1fr;gap:1rem}.trace-app .apple-copy h1 {font-size:clamp(2.25rem,8vw,3.4rem)}.apple-art {height:245px;max-width:410px;width:100%;margin:auto}.apple-art-image img {top:-115px}.trace-app .apple-entry .entry-options {grid-template-columns:1fr}.trace-app .apple-entry .entry-options button {min-height:130px;border-right:0;border-bottom:1px solid #c7a38d}.trace-app .apple-entry .entry-options button:last-child {border-bottom:0}}
+@media(max-width:400px){.trace-app .apple-copy h1 {font-size:1.75rem}.trace-app .trace-header {grid-template-columns:minmax(0,1fr) auto;gap:.75rem}.trace-app .trace-mark {font-size:26px;gap:10px}.trace-app .trace-header .language-toggle {min-width:0;font-size:13px}.trace-app .trace-header nav {min-width:0}}
+.apple-art {overflow:hidden}
+.apple-mark {width:32px;height:36px;flex:none;color:#984829}.apple-eyebrow {display:flex;align-items:center;gap:.7rem}.apple-eyebrow .apple-mark {width:18px;height:22px}.trace-footer>.apple-mark {width:24px;height:28px}.trace-app .apple-entry .entry-options button.primary {background:#80432f;color:#fff8ef}.apple-entry .entry-options button.primary .entry-index {color:#f5d9c4}.trace-app .apple-entry .entry-options button.primary:hover:enabled {background:#653420}.welcome-replay {font-size:.9rem}
+/* Layers: particle art -1, content 0, controls naturally above art. */
+.particle-apple {position:fixed;right:-2vw;top:16vh;width:min(58vw,650px);height:min(65vw,610px);z-index:-1;pointer-events:none;opacity:.8}.light-particles {position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}.light-particles i {position:absolute;width:3px;height:3px;border-radius:50%;background:#c9784b;opacity:.3;box-shadow:0 0 8px #d79856;animation:light-rise 13s ease-in-out infinite alternate}@keyframes light-rise {to {transform:translate3d(20px,-40px,0);opacity:.12}}.trace-app[data-art-motion=off] .light-particles i {animation:none}.trace-app .trace-header {grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;padding:.8rem 2rem;gap:1rem;background:#fbf7f0dd;max-width:none}.trace-app .trace-header .brand {grid-column:1;grid-row:1}.trace-app .trace-header nav {grid-column:2;grid-row:1;grid-template-columns:repeat(4,minmax(0,1fr));gap:.3rem}.trace-app .trace-header nav button {min-height:48px;font-size:16px}.trace-app .trace-header .motion-toggle {grid-column:3;grid-row:1;min-height:44px;font-size:13px}.trace-app .trace-header .language-toggle {grid-column:4;grid-row:1}.trace-app .layout {padding-top:2rem}.call-utilities {margin:1rem 0;padding:1rem 0;border-top:1px solid #c7a38d}.call-utilities button {margin:.5rem}.journal-grid {display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:3rem}.calendar-heading {display:flex;align-items:center;justify-content:space-between;gap:.5rem}.calendar-heading h2 {font-size:1.4rem}.calendar-days {display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.3rem}.calendar-days .weekday {text-align:center;font-size:.8rem;color:#735443}.trace-app .calendar-days button {min-width:0;min-height:72px;padding:.4rem;border:0;border-radius:8px;background:#f1e2d599;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;font-size:.95rem}.calendar-days button small {font-size:.7rem;max-width:100%;overflow-wrap:anywhere}.trace-app .calendar-days button.selected-day {background:#80432f;color:#fff8ef}.journal-entry {border-top:1px solid #c7a38d;padding:1rem 0;white-space:pre-wrap}.journal-form {display:flex;flex-direction:column;gap:1rem}.journal-form label {display:flex;flex-direction:column;gap:.4rem}.journal-form input,.journal-form textarea {width:100%;box-sizing:border-box;padding:.6rem;font:inherit;background:#fffaf3;border:1px solid #b88f76;color:#49382f;border-radius:.6rem}.journal-form .journal-consent {flex-direction:row;align-items:flex-start}.journal-consent input {width:22px;min-height:22px;flex:none}.sharing-draft {padding:1rem;border:1px solid #b88f76}.journal p.muted {font-size:.85rem}.trace-app .apple-art {opacity:.65}.trace-app .pair-selectors,.trace-app .pair-results {background:#fff8efc9;border-radius:1rem;padding:1rem}
+@media(max-width:760px){.trace-app .trace-header {padding:1rem;grid-template-columns:minmax(0,1fr) auto auto;gap:.5rem}.trace-app .trace-header .brand {grid-column:1}.trace-app .trace-header .motion-toggle {grid-column:2}.trace-app .trace-header .language-toggle {grid-column:3;min-width:0}.trace-app .trace-header nav {grid-column:1/-1;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr))}.trace-app .trace-mark {font-size:25px;gap:.4rem}.trace-mark .apple-mark {width:22px;height:26px}.journal-grid {grid-template-columns:minmax(0,1fr);gap:1rem}.calendar-days {gap:2px}.trace-app .calendar-days button {min-height:56px;font-size:.8rem}.particle-apple {top:25vh;right:-20vw;width:95vw;height:95vw;opacity:.45}}
+@media(prefers-reduced-motion:reduce){.light-particles i {animation:none}.particle-apple {transform:none}}
+
+/* Red apple digital sculpture: full viewport art, stable white reading surfaces. */
+:root {--trace-bg:#fff9f5;--trace-surface:#fffdfb;--trace-ink:#231b19;--trace-accent:#b31930;--trace-focus:#8a1225}
+body {background:#fff9f5;color:#231b19}
+.trace-app {color:#231b19;--trace-text:#231b19;--trace-border:#e8c3bd;background:radial-gradient(ellipse at 88% 45%,#ea879c70,transparent 48%),radial-gradient(ellipse at 4% 96%,#ce23351c,transparent 42%),linear-gradient(135deg,#fffefa,#fff3ec 65%,#f7d4cc);background-attachment:fixed}
+.apple-particle-field {position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.trace-app>.trace-header,.trace-app>.layout,.trace-app>.trace-footer {position:relative;z-index:1}
+.apple-particle-field .particle-apple {position:absolute;inset:0;width:100%;height:100%;opacity:1;transform:none;z-index:0}
+.trace-app .light-particles {display:none}
+.trace-app .apple-mark {color:#b31930}
+.trace-app .trace-header {background:#fffdfaee;border-color:#e9b7b1}
+.trace-app .trace-header nav button {background:transparent;color:#241a18}
+.trace-app .trace-header nav button[aria-current=page] {background:#fce7e5;color:#89172a;box-shadow:inset 0 -2px #b31930}
+.trace-app .apple-intro {display:block;min-height:430px;padding-top:2rem}
+.trace-app .apple-copy {max-width:590px;padding:1.5rem 2rem 1.5rem 0;background:linear-gradient(90deg,#fffaf6f5 60%,#fffaf600)}
+.trace-app .apple-copy h1 {color:#201716;font-size:clamp(2.5rem,4.4vw,4.5rem);line-height:1.3}
+.trace-app .apple-reflection,.trace-app .apple-entry-note {color:#593a32}
+.trace-app .apple-art {display:none}
+.trace-app .apple-entry .entry-options {grid-template-columns:1.2fr 1fr 1fr;border-color:#ca8986;background:#fffaf6ed}
+.trace-app .apple-entry .entry-options button {background:#fffaf6e8;border-color:#e9b7b1;color:#291b18}
+.trace-app .apple-entry .entry-options button.primary,.trace-app button.primary {background:#a9142b;color:#fffdfa;border-color:#a9142b}
+.trace-app .apple-entry .entry-options button.primary:hover:enabled,.trace-app button.primary:hover:enabled {background:#811022}
+.trace-app .entry-options button:hover:enabled {background:#fbe3df}
+.trace-app button {color:#35231e;background:#fffaf6ed;border-color:#dcb4aa}
+.trace-app button:focus-visible,.trace-app a:focus-visible,.trace-app input:focus-visible {outline-color:#99172c}
+.trace-app .call-experience {padding:1.5rem;background:linear-gradient(90deg,#fffdfbf5 45%,#fffdfbb8);border-radius:1rem}
+.trace-app .call-experience .instruction {max-width:740px;color:#241a18}
+.trace-app .conversation,.trace-app .journal,.trace-app .pair-results,.trace-app .pair-selectors {background:#fffdfbef;padding:1.5rem;border-radius:1rem}
+.trace-app .messages .agent {background:#fbe9e5}.trace-app .messages .user {background:#f3dfda}
+.trace-app .calendar-days button.selected-day {background:#a9142b;color:#fffdfb}
+.audio-wave-control {background:#fffdfbef;padding:1rem;border-radius:1rem;margin:1rem 0}.audio-wave-control p {max-width:720px;font-size:.85rem;margin:.5rem 0;color:#5d3c33}
+.trace-app .trace-footer {background:#fffaf6d9;color:#49332c}
+@media(max-width:760px){.trace-app .apple-intro {min-height:520px;padding-top:.5rem}.trace-app .apple-copy {max-width:100%;padding:1rem;background:linear-gradient(180deg,#fffaf6f5 70%,#fffaf680)}.trace-app .apple-copy h1 {font-size:clamp(1.9rem,8vw,3rem)}.trace-app .apple-entry .entry-options {grid-template-columns:1fr}.trace-app .journal,.trace-app .conversation,.trace-app .call-experience {padding:1rem}.trace-app .layout {padding-top:1rem}}
+
+/* Apple stamps: generous visual marks, explicit date labels for screen readers. */
+.calendar-days button{min-height:100px;position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;background:#fffdf8;border:1px solid #ecd8d0;border-radius:0;color:#38231f}
+.calendar-days .selected-day{outline:2px solid #a9142b;outline-offset:-2px;background:#fff1e9}
+.calendar-apple{width:44px;height:46px;fill:none;stroke:#a32225;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.calendar-apple .apple-body{fill:#fff4e7}.calendar-apple .apple-heart{fill:#ac2026}
+.apple-variant-1{transform:rotate(-7deg)}.apple-variant-2{transform:rotate(5deg)}
+.calendar-days small{font-size:.7rem;line-height:1.2;max-width:100%;overflow-wrap:anywhere}
+.draft-note{border-left:3px solid #a9142b;padding-left:1rem;color:#51382f}
+@media(max-width:600px){.calendar-days button{min-height:75px;padding:4px}.calendar-apple{width:31px;height:32px}.calendar-days{gap:2px}}
+
+/* Fluid surfaces and intact, readable moving typography. */
+.trace-app{font-family:"DengXian","Segoe UI","Microsoft YaHei",sans-serif}
+.trace-app .apple-copy{background:none}
+.trace-app .apple-copy h1{font-family:"DengXian Light","DengXian","Microsoft YaHei",sans-serif;font-weight:300;letter-spacing:.035em;line-height:1.45;animation:word-tide 9s ease-in-out infinite;transform-origin:20% 50%}
+.trace-app .apple-entry .entry-options{border:0;background:none;gap:1.5rem;margin-top:1rem}
+.trace-app .apple-entry .entry-options button,.trace-app .apple-entry .entry-options button.primary{position:relative;isolation:isolate;overflow:visible;background:transparent;color:#3c2420;border:0;border-radius:0;box-shadow:none;min-height:140px;padding:1rem .5rem;text-align:left}
+.trace-app .apple-entry .entry-options button::before{content:"";position:absolute;z-index:-1;inset:10% -4%;border-radius:63% 37% 58% 42%;background:radial-gradient(ellipse,#fffdf6b8,transparent 75%);filter:blur(14px);animation:fluid-tide 11s ease-in-out infinite alternate;pointer-events:none}
+.trace-app .apple-entry .entry-options button.primary::before{background:radial-gradient(ellipse,#ffd6cd80,transparent 72%)}
+.trace-app .apple-entry .entry-options button:hover:enabled,.trace-app .apple-entry .entry-options button.primary:hover:enabled{background:transparent;color:#a21b2f;transform:translateY(-2px)}
+.trace-app .apple-entry .entry-options button.primary .entry-index,.trace-app .apple-entry .entry-index{color:#9b332f}
+.trace-app .apple-entry .entry-options strong{font-weight:500;font-size:1.2rem}
+.trace-app .call-experience,.trace-app .conversation,.trace-app .journal,.trace-app .pair-results,.trace-app .pair-selectors{background:linear-gradient(90deg,#fffdf9ed,#fffdf98c);border:0;box-shadow:none;border-radius:0}
+.trace-app .call-controls{border:0;background:radial-gradient(ellipse at 30% 50%,#780d22d9,#a71c32aa 62%,transparent 76%);padding:1.2rem .7rem}
+.trace-app .call-controls button{background:#fff9f5eb;border:0;color:#76152b}
+.trace-app .audio-wave-control{background:radial-gradient(ellipse at 20% 40%,#751124e8,#a11b30b5 58%,transparent 85%);border-radius:48% 42% 39% 26%;padding:1.6rem 2rem;color:#fff9ef}
+.trace-app .audio-wave-control p{color:#fff7ee}.trace-app .audio-wave-control button{border:0;background:#fff8efed}
+.trace-app .journal-form{background:repeating-linear-gradient(transparent,transparent 31px,#a93b2622 32px);padding:1.5rem 1rem;gap:1.5rem}
+.trace-app .journal-form h2,.trace-app .journal h1{font-family:"KaiTi","Georgia",serif;font-weight:400}
+.trace-app .journal-form input:not([type=checkbox]),.trace-app .journal-form textarea{background:transparent;border:0;border-bottom:1px solid #a557424d;border-radius:0;box-shadow:none;padding:.5rem 0;color:#3e2723;font-family:inherit}
+.trace-app .journal-form textarea{line-height:2rem;resize:vertical}
+.trace-app .journal-form label{font-size:.9rem;color:#694137}.trace-app .journal-form label input,.trace-app .journal-form textarea{font-size:1rem}
+.trace-app .calendar-days button{background:transparent;border:0;border-radius:0}
+.trace-app .calendar-days button.selected-day{background:#fff6eee0;color:#951b2b;outline:1px solid #bb473f;outline-offset:-2px;border-radius:45% 38% 47% 34%}
+.apple-theme-strip{display:flex;gap:1.5rem;padding:.6rem 0 1.5rem}.trace-app .apple-theme-strip button{border:0;background:none;display:flex;align-items:center;gap:.2rem;padding:.25rem;color:#8d2226}
+.apple-theme-strip .calendar-apple{width:37px;height:42px}
+@keyframes word-tide{0%,100%{transform:translate3d(0,0,0) skewX(0)}50%{transform:translate3d(0,-7px,0) skewX(.4deg)}}
+@keyframes fluid-tide{0%{transform:translate3d(-5px,3px,0) scale(.96,1.03);border-radius:63% 37% 58% 42%}100%{transform:translate3d(8px,-8px,0) scale(1.04,.97);border-radius:38% 62% 43% 57%}}
+.trace-app[data-art-motion=off] .apple-copy h1,.trace-app[data-art-motion=off] .entry-options button::before{animation:none;transform:none}
+@media(prefers-reduced-motion:reduce){.trace-app .apple-copy h1,.trace-app .entry-options button::before{animation:none;transform:none}}
+@media(max-width:760px){.trace-app .apple-copy{padding:.8rem 0;background:none}.trace-app .apple-entry .entry-options{gap:.1rem}.trace-app .apple-entry .entry-options button{min-height:120px}.trace-app .apple-copy h1{font-size:clamp(1.9rem,8vw,3rem)}.trace-app .audio-wave-control{padding:1rem}.apple-theme-strip{gap:.5rem;flex-wrap:wrap}}
+
+.trace-app .apple-entry .entry-options button::before{inset:-12% -5%;background:radial-gradient(ellipse,#fffdf9f5 0%,#fffdf9e8 52%,transparent 78%);filter:blur(12px)}
+.trace-app .apple-entry .entry-options button.primary::before{background:radial-gradient(ellipse,#fff4ecf5 0%,#fff4ece8 52%,transparent 78%)}
+.trace-app .apple-entry .entry-options button{border-radius:40% 36% 43% 32%}
+
+.trace-app .journal{background:none}
+.trace-app .journal-form{position:relative;isolation:isolate}
+.trace-app .journal-form::before{content:"";position:absolute;z-index:-1;inset:-2rem -1.5rem;border-radius:43% 38% 46% 35% / 14% 12% 18% 15%;background:radial-gradient(ellipse,#fffbf5f5 0%,#fffbf5ed 60%,transparent 85%);pointer-events:none}
+.beauty-palette{padding:1rem 0;max-width:800px}.beauty-palette summary{font-size:1.1rem;color:#891c2c}.beauty-palette a{color:#891c2c}
+
+.reading-controls{position:relative;color:#632d2d}.reading-controls summary{cursor:pointer;padding:.65rem}.reading-controls[open]{background:#fffaf3;z-index:5}.reading-controls button{display:block;width:100%}
+html[data-trace-text-size=large]{font-size:125%}
+/* Explicit user preference must override page-specific fixed pixel typography. */
+html[data-trace-text-size=large] .trace-app :is(p,label,input,textarea,select){font-size:1.2rem!important}
+html[data-trace-text-size=large] .trace-app button{font-size:1rem!important}
+html[data-trace-text-size=large] .trace-app .trace-header nav button{white-space:normal!important}
+html[data-trace-contrast=high] .trace-app{background:#fff;color:#191010}
+html[data-trace-contrast=high] .particle-apple{opacity:.15}
+html[data-trace-contrast=high] .trace-app button,html[data-trace-contrast=high] .trace-app input,html[data-trace-contrast=high] .trace-app textarea{color:#191010;background:#fff;border-color:#632222}
+html[data-trace-contrast=high] .trace-app button.primary{background:#761828;color:#fff}
+.trace-app .transcript-text{white-space:pre-wrap}

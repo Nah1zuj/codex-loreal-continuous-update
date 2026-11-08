@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+*.sqlite*
+*.db
+**/.venv*/
+**/node_modules/
+**/__pycache__/
+**/.pytest_cache/
+**/dist/
+/AccessibleBeautyAgent/voice/models/
+/AccessibleBeautyAgent/voice/*.tar.bz2
+/项目资料/
+/验证与历史说明/
+/本次桌面备份说明/

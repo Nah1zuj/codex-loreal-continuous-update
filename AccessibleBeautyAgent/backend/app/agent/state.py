@@ -1,0 +1,97 @@
+import uuid
+import time
+from threading import RLock
+from app.schemas.models import Session, Stage
+
+# Explicit legal state transitions. Consent and tool events use this service.
+TRANSITIONS = {
+    Stage.INIT:{Stage.ONBOARDING},
+    Stage.ONBOARDING:{Stage.INTENT},
+    Stage.INTENT:{Stage.CLARIFY,Stage.LOOK_SELECTED},
+    Stage.CLARIFY:{Stage.CLARIFY,Stage.LOOK_SELECTED},
+    Stage.LOOK_SELECTED:{Stage.MEMORY_CONSENT,Stage.GUIDE,Stage.CHECK_REQUESTED,Stage.INTENT},
+    Stage.GUIDE:{Stage.MEMORY_CONSENT,Stage.GUIDE,Stage.CHECK_REQUESTED,Stage.FEEDBACK},
+    Stage.CHECK_REQUESTED:{Stage.CAMERA_CONSENT},
+    Stage.CAMERA_CONSENT:{Stage.VISION_GATE,Stage.GUIDE,Stage.LOOK_SELECTED},
+    Stage.VISION_GATE:{Stage.VISION_CHECK,Stage.VERIFY,Stage.CAMERA_CONSENT,Stage.GUIDE,Stage.LOOK_SELECTED},
+    Stage.VISION_CHECK:{Stage.VERIFY,Stage.CAMERA_CONSENT,Stage.GUIDE,Stage.LOOK_SELECTED},
+    Stage.VERIFY:{Stage.MEMORY_CONSENT,Stage.GUIDE,Stage.CHECK_REQUESTED,Stage.FEEDBACK,Stage.LOOK_SELECTED},
+    Stage.FEEDBACK:{Stage.MEMORY_CONSENT,Stage.FEEDBACK},
+    Stage.MEMORY_CONSENT:{Stage.MEMORY_CONSENT,Stage.FEEDBACK},
+    Stage.COMPLETE:set(),
+}
+
+class SessionStore:
+    def __init__(self):
+        self.sessions = {}
+        self.lock = RLock()
+        self.touched={}
+        self.on_media_revoked = None
+    def create(self, user_id='demo'):
+        # No durable transcript without review; expire abandoned sessions in RAM.
+        with self.lock:
+            now=time.monotonic()
+            for sid,stamp in list(self.touched.items()):
+                if now-stamp>7200:self.sessions.pop(sid,None);self.touched.pop(sid,None)
+            while len(self.sessions)>=200:
+                sid=min(self.sessions,key=lambda key:self.touched.get(key,0));self.sessions.pop(sid);self.touched.pop(sid,None)
+            session = Session(session_id=str(uuid.uuid4()),user_id=user_id)
+            self.sessions[session.session_id]=session
+            self.touched[session.session_id]=now
+            self.transition(session,Stage.ONBOARDING)
+            self.transition(session,Stage.INTENT)
+            return session
+    def get(self, sid):
+        with self.lock:
+            if sid in self.touched and time.monotonic()-self.touched[sid]>7200:
+                self.sessions.pop(sid,None);self.touched.pop(sid,None)
+            if sid not in self.sessions:
+                row=None
+                if getattr(self,'memory',None):
+                    with self.memory.connect() as db:
+                        row=db.execute('SELECT user_id,locale,payload FROM makeup_sessions WHERE session_id=? AND updated_at>?',(sid,time.time()-30*86400)).fetchone()
+                if not row:raise KeyError('Session not found')
+                from app.schemas.makeup import MakeupPlan
+                import json
+                plan=MakeupPlan.model_validate(json.loads(row[2]))
+                self.sessions[sid]=Session(session_id=sid,user_id=row[0],locale=row[1],makeup_plan=plan,stage=Stage.INTENT)
+                self.project_plan(self.sessions[sid])
+            self.touched[sid]=time.monotonic()
+            return self.sessions[sid]
+    def transition(self, session, target):
+        if target != Stage.COMPLETE and target not in TRANSITIONS[session.stage]:
+            raise ValueError(f'Illegal transition {session.stage.value} -> {target.value}')
+        session.stage = target
+        session.stage_history.append(target.value)
+    def project_plan(self, session):
+        plan = session.makeup_plan
+        if plan.legacy_routine:
+            session.routine_id = plan.legacy_routine.routine_id
+            session.selected_look = plan.legacy_routine.look_id
+        if plan.session_ended:
+            stage = Stage.COMPLETE
+        elif plan.status == 'completed':
+            stage = Stage.FEEDBACK
+        elif plan.status == 'active':
+            stage = Stage.GUIDE
+        else:
+            stage = Stage.LOOK_SELECTED
+        if session.stage != stage:
+            session.stage = stage
+            session.stage_history.append(stage.value)
+        session.scene = plan.occasion
+
+    def revoke_media(self, session):
+        session.camera_consent = False
+        session.visual_state = None
+        session.confidence = 0
+        session.media_epoch += 1
+        if self.on_media_revoked:
+            self.on_media_revoked(session)
+        if session.stage in {Stage.CHECK_REQUESTED, Stage.CAMERA_CONSENT, Stage.VISION_GATE, Stage.VISION_CHECK, Stage.VERIFY}:
+            session.stage = Stage.GUIDE if session.routine_started else Stage.LOOK_SELECTED
+            session.stage_history.append(session.stage.value)
+
+    def stop(self, session):
+        self.revoke_media(session)
+        self.transition(session,Stage.COMPLETE)

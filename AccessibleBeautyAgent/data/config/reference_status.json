@@ -1,0 +1,10 @@
+{
+  "values": [
+    "RAW",
+    "DRAFT",
+    "AI_GENERATED",
+    "HUMAN_VERIFIED",
+    "REJECTED",
+    "DEPRECATED"
+  ]
+}

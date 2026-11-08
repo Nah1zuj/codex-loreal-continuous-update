@@ -1,0 +1,2 @@
+﻿look_id,name,description,scene,desired_impression,avoid,overall_intensity,overall_contrast,base_finish,blush_intensity,blush_placement,blush_finish,lip_saturation,lip_finish,eye_definition,routine_ids,source_ids,demo_data
+template_look,SAMPLE · 新 Look 模板,请替换为研究定义,dinner,polished|controlled,too_mature|high_saturation,medium_low,medium_low,natural_polished,light_medium,upper_cheek,soft_diffused,medium_low,soft_satin,light_medium,template_routine,template_source,True

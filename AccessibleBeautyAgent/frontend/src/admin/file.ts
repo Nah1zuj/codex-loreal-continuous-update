@@ -1,0 +1,1 @@
+export function fileData(file:File):Promise<string>{if(file.size>15_000_000)return Promise.reject(new Error('文件超过 15MB，请缩小后再导入。'));return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(new Error('文件读取失败'));reader.readAsDataURL(file)})}
