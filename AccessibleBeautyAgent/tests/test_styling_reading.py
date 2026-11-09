@@ -250,16 +250,14 @@ def test_label_verification_ignores_stale_concurrent_results(monkeypatch):
     assert service.availability()['remote_verification']=='unverified'
 
 
-def test_product_comparison_identifies_source_example_and_unavailable(tmp_path):
+def test_product_comparison_uses_brand_neutral_demo_items_and_unavailable(tmp_path):
     with TestClient(create_app(Settings(memory_path=tmp_path/'products.sqlite'))) as client:
         catalogue = client.get('/api/products/catalog').json()['results']
-        assert {item['product_id'] for item in catalogue} >= {'maybelline_matte_ink','maybelline_vinyl_ink'}
-        response = client.post('/api/products/compare',json=['maybelline_matte_ink','maybelline_vinyl_ink','sample_01','unknown'])
-        first,second,demo,unknown = response.json()['results']
-        assert first['attributes']['finish']=='matte' and second['attributes']['finish']=='glossy'
+        assert {item['product_id'] for item in catalogue} >= {'sample_01','sample_02'}
+        assert all('brand' not in item for item in catalogue)
+        response = client.post('/api/products/compare',json=['sample_01','sample_02','unknown'])
+        first,second,unknown = response.json()['results']
         for row in (first,second):
-            assert row['review_status']=='DRAFT' and row['evidence_kind']=='source'
-            assert row['attributes']['undertone'] is None
-            assert row['sources'][0]['url'].startswith('https://www.maybelline.com/lip-makeup/lipstick/')
-        assert demo['evidence_kind']=='demo' and demo['sources']==[]
+            assert row['review_status']=='DRAFT' and row['evidence_kind']=='demo'
+            assert 'brand' not in row['attributes'] and row['sources']==[]
         assert unknown['evidence_kind']=='unavailable' and not unknown['attributes']

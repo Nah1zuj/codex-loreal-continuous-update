@@ -34,8 +34,8 @@ def build_documents(store):
         content='\n'.join([f"场景: {', '.join(row['scene'])}",*[f'{area}: {details(row[area])}' for area in ('overall','base','blush','lip','eye')],f"记录说明: {row['notes']}",f"不确定性: {row['uncertainty_notes']}",f"审核备注: {row['review_notes']}"])
         add(row['reference_id'],'REFERENCE_CASE',look['name']+' — Reference '+row['reference_id'],content,row,row['look_id'])
     for row in store.products:
-        content=f"品牌: {row['brand']}。类别: {row['category']}。\n{details({k:row[k] for k in ('finish','saturation','undertone')})}\n官方声明: {'; '.join(row['claims']) if row['claims'] else '信息不可用 / unknown'}"
-        for lid in row['look_ids'] or [None]:add(f"{row['product_id']}:{lid}" if lid else row['product_id'],'PRODUCT',row['name'] or row['brand']+' '+row['category'],content,row,lid,row['category'],lid)
+        content=f"单品: {row['name']}。类别: {row['category']}。\n{details({k:row[k] for k in ('finish','saturation','undertone')})}\n已核对声明: {'; '.join(row['claims']) if row['claims'] else '信息不可用 / unknown'}"
+        for lid in row['look_ids'] or [None]:add(f"{row['product_id']}:{lid}" if lid else row['product_id'],'PRODUCT',row['name'],content,row,lid,row['category'],lid)
     for row in store.guidance:
         teaching=row.get('teaching')
         content=row['content']+'\n推荐: '+row['preferred_pattern']+'\n避免: '+row['avoid_pattern']+'\n例子: '+row['example_good']

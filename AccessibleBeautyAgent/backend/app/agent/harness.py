@@ -309,7 +309,7 @@ class AgentHarness:
                 return self.respond(s,s.last_response or '请先说明今天的使用场景。')
             field = 'instruction_repeat' if command in ('repeat','重复') else ('instruction_slow' if command in ('slow down','慢一点','详细一点') else 'explanation_why')
             return self.respond(s,self.policies.guidance(step,{'instruction_repeat':'repeat','instruction_slow':'expanded','explanation_why':'why'}[field]))
-        if text and s.stage not in (Stage.MEMORY_CONSENT,Stage.COMPLETE) and any(word in command for word in ('全品类','欧莱雅','整套建议','full look recommendations','loreal','l’oréal')):
+        if text and s.stage not in (Stage.MEMORY_CONSENT,Stage.COMPLETE) and any(word in command for word in ('全品类','整套建议','完整造型','full look recommendations')):
             return self.respond(s,self.language.companion(text,s.last_response+'\n'+'\n'.join(s.story_context)[-2000:],s.locale))
         if legacy and normalized == 'ambiguous':
             return self.respond(s, self.coaching.reply_text(s, {'clarification_required': True}, normalized, text))

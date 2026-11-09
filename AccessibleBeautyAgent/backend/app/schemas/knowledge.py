@@ -173,8 +173,8 @@ class ReferenceCase(Record):
 
 class BeautyProduct(Record):
     product_id: str = Field(pattern=ID)
-    brand: str = Field(min_length=1)
-    name: str = ''
+    name: str = Field(min_length=1)
+    brand: str | None = None
     category: str = Field(min_length=1)
     finish: str | None = None
     saturation: str | None = None

@@ -35,11 +35,6 @@ for rule in rules:
 dump('evidence_rules.json',rules)
 w=openpyxl.load_workbook(Path('C:/Users/HUAWEI/Downloads/accessibility_evidence.xlsx'),read_only=True,data_only=True)
 dump('excel_inventory.json',dict(path=str(Path('C:/Users/HUAWEI/Downloads/accessibility_evidence.xlsx')),mode='READ_ONLY_DATA_ONLY',sheets=[dict(name=s.title,nonempty_rows=sum(any(v is not None for v in row) for row in s.values)) for s in w],note='Workbook is a curated screening corpus, not proof of fulltext review; source labels not promoted to HUMAN_VERIFIED'))
-products=[('base','L’Oréal Paris','True Match Nude Hyaluronic Tinted Serum','natural radiant','Lightweight coverage; 1% hyaluronic acid stated by brand','https://www.lorealparisusa.com/makeup/face/true-match-nude-hyaluronic-tinted-serum-hydrates-all-in-1'),('blush','Maybelline','Cheek Heat Gel-Cream Blush','soft dewy','Water-based gel cream; buildable pigment stated by brand','https://www.maybelline.com/face-makeup/blush-and-bronzer/cheek-heat-gel-cream-blush-face-makeup'),('lip','NYX Professional Makeup','Butter Gloss Non-Sticky Lip Gloss','high shine','Sheer-to-medium coverage; non-sticky claim by brand','https://www.nyxcosmetics.com/lip/lip-gloss/butter-gloss-non-sticky-lip-gloss/NYX_089.html'),('fragrance','Lancôme','Idôle Eau de Parfum',None,'Fresh floral; rose/jasmine heart, white musk/vanilla/patchouli/cedar base stated by brand','https://www.lancome-usa.com/fragrance/fragrance-by-collection/idole/idole-eau-de-parfum/LAN387.html')]
-rows=[dict(source_id=f'SRC-V4-PRODUCT-{i+1:03}',category=p[0],brand=p[1],title=p[2],region='US',shade=None,finish=p[3],official_claims=p[4],official_url=p[5],accessed_at=DATE,review_status='DRAFT',asset_rights_status='UNKNOWN',brand_portfolio_url='https://www.loreal.com/en/our-global-brands-portfolio/',independent_scientific_evidence=None) for i,p in enumerate(products)]
-dump('products_candidates.json',rows)
-with (OUT/'products_candidates.csv').open('w',encoding='utf-8-sig',newline='') as f:
- writer=csv.DictWriter(f,fieldnames=rows[0].keys());writer.writeheader();writer.writerows(rows)
 materials=[
 ('cotton','棉','fiber','棉是纤维；可制成挺括梭织或柔软针织，触感不能只由成分确定。','https://cottonworks.com/product-innovation/nonwovens/technical-and-performance-guide/'),
 ('linen','亚麻','fiber','亚麻来自亚麻植物；可有明显纹理和褶皱，但重量、混纺与整理决定具体触感。','https://allianceflaxlinenhemp.eu/en/flax-performance-and-properties'),
@@ -64,4 +59,4 @@ dump('assets_hash_review.json',assets)
 groups={}
 for a in assets:groups.setdefault(a['sha256'],[]).append(a['path'])
 dump('hash_duplicates.json',dict(checked_count=len(assets),algorithm='SHA256',duplicate_groups=[dict(sha256=k,paths=v) for k,v in groups.items() if len(v)>1],note='Exact-byte comparison only; perceptual duplicates not assessed'))
-print(json.dumps(dict(sources_checked=len(verified)+1,products=len(rows),materials=len(materials),assets=len(assets)),ensure_ascii=False))
+print(json.dumps(dict(sources_checked=len(verified)+1,materials=len(materials),assets=len(assets)),ensure_ascii=False))

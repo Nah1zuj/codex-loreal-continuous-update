@@ -78,10 +78,10 @@ def test_verified_reference_filter(repository,kbdir):
 def test_csv_missing_fields_reported(repository,tmp_path):
     from app.knowledge.importer import import_file
     path=tmp_path/'products.csv'
-    path.write_text('product_id,brand,category\nnew_product,,lip\n',encoding='utf-8')
+    path.write_text('product_id,name,category\nnew_product,,lip\n',encoding='utf-8')
     report=import_file(path,repository,kind='PRODUCT',commit=True)
     assert report['total_rows']==1 and report['rejected']==1
-    assert any(e['field']=='brand' for e in report['errors'])
+    assert any(e['field']=='name' for e in report['errors'])
 
 def test_index_rebuild_preserves_canonical(kbdir):
     from app.rag.knowledge import KnowledgeStore

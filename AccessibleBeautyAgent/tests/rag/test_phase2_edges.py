@@ -21,7 +21,7 @@ def test_nested_unknown_field_not_silently_discarded():
 
 def test_csv_duplicates_not_overwritten(repository,tmp_path):
     from app.knowledge.importer import import_file
-    p=tmp_path/'products.csv';p.write_text('product_id,brand,category\nsample_01,replacement,lip\n',encoding='utf-8')
+    p=tmp_path/'products.csv';p.write_text('product_id,name,category\nsample_01,replacement,lip\n',encoding='utf-8')
     before=repository.get('PRODUCT','sample_01')
     report=import_file(p,repository,kind='PRODUCT',commit=True)
     assert report['rejected']==1

@@ -1,6 +1,6 @@
 # 第五阶段：TRACE-Next 通用迁移验收
 
-日期：2026-11-08。结论：**通用迁移的软件候选通过本轮自动验收，可进入赛事特化设计讨论；未切换或替换旧项目，尚非已上线的支付宝参赛作品。**
+日期：2026-11-09。结论：**通用迁移的软件候选通过自动验收；当前路线已调整为独立、品牌中立的视障美妆陪伴项目，不属于公司、支付平台或比赛。**
 
 ## 源码与实现范围
 
@@ -12,12 +12,15 @@
 
 | 检查 | 结果 | 证据 |
 |---|---|---|
+| 当前独立版本后端回归 | 280通过、3跳过 | 2026-11-09 本地全量 pytest |
+| 当前独立版本前端回归 | 187通过、生产构建通过 | 2026-11-09 vitest、TypeScript、Vite |
+| 当前品牌中立知识库 | PASS；3 Look / 3 Routine / 2 Reference / 27 Product / 73 Guidance / 3 Source | `scripts/validate_kb.py` |
 | 旧提交隔离副本后端回归 | 268通过、3跳过 | migration/evidence/baseline-pytest.log |
 | 新独立Python环境后端回归 | 277通过、3跳过 | migration/evidence/new-pytest.log、new-pytest.xml |
 | 前端单元/组件检查 | 191通过、0失败 | migration/evidence/frontend-test-summary.json |
 | 类型检查和生产构建 | 通过，保留大分包警告 | migration/evidence/frontend-build.log |
 | 本地语音软件单元 | 10通过 | migration/evidence/voice-tests.log |
-| 知识库结构/来源检查 | PASS；3Look/3Routine/2Reference/14Product/73Guidance/5Source | migration/evidence/knowledge-validation.log |
+| 迁移时知识库结构/来源检查 | PASS；3 Look / 3 Routine / 2 Reference / 14 Product / 73 Guidance / 5 Source | migration/evidence/knowledge-validation.log（历史迁移快照） |
 | 相同输入新旧对照 | 4组场景、52组成对请求；响应码/完整JSON与SSE/状态/数据库内容无差异 | migration/evidence/compatibility-report.json |
 | 运行时OpenAPI与SQLite schema | 新旧完全相同 | migration/evidence/old-compatibility.json、new-compatibility.json |
 | 实际启动与无模型退路 | 占用端口不抢占；前端/API/SQLite/文字/恢复正常；重复启动保护、doctor、停止释放端口通过 | migration/evidence/runtime-smoke.log |
@@ -34,16 +37,16 @@ A组先验证知识与记忆的同意、签名版本、幂等、所有者、删�
 
 52对请求包括正式晚餐旧课程、新教学幂等/冲突/暂停/继续/跳过/提前结束、陌生浏览器及5种JSON Content-Type拒绝、恢复与重启回执、偏好审阅和严格同意/篡改/删除重放、造型版本冲突、标签演示与拒绝、流式开始与结束。它不是对所有83条静态路由的逐路由独立对照，其他细分行为由完整原有回归及逐字节复用覆盖。
 
-新增扩展只提供命名挂载与服务上下文。未来支付的账户、订单所有者、回调验签、退款、交付和权益必须单独实现，不能因为继承/api中间件就宣称已有支付安全性。
+新增扩展只提供命名挂载与服务上下文。未来任何第三方适配器的身份、授权、数据所有权和外部回调都必须单独实现，不能因为继承 `/api` 中间件就宣称已有外部平台能力。
 
 ## 未完成和不自动切换的边界
 
-- 未接入支付宝SDK、订单/支付回调/退款/权益，未报名、未创建真实交易、未发布。
+- 未绑定任何化妆品公司、支付平台或比赛；未发布。
 - 没有在本轮下载/实测语音或视觉模型，语音10项是软件单元，视觉回归主要为mock/合成输入；不能称作真实视障美妆准确率证据。
 - Windows实机、Mac/Windows真实读屏、实体麦克风/摄像头、远程AI供应商、专业课程审核、目标用户试用尚待独立验收。本轮没有重做网页视觉对照，前端源文件除发布标识外逐字节保留。
-- 当前匿名Cookie只适用本机隔离；管理与CORS规则仍按本地工程设计，不能直接把Vite开发服务暴露成生产参赛入口。
+- 当前匿名 Cookie 只适用本机隔离；管理与 CORS 规则仍按本地工程设计，不能直接把 Vite 开发服务暴露成生产入口。
 - 旧用户数据不迁移、不覆盖。回退时停新目录、运行旧目录。后续如要搬用户数据，需另做一致性备份、迁移和回退验证。
 
-## 本轮交付后的下一步
+## 独立项目后续
 
-已要求赛事调研聊天重读新项目与本报告，输出《支付宝比赛特化计划书》。推荐赛道与商业模式是待讨论建议，不因通用迁移完成而自动获得批准。正式账号、商户/产品准入、商品/价格/退款规则、真实付款及发布等由该计划明确前置条件。
+继续扩充跨品类、可追溯的无障碍美妆知识；默认以单品名称和品类描述，不主动突出品牌。课程专业审核、目标用户试用、真实设备与读屏验收、远程模型和正式部署仍需分别完成。

@@ -68,7 +68,7 @@ def test_unknown_session(client):
 
 def test_no_fabricated_product_field(client):
     from app.products.service import describe_product
-    p = describe_product({'product_id': 'unknown', 'brand': 'SAMPLE'})
+    p = describe_product({'product_id': 'unknown', 'name': '日常唇彩', 'category': 'lip'})
     assert '不可用' in p
     assert '持久' not in p
 

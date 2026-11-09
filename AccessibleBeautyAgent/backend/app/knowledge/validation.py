@@ -38,7 +38,7 @@ def validate_records(raw,vocabulary=None):
                 for field,vocab in [('intensity','intensity_levels'),('contrast','intensity_levels'),('definition','intensity_levels'),('finish','finishes'),('saturation','saturation_levels'),('placement','placements')]:
                     if isinstance(attrs,dict) and attrs.get(field):checks.append((area+'.'+field,vocab,[attrs[field]]))
             if kind=='PRODUCT':
-                checks.extend([('category','makeup_areas',[r['category']]),('finish','finishes',[r['finish']] if r['finish'] else []),('saturation','saturation_levels',[r['saturation']] if r['saturation'] else [])])
+                checks.extend([('category','product_categories',[r['category']]),('finish','finishes',[r['finish']] if r['finish'] else []),('saturation','saturation_levels',[r['saturation']] if r['saturation'] else [])])
             for field,vocab,values in checks:
                 for value in values:
                     if value not in vocabulary.values[vocab]:issue(warnings,kind,i,field,f'词表尚无“{value}”；请确认拼写或在 data/config/{vocab}.json 添加。')

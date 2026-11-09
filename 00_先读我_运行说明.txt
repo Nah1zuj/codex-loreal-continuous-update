@@ -1,7 +1,7 @@
-TRACE-Next 独立迁移候选（未接入支付宝）
+TRACE 独立视障美妆陪伴项目
 
 Mac：双击首次安装_Mac.command，再双击启动Demo_Mac.command。
 Windows：对应.bat入口。
 需要Python 3.12.x和Node.js26.10.0。默认网页 http://127.0.0.1:5280/ 。
 保留启动窗口，Control+C停止。缺模型可先文字体验。
-说明见README.md和docs/VERIFICATION.md，旧目录和用户数据保持原位。
+不代表化妆品公司、支付平台或比赛，不限定品牌。说明见README.md和docs/VERIFICATION.md，旧目录和用户数据保持原位。

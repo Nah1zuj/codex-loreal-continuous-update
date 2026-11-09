@@ -28,8 +28,9 @@ def test_category_recommendations_keep_the_current_step(tmp_path):
     with TestClient(create_app(Settings(memory_path=tmp_path/'category.sqlite'))) as client:
         sid=client.post('/api/chat',json={'message':'日常自然妆'}).json()['session']['session_id']
         client.post('/api/chat',json={'session_id':sid,'message':'开始步骤'})
-        reply=client.post('/api/chat',json={'session_id':sid,'message':'欧莱雅全品类推荐，衣服材质和香氛呢？'}).json()
+        reply=client.post('/api/chat',json={'session_id':sid,'message':'想要全品类的整套建议，衣服材质和香氛呢？'}).json()
         assert '护发' in reply['message'] and '材质' in reply['message']
+        assert '品牌' in reply['message'] and '欧莱雅' not in reply['message']
         assert reply['session']['routine_step']==0
 
 def test_begin_after_an_open_story_starts_the_first_step(tmp_path):

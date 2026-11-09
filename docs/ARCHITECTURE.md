@@ -2,10 +2,10 @@
 
 ## 决策
 
-1. 保留 React/TypeScript/Vite 与 FastAPI/Pydantic/SQLite。当前工程已有领域边界与回归，赛事适配不要求无条件换栈；全量改语言将扩大风险而不产生收款能力。
+1. 保留 React/TypeScript/Vite 与 FastAPI/Pydantic/SQLite。当前工程已有领域边界与回归；独立产品化不要求无条件换栈。
 2. 保留稳定领域逻辑、模型校验、SQL迁移和前端体验；这是有记录的代码复用。真正重构 backend/app/main.py 的职责：composition.py 构建服务容器，factory.py 组装 HTTP，main.py 仅为兼容启动入口并导出 create_app。导入 factory 不创建默认SQLite或模型实例，便于隔离验收和未来宿主。
-3. ExtensionSpec 提供命名的路由工厂，工厂接收服务容器。扩展统一位于 /api/extensions/{name}，不允许通过名称逃逸覆盖现有接口；现有浏览器隔离/来源中间件仍包裹全部HTTP。命名空间只是挂载边界，不自动提供扩展对象所有权、商户身份或支付验签，未来模块必须单独实现和测试。
-4. 不在本次迁移实现任何赛事特定交易。未来 commerce 扩展独立订单、支付通知验签、幂等、交付权益和退款状态；不得将模型文本或前端“支付成功”当真实回调，不得把匿名用户Cookie当生产付费账号。
+3. ExtensionSpec 提供命名的路由工厂，工厂接收服务容器。扩展统一位于 /api/extensions/{name}，不允许通过名称逃逸覆盖现有接口；现有浏览器隔离/来源中间件仍包裹全部 HTTP。命名空间只是挂载边界，不自动提供身份、授权或数据所有权，未来模块必须单独实现和测试。
+4. 核心体验保持公司、品牌和平台中立。第三方服务只能作为可选适配器接入，不得改变基础无障碍能力，也不得让模型文本冒充外部系统的真实状态。
 5. 保持原有应用相对目录，避免破坏模型定位、前端代理与跨平台入口。新runtime默认5280/8112/8113，旧版5180/8012/8013可以并存。新私有数据库属于新目录，旧数据不自动搬运；下载权重按已有固定清单另装。
 
 ```mermaid
@@ -15,7 +15,7 @@ flowchart LR
  Compose --> Core[既有领域服务 / SQLite / 知识]
  Factory --> Existing[兼容原有路由]
  Factory --> Extensions[命名扩展路由工厂]
- Extensions -.未来方案.-> Commerce[独立支付与权益模块]
+ Extensions -.可选.-> Adapter[第三方服务适配器]
  UI[原有React体验] --> Existing
 ```
 

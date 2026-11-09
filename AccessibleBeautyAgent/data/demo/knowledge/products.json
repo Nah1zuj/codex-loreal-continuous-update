@@ -1,13 +1,13 @@
 {
-  "label": "SAMPLE DATA — fictional hackathon content, not product claims",
+  "label": "SAMPLE DATA — fictional independent-project content, not product claims",
   "records": [
     {
       "product_id": "sample_01",
-      "brand": "SAMPLE · 虚构演示品牌",
-      "category": "base",
-      "finish": "natural",
-      "saturation": "low",
-      "undertone": "neutral",
+      "name": "清爽保湿霜",
+      "category": "skincare",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
       "contexts": [
         "daily"
       ],
@@ -21,8 +21,8 @@
     },
     {
       "product_id": "sample_02",
-      "brand": "SAMPLE · 虚构演示品牌",
-      "category": "blush",
+      "name": "轻薄底妆",
+      "category": "base",
       "finish": "natural",
       "saturation": "low",
       "undertone": "neutral",
@@ -39,8 +39,8 @@
     },
     {
       "product_id": "sample_03",
-      "brand": "SAMPLE · 虚构演示品牌",
-      "category": "lip",
+      "name": "柔和眼影",
+      "category": "eye",
       "finish": "natural",
       "saturation": "low",
       "undertone": "neutral",
@@ -57,8 +57,8 @@
     },
     {
       "product_id": "sample_04",
-      "brand": "SAMPLE · 虚构演示品牌",
-      "category": "brush",
+      "name": "自然眉粉",
+      "category": "brow",
       "finish": "natural",
       "saturation": "low",
       "undertone": "neutral",
@@ -75,7 +75,116 @@
     },
     {
       "product_id": "sample_05",
-      "brand": "SAMPLE · 虚构演示品牌",
+      "name": "淡彩腮红",
+      "category": "blush",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "daily"
+      ],
+      "look_ids": [
+        "clean_daily"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_06",
+      "name": "日常唇彩",
+      "category": "lip",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "daily"
+      ],
+      "look_ids": [
+        "clean_daily"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_07",
+      "name": "轻盈护发乳",
+      "category": "hair",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
+      "contexts": [
+        "daily"
+      ],
+      "look_ids": [
+        "clean_daily"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_08",
+      "name": "清新淡香",
+      "category": "fragrance",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
+      "contexts": [
+        "daily"
+      ],
+      "look_ids": [
+        "clean_daily"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_09",
+      "name": "简洁耳饰",
+      "category": "accessories",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
+      "contexts": [
+        "daily"
+      ],
+      "look_ids": [
+        "clean_daily"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_10",
+      "name": "滋润面霜",
+      "category": "skincare",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
+      "contexts": [
+        "dinner",
+        "presentation"
+      ],
+      "look_ids": [
+        "soft_formal"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_11",
+      "name": "柔润底妆",
       "category": "base",
       "finish": "natural",
       "saturation": "low",
@@ -93,8 +202,46 @@
       "verified": false
     },
     {
-      "product_id": "sample_06",
-      "brand": "SAMPLE · 虚构演示品牌",
+      "product_id": "sample_12",
+      "name": "低饱和眼影",
+      "category": "eye",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "dinner",
+        "presentation"
+      ],
+      "look_ids": [
+        "soft_formal"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_13",
+      "name": "柔和眉笔",
+      "category": "brow",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "dinner",
+        "presentation"
+      ],
+      "look_ids": [
+        "soft_formal"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_14",
+      "name": "柔雾腮红",
       "category": "blush",
       "finish": "natural",
       "saturation": "low",
@@ -112,8 +259,8 @@
       "verified": false
     },
     {
-      "product_id": "sample_07",
-      "brand": "SAMPLE · 虚构演示品牌",
+      "product_id": "sample_15",
+      "name": "柔和缎光唇膏",
       "category": "lip",
       "finish": "soft_satin",
       "saturation": "medium_low",
@@ -131,12 +278,12 @@
       "verified": false
     },
     {
-      "product_id": "sample_08",
-      "brand": "SAMPLE · 虚构演示品牌",
-      "category": "brush",
-      "finish": "natural",
-      "saturation": "low",
-      "undertone": "neutral",
+      "product_id": "sample_16",
+      "name": "顺滑造型乳",
+      "category": "hair",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
       "contexts": [
         "dinner",
         "presentation"
@@ -150,8 +297,64 @@
       "verified": false
     },
     {
-      "product_id": "sample_09",
-      "brand": "SAMPLE · 虚构演示品牌",
+      "product_id": "sample_17",
+      "name": "温柔木质香",
+      "category": "fragrance",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
+      "contexts": [
+        "dinner",
+        "presentation"
+      ],
+      "look_ids": [
+        "soft_formal"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_18",
+      "name": "低反光耳饰",
+      "category": "accessories",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
+      "contexts": [
+        "dinner",
+        "presentation"
+      ],
+      "look_ids": [
+        "soft_formal"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_19",
+      "name": "轻盈乳液",
+      "category": "skincare",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
+      "contexts": [
+        "social"
+      ],
+      "look_ids": [
+        "warm_social"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_20",
+      "name": "自然底妆",
       "category": "base",
       "finish": "natural",
       "saturation": "low",
@@ -168,8 +371,44 @@
       "verified": false
     },
     {
-      "product_id": "sample_10",
-      "brand": "SAMPLE · 虚构演示品牌",
+      "product_id": "sample_21",
+      "name": "暖棕眼影",
+      "category": "eye",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "social"
+      ],
+      "look_ids": [
+        "warm_social"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_22",
+      "name": "自然眉胶",
+      "category": "brow",
+      "finish": "natural",
+      "saturation": "low",
+      "undertone": "neutral",
+      "contexts": [
+        "social"
+      ],
+      "look_ids": [
+        "warm_social"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_23",
+      "name": "暖调腮红",
       "category": "blush",
       "finish": "natural",
       "saturation": "low",
@@ -186,8 +425,8 @@
       "verified": false
     },
     {
-      "product_id": "sample_11",
-      "brand": "SAMPLE · 虚构演示品牌",
+      "product_id": "sample_24",
+      "name": "暖调唇膏",
       "category": "lip",
       "finish": "soft_satin",
       "saturation": "medium",
@@ -204,12 +443,48 @@
       "verified": false
     },
     {
-      "product_id": "sample_12",
-      "brand": "SAMPLE · 虚构演示品牌",
-      "category": "brush",
-      "finish": "natural",
-      "saturation": "low",
-      "undertone": "neutral",
+      "product_id": "sample_25",
+      "name": "柔亮护发油",
+      "category": "hair",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
+      "contexts": [
+        "social"
+      ],
+      "look_ids": [
+        "warm_social"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_26",
+      "name": "柔和花香",
+      "category": "fragrance",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
+      "contexts": [
+        "social"
+      ],
+      "look_ids": [
+        "warm_social"
+      ],
+      "claims": [],
+      "source": "fictional_demo_catalog",
+      "source_type": "sample",
+      "verified": false
+    },
+    {
+      "product_id": "sample_27",
+      "name": "轻巧项链",
+      "category": "accessories",
+      "finish": null,
+      "saturation": null,
+      "undertone": null,
       "contexts": [
         "social"
       ],

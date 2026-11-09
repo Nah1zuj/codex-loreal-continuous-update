@@ -2,7 +2,7 @@ from app.knowledge.policy import eligible
 
 
 def describe_product(product):
-    label = f"{product.get('brand','品牌信息不可用')}，{product.get('category','类别信息不可用')}"
+    label = product.get('name') or product.get('category') or '产品信息不可用'
     fields = [('finish','妆效'),('saturation','饱和度'),('undertone','底调')]
     descriptions = [f"{title}：{product.get(field) or '信息不可用'}" for field,title in fields]
     claims = product.get('claims') or []
@@ -36,9 +36,8 @@ class ProductService:
 
     def catalog(self):
         return [
-            {key: product[key] for key in ('product_id','brand','name')}
+            {key: product[key] for key in ('product_id','name','category')}
             for product in self.available_products().values()
-            if not product.get('demo_data') and self.sources(product)
         ]
 
     def compare(self, ids):
@@ -54,7 +53,7 @@ class ProductService:
             demo = bool(product.get('demo_data') or product.get('source_type') == 'sample')
             evidence_kind = 'demo' if demo else 'source' if sources else 'unavailable'
             attributes = {field:product.get(field) or None for field in
-                          ('name','brand','category','finish','saturation','undertone')} if demo or sources else {}
+                          ('name','category','finish','saturation','undertone')} if demo or sources else {}
             results.append({
                 'product_id':product_id,'description':describe_product(product) if demo or sources else '缺少可追溯的产品资料',
                 'evidence_kind':evidence_kind,'attributes':attributes,'sources':[] if demo else sources,

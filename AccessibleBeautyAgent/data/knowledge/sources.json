@@ -59,24 +59,6 @@
       "notes": "Original authored text; not expert-reviewed; no downloaded training material.",
       "use_permission": "original",
       "use_basis": "TRACE 团队原创双语教学文本，允许在本项目内作为教学与审核素材；真实试用须经过专业审核。"
-    },
-    {
-      "source_id": "maybelline_matte_ink_us_official",
-      "title": "Super Stay Matte Ink Liquid Lipstick · 官方资料（美国站）",
-      "creator": "Maybelline New York",
-      "url": "https://www.maybelline.com/lip-makeup/lipstick/superstay-matte-ink-liquid-lipstick",
-      "accessed_at": "2026-11-07",
-      "source_type": "official_brand",
-      "notes": "只摘取产品线名称、类别和官网描述的妆效类型；未记录价格、功效、色号、配方或持妆声明。"
-    },
-    {
-      "source_id": "maybelline_vinyl_ink_us_official",
-      "title": "Super Stay Vinyl Ink Longwear Liquid Lipcolor · 官方资料（美国站）",
-      "creator": "Maybelline New York",
-      "url": "https://www.maybelline.com/lip-makeup/lipstick/super-stay-vinyl-ink-longwear-liquid-lipstick",
-      "accessed_at": "2026-11-07",
-      "source_type": "official_brand",
-      "notes": "只摘取产品线名称、类别和官网描述的妆效类型；未记录价格、功效、色号、配方或持妆声明。"
     }
   ]
 }

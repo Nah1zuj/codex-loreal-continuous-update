@@ -6,6 +6,7 @@ DEFAULTS={
  'scenes':['daily','dinner','presentation','social'],
  'impressions':['natural','fresh','polished','slightly_present','controlled','warm','approachable'],
  'makeup_areas':['base','blush','lip','eye','brush','final'],
+ 'product_categories':['skincare','base','eye','brow','blush','lip','hair','fragrance','accessories'],
  'intensity_levels':['very_low','low','light','medium_low','light_medium','medium','medium_high','high','minimal'],
  'finishes':['natural','light_natural','natural_polished','soft','soft_diffused','soft_satin','heavy_gloss','matte','satin','glossy'],
  'saturation_levels':['very_low','low','medium_low','medium','medium_high','high'],

@@ -6,12 +6,12 @@ import {useTrace} from '../content/Locale'
 import {readableDescription} from '../content/traceBrand'
 import type {Session} from '../types'
 
-interface CatalogueItem {product_id:string; brand:string; name:string}
+interface CatalogueItem {product_id:string; name:string; category:string}
 interface EvidenceSource {source_id:string; title:string; url:string; accessed_at:string|null}
 interface Comparison {
   product_id:string
   evidence_kind:'source'|'demo'|'unavailable'
-  attributes:Partial<Record<'name'|'brand'|'category'|'finish'|'saturation'|'undertone',string|null>>
+  attributes:Partial<Record<'name'|'category'|'finish'|'saturation'|'undertone',string|null>>
   sources:EvidenceSource[]
   review_status:string|null
 }
@@ -35,7 +35,7 @@ export function Pair({session,start,onError}:{session:Session|null;start:()=>voi
 
   const products=useMemo(()=>{
     const options=new Map<string,string>()
-    for(const row of catalogue)options.set(row.product_id,row.name||row.brand)
+    for(const row of catalogue)options.set(row.product_id,row.name||row.category)
     for(const [index,row] of (session?.selected_products??[]).entries()){
       if(!options.has(row.product_id))options.set(row.product_id,
         (index+1)+' · '+readableDescription(row.description.split('。')[0],locale))
@@ -60,10 +60,12 @@ export function Pair({session,start,onError}:{session:Session|null;start:()=>voi
     finally{setBusy(false)}
   }
 
-  const labels={brand:t('品牌','Brand'),category:t('类别','Category'),finish:t('妆效','Finish'),
+  const labels={category:t('类别','Category'),finish:t('妆效','Finish'),
     saturation:t('饱和度','Saturation'),undertone:t('底调','Undertone')}
-  const values:Record<string,string>={lip:t('唇部彩妆','Lip colour'),matte:t('哑光','Matte'),
-    glossy:t('亮泽','Glossy')}
+  const values:Record<string,string>={skincare:t('护肤','Skincare'),base:t('底妆','Base makeup'),
+    eye:t('眼妆','Eye makeup'),brow:t('眉部单品','Brow product'),blush:t('腮红','Blush'),
+    lip:t('唇部彩妆','Lip colour'),hair:t('头发护理','Hair care'),fragrance:t('香氛','Fragrance'),
+    accessories:t('配饰','Accessories'),matte:t('哑光','Matte'),glossy:t('亮泽','Glossy')}
   return <section>
     <ModuleHeader module="pair" explanation={c.pairIntro}/>
     <p><BilingualText text={c.pairDisclaimer}/></p>

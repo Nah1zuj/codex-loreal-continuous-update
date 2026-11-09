@@ -7,13 +7,6 @@
     "attribution": "TRACE V2 original draft",
     "local_file": "data/import/trace-original-tutorials.json"
   },
-  "loreal_portfolio": {
-    "title": "Our Global Brands Portfolio",
-    "publisher": "L’Oréal",
-    "url": "https://www.loreal.com/en/our-global-brands-portfolio/",
-    "permission": "citation_only",
-    "evidence": "No reusable full-text license established; citation metadata only."
-  },
   "rnib_makeup": {
     "title": "Applying make-up",
     "publisher": "RNIB",

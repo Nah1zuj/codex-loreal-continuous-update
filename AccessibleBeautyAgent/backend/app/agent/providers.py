@@ -7,8 +7,8 @@ class LanguageProvider(Protocol):
 
 class MockLanguageProvider:
     def companion(self,message,previous,locale):
-        if any(word in message.lower() for word in ('全品类','欧莱雅','full look','l’oréal','loreal','造型收尾')):
-            return '可以从护肤、彩妆、护发与香氛四类寻找美妆灵感；欧莱雅集团的官方品牌与品类信息可以作为起点，具体色号、成分与购买信息还需核验。穿搭材质与配饰是独立的造型建议：树林意境可以考虑柔软棉麻、低反光纹理和简洁配饰，是否采用由你决定。你希望优先用已有物品，还是给出一个预算？' if locale=='zh-CN' else 'Consider skincare, makeup, haircare and fragrance, using official L’Oréal category information as a starting point. Shades, ingredients and purchase details still need verification. Garment material and accessories are independent styling ideas: soft linen or cotton and quiet textures could support a forest mood. Would you prefer existing items or a budget?'
+        if any(word in message.lower() for word in ('全品类','整套建议','full look','完整造型','造型收尾')):
+            return '当然可以。我们可以把护肤、底妆、眼妆、腮红、唇妆、护发、香氛和穿搭材质配饰放在一起慢慢搭配，不限定任何品牌，也不要求购买新东西。比如可以先从你熟悉的轻薄底妆、柔和腮红或日常唇彩开始；具体色号、成分和价格需要另行核验。你想先看看手边已有的物品，还是先说说今天想呈现的感觉？' if locale=='zh-CN' else 'Of course. We can gently bring together skincare, base makeup, eyes, blush, lips, hair care, fragrance, clothing materials and accessories without limiting you to any brand or asking you to buy something new. We can begin with familiar items such as a lightweight base, soft blush or everyday lip color; exact shades, ingredients and prices still need separate verification. Would you like to start with what you already own, or with how you want to feel today?'
         if any(word in message.lower() for word in ('树林','森林','forest')):
             return '树林可以是一种安静、柔和的感觉：眼影可以考虑低饱和苔绿与暖棕，少量柔光像树叶间的光。这是创意方向，是否采用由你决定。你手边有哪些熟悉的眼影？' if locale=='zh-CN' else 'A forest feeling could mean muted moss and warm brown eyeshadow with a little soft light. This is an optional creative idea. Which familiar eyeshadows do you have?'
         return '我愿意先听你说说今天。不急着选妆容；你希望今天的自己有怎样的感觉？' if locale=='zh-CN' else 'Tell me about your day. There is no rush to choose a look. How would you like to feel today?'
@@ -32,8 +32,8 @@ class MockLanguageProvider:
 class QwenLanguageProvider:
     def companion(self,message,previous,locale):
         import json
-        from app.content.beauty_companion import COMPANION_POLICY,BRAND_CONTEXT
-        data=self.client.chat_json(self.model,COMPANION_POLICY+'\n'+BRAND_CONTEXT+'\nReply entirely in '+('Chinese.' if locale=='zh-CN' else 'English.'),json.dumps({'user_story':message,'previous_reply':previous[-1200:]},ensure_ascii=False))
+        from app.content.beauty_companion import COMPANION_POLICY,INDEPENDENT_CONTEXT
+        data=self.client.chat_json(self.model,COMPANION_POLICY+'\n'+INDEPENDENT_CONTEXT+'\nReply entirely in '+('Chinese.' if locale=='zh-CN' else 'English.'),json.dumps({'user_story':message,'previous_reply':previous[-1200:]},ensure_ascii=False))
         reply=data.get('message') if isinstance(data,dict) else None
         if not isinstance(reply,str) or not reply.strip() or len(reply)>1200:raise ValueError('Invalid companion reply')
         return reply.strip()
