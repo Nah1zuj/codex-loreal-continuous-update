@@ -8,6 +8,16 @@ def test_registry_loads_six_versioned_runtime_policies():
  assert all(x['version']=='v5' and len(x['sha256'])==64 for x in r.manifest())
  assert '用户' in r.system('accessibility_policy')
 
+def test_v5_policy_overlay_inherits_unchanged_v4_rules():
+ from app.policies.registry import PolicyRegistry
+ v4=PolicyRegistry(version='v4')
+ v5=PolicyRegistry(version='v5')
+ for name in ('guidance_policy','visual_feedback_policy','full_look_planner_policy','material_description_policy'):
+  assert not (v5.root/(name+'.md')).exists()
+  assert v5.rules[name]==v4.rules[name]
+ assert v5.rules['accessibility_policy']!=v4.rules['accessibility_policy']
+ assert v5.rules['brand_copy_policy']!=v4.rules['brand_copy_policy']
+
 def test_language_provider_uses_runtime_policy_not_unused_markdown():
  from app.agent.providers import DeepSeekLanguageProvider
  p=DeepSeekLanguageProvider(Settings(model_provider='deepseek',allow_remote_ai=False))

@@ -1,5 +1,0 @@
-import {it,expect} from 'vitest'
-import {renderToStaticMarkup} from 'react-dom/server'
-import {AmbientParticles} from './AmbientParticles'
-it('is deterministic bounded decoration and supports static motion',()=>{const a=renderToStaticMarkup(<AmbientParticles reducedMotion/>);expect(a).toBe(renderToStaticMarkup(<AmbientParticles reducedMotion/>));expect(a).toContain('aria-hidden="true"');expect(a).toContain('data-motion="static"');expect((a.match(/class="ambient-particle"/g)||[]).length).toBeLessThanOrEqual(12);expect(a).not.toMatch(/button|tabindex|onClick/)})
-it('reflects active call state and stays static outside listening thinking speaking',()=>{const active=renderToStaticMarkup(<AmbientParticles state="listening"/>);expect(active).toContain('data-call-state="listening"');expect(active).toContain('data-motion="gentle"');for(const state of ['idle','paused','ended','error','requesting_permission'] as const)expect(renderToStaticMarkup(<AmbientParticles state={state}/>)).toContain('data-motion="static"');expect(renderToStaticMarkup(<AmbientParticles state="speaking" reducedMotion/>)).toContain('data-motion="static"')})

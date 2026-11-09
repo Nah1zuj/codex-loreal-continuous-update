@@ -10,7 +10,13 @@ class PolicyRegistry:
         if version not in ('v4','v5'):raise ValueError('Unknown policy version')
         self.version=version
         self.root=root or Path(__file__).resolve().parents[3]/'prompts/policies'/version
-        self.rules={name:(self.root/(name+'.md')).read_text(encoding='utf-8') for name in POLICIES}
+        self.rules={name:self._policy_path(name).read_text(encoding='utf-8') for name in POLICIES}
+    def _policy_path(self,name):
+        current=self.root/(name+'.md')
+        if current.exists():return current
+        inherited=self.root.parent/'v4'/(name+'.md')
+        if self.version=='v5' and inherited.exists():return inherited
+        raise FileNotFoundError(current)
     def system(self,*names):return '\n\n'.join(self.rules[name] for name in names)
     def manifest(self):return [{'name':name,'version':self.version,'sha256':hashlib.sha256(text.encode()).hexdigest(),'review_status':'NORMATIVE_DESIGN_RULE'} for name,text in self.rules.items()]
     def validate_plan(self,p):
