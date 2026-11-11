@@ -1,6 +1,13 @@
 # 欧莱雅 Accessible Beauty Demo｜组员导入指南
 
-当前为 TRACE 内部验证版，已同步 2026 年 11 月 7 日读屏修订及净安装验证记录。Mac 和 Windows 现场复测结果待回填。当前验收状态见 [交付验证记录](specs/008-accessible-release/verification.md)，现场检查表见 [设备验收清单](specs/008-accessible-release/device-acceptance.md)。
+**当前状态：内部验证版。** 已有软件验证、Mac 净安装及部分键盘操作记录；双平台真实读屏、实体音视频、真实供应商、专业课程审核和目标用户验收仍待完成。2026-11-11 核对以共享源码 `747f994` 为基线，本次整理未重新实测应用。
+
+- **[项目进度总览：现在能做什么、缺什么、下一步做什么](docs/STATUS.md)**
+- [任务看板与状态筛选](docs/STATUS.md#任务看板) · [未完成 Issues](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues?q=is%3Aissue+is%3Aopen) · [交付里程碑](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestones)
+- [组员使用与进度更新方法](CONTRIBUTING.md) · [本次整理报告](docs/team-update-2026-11-11.md)
+- [交付验证记录](specs/008-accessible-release/verification.md) · [设备验收清单](specs/008-accessible-release/device-acceptance.md)
+
+未设置人员分工或 Assignee。每项任务都有依赖、执行清单和完成标准。
 
 GitHub 仓库：<https://github.com/Nah1zuj/codex-loreal-continuous-update>
 
@@ -47,16 +54,21 @@ cp .env.example .env
 
 ## 4. 获取更新和提交修改
 
-有仓库写入权限的组员可以拉取最新版本、提交并推送：
+先阅读 [进度总览](docs/STATUS.md) 和本次关联的 Issue，再从最新 `main` 创建任务分支。下面以 Issue #1 为例，分支名按实际任务修改：
 
 ```bash
-git pull
-git add <修改的文件>
+git switch main
+git pull --ff-only
+git switch -c task/issue-1-demo-verification
+# 完成本次范围内的修改和验证
+git add <本次修改的文件>
 git commit -m "说明本次修改"
-git push
+git push -u origin HEAD
 ```
 
-仓库目前是 Private，只有仓库所有者和获准的协作者能查看、下载和修改。已邀请 `guiyuxuan23` 与 `liuy47543-art` 并授予写入权限；他们需要先接受 GitHub 邀请，之后才能克隆仓库和推送修改。其他组员需要先联系仓库所有者添加账号。
+在 GitHub 从该分支向 `main` 开 Pull Request，关联 Issue，说明实际验证、未验事项和影响。验收通过后再合并；部分完成不要自动关闭整项任务。已有本地修改时先保存并检查工作区，再切换分支，不覆盖他人的改动。完整方法见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+仓库保持 Private，仅获准协作者可访问。若没有访问权限或无法克隆，联系仓库所有者核对账号和邀请状态；本文不预设邀请是否已经接受。
 
 ## 仓库中没有的本机文件
 
