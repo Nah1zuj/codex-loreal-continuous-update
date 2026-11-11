@@ -17,7 +17,7 @@ TRACE 当前仍是**内部验证版**。已有会话控制、文字教学、语�
 - 整理进度总览、README导航、贡献指南、代码助手工作约定、Issue／PR模板；修正路线图中的过时状态，并为阶段0能力矩阵加上历史快照说明。
 - 不分配负责人，不设置 Assignee，不按人员划分模块。
 
-GitHub Issues、标签和里程碑已经生效。文档位于[整理分支](https://github.com/Nah1zuj/codex-loreal-continuous-update/tree/docs/trace-progress-20261111)，通过PR审阅后进入main；未合并前，请从该分支阅读[进度总览](https://github.com/Nah1zuj/codex-loreal-continuous-update/blob/docs/trace-progress-20261111/docs/STATUS.md)。
+GitHub Issues、标签和里程碑已经生效。文档通过 [PR #13](https://github.com/Nah1zuj/codex-loreal-continuous-update/pull/13) 供审阅，目前未合并。文档位于[整理分支](https://github.com/Nah1zuj/codex-loreal-continuous-update/tree/docs/trace-progress-20261111)，通过PR审阅后进入main；未合并前，请从该分支阅读[进度总览](https://github.com/Nah1zuj/codex-loreal-continuous-update/blob/docs/trace-progress-20261111/docs/STATUS.md)。
 
 ## 接下来有哪些事
 
