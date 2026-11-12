@@ -138,6 +138,7 @@ class ReadingService:
         provider = settings.reading_provider
         service_name = {'mock':'TRACE 本地示例','qwen':'Alibaba Cloud Model Studio (Qwen)','deepseek':'DeepSeek'}[provider]
         destination = None
+        model = None
         verification_key = None
         if provider != 'mock':
             if provider == 'deepseek':
@@ -158,7 +159,8 @@ class ReadingService:
             verification_key = (provider, endpoint, model, sha256(key.encode()).digest())
         else:
             status = 'missing_configuration'
-        return {'provider':provider,'service_name':service_name,'destination_host':destination,'status':status}, verification_key
+        return {'provider':provider,'service_name':service_name,'destination_host':destination,
+                'model':model,'status':status}, verification_key
 
     def _sync_verification(self, key):
         if key != self._verification_key:

@@ -26,6 +26,11 @@ def build_router(agent,settings,conversation):
     @api.get('/health')
     def health():
         remote_ready, remote_verified = conversation.remote_text_readiness()
+        language_model = {
+            'qwen': settings.chat_model,
+            'deepseek': settings.deepseek_model,
+            'openai_compatible': settings.compatible_model,
+        }.get(settings.model_provider)
         memory_ready = agent.memory.healthy()
         rag_ready = bool(agent.retriever.documents)
         return {
@@ -36,6 +41,7 @@ def build_router(agent,settings,conversation):
                 'language': settings.model_provider, 'vision': settings.vision_provider,
                 'embedding': settings.embedding_provider, 'voice': settings.voice_provider,
             },
+            'provider_models': {'language': language_model},
             'developer_mode': settings.developer_mode, 'research_mode': settings.research_mode,
             'allow_remote_ai': settings.allow_remote_ai, 'reading_provider': settings.reading_provider,
             'reference_provider': settings.reference_provider, 'policy_version': agent.policies.version,
