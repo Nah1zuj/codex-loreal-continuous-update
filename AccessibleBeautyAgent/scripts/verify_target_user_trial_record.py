@@ -52,7 +52,7 @@ def validate(record):
     if errors:
         return 'INVALID', errors
 
-    if record['schema_version'] != 1:
+    if type(record['schema_version']) is not int or record['schema_version'] != 1:
         errors.append('schema_version must be 1')
     if record['record_kind'] != 'target_user_trial_observation':
         errors.append('record_kind is invalid')
@@ -107,16 +107,20 @@ def validate(record):
             errors.append(f'task {index} fields are incomplete or unexpected')
             continue
         task_id = task['task_id']
-        if task_id not in TASK_IDS or task_id in seen:
+        if not isinstance(task_id, str) or task_id not in TASK_IDS or task_id in seen:
             errors.append(f'task {index} has an invalid or duplicate task_id')
-        seen.add(task_id)
-        if not isinstance(task['result'], str) or task['result'] not in RESULTS:
+        else:
+            seen.add(task_id)
+        result = task['result']
+        if not isinstance(result, str) or result not in RESULTS:
             errors.append(f'task {task_id} has an invalid result')
-        if type(task['help_count']) is not int or task['help_count'] < 0:
+        help_count = task['help_count']
+        valid_help_count = type(help_count) is int and help_count >= 0
+        if not valid_help_count:
             errors.append(f'task {task_id} help_count must be a non-negative integer')
-        if task['result'] == 'independent' and task['help_count'] != 0:
+        if result == 'independent' and valid_help_count and help_count != 0:
             errors.append(f'task {task_id} cannot be independent with help')
-        if task['result'] == 'prompted' and task['help_count'] < 1:
+        if result == 'prompted' and valid_help_count and help_count < 1:
             errors.append(f'task {task_id} prompted result requires help_count')
         if not nonempty_string(task['observation']) or not nonempty_string(task['understanding']):
             errors.append(f'task {task_id} observation and understanding must be non-empty')

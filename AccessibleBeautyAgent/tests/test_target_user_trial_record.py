@@ -99,10 +99,17 @@ def test_unknown_personal_field_is_rejected():
 
 def test_wrong_scalar_types_are_invalid_instead_of_crashing():
     mutations = (
+        ('boolean schema version', lambda record: record.__setitem__('schema_version', True)),
         ('evidence_class', lambda record: record.__setitem__('evidence_class', [])),
         ('prerequisite', lambda record: record['prerequisites'].__setitem__(
             'issue_8_professional_review', [])),
+        ('task id', lambda record: record['tasks'][0].__setitem__('task_id', [])),
         ('task result', lambda record: record['tasks'][0].__setitem__('result', [])),
+        ('independent help count', lambda record: record['tasks'][0].__setitem__('help_count', [])),
+        ('prompted help count', lambda record: (
+            record['tasks'][0].__setitem__('result', 'prompted'),
+            record['tasks'][0].__setitem__('help_count', []),
+        )),
         ('qualification decision', lambda record: record['qualification'].__setitem__('decision', [])),
     )
     for name, mutate in mutations:
