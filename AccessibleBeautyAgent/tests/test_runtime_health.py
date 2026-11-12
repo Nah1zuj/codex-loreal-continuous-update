@@ -21,6 +21,7 @@ def test_health_reports_configuration_without_creating_personal_identity(tmp_pat
         assert response.json()['readiness']['sqlite_ready'] is True
         assert response.json()['readiness']['remote_text_configured'] is False
         assert response.json()['readiness']['remote_text_verified'] is False
+        assert response.json()['provider_models']['language'] == 'fake-model'
         assert response.json()['readiness']['vision_inference_verified'] is False
         for endpoint in ('ftp://unused.invalid', 'https:///no-host', 'https://[malformed'):
             settings.compatible_base_url = endpoint
