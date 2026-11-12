@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "record_kind": "target_user_trial_observation",
+  "evidence_class": "synthetic_fixture",
+  "participant_code": "SYNTHETIC-001",
+  "trial_commit": "db485ed098d433758358e8cc6280af5d4003afe1",
+  "package_sha256": "17b1b9c4e6b79947f3b116014ca10c4a094f52a2870107e5470a0364e9a2ae56",
+  "prerequisites": {
+    "issue_8_professional_review": "blocked",
+    "issue_11_engineering_candidate": "blocked"
+  },
+  "environment": {
+    "date": "2026-11-12",
+    "platform": "synthetic fixture; no device",
+    "browser": "synthetic fixture; no browser",
+    "assistive_tool": "synthetic fixture; no assistive tool",
+    "assistive_tool_version": "not applicable"
+  },
+  "voluntary_conditions": {
+    "information_provided": false,
+    "voluntary_agreement": false,
+    "stop_right_explained": false,
+    "data_boundary_explained": false
+  },
+  "tasks": [
+    {
+      "task_id": "start_pause_resume",
+      "result": "not_completed",
+      "help_count": 0,
+      "observation": "Synthetic format fixture only; no participant observation occurred.",
+      "understanding": "Not observed.",
+      "issue_refs": []
+    },
+    {
+      "task_id": "deny_media_continue_text",
+      "result": "not_completed",
+      "help_count": 0,
+      "observation": "Synthetic format fixture only; no participant observation occurred.",
+      "understanding": "Not observed.",
+      "issue_refs": []
+    },
+    {
+      "task_id": "summary_save_or_discard",
+      "result": "not_completed",
+      "help_count": 0,
+      "observation": "Synthetic format fixture only; no participant observation occurred.",
+      "understanding": "Not observed.",
+      "issue_refs": []
+    }
+  ],
+  "qualification": {
+    "critical_issues_open": 0,
+    "decision": "pending",
+    "rationale": "Issue #8 and Issue #11 prerequisites are blocked; this is not a real trial record."
+  }
+}

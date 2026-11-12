@@ -21,6 +21,26 @@
 - 前端：在 `frontend` 运行 `npm test -- --reporter=dot src/components/LocalCameraCheck.test.tsx src/components/LocalPhotoCheck.test.tsx src/components/CallExperience.test.tsx`，42 项通过。 `npx tsc --noEmit` 通过。
 - 浏览器：运行隔离本地启动器；打开单独 Chrome 临时配置，使用 `--headless --use-fake-device-for-media-stream --use-fake-ui-for-media-stream --remote-debugging-port`，再运行 `node scripts/verify_local_vision_browser.mjs APP_URL CHROME_DEBUG_URL`。本次 PASS。退出浏览器、服务后才复用端口。
 
+## 2026-11-12 当前源码复跑
+
+在本机源码 `fd6154a3fb2eb97dd97b8fc4d5cb05d96ace8a07` 上使用 Chrome 156.0.8078.81、独立 SQLite、前端 5194、后端 8027、语音 8028 和调试端口 9335 重新执行：
+
+```bash
+node scripts/verify_local_vision_browser.mjs http://127.0.0.1:5194 http://127.0.0.1:9335 --media
+```
+
+首次冷启动时，本地请求已返回 200，MediaPipe 与字体缓存仍在初始化；观察最终进入 `quality`，但超过脚本原有约 10 秒等待而误报超时。模型热加载后原脚本立即通过。为避免把正常冷启动误记为产品失败，本轮把通用等待上限从约 10 秒放宽到约 30 秒；修改后脚本再次通过。
+
+实际通过内容：
+
+- 预览阶段零视觉请求；明确单帧授权后才向本机路由发送请求，结果来源为 `local_mediapipe`，没有调用旧 `/api/vision/check`。
+- 关闭摄像头清除视频流和后端观察；模拟轨道结束会撤销授权、清除观察，重新开启后仍须重新同意。
+- 刷新后没有残留视频流，检查按钮保持禁用直到重新授权。
+- 合成麦克风连续三次启动和关闭；每轮轨道结束、本地语音连接回到零，窗口／文档监听数量不增长。
+- Chrome、TRACE 和调试端口停止后全部释放，Git 工作区干净。
+
+这仍是 Chrome 合成设备的软件验证，不是实体相机、真实光线／遮挡／镜像理解、扬声器或双平台辅助技术验收。
+
 ## 阶段结论
 
 本地视觉的软件实现及上述回归通过。需要由独立需求评审者确认需求清单。真实相机质量、用户左右理解与辅助技术验收仍待实体设备。

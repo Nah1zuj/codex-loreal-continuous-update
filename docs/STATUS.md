@@ -6,7 +6,11 @@
 
 本页是仓库证据的摘要，不是本次运行报告。2026-11-07 的软件测试、Mac 净安装及部分键盘操作记录已经存在；本次只核对仓库、建立任务和工作约定，未重新运行应用、调用真实供应商或开展人工验收。历史测试数量对应不同快照，不合并计算。已在线下完成但未回填的事项，提交实际证据后再更新。
 
-> 2026-11-12 补充：Issue #2 初次在当时固定的 `main db485ed` 上准备 Windows x64 自动预检、匿名记录格式和人工入口步骤；PR #21 后续已同步共享 `main 53af597`。本机不是 Windows，合成记录保持 `BLOCKED`，不改变当前分类。
+**2026-11-12 更新：** [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 的软件复核已具备待验收证据。本机源码和初次固定 `main` 提交 `db485ed` 的回归、构建、知识库、运行时边界，以及普通浏览器关键路径和 Chrome 显式媒体权限拒绝已有[独立记录](quality/issue-1-verification-2026-11-12.md)。PR #14 已在明确授权后合入共享 `main`，但没有把历史浏览器结果冒充为新提交实测；真实设备与人工验收未补齐前，M1 仍不标完成。
+
+> 2026-11-12 补充：Issue #12 初次在当时固定的 `main db485ed` 上准备匿名观察包、合成格式样例和记录校验器；PR #20 已在明确授权后合入共享 `main`。校验器对当前未通过的 #8／#11 前置输出 `BLOCKED`。这不是目标用户试用，也不改变内部验证版分类；实时进展以 Issue #12 和关联 PR 为准。
+
+> 2026-11-12 补充：Issue #2 初次在当时固定的 `main db485ed` 上准备 Windows x64 自动预检、匿名记录格式和人工入口步骤；PR #21 已同步至包含 PR #20 的共享 `main 9aea7ec`。本机不是 Windows，合成记录保持 `BLOCKED`，不改变当前分类。
 
 ## 先看这里
 
@@ -44,7 +48,7 @@
 
 | 里程碑 | 退出条件 | 当前情况 |
 |---|---|---|
-| [M1 内部演示复核](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/1) | 固定共享验收 commit，内部关键路径和本轮软件结果可复查 | 历史内部记录已存在；本轮 [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 待开始 |
+| [M1 内部演示复核](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/1) | 固定共享验收 commit，内部关键路径和本轮软件结果可复查 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 待验收；初次 `db485ed` 同提交复跑和浏览器路径已记录，PR #14 已同步 `main 53af597`，等待审阅／合并后再判定 M1 |
 | [M2 工程候选验收](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/2) | 双平台安装、读屏、实体媒体、真实服务、资料与独立清单通过；无未解决P0和核心P1；交付包可复核 | [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2)–[#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7)、[#9](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/9)–[#11](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/11) 开放 |
 | [M3 专业课程审核](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/3) | 固定中英课程版本由实际专业审核者给出有效结论，并验证准入 | [#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) 受阻；可与M2并行准备 |
 | [M4 目标用户试用](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/4) | M2、M3通过后，按实际任务结果判定真实试用资格 | [#12](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/12) 受阻 |
@@ -74,7 +78,7 @@
 | [#9](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/9) 完成产品比较资料的团队审阅 | 待验收 | 已有官方出处草稿；剩实际团队资料审阅 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) | 每条现有比较资料有来源及真实团队审阅结论 |
 | [#10](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/10) 完成阶段1–8独立清单与结构收敛评审 | 待验收 | 已有规格与软件材料；剩独立清单结论 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) [#3](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/3) [#4](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/4) [#5](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/5) [#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) [#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7) [#9](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/9) | 阶段1–8各有实际评审范围和结论，未验项目保留未勾选 |
 | [#11](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/11) 复核交付包与工程候选资格 | 受阻 | 已有内部包和手册；剩完整资格与固定版本包复核 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) [#3](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/3) [#4](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/4) [#5](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/5) [#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) [#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7) [#9](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/9) [#10](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/10) | 前置任务达到各自完成标准，双平台真实证据完整 |
-| [#12](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/12) 开展目标用户关键任务试用并判定真实试用资格 | 受阻 | 已有任务表；剩真实目标用户观察 | [#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) [#11](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/11) | 参与条件、实际样本数、逐任务原始观察与结论可复查 |
+| [#12](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/12) 开展目标用户关键任务试用并判定真实试用资格 | 受阻 | 已有任务表及待审的匿名观察准备包／格式校验；剩 #8、#11 通过后的真实目标用户观察 | [#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) [#11](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/11) | 参与条件、实际样本数、逐任务原始观察与结论可复查 |
 
 初始12项：待开始1、待验收5、受阻6；没有已确认的本轮进行中任务。它们只统计本次剩余验收清单，不代表整个产品完成率。每项详细步骤、验收标准、资料和解除条件见对应 Issue。
 
@@ -83,16 +87,16 @@
 - **Windows：**仓库缺实体记录，不据此推断团队一定没有设备。核实设备或回填已有记录后更新 [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2)。
 - **真实服务：**历史记录为 mock／关闭远程／无有效凭据；本次未读取私有配置。核实批准的配置、目的地及实际响应后更新 [#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) [#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7)。
 - **专业与用户验收：**缺真实课程审核和目标用户观察记录，按 [#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) → [#12](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/12) 的条件推进。
-- **版本与文档：**多个历史包、共享合并提交和测试数量并存。[#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 先固定共同验收版本。路线图原有“尚未启动实施”和结尾“仅整理计划书”已修正；能力矩阵保留为阶段0快照，勿当实时状态。
+- **版本与文档：**多个历史包、共享合并提交和测试数量并存。[#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 的初次共同验收基线为 `db485ed`，PR #14 已同步共享 `main 53af597` 并等待审阅；后续正式候选仍须绑定新的合并后 commit。路线图原有“尚未启动实施”和结尾“仅整理计划书”已修正；能力矩阵保留为阶段0快照，勿当实时状态。
 - **实际独立评审：**多份清单仍待实际评审者确认；软件勾选不能替代，见 [#10](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/10)。保留构建分包警告，不将其隐去或未经分析升级为缺陷结论。
 
 ## 下一步最值得推进的三项
 
-1. **[#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 固定验收版本、复核内部演示。**为后续证据提供同一基准。
+1. **审阅 [PR #14](https://github.com/Nah1zuj/codex-loreal-continuous-update/pull/14) 的 #1 固定版本与内部演示证据。**确认内容无误后再由有权限人员决定是否合并；未经确认不自动合并。
 2. **[#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) 核实 Windows 环境并完成净安装。**解除双平台设备验收的共同前置。
-3. **[#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) 核实并联调真实文字服务。**填补当前自由对话只有 mock／替身证据的缺口。
+3. **[#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) 安排真实专业审核者审阅已固定的中英课程包。**软件一致性检查不能代替专业结论。
 
-三项没有人员分配。Windows准备、私有配置预检、课程审核联系和Mac场景可并行；编号不等于必须逐项串行。真实标签服务 [#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7) 的准备也不依赖文字服务联调完成。
+三项没有人员分配。Windows准备、PR审阅、课程审核联系和Mac场景可并行；编号不等于必须逐项串行。真实文字与标签服务 [#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) [#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7) 已完成不外发预检，待批准的供应商、凭据与目的地主机具备后再执行真实调用。
 
 ## 状态如何更新
 

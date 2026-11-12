@@ -4,7 +4,9 @@ import {setTimeout as delay} from 'node:timers/promises'
 
 const [appUrl, debugUrl, extra] = process.argv.slice(2)
 const verifyMicrophone = extra === '--media'
-assert(appUrl && debugUrl, 'Usage: node scripts/verify_local_vision_browser.mjs APP_URL CHROME_DEBUG_URL [--media]')
+assert(/^http:\/\/127\.0\.0\.1:\d+$/.test(appUrl ?? ''), 'Expected loopback app URL')
+assert(/^http:\/\/127\.0\.0\.1:\d+$/.test(debugUrl ?? ''), 'Expected Chrome debug URL')
+assert(extra === undefined || extra === '--media', 'Only the optional --media flag is supported')
 const targets = await (await fetch(new URL('/json/list', debugUrl))).json()
 const target = targets.find(item => item.type === 'page')
 assert(target, 'An isolated Chrome page must be open')
@@ -39,7 +41,9 @@ async function evaluate(expression) {
   return result.value
 }
 async function until(expression, description) {
-  for (let attempt = 0; attempt < 100; attempt++) {
+  // A cold local MediaPipe start may spend more than ten seconds loading the
+  // model and building caches before the first observation reaches the UI.
+  for (let attempt = 0; attempt < 300; attempt++) {
     if (await evaluate(expression)) return
     await delay(100)
   }
