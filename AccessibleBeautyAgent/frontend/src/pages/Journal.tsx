@@ -15,7 +15,7 @@ export function Journal({seed='',draft,sessionId,onDiscardDraft}:{seed?:string;d
  async function readTranscript(id:string){try{const result=await api<{messages:{role:string;text:string}[]}>('/transcript-records/'+encodeURIComponent(id));setTranscripts(rows=>({...rows,[id]:result.messages.map(m=>m.text).join('\n\n')}))}catch{setStatus(t('原文已过期或暂时无法读取。','Transcript expired or unavailable.'))}}
  function useDraft(){if(!draft)return;setLook(draft.look);setFeeling(draft.feeling);setReflection(draft.reflection);setTraits(draft.traits);setConsent(false);setDirty(false)}
  function discardDraft(){
-  setLook('');setFeeling('');setReflection('');setTraits('');setConsent(false);setDirty(false);setEditing(null);setSaveTranscript(false);confirmation.current=null
+  setLook('');setFeeling('');setReflection('');setTraits('');setConsent(false);setDirty(false);setEditing(null);setSaveTranscript(false);setSharing('');confirmation.current=null
   onDiscardDraft?.();setStatus(t('已放弃本次对话草稿，未保存。','Conversation draft discarded without saving.'))
  }
  useEffect(()=>{if(draft&&!dirty)useDraft()},[draft])
