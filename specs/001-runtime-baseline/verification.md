@@ -17,7 +17,7 @@
 | FR-105 健康和诊断 | PASS | 启动冒烟及 `test_runtime_health.py`。诊断区分进程、SQLite、知识、资产和远程配置，不写浏览器身份、不输出测试凭据。 |
 | FR-106 Windows PowerShell / 干净安装 / 实体 | BLOCKED | 当前环境为 Mac，需 Windows 机器执行实际入口与回归。 |
 
-2026-11-12 在固定 `main` `db485ed` 上补充 [Windows x64 净安装与启停验收包](windows-acceptance-packet.md)、合成记录和记录校验器。合成记录实际输出 `BLOCKED`。包核验函数另对 Issue #11 的固定 main 审计 ZIP 做全新解压，逐一通过 569 个 manifest 文件的大小与 SHA-256；这是跨平台包结构的软件检查，不是 Windows 安装或入口证据。这些材料只统一未来实机执行和证据格式，没有新增 Windows 实机结论。
+2026-11-12 初次在当时固定的 `main db485ed` 上补充 [Windows x64 净安装与启停验收包](windows-acceptance-packet.md)、合成记录和记录校验器；PR 分支随后同步共享 `main 53af597`。合成记录实际输出 `BLOCKED`。包核验函数另对 Issue #11 的固定 main 审计 ZIP 做全新解压，逐一通过 569 个 manifest 文件的大小与 SHA-256；这是跨平台包结构的软件检查，不是 Windows 安装或入口证据。这些材料只统一未来实机执行和证据格式，没有新增 Windows 实机结论。
 | 真实设备与独立清单评审 | NOT RUN | 分别由阶段 4、5、8 和实际评审者完成。Mac 模型冷安装另见下方。 |
 
 ## 队友验收

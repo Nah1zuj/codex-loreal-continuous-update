@@ -45,6 +45,31 @@ def test_boolean_schema_version_is_invalid():
     assert any('schema_version' in error for error in errors)
 
 
+def test_placeholder_version_identifiers_are_rejected():
+    for field, value in (
+        ('expected_commit', '0' * 40),
+        ('package_sha256', '0' * 64),
+    ):
+        record = fixture()
+        record[field] = value
+        status, errors = validate_record(record)
+        assert status == 'INVALID'
+        assert any(field in error for error in errors)
+
+
+def test_observation_timestamp_must_be_utc_and_not_future():
+    for value, expected in (
+        ('2026-11-12', 'observed_at_utc must use'),
+        ('2026-99-99T00:00:00Z', 'must be a valid UTC'),
+        ('2999-01-01T00:00:00Z', 'cannot be in the future'),
+    ):
+        record = fixture()
+        record['observed_at_utc'] = value
+        status, errors = validate_record(record)
+        assert status == 'INVALID'
+        assert any(expected in error for error in errors)
+
+
 def test_preflight_refuses_non_windows_host(monkeypatch):
     monkeypatch.setattr(windows_acceptance.platform, 'system', lambda: 'Darwin')
     with pytest.raises(RuntimeError, match='actual Windows host'):

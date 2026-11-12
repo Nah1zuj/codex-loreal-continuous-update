@@ -4,6 +4,8 @@
 
 本页用于在真实 Windows x64 设备上执行阶段 1 验收。macOS 运行、PowerShell 静态解析、交叉下载 Windows 轮包、历史 Windows 文档和自动化模拟均不能替代本页的实机结果。
 
+2026-11-12 后续同步：本 PR 分支已合入当时的共享 `main 53af597a6e4f22157988b0f83b1eefdbe9b82c74`（包含已授权合并的 PR #23、#19、#17）。仓库内合成记录仍故意绑定准备时的历史 `db485ed` 及对应内部审计包，只用于证明格式会输出 `BLOCKED`；同步代码没有产生 Windows 实机记录。
+
 ## 准备
 
 1. 使用从固定 Git commit 生成的源码包，先在下载位置核对 ZIP SHA-256，再解压到同时包含中文和空格的新目录，例如 `C:\TRACE 验收\本轮 中文路径`。不要复用已有 `.venv-portable`、`work` 或模型目录。
@@ -27,6 +29,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\run_windows_ac
 
 - 实际计算所给 ZIP 的 SHA-256，逐项核对 ZIP 内 manifest、commit、条目大小和哈希，再要求解压目录的 manifest 与该 ZIP 完全一致并逐文件复核；
 - 记录 Python、Node、PowerShell 和 Chrome 版本；
+- 记录精确到秒的 UTC 执行时间，并拒绝未来时间或全零提交／包哈希占位值；
 - 确认干净包最初没有有效语音模型；
 - 调用当前 `install-portable.ps1 --force` 完成实际依赖安装；
 - 在无模型状态执行 `verify_runtime.py --missing-voice`；
@@ -65,4 +68,4 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\run_windows_ac
 
 ## 记录边界
 
-记录不得包含设备所有者姓名、Windows 用户名、主机名、邮箱、电话、完整个人目录、密钥或上游响应。路径只记录是否含中文／空格，不记录完整路径。自动检查通过不代替 Chrome、NVDA、麦克风、扬声器、耳机或相机的人工体验；其中读屏与实体媒体分别回填 Issue #3、#4、#5。
+记录不得包含设备所有者姓名、Windows 用户名、主机名、邮箱、电话、完整个人目录、密钥或上游响应。路径只记录是否含中文／空格，不记录完整路径。校验器只验证显式字段与门槛，不能证明 Git 提交或包真实存在，也不能替代 Chrome、NVDA、麦克风、扬声器、耳机或相机的人工体验；其中读屏与实体媒体分别回填 Issue #3、#4、#5。

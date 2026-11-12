@@ -25,7 +25,7 @@ CHECK_NAMES = {
 STATUSES = {'PASS', 'FAIL', 'NOT_RUN'}
 TOP_LEVEL_KEYS = {
     'schema_version', 'record_kind', 'evidence_class', 'expected_commit',
-    'package_sha256', 'environment', 'checks', 'result', 'limitations',
+    'package_sha256', 'observed_at_utc', 'environment', 'checks', 'result', 'limitations',
 }
 ENVIRONMENT_KEYS = {
     'os', 'architecture', 'python', 'node', 'powershell', 'chrome',
@@ -64,10 +64,28 @@ def validate_record(record):
     evidence_class = record['evidence_class']
     if not isinstance(evidence_class, str) or evidence_class not in {'windows_x64_device', 'synthetic_fixture'}:
         errors.append('evidence_class is invalid')
-    if not isinstance(record['expected_commit'], str) or not re.fullmatch(r'[0-9a-f]{40}', record['expected_commit']):
+    if (not isinstance(record['expected_commit'], str)
+            or not re.fullmatch(r'[0-9a-f]{40}', record['expected_commit'])
+            or record['expected_commit'] == '0' * 40):
         errors.append('expected_commit must be a full lowercase Git SHA')
-    if not isinstance(record['package_sha256'], str) or not re.fullmatch(r'[0-9a-f]{64}', record['package_sha256']):
+    if (not isinstance(record['package_sha256'], str)
+            or not re.fullmatch(r'[0-9a-f]{64}', record['package_sha256'])
+            or record['package_sha256'] == '0' * 64):
         errors.append('package_sha256 must be a lowercase SHA-256')
+    observed_at = record['observed_at_utc']
+    if (not isinstance(observed_at, str)
+            or not re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z', observed_at)):
+        errors.append('observed_at_utc must use YYYY-MM-DDTHH:MM:SSZ')
+    else:
+        try:
+            parsed_observed_at = datetime.strptime(
+                observed_at, '%Y-%m-%dT%H:%M:%SZ'
+            ).replace(tzinfo=timezone.utc)
+        except ValueError:
+            errors.append('observed_at_utc must be a valid UTC date and time')
+        else:
+            if parsed_observed_at > datetime.now(timezone.utc):
+                errors.append('observed_at_utc cannot be in the future')
 
     environment = record['environment']
     if not isinstance(environment, dict) or set(environment) != ENVIRONMENT_KEYS:
@@ -255,6 +273,7 @@ def run_preflight(args):
         'evidence_class': 'windows_x64_device',
         'expected_commit': args.expected_commit,
         'package_sha256': args.package_sha256,
+        'observed_at_utc': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
         'environment': {
             'os': 'Windows', 'architecture': architecture,
             'python': platform.python_version(), 'node': node,
