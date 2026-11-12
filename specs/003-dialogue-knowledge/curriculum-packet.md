@@ -4,11 +4,16 @@
 
 This packet presents the five Chinese and English lesson pairs for the default Natural Everyday course. All ten lesson records are v1 drafts awaiting professional review. The text and order come from the canonical records. “Not set” denotes a null optional visual check.
 
+本送审快照固定于 GitHub `main` commit `db485ed098d433758358e8cc6280af5d4003afe1`。若规范数据或来源版本变化，必须重新生成／核对审核包并重新审核；本提交号只标识本次送审内容，不表示专业审核通过。
+
+This review snapshot is pinned to GitHub `main` commit `db485ed098d433758358e8cc6280af5d4003afe1`. Any canonical lesson or source-version change requires the packet and professional decision to be reviewed again. The commit identifies the submitted content; it is not an approval.
+
 课程来源为 `trace_original_phase4` v2（TRACE original bilingual coaching drafts），状态为 `DRAFT`，许可标记为 `original`。来源记录注明「TRACE 团队原创双语教学文本，允许在本项目内作为教学与审核素材；真实试用须经过专业审核。」
 
 - [课程规范数据 / Canonical lesson records](../../AccessibleBeautyAgent/data/knowledge/accessibility_guidance.json)
 - [来源记录与使用依据 / Source record and permitted use](../../AccessibleBeautyAgent/data/knowledge/sources.json)
 - [审核及归档流程 / Review workflow](curriculum-review.md)
+- [审核包一致性检查 / Packet consistency check](../../AccessibleBeautyAgent/scripts/verify_curriculum_packet.py)
 
 ## 1. 准备 / Preparation
 
