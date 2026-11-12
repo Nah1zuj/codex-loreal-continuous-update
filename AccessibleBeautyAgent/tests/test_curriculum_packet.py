@@ -28,3 +28,26 @@ def test_curriculum_packet_verifier_rejects_data_changed_after_pinned_commit(tmp
     candidate.write_text(json.dumps(payload, ensure_ascii=False), encoding='utf-8')
     with pytest.raises(ValueError, match='differs from the pinned Git snapshot'):
         verify(guidance_path=candidate)
+
+
+def test_curriculum_packet_rejects_visual_checks_swapped_between_lessons(tmp_path):
+    packet = Path(__file__).resolve().parents[2] / 'specs/003-dialogue-knowledge/curriculum-packet.md'
+    changed = packet.read_text(encoding='utf-8')
+    changed = changed.replace('`blush_presence`', '`temporary_visual_check`', 2)
+    changed = changed.replace('`lip_presence`', '`blush_presence`', 2)
+    changed = changed.replace('`temporary_visual_check`', '`lip_presence`', 2)
+    candidate = tmp_path / 'curriculum-packet.md'
+    candidate.write_text(changed, encoding='utf-8')
+    with pytest.raises(ValueError, match='lesson block differs'):
+        verify(packet_path=candidate)
+
+
+def test_curriculum_packet_rejects_duplicate_canonical_lesson_id(tmp_path):
+    guidance = Path(__file__).resolve().parents[1] / 'data/knowledge/accessibility_guidance.json'
+    payload = json.loads(guidance.read_text(encoding='utf-8'))
+    original = next(row for row in payload['records'] if row['guidance_id'] == 'coaching_prep_zh')
+    payload['records'].append(original.copy())
+    candidate = tmp_path / 'accessibility_guidance.json'
+    candidate.write_text(json.dumps(payload, ensure_ascii=False), encoding='utf-8')
+    with pytest.raises(ValueError, match='duplicate guidance_id'):
+        verify(guidance_path=candidate)

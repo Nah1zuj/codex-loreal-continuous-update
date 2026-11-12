@@ -39,6 +39,17 @@ def require(condition, message):
         raise ValueError(message)
 
 
+def index_unique(records, key, label):
+    require(isinstance(records, list) and all(isinstance(row, dict) for row in records),
+            f'{label} records must be an array of objects.')
+    identifiers = [row.get(key) for row in records]
+    require(all(isinstance(value, str) and value for value in identifiers),
+            f'{label} records must have nonempty {key} values.')
+    duplicates = sorted(value for value, count in Counter(identifiers).items() if count > 1)
+    require(not duplicates, f'{label} records contain duplicate {key} values: {duplicates}')
+    return dict(zip(identifiers, records, strict=True))
+
+
 def verify(packet_path=None, guidance_path=None, sources_path=None):
     packet_path = packet_path or REPO / 'specs/003-dialogue-knowledge/curriculum-packet.md'
     guidance_path = guidance_path or ROOT / 'data/knowledge/accessibility_guidance.json'
@@ -49,8 +60,8 @@ def verify(packet_path=None, guidance_path=None, sources_path=None):
     pinned_guidance = load_pinned_records(ROOT / 'data/knowledge/accessibility_guidance.json')
     pinned_sources = load_pinned_records(ROOT / 'data/knowledge/sources.json')
     expected_ids = [f'coaching_{topic}_{language}' for topic in TOPICS for language in LANGUAGES]
-    by_id = {row['guidance_id']: row for row in guidance}
-    pinned_by_id = {row['guidance_id']: row for row in pinned_guidance}
+    by_id = index_unique(guidance, 'guidance_id', 'Current guidance')
+    pinned_by_id = index_unique(pinned_guidance, 'guidance_id', 'Pinned guidance')
     require(all(guidance_id in by_id for guidance_id in expected_ids), 'A required bilingual lesson is missing.')
     require(
         all(by_id[guidance_id] == pinned_by_id.get(guidance_id) for guidance_id in expected_ids),
@@ -71,6 +82,12 @@ def verify(packet_path=None, guidance_path=None, sources_path=None):
         heading = '简体中文' if language == 'zh' else 'English'
         review_fragments.append(f'### {heading} · {row["principle"]}')
         teaching = row['teaching']
+        lesson_lines = [
+            f'### {heading} · {row["principle"]}',
+            '',
+            f'`{row["guidance_id"]}` · v1 · `DRAFT`',
+            '',
+        ]
         for field, label in zip(TEACHING_FIELDS, FIELD_LABELS[language], strict=True):
             field_values = teaching[field]
             if isinstance(field_values, list):
@@ -78,7 +95,15 @@ def verify(packet_path=None, guidance_path=None, sources_path=None):
                 value = field_values[0]
             else:
                 value = field_values
-            review_fragments.append(f'- **{label}** {value}')
+            fragment = f'- **{label}** {value}'
+            review_fragments.append(fragment)
+            lesson_lines.append(fragment)
+        optional_visual = teaching['optionalVisualCheck']
+        optional_label = '可选视觉检查' if language == 'zh' else 'Optional visual check'
+        optional_value = f'`{optional_visual}`' if optional_visual else ('未设置' if language == 'zh' else 'Not set')
+        lesson_lines.append(f'- **{optional_label}** {optional_value}')
+        require('\n'.join(lesson_lines) in packet,
+                f'The packet lesson block differs from canonical data: {row["guidance_id"]}')
     require(len(review_fragments) == 80, 'Expected ten lessons with eight review fields each.')
     for fragment, count in Counter(review_fragments).items():
         require(packet.count(fragment) == count, f'The packet differs for canonical field: {fragment!r}')
@@ -90,8 +115,12 @@ def verify(packet_path=None, guidance_path=None, sources_path=None):
     require(packet.count('`blush_presence`') == 2, 'Blush visual checks differ from the records.')
     require(packet.count('`lip_presence`') == 2, 'Lip visual checks differ from the records.')
 
-    source = next(row for row in sources if row['source_id'] == 'trace_original_phase4')
-    pinned_source = next(row for row in pinned_sources if row['source_id'] == 'trace_original_phase4')
+    source_by_id = index_unique(sources, 'source_id', 'Current source')
+    pinned_source_by_id = index_unique(pinned_sources, 'source_id', 'Pinned source')
+    require('trace_original_phase4' in source_by_id and 'trace_original_phase4' in pinned_source_by_id,
+            'The required source record is missing.')
+    source = source_by_id['trace_original_phase4']
+    pinned_source = pinned_source_by_id['trace_original_phase4']
     require(source == pinned_source, 'The current source record differs from the pinned Git snapshot.')
     require(source['version'] == 2 and source['status'] == 'DRAFT' and source['verified'] is False,
             'The pinned source record is not the expected unreviewed v2 draft.')
