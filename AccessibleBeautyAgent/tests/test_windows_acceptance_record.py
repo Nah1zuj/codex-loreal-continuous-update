@@ -157,3 +157,21 @@ def test_extracted_files_must_match_manifest_hashes(monkeypatch, tmp_path):
     source.write_text('tampered source', encoding='utf-8')
     with pytest.raises(ValueError, match='size differs|hash differs'):
         windows_acceptance.verify_extracted_manifest(manifest)
+
+
+@pytest.mark.parametrize('files', [
+    None,
+    [{}],
+    ['not an object'],
+    [{'path': [], 'size': 1, 'sha256': '0' * 64}],
+    [{'path': '../outside', 'size': 1, 'sha256': '0' * 64}],
+    [{'path': 'file.txt', 'size': -1, 'sha256': '0' * 64}],
+    [{'path': 'file.txt', 'size': 1, 'sha256': 'not-a-hash'}],
+    [
+        {'path': 'file.txt', 'size': 1, 'sha256': '0' * 64},
+        {'path': 'file.txt', 'size': 1, 'sha256': '0' * 64},
+    ],
+])
+def test_extracted_manifest_rejects_malformed_rows(files):
+    with pytest.raises(ValueError, match='manifest|path|size|SHA-256'):
+        windows_acceptance.verify_extracted_manifest({'files': files})

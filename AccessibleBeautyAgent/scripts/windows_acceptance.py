@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import platform
 import re
 import subprocess
@@ -143,9 +143,25 @@ def models_valid():
 
 
 def verify_extracted_manifest(manifest):
-    expected = {item['path']: item for item in manifest.get('files', [])}
-    if not expected or len(expected) != len(manifest.get('files', [])):
-        raise ValueError('Bundle manifest file list is empty or contains duplicate paths.')
+    if not isinstance(manifest, dict) or not isinstance(manifest.get('files'), list) or not manifest['files']:
+        raise ValueError('Bundle manifest file list must be a non-empty array.')
+    expected = {}
+    for index, item in enumerate(manifest['files']):
+        if not isinstance(item, dict) or set(item) != {'path', 'size', 'sha256'}:
+            raise ValueError(f'Bundle manifest row {index} is incomplete or unexpected.')
+        name = item['path']
+        path = PurePosixPath(name) if isinstance(name, str) else None
+        if (path is None or not name or path.is_absolute() or '..' in path.parts
+                or any(mark in name for mark in ('\\', ':'))):
+            raise ValueError(f'Bundle manifest row {index} has an unsafe path.')
+        if type(item['size']) is not int or item['size'] < 0:
+            raise ValueError(f'Bundle manifest row {index} has an invalid size.')
+        if (not isinstance(item['sha256'], str)
+                or not re.fullmatch(r'[0-9a-f]{64}', item['sha256'])):
+            raise ValueError(f'Bundle manifest row {index} has an invalid SHA-256.')
+        if name in expected:
+            raise ValueError(f'Bundle manifest contains a duplicate path: {name}')
+        expected[name] = item
     actual = {
         path.relative_to(PACKAGE_ROOT).as_posix()
         for path in PACKAGE_ROOT.rglob('*')
