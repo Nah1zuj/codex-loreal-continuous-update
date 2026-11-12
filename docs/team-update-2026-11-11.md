@@ -17,13 +17,15 @@ TRACE 当前仍是**内部验证版**。已有会话控制、文字教学、语�
 - 整理进度总览、README导航、贡献指南、代码助手工作约定、Issue／PR模板；修正路线图中的过时状态，并为阶段0能力矩阵加上历史快照说明。
 - 不分配负责人，不设置 Assignee，不按人员划分模块。
 
-GitHub Issues、标签和里程碑已经生效。文档通过 [PR #13](https://github.com/Nah1zuj/codex-loreal-continuous-update/pull/13) 供审阅，目前未合并。文档位于[整理分支](https://github.com/Nah1zuj/codex-loreal-continuous-update/tree/docs/trace-progress-20261111)，通过PR审阅后进入main；未合并前，请从该分支阅读[进度总览](https://github.com/Nah1zuj/codex-loreal-continuous-update/blob/docs/trace-progress-20261111/docs/STATUS.md)。
+GitHub Issues、标签和里程碑已经生效。[PR #13](https://github.com/Nah1zuj/codex-loreal-continuous-update/pull/13) 已于 2026-11-11 合并，文档现已进入 main；请从 main 阅读[进度总览](https://github.com/Nah1zuj/codex-loreal-continuous-update/blob/main/docs/STATUS.md)。整理分支保留为历史来源，不再是当前阅读入口。
+
+**2026-11-12 补充：** [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 已进入进行中，并新增本机软件复核证据；这不改变“内部验证版”分类，最新实时状态以 Issue 和进度总览为准。
 
 ## 接下来有哪些事
 
 | 任务 | 当前状态 | 完成后能确认什么 |
 |---|---|---|
-| [#1 共享版本与内部演示](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) | 待开始 | 所有后续验收使用同一代码基准，内部路径和本轮检查有记录 |
+| [#1 共享版本与内部演示](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) | 进行中 | 已记录本机软件复核；仍需最新 main 同提交和人工关键路径 |
 | [#2 Windows净安装与启停](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) | 受阻 | 真实Windows入口可安装、运行、恢复和释放端口 |
 | [#3 双端读屏与键盘](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/3) | 待验收 | VoiceOver／NVDA的实际播报、焦点、缩放与打断可用 |
 | [#4 实体音频](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/4) | 待验收 | 麦克风、扬声器、耳机、回声与断连在双端可复核 |
