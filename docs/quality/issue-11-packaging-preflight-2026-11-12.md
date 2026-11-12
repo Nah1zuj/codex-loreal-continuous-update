@@ -62,3 +62,7 @@ Packaging failed: private or local file tracked in release tree: AccessibleBeaut
 ## 尚未完成
 
 本次没有在全新 Windows 环境执行 `install-portable.ps1`，也没有真实演练卸载/回退；解压验证复用了本机已有依赖。因此 Issue #11 的“安装、启停和回退”验收项不能据此勾选。正式候选还必须在相关 PR 合并后，从新的固定 commit 重新生成并复验，且不能替代真实设备、真实服务和人工审核结论。
+
+## 2026-11-12 后续基线状态
+
+PR #23 已经明确授权合并，共享 `main` 现为 `5f5d2781fea0e447bb29e7059176c38b747df166`。PR #19 已以普通合并同步该基线，新 head 为 `6f11d38c36bf5deac91621a941508bf1d2c6eb6f`，GitHub Software checks run #4 通过。上文 `827e…f275` 仍仅是修复后打包器对历史固定提交 `db485ed` 生成的可重现内部审计包哈希，不是新 `main` 或正式工程候选包的哈希。PR #19 尚未合并，因此不对 `5f5d278` 重打并发布新哈希；应在本 PR 及其余必要改动实际合并后，从新固定提交重新生成和复验。
