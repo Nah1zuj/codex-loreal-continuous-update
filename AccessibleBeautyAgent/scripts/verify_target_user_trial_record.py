@@ -57,7 +57,7 @@ def validate(record):
     if record['record_kind'] != 'target_user_trial_observation':
         errors.append('record_kind is invalid')
     evidence = record['evidence_class']
-    if evidence not in {'real_target_user', 'synthetic_fixture'}:
+    if not isinstance(evidence, str) or evidence not in {'real_target_user', 'synthetic_fixture'}:
         errors.append('evidence_class is invalid')
     code = record['participant_code']
     expected_code = r'P-\d{3,}' if evidence == 'real_target_user' else r'SYNTHETIC-\d{3,}'
@@ -73,7 +73,8 @@ def validate(record):
     if not isinstance(prerequisites, dict) or set(prerequisites) != expected_prerequisites:
         errors.append('prerequisites must contain exactly Issue #8 and Issue #11 states')
         prerequisites = {}
-    elif any(value not in PREREQUISITE_STATES for value in prerequisites.values()):
+    elif any(not isinstance(value, str) or value not in PREREQUISITE_STATES
+             for value in prerequisites.values()):
         errors.append('prerequisite states must be passed or blocked')
 
     environment = record['environment']
@@ -109,7 +110,7 @@ def validate(record):
         if task_id not in TASK_IDS or task_id in seen:
             errors.append(f'task {index} has an invalid or duplicate task_id')
         seen.add(task_id)
-        if task['result'] not in RESULTS:
+        if not isinstance(task['result'], str) or task['result'] not in RESULTS:
             errors.append(f'task {task_id} has an invalid result')
         if type(task['help_count']) is not int or task['help_count'] < 0:
             errors.append(f'task {task_id} help_count must be a non-negative integer')
@@ -133,7 +134,8 @@ def validate(record):
     else:
         if type(qualification['critical_issues_open']) is not int or qualification['critical_issues_open'] < 0:
             errors.append('critical_issues_open must be a non-negative integer')
-        if qualification['decision'] not in DECISIONS:
+        if (not isinstance(qualification['decision'], str)
+                or qualification['decision'] not in DECISIONS):
             errors.append('qualification.decision is invalid')
         if not nonempty_string(qualification['rationale']):
             errors.append('qualification.rationale must be non-empty')

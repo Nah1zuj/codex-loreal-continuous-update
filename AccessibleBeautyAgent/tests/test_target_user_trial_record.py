@@ -95,3 +95,19 @@ def test_unknown_personal_field_is_rejected():
     status, errors = validate(record)
     assert status == 'INVALID'
     assert any('unexpected top-level fields' in error for error in errors)
+
+
+def test_wrong_scalar_types_are_invalid_instead_of_crashing():
+    mutations = (
+        ('evidence_class', lambda record: record.__setitem__('evidence_class', [])),
+        ('prerequisite', lambda record: record['prerequisites'].__setitem__(
+            'issue_8_professional_review', [])),
+        ('task result', lambda record: record['tasks'][0].__setitem__('result', [])),
+        ('qualification decision', lambda record: record['qualification'].__setitem__('decision', [])),
+    )
+    for name, mutate in mutations:
+        record = fixture()
+        mutate(record)
+        status, errors = validate(record)
+        assert status == 'INVALID', name
+        assert errors, name
