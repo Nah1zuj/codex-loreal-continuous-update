@@ -2,6 +2,8 @@
 
 关联任务：[#11 复核交付包与工程候选资格](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/11)
 
+工程候选前置状态和残余缺陷另见[门槛审计表](issue-11-engineering-candidate-gates-2026-11-12.md)。
+
 ## 首次结果：FAIL
 
 在独立 worktree 对 GitHub `main` `db485ed098d433758358e8cc6280af5d4003afe1` 执行打包器，首次以退出码 1 失败：
