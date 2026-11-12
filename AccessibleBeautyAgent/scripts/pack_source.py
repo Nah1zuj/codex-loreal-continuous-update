@@ -17,6 +17,7 @@ PUBLIC_MEDIA = {PUBLIC_ASSETS / name for name in (
     'visuals/porcelain-character.png',
 )}
 LEGACY_STARTUP = PurePosixPath('AccessibleBeautyAgent/docs/旧入口归档')
+VOICE_MODELS = PurePosixPath('AccessibleBeautyAgent/voice/models')
 MEDIA_EXTENSIONS = {'.aiff', '.avif', '.gif', '.glb', '.heic', '.jpeg', '.jpg', '.m4a',
                     '.mov', '.mp3', '.mp4', '.png', '.wav', '.webm', '.webp'}
 PRIVATE_EXTENSIONS = {'.db', '.key', '.onnx', '.p12', '.pem', '.pfx', '.sqlite', '.sqlite3'}
@@ -26,23 +27,29 @@ SECRET_CONTENT = re.compile(
     rb'-----BEGIN (?:[A-Z]+ )?PRIVATE KEY-----|'
     rb'(?im:^[ \t]*(?:[A-Z0-9_]*API_KEY|[A-Z0-9_]*ACCESS_TOKEN)\s*=\s*["\x27]?[A-Za-z0-9_-]{24,})'
 )
+MANIFEST_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
 
 
 def git(*arguments):
     return subprocess.check_output(['git', '-C', str(ROOT), *arguments])
 
 
-def checked_name(name):
+def safe_name(name):
     path = PurePosixPath(name)
     if path.is_absolute() or '..' in path.parts or any(mark in name for mark in ('\\', ':')):
         raise ValueError(f'unsafe archive path: {name}')
+    return path
+
+
+def checked_name(name):
+    path = safe_name(name)
     filename = path.name.lower()
     if (any(part in LOCAL_DIRECTORIES or part.startswith('.venv') for part in path.parts)
             or (filename.startswith('.env') and filename != '.env.example')
             or path.suffix.lower() in PRIVATE_EXTENSIONS
             or '.sqlite-' in filename
             or path.is_relative_to('AccessibleBeautyAgent/data/users')
-            or path.is_relative_to('AccessibleBeautyAgent/voice/models')):
+            or path.is_relative_to(VOICE_MODELS)):
         raise ValueError(f'private or local file tracked in release tree: {name}')
     return path
 
@@ -59,9 +66,18 @@ def build(commit, output):
     try:
         with zipfile.ZipFile(io.BytesIO(snapshot)) as source, zipfile.ZipFile(temp_path, 'w', zipfile.ZIP_DEFLATED) as target:
             for member in source.infolist():
-                path = checked_name(member.filename)
+                path = safe_name(member.filename)
                 if member.is_dir():
                     continue
+                # Model assets may be tracked for local speech, but release bundles intentionally
+                # omit the entire tree. Unexpected private files remain hard failures below.
+                if path.is_relative_to(VOICE_MODELS):
+                    continue
+                # These are explicitly local/history trees, not release source. They may exist in
+                # the Git snapshot, so omit their files before the stricter private-file checks.
+                if any(part in LOCAL_DIRECTORIES or part.startswith('.venv') for part in path.parts):
+                    continue
+                path = checked_name(member.filename)
                 if path.is_relative_to(LEGACY_STARTUP) and path.suffix.lower() in {'.sh','.ps1','.bat','.command'}:
                     continue
                 if path.name=='复制文件夹到桌面.command':
@@ -79,13 +95,27 @@ def build(commit, output):
                     raise ValueError(f'possible credential in release tree: {member.filename}')
                 target.writestr(member, data)
                 entries.append({'path': path.as_posix(), 'size': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
-            target.writestr('TRACE-BUNDLE-MANIFEST.json', json.dumps(
+            manifest = zipfile.ZipInfo('TRACE-BUNDLE-MANIFEST.json', MANIFEST_TIMESTAMP)
+            manifest.compress_type = zipfile.ZIP_DEFLATED
+            manifest.external_attr = 0o100644 << 16
+            target.writestr(manifest, json.dumps(
                 {'commit': commit, 'classification': 'internal verification', 'files': entries},
                 ensure_ascii=False, indent=2,
             ) + '\n')
         with zipfile.ZipFile(temp_path) as archive:
-            assert archive.testzip() is None
-            assert len(archive.namelist()) == len(entries) + 1
+            corrupt_entry = archive.testzip()
+            if corrupt_entry is not None:
+                raise ValueError(f'corrupt archive entry: {corrupt_entry}')
+            archive_names = archive.namelist()
+            if len(archive_names) != len(entries) + 1:
+                raise ValueError(
+                    f'archive entry count mismatch: expected {len(entries) + 1}, '
+                    f'found {len(archive_names)}'
+                )
+            if len(archive_names) != len(set(archive_names)):
+                raise ValueError('duplicate archive entry name')
+            if archive_names[-1] != 'TRACE-BUNDLE-MANIFEST.json':
+                raise ValueError('manifest is missing or not the final archive entry')
         temp_path.replace(output)
     finally:
         temp_path.unlink(missing_ok=True)
