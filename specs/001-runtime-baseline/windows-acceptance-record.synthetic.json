@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "record_kind": "windows_runtime_acceptance",
+  "evidence_class": "synthetic_fixture",
+  "expected_commit": "db485ed098d433758358e8cc6280af5d4003afe1",
+  "package_sha256": "17b1b9c4e6b79947f3b116014ca10c4a094f52a2870107e5470a0364e9a2ae56",
+  "observed_at_utc": "2026-11-12T00:00:00Z",
+  "environment": {
+    "os": "not run",
+    "architecture": "not run",
+    "python": "not run",
+    "node": "not run",
+    "powershell": "not run",
+    "chrome": "not run",
+    "path_has_non_ascii": false,
+    "path_has_space": false
+  },
+  "checks": {
+    "manifest_commit": {"status": "NOT_RUN", "evidence": "Synthetic fixture only."},
+    "manifest_files": {"status": "NOT_RUN", "evidence": "Synthetic fixture only."},
+    "package_sha256": {"status": "NOT_RUN", "evidence": "Synthetic fixture only."},
+    "path_case": {"status": "NOT_RUN", "evidence": "Synthetic fixture only."},
+    "clean_package_without_voice_models": {"status": "NOT_RUN", "evidence": "Synthetic fixture only."},
+    "portable_install": {"status": "NOT_RUN", "evidence": "Synthetic fixture only."},
+    "missing_voice_runtime": {"status": "NOT_RUN", "evidence": "Synthetic fixture only."},
+    "model_install_runtime": {"status": "NOT_RUN", "evidence": "Synthetic fixture only."},
+    "occupied_port_preserved": {"status": "NOT_RUN", "evidence": "Synthetic fixture only."},
+    "duplicate_start_preserved": {"status": "NOT_RUN", "evidence": "Synthetic fixture only."},
+    "owned_ports_released": {"status": "NOT_RUN", "evidence": "Synthetic fixture only."},
+    "outer_install_entry": {"status": "NOT_RUN", "evidence": "Requires actual double-click on Windows."},
+    "outer_start_entry": {"status": "NOT_RUN", "evidence": "Requires actual double-click on Windows."},
+    "directory_move_restart": {"status": "NOT_RUN", "evidence": "Requires actual directory move on Windows."},
+    "windows_specific_tests": {"status": "NOT_RUN", "evidence": "Requires Windows test execution."}
+  },
+  "result": "BLOCKED",
+  "limitations": "No Windows device operation occurred; this file only fixes the record format."
+}
