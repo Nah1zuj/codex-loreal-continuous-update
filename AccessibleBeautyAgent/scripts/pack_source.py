@@ -103,8 +103,19 @@ def build(commit, output):
                 ensure_ascii=False, indent=2,
             ) + '\n')
         with zipfile.ZipFile(temp_path) as archive:
-            assert archive.testzip() is None
-            assert len(archive.namelist()) == len(entries) + 1
+            corrupt_entry = archive.testzip()
+            if corrupt_entry is not None:
+                raise ValueError(f'corrupt archive entry: {corrupt_entry}')
+            archive_names = archive.namelist()
+            if len(archive_names) != len(entries) + 1:
+                raise ValueError(
+                    f'archive entry count mismatch: expected {len(entries) + 1}, '
+                    f'found {len(archive_names)}'
+                )
+            if len(archive_names) != len(set(archive_names)):
+                raise ValueError('duplicate archive entry name')
+            if archive_names[-1] != 'TRACE-BUNDLE-MANIFEST.json':
+                raise ValueError('manifest is missing or not the final archive entry')
         temp_path.replace(output)
     finally:
         temp_path.unlink(missing_ok=True)

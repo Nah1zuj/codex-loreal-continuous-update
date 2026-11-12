@@ -73,3 +73,11 @@ def test_pack_still_rejects_accidental_private_files(monkeypatch, tmp_path):
     monkeypatch.setattr(pack_source, 'git', fake_git(source))
     with pytest.raises(ValueError, match='private or local file tracked'):
         pack_source.build('HEAD', tmp_path / 'bundle.zip')
+
+
+def test_pack_integrity_failure_is_not_an_assertion(monkeypatch, tmp_path):
+    source = snapshot(('AccessibleBeautyAgent/README.md', b'public source'))
+    monkeypatch.setattr(pack_source, 'git', fake_git(source))
+    monkeypatch.setattr(zipfile.ZipFile, 'testzip', lambda self: 'broken-entry')
+    with pytest.raises(ValueError, match='corrupt archive entry: broken-entry'):
+        pack_source.build('HEAD', tmp_path / 'bundle.zip')
