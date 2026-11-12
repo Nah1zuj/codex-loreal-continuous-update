@@ -4,7 +4,9 @@ import {setTimeout as delay} from 'node:timers/promises'
 
 const [appUrl, debugUrl, extra] = process.argv.slice(2)
 const verifyMicrophone = extra === '--media'
-assert(appUrl && debugUrl, 'Usage: node scripts/verify_local_vision_browser.mjs APP_URL CHROME_DEBUG_URL [--media]')
+assert(/^http:\/\/127\.0\.0\.1:\d+$/.test(appUrl ?? ''), 'Expected loopback app URL')
+assert(/^http:\/\/127\.0\.0\.1:\d+$/.test(debugUrl ?? ''), 'Expected Chrome debug URL')
+assert(extra === undefined || extra === '--media', 'Only the optional --media flag is supported')
 const targets = await (await fetch(new URL('/json/list', debugUrl))).json()
 const target = targets.find(item => item.type === 'page')
 assert(target, 'An isolated Chrome page must be open')
