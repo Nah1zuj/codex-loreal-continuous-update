@@ -1,6 +1,7 @@
 """Check the opt-in TRACE text or label route on a loopback test instance."""
 import argparse
 import base64
+import hashlib
 import json
 from pathlib import Path
 
@@ -30,13 +31,17 @@ def verify_text(client, args):
     }) as response:
         response.raise_for_status()
         terminal = None
+        committed = False
         for line in response.iter_lines():
             if line.startswith('data: '):
                 event = json.loads(line[6:])
+                if event['type'] == 'committed':
+                    committed = True
                 if event['type'] in ('final', 'error'):
                     terminal = event
     require(terminal and terminal['type'] == 'final' and terminal['reply'].get('message', '').strip(),
             'The text request did not finish with a nonempty reply.')
+    require(not committed, 'The fixed verification message unexpectedly committed course progress.')
     turns = client.get('/api/diagnostics').raise_for_status().json()['turns']
     require(turns and turns[-1]['outcome'] == 'complete' and turns[-1].get('provider') == args.provider
             and turns[-1].get('remote_response_verified') is True,
@@ -56,7 +61,16 @@ def verify_label(client, args):
     require(args.image and (args.expect_text or args.expect_uncertain),
             'To send one approved test label, provide --image and its expected outcome.')
     require(args.image.stat().st_size <= 2_000_000, 'Use a synthetic JPEG or PNG under 2 MB.')
-    image = base64.b64encode(args.image.read_bytes()).decode('ascii')
+    raw = args.image.read_bytes()
+    require(raw.startswith(b'\x89PNG\r\n\x1a\n') or raw.startswith(b'\xff\xd8\xff'),
+            'The approved label must be a PNG or JPEG file.')
+    require(args.expect_sha256 and len(args.expect_sha256) == 64
+            and all(character in '0123456789abcdef' for character in args.expect_sha256),
+            'Provide the approved image SHA-256 as 64 lowercase hexadecimal characters.')
+    digest = hashlib.sha256(raw).hexdigest()
+    require(digest == args.expect_sha256,
+            'The selected image does not match the explicitly approved SHA-256.')
+    image = base64.b64encode(raw).decode('ascii')
     result = client.post('/api/reading/read', json={
         'image': image, 'label_kind': args.label_kind,
         'explicit_consent': True, 'remote_upload_consent': True, 'authorized_provider': args.provider,
@@ -75,7 +89,8 @@ def verify_label(client, args):
     else:
         require(result['status'] == 'READ' and args.expect_text in (result['full_text'] or ''),
                 'The clear sample did not contain the expected transcription.')
-    print(f'PASS: {result["status"]} label result from {args.provider} at {args.destination_host}; image and text omitted.')
+    print(f'PASS: {result["status"]} label result from {args.provider} at {args.destination_host}; '
+          f'image SHA-256 {digest}; image and text omitted.')
 
 
 def main():
@@ -93,6 +108,7 @@ def main():
     expectations = label.add_mutually_exclusive_group()
     expectations.add_argument('--expect-text', help='Known text to find in the clear sample')
     expectations.add_argument('--expect-uncertain', action='store_true', help='Expect an unreadable result without inferred fields')
+    label.add_argument('--expect-sha256', help='Approved lowercase SHA-256 of the one image to send')
     label.add_argument('--execute', action='store_true', help='Authorize sending this image once to the named host')
     args = parser.parse_args()
 

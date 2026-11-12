@@ -43,7 +43,7 @@ DEVELOPER_MODE=true ADMIN_ENABLED=false \
 .venv-portable/bin/python scripts/verify_remote_services.py --port 64527 label --provider "$trace_label_provider" --destination-host "$trace_label_host"
 ```
 
-确认目的地后，文字命令加 `--execute`，会向所选文字服务发送一条固定虚构语句。标签命令每次加 `--execute --image "$trace_label_file"`，再按样本加 `--expect-text "$trace_label_expected"` 或 `--expect-uncertain`。一次只发送一张经确认的测试图。文字检查须收到完成事件和实际供应商响应证据。清晰标签须返回已知原文，模糊标签须保留不确定性且不推断色号、成分或用法。必要时现场复核原文及难辨片段，记录版本、供应商、日期和结果。配置就绪和替身测试分别记录。联调结束后用 Control+C 停止后端。
+确认目的地后，文字命令加 `--execute`，会向所选文字服务发送一条固定虚构语句。标签命令每次加 `--execute --image "$trace_label_file" --expect-sha256 "$trace_label_sha256"`，再按样本加 `--expect-text "$trace_label_expected"` 或 `--expect-uncertain`。哈希必须是本次明确确认图片的 64 位小写 SHA-256；文件内容变化时命令会在本地拒绝，且不会发送 POST。一次只发送一张经确认的 PNG 或 JPEG。文字检查须收到完成事件和实际供应商响应证据，且固定验证语句不得产生课程进度提交事件。清晰标签须返回已知原文，模糊标签须保留不确定性且不推断色号、成分或用法。必要时现场复核原文及难辨片段，记录版本、供应商、日期和结果。配置就绪和替身测试分别记录。联调结束后用 Control+C 停止后端。
 
 ## 打包和回退
 
