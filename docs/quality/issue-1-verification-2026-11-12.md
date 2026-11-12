@@ -4,7 +4,7 @@
 
 ## 结论
 
-本轮为 **进行中的内部软件复核**，不是 M1 完成证明。后端、前端、构建、知识库、正常语音模型运行时、缺语音模型文字路径及关键会话状态自动化检查通过；两轮独立本地实例的普通浏览器路径也已覆盖文字、暂停／继续、跳过、刷新恢复、提前结束、小结拒绝、修改后重新预览、明确保存和二次确认删除。另以独立 Chrome 156 将麦克风和摄像头站点权限显式设为 `denied`，确认两种请求均被拒绝、提示结束且文字回复正常。当前仍缺 GitHub 最新 `main` 的本地同提交独立检出；真实权限弹窗键盘操作、读屏和实体设备证据另属后续验收。
+本轮为 **进行中的内部软件复核**，不是 M1 完成证明。后端、前端、构建、知识库、正常语音模型运行时、缺语音模型文字路径及关键会话状态自动化检查通过；两轮独立本地实例的普通浏览器路径也已覆盖文字、暂停／继续、跳过、刷新恢复、提前结束、小结拒绝、修改后重新预览、明确保存和二次确认删除。另以独立 Chrome 156 将麦克风和摄像头站点权限显式设为 `denied`，确认两种请求均被拒绝、提示结束且文字回复正常。GitHub 最新 `main` 已在独立工作树按精确提交复跑；干净检出按仓库说明以缺语音模型模式通过，浏览器所用应用代码与该提交一致。真实权限弹窗键盘操作、读屏和实体设备证据另属后续验收。
 
 不得将本页用于声称 Windows、实体音视频、VoiceOver／NVDA、真实供应商、专业课程或目标用户验收通过。
 
@@ -13,8 +13,9 @@
 | 项目 | 实际值 |
 |---|---|
 | GitHub 最新 main | `db485ed098d433758358e8cc6280af5d4003afe1`，PR #13 文档合并提交 |
-| 本轮本地源码 | `fd6154a3fb2eb97dd97b8fc4d5cb05d96ace8a07`，分支 `trace/spec-kit-remediation` |
-| 共享源码关系 | `747f994` 的提交说明记录其同步了本地源码 `fd6154a`；本轮未把该关系冒充为最新 main 的同提交检出 |
+| 日常复核源码 | `fd6154a3fb2eb97dd97b8fc4d5cb05d96ace8a07`，分支 `trace/spec-kit-remediation` |
+| 最新 main 独立检出 | `db485ed098d433758358e8cc6280af5d4003afe1`，detached worktree `TRACE-main-20261112` |
+| 应用代码差异 | `fd6154a..db485ed` 在 `AccessibleBeautyAgent` 下仅新增 57 个已跟踪语音模型／测试音频文件；浏览器、前后端和脚本源码无差异 |
 | 系统 | macOS |
 | Python | 3.12.15 |
 | Node | v26.10.0 |
@@ -33,7 +34,12 @@
 | `npm run build` | PASS | 保留大于 500 kB 的 Vite 分包警告，未把警告隐去或直接判为缺陷 |
 | `scripts/validate_kb.py` | PASS：LOOK 3、ROUTINE 3、REFERENCE_CASE 2、PRODUCT 14、ACCESSIBILITY_GUIDANCE 73、SOURCE 5 | 知识库结构校验，不是专业内容审核 |
 | `scripts/verify_runtime.py` | PASS | 本机模型已加载；独立 SQLite、文字交互、会话恢复、端口归属、诊断和释放通过 |
-| Git 归档独立副本 `scripts/verify_runtime.py --missing-voice` | PASS | 无语音模型时正确报告 `assets_missing_or_invalid`，文字路径、恢复、诊断及清理通过 |
+| 最新 main `python -m pytest -ra` | PASS：268 passed，3 skipped，15.27s | 2 项为 Windows PowerShell 专用；1 项因干净检出未安装官方本地 Face Landmarker，未冒充实体视觉结果 |
+| 最新 main `npm test -- --run` | PASS：36 files，191 tests | 与日常复核源码相同；jsdom Canvas 提示仍保留 |
+| 最新 main `npm run build` | PASS：137 modules | 保留大于 500 kB 的分包警告 |
+| 最新 main `scripts/validate_kb.py` | PASS：LOOK 3、ROUTINE 3、REFERENCE_CASE 2、PRODUCT 14、ACCESSIBILITY_GUIDANCE 73、SOURCE 5 | 知识库结构校验，不是专业内容审核 |
+| 最新 main `scripts/verify_runtime.py --missing-voice` | PASS | README 对干净检出指定此模式；正确报告 `assets_missing_or_invalid`，文字路径、恢复、诊断及清理通过 |
+| 最新 main 普通运行模式 | 预期不通过：`assets_missing_or_invalid` | 仓库包含 KWS 资产和模型来源清单，但未随 Git 分发完整 ASR `model.int8.onnx`；不能声称干净仓库语音开箱即用 |
 | 会话控制与确认式小结专项 | PASS：18 tests | 覆盖跳步、暂停、恢复、结束、小结拒绝、明确确认、防重放和删除的软件行为 |
 | 独立本地实例普通浏览器关键路径 | PASS（两轮） | 文字入口、提交、开始、暂停／继续、下一步、跳过、刷新、提前结束、小结拒绝、明确保存和二次确认删除可操作；浏览器无 warning/error |
 | Chrome 显式媒体权限拒绝 | PASS（重复 2 次） | Chrome 156 / CDP 1.3 将 microphone、camera 权限设为 denied；两种请求均返回拒绝，提示结束，文字获得正常回复 |
@@ -99,6 +105,6 @@ node scripts/verify_media_denial_browser.mjs http://127.0.0.1:5193 http://127.0.
 
 ## 未完成和下一步
 
-1. 恢复本机 GitHub 认证，从最新 `main` 建独立检出并记录精确 `git rev-parse HEAD`。
-2. 在该同提交副本上复跑后端、前端、构建、知识库和运行时检查。
-3. PR 合并后同步 main 上的状态总览和证据入口；全部完成标准满足后，才把 #1 转为待验收或已完成。
+1. 审阅本 PR 中的证据、脚本和状态摘要；未经确认不合并。
+2. PR 合并后在 `main` 同步证据入口，并再次确认合并提交的检查结果。
+3. #1 可进入“待验收”，但 M1 是否完成仍取决于共享证据落入 `main`；真实权限弹窗、VoiceOver／NVDA、Windows 和实体设备继续由后续 Issues 验收。
