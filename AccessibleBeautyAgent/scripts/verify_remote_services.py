@@ -19,8 +19,10 @@ def require(condition, message):
 
 def verify_text(client, args):
     health = client.get('/api/health').raise_for_status().json()
-    require(health['provider_mode'] == args.provider and health['readiness']['remote_text_configured'],
-            'The expected text provider is not configured and enabled.')
+    require(health['provider_mode'] == args.provider
+            and health.get('provider_models', {}).get('language') == args.model
+            and health['readiness']['remote_text_configured'],
+            'The expected text provider and model are not configured and enabled.')
     if not args.execute:
         print('READY: text configuration only. No message sent.')
         return
@@ -52,8 +54,9 @@ def verify_text(client, args):
 def verify_label(client, args):
     service = client.get('/api/reading/availability').raise_for_status().json()
     require(service['status'] == 'configured' and service['provider'] == args.provider
+            and service.get('model') == args.model
             and service['destination_host'] == args.destination_host,
-            'The expected label provider and destination are not configured and enabled.')
+            'The expected label provider, model, and destination are not configured and enabled.')
     if not args.execute:
         print(f'READY: label configuration for {args.destination_host} only. No image sent.')
         return
@@ -99,9 +102,11 @@ def main():
     modes = parser.add_subparsers(dest='mode', required=True)
     text = modes.add_parser('text', help='Check a text provider with one fixed fictional message')
     text.add_argument('--provider', required=True, choices=('deepseek', 'qwen', 'openai_compatible'))
+    text.add_argument('--model', required=True, help='Exact configured text model name')
     text.add_argument('--execute', action='store_true', help='Authorize sending the fixed fictional message')
     label = modes.add_parser('label', help='Check one approved synthetic label')
     label.add_argument('--provider', required=True, choices=('deepseek', 'qwen'))
+    label.add_argument('--model', required=True, help='Exact configured image-reading model name')
     label.add_argument('--destination-host', required=True)
     label.add_argument('--label-kind', choices=('product', 'garment'), default='product')
     label.add_argument('--image', type=Path, help='One approved JPEG or PNG with no personal content')
