@@ -14,6 +14,18 @@
 
 已核对官方来源。妆效仅表示厂商产品线描述，适用性、配方、价格和购买信息未纳入比较。[Maybelline Matte Ink](https://www.maybelline.com/lip-makeup/lipstick/superstay-matte-ink-liquid-lipstick) · [Maybelline Vinyl Ink](https://www.maybelline.com/lip-makeup/lipstick/super-stay-vinyl-ink-longwear-liquid-lipstick)
 
+## 2026-11-12 产品资料来源复核
+
+在 GitHub `main` 的 `db485ed098d433758358e8cc6280af5d4003afe1` 上重新打开两条 Maybelline 美国官网页面，并逐项对照产品 JSON、比较接口和前端显示：
+
+- Matte Ink 的产品线名称、唇部类别和 `matte` 妆效仍有官网支持。
+- Vinyl Ink 的产品线名称、唇部类别和官网所述 `instant shine / vinyl finish` 仍可核对；应用中的 `glossy` 是“亮泽”类别归一化，不是官网逐字字段。
+- 当前目录没有指定具体色号，因此没有把官网的单色号底调或饱和度上推为整条产品线事实；这两个字段继续显示“未知”。
+- 比较页把厂商公开资料、虚构演示属性和缺少可追溯资料分开显示；`DRAFT` 来源继续显示“团队审核待完成”。用户选择的偏好只在单独的“你的个人偏好”行出现。
+- 价格、购买信息、功效、配方、持妆声明和适用性均未进入比较字段；本轮没有据官网页面新增这些主张。
+
+来源记录的查看日期已更新为 2026-11-12，并补充上述归一化边界。新增前端测试复核厂商资料、未知值、待审核状态、出处链接和个人偏好不会混为一体。此复核是 GPT/Codex 的来源字段审查，不是团队实际签字；Issue #9 仍保持待验收。
+
 Qwen 适配使用官方兼容接口的图片和 JSON 输出参数。真实凭证与测试标签到位后，按实际环境的同意流程验证上传一次、返回原文及低质量图片的降级提示。[图片接口文档](https://www.alibabacloud.com/help/en/model-studio/vision/) · [JSON 输出文档](https://www.alibabacloud.com/help/en/model-studio/qwen-structured-output)
 
 联调复核覆盖已配置、有效响应和最近一次调用失败三种状态。目的地主机不匹配或未获授权时，替身收到零张图片。回环 HTTP 替身验证了清晰原文及模糊结果的端到端协议，后者保留难辨标记且不接受虚构色号。实际标签识别准确性和外部供应商访问仍待现场联调。[联调步骤](../../docs/quality/release-runbook.md#真实文字与标签联调)
