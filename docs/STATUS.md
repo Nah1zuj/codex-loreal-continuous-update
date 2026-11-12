@@ -23,6 +23,8 @@
 
 下表“待验收”表示已有实现和软件证据，仍缺对应的完整验收；不把各阶段 tasks 的软件勾选理解为工程候选资格已通过。
 
+> 2026-11-12 进展：已提出引入 [Pull Request 软件检查](quality/ci-software-checks.md) 的待审改动，用于后续 PR 的 Ubuntu 软件回归。该改动尚未合并，不改变 12 个验收 Issue 的当前状态，也不覆盖设备、真实服务和人工证据缺口。
+
 | 模块 | 状态 | 已有证据 | 剩余事项 | 关联任务 |
 |---|---|---|---|---|
 | 1 运行与安装 | 待验收 | Mac 净安装、模型冷安装、缺模型文字路径与启停有历史记录 | 固定共享验收版本，Windows 净安装／实际入口与回归 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) |
