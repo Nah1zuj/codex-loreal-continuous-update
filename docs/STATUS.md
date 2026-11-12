@@ -6,7 +6,7 @@
 
 本页是仓库证据的摘要，不是本次运行报告。2026-11-07 的软件测试、Mac 净安装及部分键盘操作记录已经存在；本次只核对仓库、建立任务和工作约定，未重新运行应用、调用真实供应商或开展人工验收。历史测试数量对应不同快照，不合并计算。已在线下完成但未回填的事项，提交实际证据后再更新。
 
-> 2026-11-12 补充：Issue #3 在固定 `main` `db485ed` 上新增 Mac Chrome 100%／200% 缩放、跳到正文、连续焦点、文字提交、语言切换、主动朗读暂停／继续、隔离日志保存及显式放弃草稿的实际浏览器记录；VoiceOver、Windows NVDA 和系统减少动态仍未完成，因此状态保持待验收。
+> 2026-11-12 补充：Issue #3 在固定 `main` `db485ed` 及 PR #22 上新增 Mac Chrome 100%／200% 缩放、跳到正文、连续焦点、应用内字号／动态控制、文字提交、语言切换、主动朗读暂停／继续、隔离日志保存／放弃，以及摄像头拒绝后继续文字的实际浏览器记录。麦克风在权限请求前被本机语音不可用拦截；VoiceOver、Windows NVDA 和系统减少动态仍未完成，因此状态保持待验收。
 
 ## 先看这里
 
@@ -63,7 +63,7 @@
 |---|---|---|---|---|
 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 固定共享验收版本，复核内部演示 | 待开始 | 已有历史内部记录；剩共享版本的本轮复核 | 无 | 验收 commit 和环境明确，内部演示关键路径可复查 |
 | [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) 完成 Windows 净安装、启停与恢复验收 | 受阻 | 已有Windows静态检查；剩实机安装启停 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) | Windows 实机记录绑定同一验收 commit，安装和启停各有结果 |
-| [#3](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/3) 验收双平台键盘、缩放和真实读屏播报 | 待验收 | 固定 main 的 Mac 缩放、焦点、文字、语言、主动朗读控制、保存与放弃草稿已补证；剩减少动态、VoiceOver 实际播报及 Windows NVDA | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) | 双平台关键场景均有实际播报摘录或现场观察和结论 |
+| [#3](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/3) 验收双平台键盘、缩放和真实读屏播报 | 待验收 | 固定 main 的 Mac 缩放／焦点／文字／语言／主动朗读／保存／放弃、应用动态开关和摄像头拒绝文字退路已补证；剩麦克风拒绝权限框、系统减少动态、VoiceOver 实际播报及 Windows NVDA | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) | 双平台关键场景均有实际播报摘录或现场观察和结论 |
 | [#4](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/4) 验收双平台实体麦克风、扬声器与耳机 | 待验收 | 已有合成及模型记录；剩双端实体音频 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) | 双平台每个实体场景有输入、期望、实际结果及观察证据 |
 | [#5](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/5) 验收实体相机、左右理解与撤权清理 | 待验收 | 已有模拟相机记录；剩实体相机与方向理解 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) | 实体相机与模拟输入结果分列，双平台场景有记录 |
 | [#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) 完成真实文字供应商联调 | 受阻 | 已有替身协议；剩实际文字调用 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) | 真实供应商、模型、commit、日期与执行命令可核查，凭据不进入记录 |
