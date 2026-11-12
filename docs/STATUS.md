@@ -81,16 +81,16 @@
 - **Windows：**仓库缺实体记录，不据此推断团队一定没有设备。核实设备或回填已有记录后更新 [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2)。
 - **真实服务：**历史记录为 mock／关闭远程／无有效凭据；本次未读取私有配置。核实批准的配置、目的地及实际响应后更新 [#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) [#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7)。
 - **专业与用户验收：**缺真实课程审核和目标用户观察记录，按 [#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) → [#12](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/12) 的条件推进。
-- **版本与文档：**多个历史包、共享合并提交和测试数量并存。[#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 先固定共同验收版本。路线图原有“尚未启动实施”和结尾“仅整理计划书”已修正；能力矩阵保留为阶段0快照，勿当实时状态。
+- **版本与文档：**多个历史包、共享合并提交和测试数量并存。[#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 已固定共同验收基线为 `db485ed`，软件证据在 PR #14 等待审阅；后续正式候选仍须绑定新的合并后 commit。路线图原有“尚未启动实施”和结尾“仅整理计划书”已修正；能力矩阵保留为阶段0快照，勿当实时状态。
 - **实际独立评审：**多份清单仍待实际评审者确认；软件勾选不能替代，见 [#10](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/10)。保留构建分包警告，不将其隐去或未经分析升级为缺陷结论。
 
 ## 下一步最值得推进的三项
 
-1. **[#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 固定验收版本、复核内部演示。**为后续证据提供同一基准。
+1. **审阅 [PR #14](https://github.com/Nah1zuj/codex-loreal-continuous-update/pull/14) 的 #1 固定版本与内部演示证据。**确认内容无误后再由有权限人员决定是否合并；未经确认不自动合并。
 2. **[#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) 核实 Windows 环境并完成净安装。**解除双平台设备验收的共同前置。
-3. **[#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) 核实并联调真实文字服务。**填补当前自由对话只有 mock／替身证据的缺口。
+3. **[#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) 安排真实专业审核者审阅已固定的中英课程包。**软件一致性检查不能代替专业结论。
 
-三项没有人员分配。Windows准备、私有配置预检、课程审核联系和Mac场景可并行；编号不等于必须逐项串行。真实标签服务 [#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7) 的准备也不依赖文字服务联调完成。
+三项没有人员分配。Windows准备、PR审阅、课程审核联系和Mac场景可并行；编号不等于必须逐项串行。真实文字与标签服务 [#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) [#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7) 已完成不外发预检，待批准的供应商、凭据与目的地主机具备后再执行真实调用。
 
 ## 状态如何更新
 
