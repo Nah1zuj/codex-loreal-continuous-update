@@ -17,6 +17,7 @@ PUBLIC_MEDIA = {PUBLIC_ASSETS / name for name in (
     'visuals/porcelain-character.png',
 )}
 LEGACY_STARTUP = PurePosixPath('AccessibleBeautyAgent/docs/旧入口归档')
+VOICE_MODELS = PurePosixPath('AccessibleBeautyAgent/voice/models')
 MEDIA_EXTENSIONS = {'.aiff', '.avif', '.gif', '.glb', '.heic', '.jpeg', '.jpg', '.m4a',
                     '.mov', '.mp3', '.mp4', '.png', '.wav', '.webm', '.webp'}
 PRIVATE_EXTENSIONS = {'.db', '.key', '.onnx', '.p12', '.pem', '.pfx', '.sqlite', '.sqlite3'}
@@ -32,17 +33,22 @@ def git(*arguments):
     return subprocess.check_output(['git', '-C', str(ROOT), *arguments])
 
 
-def checked_name(name):
+def safe_name(name):
     path = PurePosixPath(name)
     if path.is_absolute() or '..' in path.parts or any(mark in name for mark in ('\\', ':')):
         raise ValueError(f'unsafe archive path: {name}')
+    return path
+
+
+def checked_name(name):
+    path = safe_name(name)
     filename = path.name.lower()
     if (any(part in LOCAL_DIRECTORIES or part.startswith('.venv') for part in path.parts)
             or (filename.startswith('.env') and filename != '.env.example')
             or path.suffix.lower() in PRIVATE_EXTENSIONS
             or '.sqlite-' in filename
             or path.is_relative_to('AccessibleBeautyAgent/data/users')
-            or path.is_relative_to('AccessibleBeautyAgent/voice/models')):
+            or path.is_relative_to(VOICE_MODELS)):
         raise ValueError(f'private or local file tracked in release tree: {name}')
     return path
 
@@ -59,9 +65,18 @@ def build(commit, output):
     try:
         with zipfile.ZipFile(io.BytesIO(snapshot)) as source, zipfile.ZipFile(temp_path, 'w', zipfile.ZIP_DEFLATED) as target:
             for member in source.infolist():
-                path = checked_name(member.filename)
+                path = safe_name(member.filename)
                 if member.is_dir():
                     continue
+                # Model assets may be tracked for local speech, but release bundles intentionally
+                # omit the entire tree. Unexpected private files remain hard failures below.
+                if path.is_relative_to(VOICE_MODELS):
+                    continue
+                # These are explicitly local/history trees, not release source. They may exist in
+                # the Git snapshot, so omit their files before the stricter private-file checks.
+                if any(part in LOCAL_DIRECTORIES or part.startswith('.venv') for part in path.parts):
+                    continue
+                path = checked_name(member.filename)
                 if path.is_relative_to(LEGACY_STARTUP) and path.suffix.lower() in {'.sh','.ps1','.bat','.command'}:
                     continue
                 if path.name=='复制文件夹到桌面.command':
