@@ -60,7 +60,7 @@ def validate_record(record):
     if record['schema_version'] != 1 or record['record_kind'] != 'windows_runtime_acceptance':
         errors.append('schema_version or record_kind is invalid')
     evidence_class = record['evidence_class']
-    if evidence_class not in {'windows_x64_device', 'synthetic_fixture'}:
+    if not isinstance(evidence_class, str) or evidence_class not in {'windows_x64_device', 'synthetic_fixture'}:
         errors.append('evidence_class is invalid')
     if not isinstance(record['expected_commit'], str) or not re.fullmatch(r'[0-9a-f]{40}', record['expected_commit']):
         errors.append('expected_commit must be a full lowercase Git SHA')
@@ -78,7 +78,10 @@ def validate_record(record):
         if any(type(environment[key]) is not bool for key in ('path_has_non_ascii', 'path_has_space')):
             errors.append('path flags must be booleans')
         if evidence_class == 'windows_x64_device':
-            if environment['os'] != 'Windows' or environment['architecture'].lower() not in {'amd64', 'x86_64'}:
+            if (not isinstance(environment['os'], str)
+                    or environment['os'] != 'Windows'
+                    or not isinstance(environment['architecture'], str)
+                    or environment['architecture'].lower() not in {'amd64', 'x86_64'}):
                 errors.append('real evidence must identify Windows x64')
 
     checks = record['checks']
@@ -90,15 +93,17 @@ def validate_record(record):
             if not isinstance(check, dict) or set(check) != {'status', 'evidence'}:
                 errors.append(f'{name} fields are incomplete or unexpected')
                 continue
-            if check['status'] not in STATUSES:
+            if not isinstance(check['status'], str) or check['status'] not in STATUSES:
                 errors.append(f'{name} status is invalid')
             if not isinstance(check['evidence'], str) or not check['evidence'].strip():
                 errors.append(f'{name} evidence must be a non-empty string')
-        if (checks['path_case']['status'] == 'PASS'
+        path_case = checks.get('path_case')
+        if (isinstance(path_case, dict)
+                and path_case.get('status') == 'PASS'
                 and (not environment.get('path_has_non_ascii') or not environment.get('path_has_space'))):
             errors.append('path_case cannot pass without non-ASCII text and a space')
 
-    if record['result'] not in {'PASS', 'FAIL', 'BLOCKED'}:
+    if not isinstance(record['result'], str) or record['result'] not in {'PASS', 'FAIL', 'BLOCKED'}:
         errors.append('result is invalid')
     if not isinstance(record['limitations'], str) or not record['limitations'].strip():
         errors.append('limitations must be a non-empty string')

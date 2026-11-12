@@ -101,6 +101,40 @@ def test_missing_check_is_rejected():
     assert any('checks are incomplete' in error for error in errors)
 
 
+@pytest.mark.parametrize(('field', 'value', 'expected_error'), [
+    ('evidence_class', [], 'evidence_class is invalid'),
+    ('result', [], 'result is invalid'),
+])
+def test_malformed_top_level_values_are_invalid_instead_of_crashing(field, value, expected_error):
+    record = real_record()
+    record[field] = value
+    status, errors = validate_record(record)
+    assert status == 'INVALID'
+    assert expected_error in errors
+
+
+@pytest.mark.parametrize('value', [
+    'PASS',
+    {'status': [], 'evidence': 'Malformed status type.'},
+    {'status': 'PASS'},
+])
+def test_malformed_path_check_is_invalid_instead_of_crashing(value):
+    record = real_record()
+    record['checks']['path_case'] = value
+    status, errors = validate_record(record)
+    assert status == 'INVALID'
+    assert errors
+
+
+def test_malformed_architecture_is_invalid_instead_of_crashing():
+    record = real_record()
+    record['environment']['architecture'] = []
+    status, errors = validate_record(record)
+    assert status == 'INVALID'
+    assert 'environment version fields must be non-empty strings' in errors
+    assert 'real evidence must identify Windows x64' in errors
+
+
 def test_windows_wrapper_requires_real_package_path_and_windows_host():
     wrapper = (ROOT / 'AccessibleBeautyAgent/scripts/run_windows_acceptance.ps1').read_text(encoding='utf-8')
     assert '[string]$PackagePath' in wrapper
