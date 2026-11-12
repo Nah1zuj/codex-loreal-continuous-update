@@ -16,7 +16,7 @@
 
 ## 2026-11-12 产品资料来源复核
 
-在 GitHub `main` 的 `db485ed098d433758358e8cc6280af5d4003afe1` 上重新打开两条 Maybelline 美国官网页面，并逐项对照产品 JSON、比较接口和前端显示：
+初次来源复核在 GitHub `main` 当时的 `db485ed098d433758358e8cc6280af5d4003afe1` 上重新打开两条 Maybelline 美国官网页面，并逐项对照产品 JSON、比较接口和前端显示。PR 分支随后已同步共享 `main 53af597a6e4f22157988b0f83b1eefdbe9b82c74`；该同步不代表再次打开网页，也不构成团队签字：
 
 - Matte Ink 的产品线名称、唇部类别和 `matte` 妆效仍有官网支持。
 - Vinyl Ink 的产品线名称、唇部类别和官网所述 `instant shine / vinyl finish` 仍可核对；应用中的 `glossy` 是“亮泽”类别归一化，不是官网逐字字段。
