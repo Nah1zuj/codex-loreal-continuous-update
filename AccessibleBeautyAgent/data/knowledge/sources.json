@@ -65,18 +65,18 @@
       "title": "Super Stay Matte Ink Liquid Lipstick · 官方资料（美国站）",
       "creator": "Maybelline New York",
       "url": "https://www.maybelline.com/lip-makeup/lipstick/superstay-matte-ink-liquid-lipstick",
-      "accessed_at": "2026-11-07",
+      "accessed_at": "2026-11-12",
       "source_type": "official_brand",
-      "notes": "只摘取产品线名称、类别和官网描述的妆效类型；未记录价格、功效、色号、配方或持妆声明。"
+      "notes": "2026-11-12 复核美国官网：产品线名称、唇部类别和 matte 妆效仍受页面支持。应用未摘取价格、功效、具体色号、配方或持妆声明。"
     },
     {
       "source_id": "maybelline_vinyl_ink_us_official",
       "title": "Super Stay Vinyl Ink Longwear Liquid Lipcolor · 官方资料（美国站）",
       "creator": "Maybelline New York",
       "url": "https://www.maybelline.com/lip-makeup/lipstick/super-stay-vinyl-ink-longwear-liquid-lipstick",
-      "accessed_at": "2026-11-07",
+      "accessed_at": "2026-11-12",
       "source_type": "official_brand",
-      "notes": "只摘取产品线名称、类别和官网描述的妆效类型；未记录价格、功效、色号、配方或持妆声明。"
+      "notes": "2026-11-12 复核美国官网：产品线名称、唇部类别和 instant shine / vinyl finish 仍受页面支持；应用中的 glossy 是亮泽类别归一化，不是官网逐字字段。应用未摘取价格、功效、具体色号、配方或持妆声明。"
     }
   ]
 }
