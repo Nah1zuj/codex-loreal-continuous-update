@@ -118,3 +118,23 @@ def test_wrong_scalar_types_are_invalid_instead_of_crashing():
         status, errors = validate(record)
         assert status == 'INVALID', name
         assert errors, name
+
+
+def test_placeholder_version_identifiers_are_rejected():
+    for field, value in (
+        ('trial_commit', '0' * 40),
+        ('package_sha256', '0' * 64),
+    ):
+        record = fixture()
+        record[field] = value
+        status, errors = validate(record)
+        assert status == 'INVALID'
+        assert any(field in error for error in errors)
+
+
+def test_future_observation_date_is_rejected():
+    record = fixture()
+    record['environment']['date'] = '2999-01-01'
+    status, errors = validate(record)
+    assert status == 'INVALID'
+    assert any('future' in error for error in errors)

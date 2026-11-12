@@ -63,9 +63,13 @@ def validate(record):
     expected_code = r'P-\d{3,}' if evidence == 'real_target_user' else r'SYNTHETIC-\d{3,}'
     if not isinstance(code, str) or not re.fullmatch(expected_code, code):
         errors.append('participant_code does not match the evidence class')
-    if not isinstance(record['trial_commit'], str) or not re.fullmatch(r'[0-9a-f]{40}', record['trial_commit']):
+    if (not isinstance(record['trial_commit'], str)
+            or not re.fullmatch(r'[0-9a-f]{40}', record['trial_commit'])
+            or record['trial_commit'] == '0' * 40):
         errors.append('trial_commit must be a full lowercase Git SHA')
-    if not isinstance(record['package_sha256'], str) or not re.fullmatch(r'[0-9a-f]{64}', record['package_sha256']):
+    if (not isinstance(record['package_sha256'], str)
+            or not re.fullmatch(r'[0-9a-f]{64}', record['package_sha256'])
+            or record['package_sha256'] == '0' * 64):
         errors.append('package_sha256 must be a lowercase SHA-256')
 
     prerequisites = record['prerequisites']
@@ -85,9 +89,12 @@ def validate(record):
         if not all(nonempty_string(environment[key]) for key in environment_keys):
             errors.append('environment fields must be non-empty strings')
         try:
-            date.fromisoformat(environment['date'])
+            observed_on = date.fromisoformat(environment['date'])
         except (TypeError, ValueError):
             errors.append('environment.date must use YYYY-MM-DD')
+        else:
+            if observed_on > date.today():
+                errors.append('environment.date cannot be in the future')
 
     voluntary = record['voluntary_conditions']
     voluntary_keys = {'information_provided', 'voluntary_agreement', 'stop_right_explained', 'data_boundary_explained'}
