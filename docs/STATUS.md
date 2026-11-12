@@ -6,6 +6,8 @@
 
 本页是仓库证据的摘要，不是本次运行报告。2026-11-07 的软件测试、Mac 净安装及部分键盘操作记录已经存在；本次只核对仓库、建立任务和工作约定，未重新运行应用、调用真实供应商或开展人工验收。历史测试数量对应不同快照，不合并计算。已在线下完成但未回填的事项，提交实际证据后再更新。
 
+> 2026-11-12 补充：Issue #2 已在固定 `main` `db485ed` 上准备 Windows x64 自动预检、匿名记录格式和人工入口步骤；本机不是 Windows，合成记录保持 `BLOCKED`，不改变当前分类。
+
 ## 先看这里
 
 - [所有未完成任务](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues?q=is%3Aissue+is%3Aopen)；[4个里程碑](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestones)。
@@ -60,7 +62,7 @@
 | 任务 | 初始状态 | 已完成部分／剩余工作 | 前置依赖 | 完成标准摘要 |
 |---|---|---|---|---|
 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 固定共享验收版本，复核内部演示 | 待开始 | 已有历史内部记录；剩共享版本的本轮复核 | 无 | 验收 commit 和环境明确，内部演示关键路径可复查 |
-| [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) 完成 Windows 净安装、启停与恢复验收 | 受阻 | 已有Windows静态检查；剩实机安装启停 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) | Windows 实机记录绑定同一验收 commit，安装和启停各有结果 |
+| [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) 完成 Windows 净安装、启停与恢复验收 | 受阻 | 已有静态检查及待审的 Windows 自动预检／记录包；剩实机净安装、双击入口、目录移动与启停 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) | Windows 实机记录绑定同一验收 commit，安装和启停各有结果 |
 | [#3](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/3) 验收双平台键盘、缩放和真实读屏播报 | 待验收 | 已有软件及Mac部分键盘记录；剩双端实际播报 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) | 双平台关键场景均有实际播报摘录或现场观察和结论 |
 | [#4](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/4) 验收双平台实体麦克风、扬声器与耳机 | 待验收 | 已有合成及模型记录；剩双端实体音频 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) | 双平台每个实体场景有输入、期望、实际结果及观察证据 |
 | [#5](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/5) 验收实体相机、左右理解与撤权清理 | 待验收 | 已有模拟相机记录；剩实体相机与方向理解 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) | 实体相机与模拟输入结果分列，双平台场景有记录 |
