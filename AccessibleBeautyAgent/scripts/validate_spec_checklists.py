@@ -1,6 +1,8 @@
 """Validate stage 1–8 review checklist structure and FR traceability."""
+import argparse
 from pathlib import Path
 import re
+import subprocess
 import sys
 
 
@@ -16,6 +18,30 @@ REVIEW_FIELDS = (
     '评审者：', '评审日期：', '审查 Git 版本：',
     '已查看范围：', '结论：', '保留项：',
 )
+REVIEW_PLACEHOLDERS = {'', '待填写'}
+
+
+def git_output(*args):
+    result = subprocess.run(
+        ['git', '-C', str(REPO_ROOT), *args],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        detail = result.stderr.strip() or result.stdout.strip()
+        raise ValueError(detail or f'git command failed: {args}')
+    return result.stdout
+
+
+def git_snapshot(commit):
+    resolved = git_output('rev-parse', '--verify', f'{commit}^{{commit}}').strip()
+    names = git_output('ls-tree', '-d', '--name-only', f'{resolved}:specs').splitlines()
+
+    def read_text(relative_path):
+        return git_output('show', f'{resolved}:{relative_path.as_posix()}')
+
+    return resolved, names, read_text
 
 
 def expand_references(text):
@@ -29,10 +55,11 @@ def expand_references(text):
     return references
 
 
-def validate_stage(directory):
-    stage = STAGE_DIRECTORY.fullmatch(directory.name).group(1)
-    spec = (directory / 'spec.md').read_text(encoding='utf-8')
-    checklist = (directory / 'checklists/requirements.md').read_text(encoding='utf-8')
+def validate_stage(directory_name, read_text):
+    stage = STAGE_DIRECTORY.fullmatch(directory_name).group(1)
+    base = Path('specs') / directory_name
+    spec = read_text(base / 'spec.md')
+    checklist = read_text(base / 'checklists/requirements.md')
     definitions = {next(value for value in match.groups() if value) for match in FR_DEFINITION.finditer(spec)}
     checks = CHECK_LINE.findall(checklist)
     errors = []
@@ -67,36 +94,72 @@ def validate_stage(directory):
         errors.append(f'FR definitions without CHK coverage: {missing}')
     if checklist.count('## 评审记录（由实际评审者填写）') != 1:
         errors.append('review record section must occur exactly once')
+    review_values = []
     for field in REVIEW_FIELDS:
         if checklist.count(f'- {field}') != 1:
             errors.append(f'review field must occur exactly once: {field}')
-    return numbers, len(definitions), errors
+            continue
+        value = checklist.split(f'- {field}', 1)[1].splitlines()[0].strip()
+        review_values.append(value)
+    normalized = [value if value not in REVIEW_PLACEHOLDERS else '' for value in review_values]
+    if any(normalized) and not all(normalized):
+        errors.append('review record is partially filled')
+    review_status = 'completed' if normalized and all(normalized) else 'pending'
+    return numbers, len(definitions), review_status, errors
 
 
-def main():
-    directories = sorted(
-        path for path in SPECS_ROOT.iterdir()
-        if path.is_dir() and STAGE_DIRECTORY.fullmatch(path.name)
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--commit',
+        help='read specs from an immutable Git commit instead of the working tree',
     )
+    return parser.parse_args(argv)
+
+
+def main(argv=None):
+    args = parse_args(argv)
+    try:
+        if args.commit:
+            source, names, read_text = git_snapshot(args.commit)
+            source_label = f'commit {source}'
+        else:
+            names = [path.name for path in SPECS_ROOT.iterdir() if path.is_dir()]
+            read_text = lambda relative: (REPO_ROOT / relative).read_text(encoding='utf-8')
+            source_label = 'working tree (may include uncommitted changes)'
+    except (OSError, ValueError) as error:
+        print(f'INVALID: cannot read validation source: {error}', file=sys.stderr)
+        return 1
+    directories = sorted(name for name in names if STAGE_DIRECTORY.fullmatch(name))
     if len(directories) != 8:
         print(f'INVALID: expected 8 stage directories, found {len(directories)}', file=sys.stderr)
         return 1
     all_numbers = []
+    review_statuses = []
     failures = []
     for directory in directories:
-        numbers, fr_count, errors = validate_stage(directory)
+        try:
+            numbers, fr_count, review_status, errors = validate_stage(directory, read_text)
+        except (OSError, ValueError) as error:
+            failures.append(f'{directory}: cannot read stage files: {error}')
+            continue
         all_numbers.extend(numbers)
+        review_statuses.append(review_status)
         if errors:
-            failures.extend(f'{directory.name}: {error}' for error in errors)
+            failures.extend(f'{directory}: {error}' for error in errors)
         else:
-            print(f'PASS {directory.name}: {len(numbers)} CHK, {fr_count} FR')
+            print(f'PASS {directory}: {len(numbers)} CHK, {fr_count} FR, review {review_status}')
     duplicates = sorted({number for number in all_numbers if all_numbers.count(number) > 1})
     if duplicates:
         failures.append(f'global duplicate CHK numbers: {duplicates}')
     if failures:
         print('INVALID: ' + '; '.join(failures), file=sys.stderr)
         return 1
-    print(f'PASS all stages: {len(all_numbers)} unique CHK with complete FR coverage and review metadata')
+    completed = review_statuses.count('completed')
+    pending = review_statuses.count('pending')
+    print(f'PASS source: {source_label}')
+    print(f'PASS all stages: {len(all_numbers)} unique CHK with complete FR coverage')
+    print(f'REVIEW RECORDS: {completed} completed, {pending} pending')
     return 0
 
 

@@ -83,10 +83,12 @@
 运行：
 
 ```bash
-python AccessibleBeautyAgent/scripts/validate_spec_checklists.py
+python3 AccessibleBeautyAgent/scripts/validate_spec_checklists.py --commit HEAD
 ```
 
-该脚本逐阶段读取 `spec.md` 和 `checklists/requirements.md`，检查阶段 1–8 是否齐全、CHK 编号是否阶段内连续且全局唯一、每个 CHK 的 FR 引用是否存在、每阶段全部 FR 是否至少被一个 CHK 覆盖，以及评审记录区和六个元数据字段是否各出现一次。2026-11-12 在 PR #15 分支运行结果为 8 个阶段全部 PASS，共 36 个 CHK。
+`--commit` 会先解析为完整提交哈希，再直接读取该 Git 快照中的规格，避免把本地未提交文件误记为 PR 证据；不带参数时脚本会明确标为 working tree。脚本逐阶段检查阶段 1–8 是否齐全、CHK 编号是否阶段内连续且全局唯一、每个 CHK 的 FR 引用是否存在、每阶段全部 FR 是否至少被一个 CHK 覆盖，以及评审记录区和六个字段是否各出现一次。它还区分空白记录、完整记录和不允许的部分填写记录。
+
+2026-11-12 在 PR #15 分支对固定提交运行结果为 8 个阶段全部 PASS，共 36 个 CHK；评审记录为 `0 completed, 8 pending`。普通解释器与 `python3 -O` 结果一致，4 项针对性测试通过。
 
 脚本只验证结构和引用，不判断需求内容正确性，不填写评审者结论，也不替代设备、真实服务、专业审核或目标用户证据。
 
