@@ -9,6 +9,7 @@ import platform
 import re
 import subprocess
 import sys
+import zipfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,7 +58,8 @@ def validate_record(record):
     if set(record) != TOP_LEVEL_KEYS:
         errors.append('top-level fields are incomplete or unexpected')
         return 'INVALID', errors
-    if record['schema_version'] != 1 or record['record_kind'] != 'windows_runtime_acceptance':
+    if (type(record['schema_version']) is not int or record['schema_version'] != 1
+            or record['record_kind'] != 'windows_runtime_acceptance'):
         errors.append('schema_version or record_kind is invalid')
     evidence_class = record['evidence_class']
     if not isinstance(evidence_class, str) or evidence_class not in {'windows_x64_device', 'synthetic_fixture'}:
@@ -142,8 +144,14 @@ def models_valid():
     return True
 
 
-def verify_extracted_manifest(manifest):
-    if not isinstance(manifest, dict) or not isinstance(manifest.get('files'), list) or not manifest['files']:
+def validated_manifest_files(manifest):
+    if (not isinstance(manifest, dict)
+            or set(manifest) != {'commit', 'classification', 'files'}
+            or not isinstance(manifest.get('commit'), str)
+            or not re.fullmatch(r'[0-9a-f]{40}', manifest['commit'])
+            or manifest.get('classification') != 'internal verification'
+            or not isinstance(manifest.get('files'), list)
+            or not manifest['files']):
         raise ValueError('Bundle manifest file list must be a non-empty array.')
     expected = {}
     for index, item in enumerate(manifest['files']):
@@ -162,6 +170,39 @@ def verify_extracted_manifest(manifest):
         if name in expected:
             raise ValueError(f'Bundle manifest contains a duplicate path: {name}')
         expected[name] = item
+    return expected
+
+
+def verify_package_archive(package_path, expected_commit):
+    try:
+        with zipfile.ZipFile(package_path) as archive:
+            corrupt = archive.testzip()
+            if corrupt is not None:
+                raise ValueError(f'Package ZIP contains a corrupt entry: {corrupt}')
+            names = archive.namelist()
+            if len(names) != len(set(names)):
+                raise ValueError('Package ZIP contains duplicate entry names.')
+            if names.count('TRACE-BUNDLE-MANIFEST.json') != 1:
+                raise ValueError('Package ZIP must contain exactly one bundle manifest.')
+            manifest = json.loads(archive.read('TRACE-BUNDLE-MANIFEST.json'))
+            expected = validated_manifest_files(manifest)
+            if manifest['commit'] != expected_commit:
+                raise ValueError('Package ZIP manifest commit does not match ExpectedCommit.')
+            if set(names) != set(expected) | {'TRACE-BUNDLE-MANIFEST.json'}:
+                raise ValueError('Package ZIP entries do not exactly match its manifest.')
+            for name, item in expected.items():
+                data = archive.read(name)
+                if len(data) != item['size']:
+                    raise ValueError(f'Package ZIP file size differs from manifest: {name}')
+                if hashlib.sha256(data).hexdigest() != item['sha256']:
+                    raise ValueError(f'Package ZIP file hash differs from manifest: {name}')
+    except (zipfile.BadZipFile, KeyError, json.JSONDecodeError) as error:
+        raise ValueError(f'Package ZIP or manifest is invalid: {error}') from error
+    return manifest
+
+
+def verify_extracted_manifest(manifest):
+    expected = validated_manifest_files(manifest)
     actual = {
         path.relative_to(PACKAGE_ROOT).as_posix()
         for path in PACKAGE_ROOT.rglob('*')
@@ -240,9 +281,12 @@ def run_preflight(args):
             raise ValueError('Source ZIP SHA-256 does not match PackageSha256.')
         set_check(record, 'package_sha256', 'PASS', 'The supplied source ZIP hash matches PackageSha256.')
         current_check = 'manifest_commit'
-        manifest = json.loads((PACKAGE_ROOT / 'TRACE-BUNDLE-MANIFEST.json').read_text(encoding='utf-8'))
-        if manifest.get('commit') != args.expected_commit:
-            raise ValueError('Bundle manifest commit does not match ExpectedCommit.')
+        manifest = verify_package_archive(package_path, args.expected_commit)
+        extracted_manifest = json.loads(
+            (PACKAGE_ROOT / 'TRACE-BUNDLE-MANIFEST.json').read_text(encoding='utf-8')
+        )
+        if extracted_manifest != manifest:
+            raise ValueError('Extracted bundle manifest differs from the supplied PackagePath ZIP.')
         set_check(record, 'manifest_commit', 'PASS', 'Bundle manifest commit matches ExpectedCommit.')
         current_check = 'manifest_files'
         file_count = verify_extracted_manifest(manifest)

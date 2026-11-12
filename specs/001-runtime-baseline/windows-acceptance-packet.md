@@ -25,7 +25,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\run_windows_ac
 
 脚本只允许在 Windows x64 运行，并要求当前路径同时含非 ASCII 字符和空格。它将：
 
-- 实际计算所给 ZIP 的 SHA-256，核对包 manifest commit，并逐文件复核解压内容的大小和哈希；
+- 实际计算所给 ZIP 的 SHA-256，逐项核对 ZIP 内 manifest、commit、条目大小和哈希，再要求解压目录的 manifest 与该 ZIP 完全一致并逐文件复核；
 - 记录 Python、Node、PowerShell 和 Chrome 版本；
 - 确认干净包最初没有有效语音模型；
 - 调用当前 `install-portable.ps1 --force` 完成实际依赖安装；

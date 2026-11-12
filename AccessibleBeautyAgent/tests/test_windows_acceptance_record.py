@@ -2,6 +2,7 @@ import hashlib
 import json
 from pathlib import Path
 from types import SimpleNamespace
+import zipfile
 
 import pytest
 
@@ -34,6 +35,14 @@ def real_record():
 
 def test_repository_fixture_is_blocked():
     assert validate_record(fixture()) == ('BLOCKED', [])
+
+
+def test_boolean_schema_version_is_invalid():
+    record = fixture()
+    record['schema_version'] = True
+    status, errors = validate_record(record)
+    assert status == 'INVALID'
+    assert any('schema_version' in error for error in errors)
 
 
 def test_preflight_refuses_non_windows_host(monkeypatch):
@@ -147,7 +156,7 @@ def test_extracted_files_must_match_manifest_hashes(monkeypatch, tmp_path):
     source.parent.mkdir()
     source.write_text('public source', encoding='utf-8')
     data = source.read_bytes()
-    manifest = {'files': [{
+    manifest = {'commit': '1' * 40, 'classification': 'internal verification', 'files': [{
         'path': 'AccessibleBeautyAgent/README.md',
         'size': len(data),
         'sha256': hashlib.sha256(data).hexdigest(),
@@ -157,6 +166,51 @@ def test_extracted_files_must_match_manifest_hashes(monkeypatch, tmp_path):
     source.write_text('tampered source', encoding='utf-8')
     with pytest.raises(ValueError, match='size differs|hash differs'):
         windows_acceptance.verify_extracted_manifest(manifest)
+
+
+def package_zip(path, commit, content=b'public source', manifest_content=None):
+    name = 'AccessibleBeautyAgent/README.md'
+    manifest = {
+        'commit': commit,
+        'classification': 'internal verification',
+        'files': [{
+            'path': name,
+            'size': len(content),
+            'sha256': hashlib.sha256(content).hexdigest(),
+        }],
+    }
+    with zipfile.ZipFile(path, 'w') as archive:
+        archive.writestr(name, content)
+        archive.writestr(
+            'TRACE-BUNDLE-MANIFEST.json',
+            json.dumps(manifest_content or manifest),
+        )
+    return manifest
+
+
+def test_package_zip_is_bound_to_commit_manifest_and_contents(tmp_path):
+    commit = '1' * 40
+    path = tmp_path / 'bundle.zip'
+    manifest = package_zip(path, commit)
+    assert windows_acceptance.verify_package_archive(path, commit) == manifest
+
+
+def test_package_zip_content_mismatch_is_rejected(tmp_path):
+    commit = '1' * 40
+    path = tmp_path / 'bundle.zip'
+    manifest = package_zip(path, commit)
+    manifest['files'][0]['sha256'] = '0' * 64
+    path.unlink()
+    package_zip(path, commit, manifest_content=manifest)
+    with pytest.raises(ValueError, match='hash differs'):
+        windows_acceptance.verify_package_archive(path, commit)
+
+
+def test_package_zip_commit_mismatch_is_rejected(tmp_path):
+    path = tmp_path / 'bundle.zip'
+    package_zip(path, '1' * 40)
+    with pytest.raises(ValueError, match='commit does not match'):
+        windows_acceptance.verify_package_archive(path, '2' * 40)
 
 
 @pytest.mark.parametrize('files', [
