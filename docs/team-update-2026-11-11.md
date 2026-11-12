@@ -19,7 +19,7 @@ TRACE 当前仍是**内部验证版**。已有会话控制、文字教学、语�
 
 GitHub Issues、标签和里程碑已经生效。[PR #13](https://github.com/Nah1zuj/codex-loreal-continuous-update/pull/13) 已于 2026-11-11 合并，文档现已进入 main；请从 main 阅读[进度总览](https://github.com/Nah1zuj/codex-loreal-continuous-update/blob/main/docs/STATUS.md)。整理分支保留为历史来源，不再是当前阅读入口。
 
-**2026-11-12 补充：** [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 已具备待验收的软件证据：最新 `main` 精确提交、本机回归、构建、运行时边界、普通浏览器关键路径和显式媒体权限拒绝均有记录。证据 PR 尚未合并，真实读屏与实体设备仍属于后续任务，因此不改变“内部验证版”分类。
+**2026-11-12 补充：** [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 已具备待验收的软件证据：初次固定 `main db485ed` 的本机回归、构建、运行时边界、普通浏览器关键路径和显式媒体权限拒绝均有记录；PR #14 后续已同步共享 `main 53af597`。证据 PR 尚未合并，且同步没有重新执行浏览器、真实读屏或实体设备场景，因此不改变“内部验证版”分类。
 
 ## 接下来有哪些事
 

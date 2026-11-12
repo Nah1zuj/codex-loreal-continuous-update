@@ -4,7 +4,9 @@
 
 ## 结论
 
-本轮为 **进行中的内部软件复核**，不是 M1 完成证明。后端、前端、构建、知识库、正常语音模型运行时、缺语音模型文字路径及关键会话状态自动化检查通过；两轮独立本地实例的普通浏览器路径也已覆盖文字、暂停／继续、跳过、刷新恢复、提前结束、小结拒绝、修改后重新预览、明确保存和二次确认删除。另以独立 Chrome 156 将麦克风和摄像头站点权限显式设为 `denied`，确认两种请求均被拒绝、提示结束且文字回复正常。GitHub 最新 `main` 已在独立工作树按精确提交复跑；干净检出按仓库说明以缺语音模型模式通过，浏览器所用应用代码与该提交一致。真实权限弹窗键盘操作、读屏和实体设备证据另属后续验收。
+本轮为 **进行中的内部软件复核**，不是 M1 完成证明。后端、前端、构建、知识库、正常语音模型运行时、缺语音模型文字路径及关键会话状态自动化检查通过；两轮独立本地实例的普通浏览器路径也已覆盖文字、暂停／继续、跳过、刷新恢复、提前结束、小结拒绝、修改后重新预览、明确保存和二次确认删除。另以独立 Chrome 156 将麦克风和摄像头站点权限显式设为 `denied`，确认两种请求均被拒绝、提示结束且文字回复正常。当时的 GitHub `main` 已在独立工作树按精确提交复跑；干净检出按仓库说明以缺语音模型模式通过，浏览器所用应用代码与该提交一致。真实权限弹窗键盘操作、读屏和实体设备证据另属后续验收。
+
+2026-11-12 后续同步：本 PR 分支已合入当时的共享 `main 53af597a6e4f22157988b0f83b1eefdbe9b82c74`（包含已授权合并的 PR #23、#19、#17）。下文 `db485ed` 和 `fd6154a` 仍是初次本机／浏览器复核的精确历史快照；本次代码同步没有重新执行浏览器、权限弹窗、读屏或实体设备场景，也不把旧结果改写成新提交实测。
 
 不得将本页用于声称 Windows、实体音视频、VoiceOver／NVDA、真实供应商、专业课程或目标用户验收通过。
 
@@ -12,9 +14,9 @@
 
 | 项目 | 实际值 |
 |---|---|
-| GitHub 最新 main | `db485ed098d433758358e8cc6280af5d4003afe1`，PR #13 文档合并提交 |
+| 初次复核时的 GitHub main | `db485ed098d433758358e8cc6280af5d4003afe1`，PR #13 文档合并提交 |
 | 日常复核源码 | `fd6154a3fb2eb97dd97b8fc4d5cb05d96ace8a07`，分支 `trace/spec-kit-remediation` |
-| 最新 main 独立检出 | `db485ed098d433758358e8cc6280af5d4003afe1`，detached worktree `TRACE-main-20261112` |
+| 初次 main 独立检出 | `db485ed098d433758358e8cc6280af5d4003afe1`，detached worktree `TRACE-main-20261112` |
 | 应用代码差异 | `fd6154a..db485ed` 在 `AccessibleBeautyAgent` 下仅新增 57 个已跟踪语音模型／测试音频文件；浏览器、前后端和脚本源码无差异 |
 | 系统 | macOS |
 | Python | 3.12.15 |
@@ -34,12 +36,12 @@
 | `npm run build` | PASS | 保留大于 500 kB 的 Vite 分包警告，未把警告隐去或直接判为缺陷 |
 | `scripts/validate_kb.py` | PASS：LOOK 3、ROUTINE 3、REFERENCE_CASE 2、PRODUCT 14、ACCESSIBILITY_GUIDANCE 73、SOURCE 5 | 知识库结构校验，不是专业内容审核 |
 | `scripts/verify_runtime.py` | PASS | 本机模型已加载；独立 SQLite、文字交互、会话恢复、端口归属、诊断和释放通过 |
-| 最新 main `python -m pytest -ra` | PASS：268 passed，3 skipped，15.27s | 2 项为 Windows PowerShell 专用；1 项因干净检出未安装官方本地 Face Landmarker，未冒充实体视觉结果 |
-| 最新 main `npm test -- --run` | PASS：36 files，191 tests | 与日常复核源码相同；jsdom Canvas 提示仍保留 |
-| 最新 main `npm run build` | PASS：137 modules | 保留大于 500 kB 的分包警告 |
-| 最新 main `scripts/validate_kb.py` | PASS：LOOK 3、ROUTINE 3、REFERENCE_CASE 2、PRODUCT 14、ACCESSIBILITY_GUIDANCE 73、SOURCE 5 | 知识库结构校验，不是专业内容审核 |
-| 最新 main `scripts/verify_runtime.py --missing-voice` | PASS | README 对干净检出指定此模式；正确报告 `assets_missing_or_invalid`，文字路径、恢复、诊断及清理通过 |
-| 最新 main 普通运行模式 | 预期不通过：`assets_missing_or_invalid` | 仓库包含 KWS 资产和模型来源清单，但未随 Git 分发完整 ASR `model.int8.onnx`；不能声称干净仓库语音开箱即用 |
+| 当时 main `db485ed`：`python -m pytest -ra` | PASS：268 passed，3 skipped，15.27s | 2 项为 Windows PowerShell 专用；1 项因干净检出未安装官方本地 Face Landmarker，未冒充实体视觉结果 |
+| 当时 main `db485ed`：`npm test -- --run` | PASS：36 files，191 tests | 与日常复核源码相同；jsdom Canvas 提示仍保留 |
+| 当时 main `db485ed`：`npm run build` | PASS：137 modules | 保留大于 500 kB 的分包警告 |
+| 当时 main `db485ed`：`scripts/validate_kb.py` | PASS：LOOK 3、ROUTINE 3、REFERENCE_CASE 2、PRODUCT 14、ACCESSIBILITY_GUIDANCE 73、SOURCE 5 | 知识库结构校验，不是专业内容审核 |
+| 当时 main `db485ed`：`scripts/verify_runtime.py --missing-voice` | PASS | README 对干净检出指定此模式；正确报告 `assets_missing_or_invalid`，文字路径、恢复、诊断及清理通过 |
+| 当时 main `db485ed`：普通运行模式 | 预期不通过：`assets_missing_or_invalid` | 仓库包含 KWS 资产和模型来源清单，但未随 Git 分发完整 ASR `model.int8.onnx`；不能声称干净仓库语音开箱即用 |
 | 会话控制与确认式小结专项 | PASS：18 tests | 覆盖跳步、暂停、恢复、结束、小结拒绝、明确确认、防重放和删除的软件行为 |
 | 独立本地实例普通浏览器关键路径 | PASS（两轮） | 文字入口、提交、开始、暂停／继续、下一步、跳过、刷新、提前结束、小结拒绝、明确保存和二次确认删除可操作；浏览器无 warning/error |
 | Chrome 显式媒体权限拒绝 | PASS（重复 2 次） | Chrome 156 / CDP 1.3 将 microphone、camera 权限设为 denied；两种请求均返回拒绝，提示结束，文字获得正常回复 |

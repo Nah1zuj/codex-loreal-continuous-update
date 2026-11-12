@@ -6,7 +6,7 @@
 
 本页是仓库证据的摘要，不是本次运行报告。2026-11-07 的软件测试、Mac 净安装及部分键盘操作记录已经存在；本次只核对仓库、建立任务和工作约定，未重新运行应用、调用真实供应商或开展人工验收。历史测试数量对应不同快照，不合并计算。已在线下完成但未回填的事项，提交实际证据后再更新。
 
-**2026-11-12 更新：** [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 的软件复核已具备待验收证据。本机源码和最新 `main` 精确提交 `db485ed` 的回归、构建、知识库、运行时边界，以及普通浏览器关键路径和 Chrome 显式媒体权限拒绝已有[独立记录](quality/issue-1-verification-2026-11-12.md)。干净检出未随 Git 分发完整 ASR 模型，按 README 使用缺语音模型模式通过；PR 未合并前 M1 仍不标完成。
+**2026-11-12 更新：** [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 的软件复核已具备待验收证据。本机源码和初次固定 `main` 提交 `db485ed` 的回归、构建、知识库、运行时边界，以及普通浏览器关键路径和 Chrome 显式媒体权限拒绝已有[独立记录](quality/issue-1-verification-2026-11-12.md)。PR #14 后续已同步共享 `main 53af597`，但没有把历史浏览器结果冒充为新提交实测；PR 未合并前 M1 仍不标完成。
 
 ## 先看这里
 
@@ -25,7 +25,7 @@
 
 下表“待验收”表示已有实现和软件证据，仍缺对应的完整验收；不把各阶段 tasks 的软件勾选理解为工程候选资格已通过。
 
-> 2026-11-12 进展：已提出引入 [Pull Request 软件检查](quality/ci-software-checks.md) 的待审改动，用于后续 PR 的 Ubuntu 软件回归。该改动尚未合并，不改变 12 个验收 Issue 的当前状态，也不覆盖设备、真实服务和人工证据缺口。
+> 2026-11-12 进展：[Pull Request 软件检查](quality/ci-software-checks.md) 已随 PR #23 合入，并用于后续 PR 的 Ubuntu 软件回归；PR #19 与 PR #17 也已在明确授权后合入。自动检查和这些合并不改变 12 个验收 Issue 的实际验收状态，也不覆盖设备、真实服务和人工证据缺口。
 
 | 模块 | 状态 | 已有证据 | 剩余事项 | 关联任务 |
 |---|---|---|---|---|
@@ -44,7 +44,7 @@
 
 | 里程碑 | 退出条件 | 当前情况 |
 |---|---|---|
-| [M1 内部演示复核](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/1) | 固定共享验收 commit，内部关键路径和本轮软件结果可复查 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 待验收；`db485ed` 同提交复跑和浏览器路径已记录，等待 PR 审阅／合并后再判定 M1 |
+| [M1 内部演示复核](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/1) | 固定共享验收 commit，内部关键路径和本轮软件结果可复查 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 待验收；初次 `db485ed` 同提交复跑和浏览器路径已记录，PR #14 已同步 `main 53af597`，等待审阅／合并后再判定 M1 |
 | [M2 工程候选验收](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/2) | 双平台安装、读屏、实体媒体、真实服务、资料与独立清单通过；无未解决P0和核心P1；交付包可复核 | [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2)–[#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7)、[#9](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/9)–[#11](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/11) 开放 |
 | [M3 专业课程审核](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/3) | 固定中英课程版本由实际专业审核者给出有效结论，并验证准入 | [#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) 受阻；可与M2并行准备 |
 | [M4 目标用户试用](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/4) | M2、M3通过后，按实际任务结果判定真实试用资格 | [#12](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/12) 受阻 |
@@ -83,7 +83,7 @@
 - **Windows：**仓库缺实体记录，不据此推断团队一定没有设备。核实设备或回填已有记录后更新 [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2)。
 - **真实服务：**历史记录为 mock／关闭远程／无有效凭据；本次未读取私有配置。核实批准的配置、目的地及实际响应后更新 [#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) [#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7)。
 - **专业与用户验收：**缺真实课程审核和目标用户观察记录，按 [#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) → [#12](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/12) 的条件推进。
-- **版本与文档：**多个历史包、共享合并提交和测试数量并存。[#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 已固定共同验收基线为 `db485ed`，软件证据在 PR #14 等待审阅；后续正式候选仍须绑定新的合并后 commit。路线图原有“尚未启动实施”和结尾“仅整理计划书”已修正；能力矩阵保留为阶段0快照，勿当实时状态。
+- **版本与文档：**多个历史包、共享合并提交和测试数量并存。[#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 的初次共同验收基线为 `db485ed`，PR #14 已同步共享 `main 53af597` 并等待审阅；后续正式候选仍须绑定新的合并后 commit。路线图原有“尚未启动实施”和结尾“仅整理计划书”已修正；能力矩阵保留为阶段0快照，勿当实时状态。
 - **实际独立评审：**多份清单仍待实际评审者确认；软件勾选不能替代，见 [#10](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/10)。保留构建分包警告，不将其隐去或未经分析升级为缺陷结论。
 
 ## 下一步最值得推进的三项
