@@ -39,7 +39,9 @@ async function evaluate(expression) {
   return result.value
 }
 async function until(expression, description) {
-  // A cold local MediaPipe start may spend more than ten seconds loading the\n  // model and building caches before the first observation reaches the UI.\n  for (let attempt = 0; attempt < 300; attempt++) {
+  // A cold local MediaPipe start may spend more than ten seconds loading the
+  // model and building caches before the first observation reaches the UI.
+  for (let attempt = 0; attempt < 300; attempt++) {
     if (await evaluate(expression)) return
     await delay(100)
   }
