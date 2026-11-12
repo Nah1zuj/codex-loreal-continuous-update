@@ -6,7 +6,7 @@
 
 本页是仓库证据的摘要，不是本次运行报告。2026-11-07 的软件测试、Mac 净安装及部分键盘操作记录已经存在；本次只核对仓库、建立任务和工作约定，未重新运行应用、调用真实供应商或开展人工验收。历史测试数量对应不同快照，不合并计算。已在线下完成但未回填的事项，提交实际证据后再更新。
 
-**2026-11-12 更新：** [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 已进入进行中。本机源码的软件回归、正常及缺语音模型运行时、关键会话状态和前端动效无障碍边界已有[独立记录](quality/issue-1-verification-2026-11-12.md)；仍缺最新 main 的本地同提交检出及人工浏览器关键路径，因此 M1 尚未完成。
+**2026-11-12 更新：** [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 的软件复核已具备待验收证据。本机源码和最新 `main` 精确提交 `db485ed` 的回归、构建、知识库、运行时边界，以及普通浏览器关键路径和 Chrome 显式媒体权限拒绝已有[独立记录](quality/issue-1-verification-2026-11-12.md)。干净检出未随 Git 分发完整 ASR 模型，按 README 使用缺语音模型模式通过；PR 未合并前 M1 仍不标完成。
 
 ## 先看这里
 
@@ -42,7 +42,7 @@
 
 | 里程碑 | 退出条件 | 当前情况 |
 |---|---|---|
-| [M1 内部演示复核](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/1) | 固定共享验收 commit，内部关键路径和本轮软件结果可复查 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 进行中；2026-11-12 软件复核已记录，仍缺最新 main 同提交和人工路径 |
+| [M1 内部演示复核](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/1) | 固定共享验收 commit，内部关键路径和本轮软件结果可复查 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 待验收；`db485ed` 同提交复跑和浏览器路径已记录，等待 PR 审阅／合并后再判定 M1 |
 | [M2 工程候选验收](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/2) | 双平台安装、读屏、实体媒体、真实服务、资料与独立清单通过；无未解决P0和核心P1；交付包可复核 | [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2)–[#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7)、[#9](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/9)–[#11](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/11) 开放 |
 | [M3 专业课程审核](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/3) | 固定中英课程版本由实际专业审核者给出有效结论，并验证准入 | [#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) 受阻；可与M2并行准备 |
 | [M4 目标用户试用](https://github.com/Nah1zuj/codex-loreal-continuous-update/milestone/4) | M2、M3通过后，按实际任务结果判定真实试用资格 | [#12](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/12) 受阻 |
