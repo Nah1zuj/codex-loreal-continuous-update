@@ -6,7 +6,9 @@
 
 本页是仓库证据的摘要，不是本次运行报告。2026-11-07 的软件测试、Mac 净安装及部分键盘操作记录已经存在；本次只核对仓库、建立任务和工作约定，未重新运行应用、调用真实供应商或开展人工验收。历史测试数量对应不同快照，不合并计算。已在线下完成但未回填的事项，提交实际证据后再更新。
 
-**2026-11-12 更新：** [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 的软件复核已具备待验收证据。本机源码和初次固定 `main` 提交 `db485ed` 的回归、构建、知识库、运行时边界，以及普通浏览器关键路径和 Chrome 显式媒体权限拒绝已有[独立记录](quality/issue-1-verification-2026-11-12.md)。PR #14 后续已同步共享 `main 53af597`，但没有把历史浏览器结果冒充为新提交实测；PR 未合并前 M1 仍不标完成。
+**2026-11-12 更新：** [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) 的软件复核已具备待验收证据。本机源码和初次固定 `main` 提交 `db485ed` 的回归、构建、知识库、运行时边界，以及普通浏览器关键路径和 Chrome 显式媒体权限拒绝已有[独立记录](quality/issue-1-verification-2026-11-12.md)。PR #14 已在明确授权后合入共享 `main`，但没有把历史浏览器结果冒充为新提交实测；真实设备与人工验收未补齐前，M1 仍不标完成。
+
+> 2026-11-12 补充：Issue #12 初次在当时固定的 `main db485ed` 上准备匿名观察包、合成格式样例和记录校验器；PR #20 已同步至包含 PR #14、#15、#16、#18 的共享 `main e551656`。校验器对当前未通过的 #8／#11 前置输出 `BLOCKED`。这不是目标用户试用，也不改变内部验证版分类；实时进展以 Issue #12 和关联 PR 为准。
 
 ## 先看这里
 
@@ -74,7 +76,7 @@
 | [#9](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/9) 完成产品比较资料的团队审阅 | 待验收 | 已有官方出处草稿；剩实际团队资料审阅 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) | 每条现有比较资料有来源及真实团队审阅结论 |
 | [#10](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/10) 完成阶段1–8独立清单与结构收敛评审 | 待验收 | 已有规格与软件材料；剩独立清单结论 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) [#3](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/3) [#4](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/4) [#5](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/5) [#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) [#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7) [#9](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/9) | 阶段1–8各有实际评审范围和结论，未验项目保留未勾选 |
 | [#11](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/11) 复核交付包与工程候选资格 | 受阻 | 已有内部包和手册；剩完整资格与固定版本包复核 | [#1](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/1) [#2](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/2) [#3](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/3) [#4](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/4) [#5](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/5) [#6](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/6) [#7](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/7) [#9](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/9) [#10](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/10) | 前置任务达到各自完成标准，双平台真实证据完整 |
-| [#12](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/12) 开展目标用户关键任务试用并判定真实试用资格 | 受阻 | 已有任务表；剩真实目标用户观察 | [#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) [#11](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/11) | 参与条件、实际样本数、逐任务原始观察与结论可复查 |
+| [#12](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/12) 开展目标用户关键任务试用并判定真实试用资格 | 受阻 | 已有任务表及待审的匿名观察准备包／格式校验；剩 #8、#11 通过后的真实目标用户观察 | [#8](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/8) [#11](https://github.com/Nah1zuj/codex-loreal-continuous-update/issues/11) | 参与条件、实际样本数、逐任务原始观察与结论可复查 |
 
 初始12项：待开始1、待验收5、受阻6；没有已确认的本轮进行中任务。它们只统计本次剩余验收清单，不代表整个产品完成率。每项详细步骤、验收标准、资料和解除条件见对应 Issue。
 
