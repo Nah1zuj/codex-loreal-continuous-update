@@ -35,5 +35,37 @@ def test_vinyl_normalization_explanation_is_required(tmp_path):
         lambda rows: next(row for row in rows if row['source_id'] == 'maybelline_vinyl_ink_us_official').__setitem__(
             'notes', 'instant shine / vinyl finish'),
     )
-    with pytest.raises(ValueError, match='normalized finish boundary'):
+    with pytest.raises(ValueError, match='source notes changed'):
         verify(sources_path=candidate)
+
+
+def test_unreviewed_source_claim_append_is_rejected(tmp_path):
+    candidate = changed_copy(
+        SOURCES,
+        tmp_path / 'sources.json',
+        lambda rows: next(row for row in rows if row['source_id'] == 'maybelline_matte_ink_us_official').__setitem__(
+            'notes', next(row for row in rows if row['source_id'] == 'maybelline_matte_ink_us_official')['notes'] + ' 额外持妆宣传。'),
+    )
+    with pytest.raises(ValueError, match='source notes changed'):
+        verify(sources_path=candidate)
+
+
+def test_duplicate_source_id_is_rejected(tmp_path):
+    def duplicate(rows):
+        source = next(row for row in rows if row['source_id'] == 'maybelline_matte_ink_us_official')
+        rows.append(source.copy())
+
+    candidate = changed_copy(SOURCES, tmp_path / 'sources.json', duplicate)
+    with pytest.raises(ValueError, match='duplicate source_id'):
+        verify(sources_path=candidate)
+
+
+def test_non_boolean_demo_marker_is_rejected(tmp_path):
+    candidate = changed_copy(
+        PRODUCTS,
+        tmp_path / 'products.json',
+        lambda rows: next(row for row in rows if row['product_id'] == 'maybelline_matte_ink').__setitem__(
+            'demo_data', 0),
+    )
+    with pytest.raises(ValueError, match='demo_data value must be a boolean'):
+        verify(products_path=candidate)
