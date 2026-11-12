@@ -28,8 +28,16 @@ jobs:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: AccessibleBeautyAgent/backend/requirements-lock.txt
+      - name: Set up Node.js for runtime verification
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "26.10.0"
+          cache: npm
+          cache-dependency-path: AccessibleBeautyAgent/frontend/package-lock.json
       - name: Install locked dependencies
         run: python -m pip install --disable-pip-version-check -r backend/requirements-lock.txt
+      - name: Install locked frontend runtime dependencies
+        run: npm ci --prefix frontend
       - name: Check installed dependencies
         run: python -m pip check
       - name: Run backend tests

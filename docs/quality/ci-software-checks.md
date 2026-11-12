@@ -4,7 +4,7 @@
 
 ## 自动执行的检查
 
-- Ubuntu＋Python 3.12：按 `backend/requirements-lock.txt` 安装并检查锁定依赖，运行后端回归、知识库校验和缺失可选语音资产时的运行时降级检查。
+- Ubuntu＋Python 3.12：按 `backend/requirements-lock.txt` 安装并检查锁定依赖，运行后端回归和知识库校验；同一任务准备 Node.js 26.10.0 及锁定前端依赖，再执行缺失可选语音资产时的完整运行时降级检查。
 - Ubuntu＋Node.js 26.10.0：使用 `npm ci` 安装锁定依赖，拦截当前高危及以上的 npm 审计发现，运行前端测试和生产构建。
 - GitHub Actions 引用固定到已查询的完整 commit，工作流权限只保留仓库内容读取。
 
