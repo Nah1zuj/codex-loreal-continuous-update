@@ -6,7 +6,9 @@ import pytest
 
 
 @pytest.mark.skipif(os.name != 'nt', reason='PowerShell-specific startup guard')
-@pytest.mark.parametrize('name', ['install-portable.ps1', 'start-portable.ps1'])
+@pytest.mark.parametrize('name', [
+    'install-portable.ps1', 'start-portable.ps1', 'scripts/run_windows_acceptance.ps1',
+])
 def test_portable_powershell_parses(name):
     root = Path(__file__).resolve().parents[2]
     path = str(root / name).replace("'", "''")
