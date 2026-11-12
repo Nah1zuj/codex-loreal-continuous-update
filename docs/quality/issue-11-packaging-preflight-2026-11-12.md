@@ -42,6 +42,8 @@ Packaging failed: private or local file tracked in release tree: AccessibleBeaut
 | 禁止条目 | 0 |
 | 必要入口 | `README.md`、`install-portable.ps1`、`launch-portable.py`、`start-portable.ps1` 均存在 |
 
+补充复核发现，上述 SHA-256 只对应当时保留的单次临时产物：旧实现给 manifest ZIP 条目写入当前时间，因此同一固定 commit 重打包会得到不同的 ZIP 哈希。后续修复把 manifest 时间戳固定，并增加双次打包逐字节一致回归；正式候选必须使用修复后的打包器重新生成，不能把上表旧哈希当作可由源码重现的候选哈希。
+
 使用 Python 标准库独立解压同一 ZIP 后，在解压副本中复用已有本地 Python 与前端依赖，仅验证归档内容能否运行现有检查；未把本机依赖写入 ZIP：
 
 - `scripts/verify_runtime.py --missing-voice`：通过；端口占用保护、隔离 SQLite、文本轮次、会话恢复、重复启动归属、诊断与端口释放均通过，语音按无模型模式报告 `assets_missing_or_invalid`。

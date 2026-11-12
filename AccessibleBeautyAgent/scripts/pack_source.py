@@ -27,6 +27,7 @@ SECRET_CONTENT = re.compile(
     rb'-----BEGIN (?:[A-Z]+ )?PRIVATE KEY-----|'
     rb'(?im:^[ \t]*(?:[A-Z0-9_]*API_KEY|[A-Z0-9_]*ACCESS_TOKEN)\s*=\s*["\x27]?[A-Za-z0-9_-]{24,})'
 )
+MANIFEST_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
 
 
 def git(*arguments):
@@ -94,7 +95,10 @@ def build(commit, output):
                     raise ValueError(f'possible credential in release tree: {member.filename}')
                 target.writestr(member, data)
                 entries.append({'path': path.as_posix(), 'size': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
-            target.writestr('TRACE-BUNDLE-MANIFEST.json', json.dumps(
+            manifest = zipfile.ZipInfo('TRACE-BUNDLE-MANIFEST.json', MANIFEST_TIMESTAMP)
+            manifest.compress_type = zipfile.ZIP_DEFLATED
+            manifest.external_attr = 0o100644 << 16
+            target.writestr(manifest, json.dumps(
                 {'commit': commit, 'classification': 'internal verification', 'files': entries},
                 ensure_ascii=False, indent=2,
             ) + '\n')

@@ -47,6 +47,22 @@ def test_pack_excludes_tracked_voice_model_tree(monkeypatch, tmp_path):
         manifest = json.loads(archive.read('TRACE-BUNDLE-MANIFEST.json'))
     assert manifest['commit'] == COMMIT
     assert [row['path'] for row in manifest['files']] == ['AccessibleBeautyAgent/README.md']
+    assert archive_timestamp(output, 'TRACE-BUNDLE-MANIFEST.json') == pack_source.MANIFEST_TIMESTAMP
+
+
+def archive_timestamp(path, name):
+    with zipfile.ZipFile(path) as archive:
+        return archive.getinfo(name).date_time
+
+
+def test_pack_is_reproducible(monkeypatch, tmp_path):
+    source = snapshot(('AccessibleBeautyAgent/README.md', b'public source'))
+    monkeypatch.setattr(pack_source, 'git', fake_git(source))
+    first = tmp_path / 'first.zip'
+    second = tmp_path / 'second.zip'
+    pack_source.build('HEAD', first)
+    pack_source.build('HEAD', second)
+    assert first.read_bytes() == second.read_bytes()
 
 
 def test_pack_still_rejects_accidental_private_files(monkeypatch, tmp_path):
